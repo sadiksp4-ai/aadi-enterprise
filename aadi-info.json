@@ -1,0 +1,369 @@
+{
+  "companyInfo": {
+    "name": "AADI ENTERPRISES",
+    "mainHeadline": "HOUSEKEEPING & IN-ROOM AMENITIES SOLUTION",
+    "tagline": "Premium & Essential Collections for Modern Hospitality"
+  },
+  "introduction": {
+    "title": "Enhancing Guest Comfort, One Detail at a time",
+    "description": "Aadi Enterprises delivers a complete range of Housekeeping and In-Room Amenity Solutions designed for efficiency, elegance, and long-lasting performance — empowering hotels and resorts to craft unforgettable guest experiences.",
+    "imageDescriptions": [
+      "Page 1: Two housekeeping staff members in uniform making a hotel bed.",
+      "Page 1: A stack of folded towels (white, beige, grey) next to green soap/lotion dispensers on a marble surface.",
+      "Page 2: Polaroid-style photos showing cleaning supplies in a bucket and a collection of hotel bathroom amenities (soaps, brushes, etc.).",
+      "Page 2: A full view of a modern, well-appointed hotel room with a neatly made bed and city view."
+    ]
+  },
+  "philosophy": {
+    "title": "Our Philosophy",
+    "subtitle": "Where Function Meets Luxury",
+    "points": [
+      "Tailored solutions for all property categories – from budget to luxury.",
+      "Imported and Indian-made collections.",
+      "Focus on durability, hygiene, and design aesthetics.",
+      "Supported by after-sales service and expert consultation."
+    ],
+    "imageDescriptions": [
+      "An image of a luxury resort with palm trees and a tiled roof.",
+      "A large hotel building with a curved facade next to a swimming pool."
+    ]
+  },
+  "productSegmentsOverview": {
+    "title": "Product Segments Overview",
+    "subtitle": "TWO CURATED RANGES TO SUIT EVERY NEED",
+    "comparisonTable": [
+      {
+        "feature": "Collection Type",
+        "premium": "Imported & Designer Collection",
+        "essential": "Practical cost effective selection"
+      },
+      {
+        "feature": "Materials",
+        "premium": "High-end materials (leather, chrome, glass, microfiber)",
+        "essential": "Durable everyday essentials"
+      },
+      {
+        "feature": "Target Audience",
+        "premium": "Focused on 5★-4★ properties",
+        "essential": "Ideal for 2★-3★ hotels & business stays"
+      }
+    ],
+    "imageDescriptions": [
+      "A guest couple checking in at a hotel reception desk.",
+      "Breakfast tray being served on a neatly made hotel bed.",
+      "A female housekeeper carrying a basket of cleaning supplies."
+    ]
+  },
+  "productCategories": [
+    {
+      "category": "In-Room Collection",
+      "premiumRange": {
+        "title": "Premium Range",
+        "items": [
+          "Egyptian cotton bedsheets, duvets & pillow covers",
+          "Plush bathrobes & towels",
+          "Anti-allergy mattress toppers & protectors",
+          "Designer cushions & throws"
+        ]
+      },
+      "essentialRange": {
+        "title": "Essential Range",
+        "items": [
+          "Cotton-poly blend linen sets",
+          "Soft touch bath linen",
+          "Basic bed protectors & runners"
+        ]
+      },
+      "imageDescriptions": [
+        "A stack of white towels with AADI branded amenities on a bathroom counter.",
+        "A hotel room interior with a bed and a desk with a water bottle.",
+        "Two white candles in glass jars."
+      ]
+    },
+    {
+      "category": "Entrance Solutions",
+      "headline": "First Impressions That Last",
+      "description": "functional, Safe, and Stylish Solutions for Every Hotel Entry Point. From the grand hotel lobby to the service entrance, Aadi Enterprises provides durable, aesthetic, and functional entrance solutions designed to enhance safety, cleanliness, and brand appeal.",
+      "subCategories": [
+        {
+          "subCategory": "Front of the House Solutions (Lobby Area)",
+          "premiumRange": {
+            "title": "Premium (Luxury/5★)",
+            "items": [
+              "Designer floor mats with logo engraving",
+              "Brass or stainless-steel queue managers",
+              "Luggage trolleys with polished finish",
+              "Decorative umbrella stands",
+              "Designer signage stands",
+              "Fragrance diffusers for entry",
+              "Sanitizer kiosks with branding"
+            ]
+          },
+          "classicRange": {
+            "title": "Classic (Essential/3-4★)",
+            "items": [
+              "Heavy-duty coir or PVC mats",
+              "Powder-coated steel queue barriers",
+              "Standard chrome/SS luggage carts",
+              "Basic umbrella holders",
+              "Acrylic or metal signage boards",
+              "Air freshener dispensers",
+              "Standard sanitizer stands"
+            ]
+          }
+        },
+        {
+          "subCategory": "Back of the House/Service entrance",
+          "description": "Durable Utility Solutions for High-Traffic Areas",
+          "premiumRange": {
+            "title": "Premium (Luxury/5★)",
+            "items": [
+              "Industrial floor mats (anti-slip, chemical resistant)",
+              "Heavy-duty waste bins & ash urns",
+              "Rolling racks for supplies",
+              "Industrial signage boards (metal/reflective)",
+              "Staff sanitizer & hygiene stations",
+              "Boot cleaning & drying stations"
+            ]
+          },
+          "classicRange": {
+            "title": "Classic (Essential/3-4★)",
+            "items": [
+              "Rubber grip mats",
+              "Standard dustbins",
+              "Basic hand trucks",
+              "PVC signage boards",
+              "Regular dispensers",
+              "Regular dispensers"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "category": "Guest Comfort Essentials",
+      "premiumRange": {
+        "title": "Premium Range",
+        "items": [
+          "Digital safes",
+          "Smart alarm clocks & docking stations",
+          "Designer kettles & coffee machines",
+          "Luxury bathroom slippers"
+        ]
+      },
+      "essentialRange": {
+        "title": "Essential Range",
+        "items": [
+          "Standard electric kettles",
+          "Manual alarm clocks",
+          "Regular slippers & trays"
+        ]
+      },
+      "imageDescriptions": [
+        "Hotel closet with wooden hangers and a digital safe.",
+        "A tray on a hotel room table with a kettle, mugs, and amenities.",
+        "A white laundry bag and slippers on a hotel room floor."
+      ]
+    },
+    {
+      "category": "Bathroom & Wellness Amenities",
+      "premiumRange": {
+        "title": "Premium Range",
+        "items": [
+          "LED shaving mirrors",
+          "Defogger mirrors",
+          "Sensor soap dispensers",
+          "Soft-touch towels & bath mats"
+        ]
+      },
+      "essentialRange": {
+        "title": "Essential Range",
+        "items": [
+          "Manual soap dispensers",
+          "Regular mirrors",
+          "Basic towel sets"
+        ]
+      },
+      "imageDescriptions": [
+        "A modern hotel bathroom with an illuminated mirror and marble sink.",
+        "An illustration of a bathroom scene with a bathtub and shower curtain."
+      ]
+    },
+    {
+      "category": "Room Accessories",
+      "premiumRange": {
+        "title": "Premium Range",
+        "items": [
+          "Faux leather notepad holders, tissue boxes, and remote holders",
+          "Customized minibar trays & organizers",
+          "Polished wooden luggage racks"
+        ]
+      },
+      "essentialRange": {
+        "title": "Essential Range",
+        "items": [
+          "MDF/PU leatherette accessories",
+          "Standard minibar & tissue setups"
+        ]
+      },
+      "imageDescriptions": [
+        "A black digital safe with the AADI logo inside a wooden cabinet.",
+        "A leatherette tissue box with the AADI logo on a table.",
+        "A breakfast tray with juice and croissants on a bed."
+      ]
+    },
+    {
+      "category": "Housekeeping Essentials",
+      "headline": "Smart Solutions for a Spotless Property",
+      "description": "From janitorial carts to electronic cleaning machines, our housekeeping products blend efficiency, safety, and design — empowering staff to maintain immaculate standards with minimal effort.",
+      "subCategories": [
+        {
+          "subCategory": "Cleaning Tools & Machines",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Karcher / IPC / Tennant equipment",
+              "High-pressure cleaners, steam machines",
+              "Electrostatic sprayers",
+              "Smart vacuum & extraction systems"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Manual mops, wringers, microfibers",
+              "Basic vacuum cleaners",
+              "Entry-level scrubbers"
+            ]
+          }
+        },
+        {
+          "subCategory": "Trolleys & Carts",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Stainless steel & faux leather finishes",
+              "Modular housekeeping & minibar trolleys",
+              "Ergonomic designs"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Powder-coated or plastic trolleys",
+              "Basic janitor & linen carts"
+            ]
+          }
+        },
+        {
+          "subCategory": "Waste Management & Public Area Solutions",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Designer dustbins, ash urns & smoking stations",
+              "Motion sensor bins",
+              "Imported public area accessories"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": ["Standard SS bins", "Basic waste segregation solutions"]
+          }
+        },
+        {
+          "subCategory": "Guest-Focused Add-Ons",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Aroma diffusers & air purifiers",
+              "Dehumidifiers & mosquito repellents",
+              "Yoga mats & comfort kits"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": ["Basic room heaters", "Manual diffusers"]
+          }
+        }
+      ]
+    }
+  ],
+  "trustedBrands": {
+    "title": "Our Trusted Brands",
+    "subtitle": "Powered by Global Excellence",
+    "brands": [
+      {
+        "name": "IPC (by Tennant Company)",
+        "description": "IPC (Integrated Professional Cleaning), a leading manufacturer of cleaning machines and equipment, is a part of the Tennant Company, USA"
+      },
+      {
+        "name": "Kärcher",
+        "description": "Kärcher is a family-owned global leader in cleaning technology. Discover the range of quality pressure washers, steam cleaners, window vacs & more"
+      },
+      {
+        "name": "Trust",
+        "description": "Trust Housekeeping services would likely focus on their expertise in providing professional and reliable cleaning solutions for businesses and commercial spaces"
+      },
+      {
+        "name": "Euronics",
+        "description": "Euronics, founded in 2002, aims to provide innovative products and services in public washroom automation for the growing Indian IT and hospitality sectors. It is now the largest brand in this market in India."
+      },
+      {
+        "name": "Dolphy",
+        "description": "Dolphy India Pvt. Ltd is India's leading single brand manufacturer and supplier of hygienic products. We make high quality durable product for customer's having best performance."
+      },
+      {
+        "name": "Vileda",
+        "description": "Vileda is a German-based company that specializes in the manufacture and sale of household and professional cleaning products."
+      },
+      {
+        "name": "JVD",
+        "description": "JVD is a French company founded in 1984 that designs and manufactures hygiene and hotel equipment. It offers a variety of products for guest rooms and public areas, including hairdryers, kettles, minibars, and soap dispensers."
+      },
+      {
+        "name": "Origami",
+        "description": "Origami is a prominent Indian manufacturer of disposable paper products, specializing in tissues and hygiene products."
+      },
+      {
+        "name": "Saraya Mystair",
+        "description": "Saraya Mystair Hygiene Private Limited, founded in 2010, is a top manufacturer and supplier in India of tissue paper items, dispensers, hand dryers, liquid soap, and more."
+      }
+    ]
+  },
+  "whyChooseUs": {
+    "title": "Why Choose AADI",
+    "reasons": [
+      {
+        "point": "One-Stop",
+        "description": "supplier for all housekeeping and guest amenity needs"
+      },
+      {
+        "point": "Tailored",
+        "description": "range for different hotel categories"
+      },
+      {
+        "point": "Global",
+        "description": "sourcing, Indian logistics"
+      },
+      {
+        "point": "Expert",
+        "description": "consultation & post-sales support"
+      },
+      {
+        "point": "Trusted",
+        "description": "by top hospitality names"
+      }
+    ]
+  },
+  "clientPortfolio": {
+    "title": "Client Portfolio",
+    "subtitle": "Trusted by Leading Hotels & Resorts",
+    "note": "This section contains placeholder content ('xyz') and requires actual client names, testimonials, and ratings to be added."
+  },
+  "contactInfo": {
+    "phone": "+91-9076304428",
+    "email": "aadienterprises2k23@gmail.com",
+    "closingMessage": "Let's Enhance Your Guest Experience Together!",
+    "thankYou": "Thank You Very Much"
+  }
+}
