@@ -54,7 +54,10 @@
       "A female housekeeper carrying a basket of cleaning supplies."
     ]
   },
-  "productCategories": [
+  "productSections": {
+    "housekeeping": {
+      "title": "Housekeeping Solutions",
+      "categories": [
     {
       "category": "In-Room Collection",
       "premiumRange": {
@@ -287,7 +290,282 @@
         }
       ]
     }
-  ],
+      ]
+    },
+    "foodAndBeverage": {
+      "title": "Food & Beverage Solutions",
+      "categories": [
+        {
+          "category": "Pre-Opening Hotel & Restaurant Consultation",
+          "headline": "Tailored to Your Specific Needs",
+          "description": "Expert consultation services for pre-opening hotels and restaurants, ensuring seamless setup and operational readiness.",
+          "premiumRange": {
+            "title": "Premium Services",
+            "items": [
+              "Complete property assessment & planning",
+              "Customized operational SOPs",
+              "Staff training programs",
+              "Vendor sourcing & management",
+              "Pre-opening timeline & project management"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Services",
+            "items": [
+              "Basic operational guidelines",
+              "Standard vendor recommendations",
+              "Essential staff training modules"
+            ]
+          }
+        },
+        {
+          "category": "Food & Beverage Equipment",
+          "headline": "High-Tech Beverage Dispensers, Blenders, and More",
+          "description": "Professional-grade F&B equipment designed for efficiency and reliability in demanding hospitality environments.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Commercial beverage dispensers with digital controls",
+              "High-performance commercial blenders",
+              "Professional coffee & espresso machines",
+              "Smart refrigeration units",
+              "Automated drink preparation systems"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Standard beverage dispensers",
+              "Basic commercial blenders",
+              "Entry-level coffee equipment",
+              "Standard refrigeration"
+            ]
+          }
+        },
+        {
+          "category": "Tableware & Buffet-Ware",
+          "headline": "Elegant and Stylish Dining Essentials",
+          "description": "Sophisticated tableware and buffet solutions that elevate the dining experience for your guests.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Fine bone china dinnerware sets",
+              "Designer flatware & cutlery collections",
+              "Crystal glassware & stemware",
+              "Elegant chafers & warming stations",
+              "Custom-branded serving pieces"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Durable porcelain dinnerware",
+              "Stainless steel flatware",
+              "Standard glassware",
+              "Basic buffet chafers",
+              "Standard serving trays & platters"
+            ]
+          }
+        },
+        {
+          "category": "Bar Equipment & Accessories",
+          "headline": "High-Quality Glassware and Serving Solutions",
+          "description": "Complete bar solutions featuring premium glassware, tools, and accessories for professional beverage service.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Crystal bar glassware collections",
+              "Professional cocktail toolkits",
+              "Premium ice machines & chillers",
+              "Designer wine storage solutions",
+              "Backlit bottle displays"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Standard bar glassware",
+              "Basic bartending tools",
+              "Standard ice makers",
+              "Wine racks & basic storage",
+              "Standard bottle organizers"
+            ]
+          }
+        },
+        {
+          "category": "Cooking Appliances",
+          "headline": "Advanced Kitchen Solutions for Efficiency",
+          "description": "State-of-the-art cooking equipment designed to streamline kitchen operations and enhance culinary excellence.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Commercial convection ovens",
+              "Induction cooking ranges",
+              "High-capacity fryers & griddles",
+              "Combi-steamers",
+              "Blast chillers & warming cabinets"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Standard gas ranges",
+              "Basic ovens",
+              "Entry-level fryers",
+              "Standard grills",
+              "Basic food warmers"
+            ]
+          }
+        },
+        {
+          "category": "Display Risers & Food Presentation",
+          "headline": "Acrylic, Wooden, Stainless Steel and Glass Food Buffet Display Riser",
+          "description": "Elegant display solutions that showcase your culinary creations with style and sophistication.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Custom acrylic tiered displays",
+              "Solid wood presentation boards",
+              "Stainless steel modular risers",
+              "Illuminated glass showcases",
+              "Designer buffet displays with branding"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Standard acrylic risers",
+              "Basic wooden serving boards",
+              "Standard metal displays",
+              "Simple glass platters",
+              "Basic buffet risers"
+            ]
+          }
+        },
+        {
+          "category": "Kitchen & F&B Layout Planning",
+          "headline": "Kitchen and F&B Layout Planning & End to End Setup",
+          "description": "Comprehensive planning and execution services for efficient kitchen design and F&B operation setup.",
+          "premiumRange": {
+            "title": "Premium Services",
+            "items": [
+              "3D kitchen layout design & visualization",
+              "Complete equipment procurement & installation",
+              "Workflow optimization consulting",
+              "Ventilation & exhaust system design",
+              "End-to-end project management"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Services",
+            "items": [
+              "Basic layout planning",
+              "Equipment sourcing assistance",
+              "Standard workflow recommendations",
+              "Basic installation support"
+            ]
+          }
+        },
+        {
+          "category": "Refrigeration & Walk-ins",
+          "headline": "Refrigeration and Walk Ins",
+          "description": "Professional refrigeration solutions ensuring optimal food storage and preservation.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Custom walk-in coolers & freezers",
+              "Energy-efficient commercial refrigeration",
+              "Digital temperature monitoring systems",
+              "Blast chillers",
+              "Specialized wine & beverage coolers"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Standard walk-in units",
+              "Commercial reach-in refrigerators",
+              "Basic freezers",
+              "Standard display coolers"
+            ]
+          }
+        },
+        {
+          "category": "Premium Linen Solutions",
+          "headline": "Premium Linen Solutions Crafted for Comfort, Durability, and Elegance",
+          "description": "Luxurious linen collections designed specifically for F&B and restaurant environments.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Egyptian cotton table linens",
+              "Designer napkins with custom embroidery",
+              "Stain-resistant tablecloths",
+              "Premium chef uniforms & aprons",
+              "Luxury service towels"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Cotton-poly blend table linens",
+              "Standard napkins",
+              "Basic tablecloths",
+              "Standard uniforms",
+              "Regular service towels"
+            ]
+          }
+        },
+        {
+          "category": "Complete Laundry Solutions",
+          "headline": "Complete Laundry Solutions with Machines, Designs and Execution",
+          "description": "Full-service laundry systems with installation, design, and operational support.",
+          "premiumRange": {
+            "title": "Premium Solutions",
+            "items": [
+              "Industrial washer-extractors",
+              "High-capacity dryers & ironers",
+              "Automated folding systems",
+              "Laundry management software",
+              "Complete facility design & installation"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Solutions",
+            "items": [
+              "Commercial washers & dryers",
+              "Basic ironing equipment",
+              "Standard laundry carts",
+              "Manual folding stations"
+            ]
+          }
+        },
+        {
+          "category": "Corporate Gifting & Bakery Packaging",
+          "headline": "Customized Corporate Gifting and Bakery Packaging Solutions",
+          "description": "Creative packaging and gifting solutions that blend functionality with brand identity.",
+          "premiumRange": {
+            "title": "Premium Range",
+            "items": [
+              "Custom-designed gift hampers",
+              "Luxury packaging with branding",
+              "Premium bakery boxes & displays",
+              "Branded corporate gift sets",
+              "Eco-luxury packaging solutions"
+            ]
+          },
+          "essentialRange": {
+            "title": "Essential Range",
+            "items": [
+              "Standard gift boxes",
+              "Basic bakery packaging",
+              "Simple branded bags",
+              "Standard packaging materials"
+            ]
+          }
+        }
+      ]
+    }
+  },
   "trustedBrands": {
     "title": "Our Trusted Brands",
     "subtitle": "Powered by Global Excellence",
@@ -361,9 +639,22 @@
     "note": "This section contains placeholder content ('xyz') and requires actual client names, testimonials, and ratings to be added."
   },
   "contactInfo": {
-    "phone": "+91-9076304428",
     "email": "aadienterprises2k23@gmail.com",
     "closingMessage": "Let's Enhance Your Guest Experience Together!",
-    "thankYou": "Thank You Very Much"
+    "thankYou": "Thank You Very Much",
+    "offices": [
+      {
+        "label": "Mumbai Office",
+        "phone": "+91-9076304428"
+      },
+      {
+        "label": "Bengaluru Office",
+        "phone": "+91-9270075682"
+      },
+      {
+        "label": "Delhi Office",
+        "phone": "+91-9834921872"
+      }
+    ]
   }
 }

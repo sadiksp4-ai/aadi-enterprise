@@ -30,8 +30,8 @@ const Navbar: React.FC = () => {
     <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
       <a href="#home" className="navbar-logo-link">
         <div className="navbar-logo">
-          <img src={logo} alt="AADI ENTERPRISE" />
-          <span>AADI ENTERPRISE</span>
+          <img src={logo} alt="AADI ENTERPRISES" />
+          <span>AADI ENTERPRISES</span>
         </div>
       </a>
       <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>

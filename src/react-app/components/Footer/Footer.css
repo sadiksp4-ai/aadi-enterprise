@@ -1,12 +1,27 @@
 .footer {
-  padding: 2rem;
+  padding: var(--space-lg);
   text-align: center;
-  background-color: rgba(10, 15, 24, 0.5);
-  margin-top: 5rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 15, 24, 0.8) 100%);
+  margin-top: var(--space-2xl);
+  border-top: var(--border-subtle);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 1px;
+  background: var(--gradient-gold);
 }
 
 .footer p {
   margin: 0;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  font-weight: 300;
 }

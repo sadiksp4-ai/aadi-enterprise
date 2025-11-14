@@ -1,44 +1,76 @@
 .about {
-    padding: 5rem 2rem;
+    padding: var(--space-2xl) var(--space-md);
     text-align: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+    position: relative;
 }
 
-.section-title {
+.about .section-title {
+    margin-bottom: var(--space-sm);
+}
+
+.about .section-subtitle {
     font-family: var(--font-primary);
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--primary-gold-light);
+    margin-bottom: var(--space-lg);
+    letter-spacing: 0.03em;
 }
 
 .about-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.9;
+    margin-bottom: var(--space-md);
+    color: var(--text-secondary);
+    font-weight: 300;
+    letter-spacing: 0.02em;
 }
 
 .philosophy-list {
     list-style: none;
     padding: 0;
-    margin-top: 2rem;
+    margin-top: var(--space-lg);
     text-align: left;
-    max-width: 600px;
+    max-width: 650px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .philosophy-list li {
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    padding-left: 3rem;
     position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 2px solid var(--primary-gold);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.philosophy-list li:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-left-color: var(--primary-gold-light);
+    transform: translateX(8px);
 }
 
 .philosophy-list li::before {
-    content: "✓";
+    content: "•";
     position: absolute;
-    left: 0;
-    color: var(--primary-color);
+    left: var(--space-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-gold);
     font-weight: bold;
+    font-size: 1.5rem;
+    transition: color var(--transition-base);
+}
+
+.philosophy-list li:hover::before {
+    color: var(--primary-gold-light);
 }

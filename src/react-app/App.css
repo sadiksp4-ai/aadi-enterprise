@@ -1,12 +1,38 @@
+/* Enhanced section animations */
 .App main > section {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
     transition:
-        opacity 0.8s ease-out,
-        transform 0.8s ease-out;
+        opacity var(--transition-luxury),
+        transform var(--transition-luxury);
 }
 
 .App main > section.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Global section title styling */
+.section-title {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--primary-gold);
+    margin-bottom: var(--space-lg);
+    letter-spacing: 0.02em;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--gradient-gold);
+    border-radius: 2px;
 }

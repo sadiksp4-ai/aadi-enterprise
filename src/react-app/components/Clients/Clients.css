@@ -1,36 +1,66 @@
 .clients {
-  padding: 5rem 0;
+  padding: var(--space-2xl) 0;
   text-align: center;
   overflow: hidden;
+  position: relative;
 }
 
 .clients-marquee {
   width: 100%;
   overflow: hidden;
   position: relative;
-  margin-top: 3rem;
+  margin-top: var(--space-xl);
+  padding: var(--space-md) 0;
+}
+
+.clients-marquee::before,
+.clients-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.clients-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-primary) 0%, transparent 100%);
+}
+
+.clients-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-primary) 0%, transparent 100%);
 }
 
 .clients-slide {
   display: flex;
   width: fit-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
+}
+
+.clients-slide:hover {
+  animation-play-state: paused;
 }
 
 .client-logo {
   font-family: var(--font-primary);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-color);
-  margin: 0 3rem;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 4rem;
   white-space: nowrap;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
+  opacity: 0.6;
+  transition: all var(--transition-base);
+  letter-spacing: 0.05em;
+  cursor: default;
 }
 
 .client-logo:hover {
-    opacity: 1;
-    color: var(--primary-color);
+  opacity: 1;
+  color: var(--primary-gold-light);
+  transform: scale(1.1);
 }
 
 @keyframes marquee {

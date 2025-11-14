@@ -6,16 +6,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
-    background-color: rgba(10, 15, 24, 0.8);
-    backdrop-filter: blur(10px);
+    padding: 1.25rem 5%;
+    background-color: rgba(10, 15, 24, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     z-index: 1000;
-    transition: background-color 0.3s ease-in-out;
+    transition: all var(--transition-base);
     box-sizing: border-box;
+    border-bottom: var(--border-subtle);
 }
 
 .navbar.scrolled {
-    background-color: rgba(10, 15, 24, 0.5);
+    background-color: rgba(10, 15, 24, 0.95);
+    padding: 0.875rem 5%;
+    box-shadow: var(--shadow-md);
 }
 
 @keyframes slideInDown {
@@ -39,12 +43,24 @@
 .navbar-logo img {
     height: 40px;
     margin-right: 1rem;
+    transition: transform var(--transition-base);
 }
+
+.navbar-logo:hover img {
+    transform: scale(1.05);
+}
+
 .navbar-logo span {
     font-family: var(--font-primary);
     font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
+    font-weight: 600;
+    color: var(--primary-gold);
+    letter-spacing: 0.05em;
+    transition: color var(--transition-base);
+}
+
+.navbar-logo:hover span {
+    color: var(--primary-gold-light);
 }
 
 .navbar-links {
@@ -52,12 +68,15 @@
 }
 
 .navbar-links a {
-    margin: 0 1rem;
+    margin: 0 1.5rem;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-secondary);
     font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     position: relative;
-    transition: color 0.3s ease;
+    transition: color var(--transition-base);
 }
 
 .navbar-links a::after {
@@ -65,15 +84,16 @@
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -5px;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
+    background: var(--gradient-gold);
+    transition: width var(--transition-base);
+    border-radius: 2px;
 }
 
 .navbar-links a:hover {
-    color: var(--primary-color);
+    color: var(--primary-gold-light);
 }
 
 .navbar-links a:hover::after {

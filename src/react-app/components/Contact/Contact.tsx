@@ -3,7 +3,7 @@ import "./Contact.css";
 import data from "../../../../aadi-info.json";
 
 const Contact = React.forwardRef<HTMLElement>((_, ref) => {
-  const { phone, email, closingMessage } = data.contactInfo;
+  const { email, closingMessage, offices } = data.contactInfo;
 
   return (
     <section id="contact" className="contact" ref={ref}>
@@ -13,9 +13,16 @@ const Contact = React.forwardRef<HTMLElement>((_, ref) => {
         <p>
           Email: <a href={`mailto:${email}`}>{email}</a>
         </p>
-        <p>
-          Phone: <a href={`tel:${phone}`}>{phone}</a>
-        </p>
+        <div className="office-list">
+          {offices.map((office, index) => (
+            <div key={index} className="office-item">
+              <strong>{office.label}</strong>
+              <span>
+                <a href={`tel:${office.phone}`}>{office.phone}</a>
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
       <form className="contact-form">
         <input type="text" placeholder="Your Name" required />
