@@ -131,10 +131,17 @@ const ContactPage: React.FC = () => {
                                             <MapPin className="info-icon" size={24} />
                                         </div>
                                         <div>
-                                            <p className="info-main">Pune, Maharashtra</p>
-                                            <p className="info-sub">
-                                                Registered Office & Experience Center
-                                            </p>
+                                            <a
+                                                href="https://maps.app.goo.gl/Eft6y7Ji6cmZpy7d7?g_st=ipc"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="info-link"
+                                            >
+                                                <p className="info-main">Parage Chowk, Ashirwad Complex, Barane Rd, Mangalwar Peth, Pune, Maharashtra 411011</p>
+                                                <p className="info-sub">
+                                                    Registered Office & Experience Center
+                                                </p>
+                                            </a>
                                         </div>
                                     </div>
                                     <div className="info-item">
