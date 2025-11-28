@@ -61,15 +61,17 @@ interface ProductDetailsModalProps {
 }
 
 const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOpen, onClose }) => {
-  if (!isOpen || !product) return null;
-
   // Prevent background scroll when modal is open
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+
+  if (!isOpen || !product) return null;
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
