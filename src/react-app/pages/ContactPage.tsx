@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
-import data from "../../../../aadi-info.json";
+import { MapPin, Mail, Clock, ArrowRight } from "lucide-react";
+import data from "../../../aadi-info.json";
 import "./ContactPage.css";
 
 const ContactPage: React.FC = () => {
@@ -25,7 +25,7 @@ const ContactPage: React.FC = () => {
         });
     };
 
-    const { email, linkedin, maps, closingMessage, offices } = data.contactInfo;
+    const { email, offices } = data.contactInfo;
 
     return (
         <div className="contact-page">

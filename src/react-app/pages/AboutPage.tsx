@@ -13,6 +13,7 @@ import {
     ArrowRight,
     Download
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./AboutPage.css";
 
 const AboutPage: React.FC = () => {
@@ -92,7 +93,7 @@ const AboutPage: React.FC = () => {
                         <div className="about-split-image">
                             <div className="about-image-wrapper">
                                 <img
-                                    src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=1000&auto=format&fit=crop"
+                                    src="/about_us_image.jpg"
                                     alt="Chef and consultant discussing kitchen blueprints"
                                     className="about-narrative-image"
                                 />
@@ -253,12 +254,17 @@ const AboutPage: React.FC = () => {
                         Let's create something amazing together.
                     </p>
                     <div className="about-cta-buttons">
-                        <button className="btn-primary">
+                        <Link to="/contact" className="btn-primary">
                             Contact Our Consultants <ArrowRight size={18} className="btn-icon" />
-                        </button>
-                        <button className="btn-outline">
+                        </Link>
+                        <a
+                            href="https://drive.google.com/drive/folders/1f6st0JQ64rPWvfX-nhnfuVSjP5kFCohs?usp=sharing"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-outline"
+                        >
                             Download Corporate Profile <Download size={18} className="btn-icon" />
-                        </button>
+                        </a>
                     </div>
                 </div>
             </section>
