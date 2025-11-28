@@ -55,13 +55,7 @@ const Navbar: React.FC = () => {
         >
           Products
         </Link>
-        <Link
-          to="/brands"
-          onClick={closeMenu}
-          className={location.pathname === "/brands" ? "active" : ""}
-        >
-          Brands
-        </Link>
+        {/* Brands link removed as it's merged with Products */}
         <Link
           to="/clients"
           onClick={closeMenu}
@@ -87,4 +81,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-

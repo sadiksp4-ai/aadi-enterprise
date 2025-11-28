@@ -1,244 +1,245 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Products.css";
 import data from "../../../../aadi-info.json";
 
-interface ProductsProps {
-  onOpenModal: () => void;
+interface ProductEntry {
+  name: string;
+  logo?: string;
+  headline?: string;
+  description: string;
+  subDescription?: string;
+  features?: string[];
+  idealFor?: string[];
+  closing?: string;
+  extraInfo?: Record<string, any>;
+  subItems?: {
+    title: string;
+    description?: string;
+    items: string[];
+  }[];
+  advantages?: string[];
 }
 
-const Products: React.FC<ProductsProps> = ({ onOpenModal }) => {
-  const { productSections } = data;
-  const [activeSection, setActiveSection] = useState<
-    "housekeeping" | "foodAndBeverage"
-  >("housekeeping");
-  const [activeTab, setActiveTab] = useState(0);
-  const [activeRange, setActiveRange] = useState<"premium" | "essential">(
-    "premium",
-  );
-  const [expandedSubcategories, setExpandedSubcategories] = useState<
-    Set<number>
-  >(new Set());
+interface ProductCategory {
+  id: string;
+  title: string;
+  description: string;
+  brands: ProductEntry[];
+}
 
-  const currentCategories =
-    productSections[activeSection as keyof typeof productSections].categories;
-  const currentCategory = currentCategories[activeTab];
+// Helper type to match the JSON structure
+const productCategories = data.productCategories as ProductCategory[];
 
-  const toggleSubcategory = (index: number) => {
-    const newExpanded = new Set(expandedSubcategories);
-    if (newExpanded.has(index)) {
-      newExpanded.delete(index);
-    } else {
-      newExpanded.add(index);
-    }
-    setExpandedSubcategories(newExpanded);
-  };
+interface BrandCardProps {
+  brand: ProductEntry;
+  onClick: () => void;
+}
 
-  const handleSectionChange = (
-    section: "housekeeping" | "foodAndBeverage",
-  ) => {
-    setActiveSection(section);
-    setActiveTab(0);
-    setExpandedSubcategories(new Set());
-  };
-
-  const renderProductList = (items: string[]) => (
-    <ul className="product-list">
-      {items.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
-  );
-
-  const getCategoryImage = () => {
-    const folderName = activeSection === "housekeeping" ? "housekeeping" : "F&B";
-    const imageName = currentCategory.category
-      .toLowerCase()
-      .replace(/&/g, "and")
-      .replace(/\s+/g, "-")
-      .replace(/[()]/g, "");
-    return `/${folderName}/${imageName}.jpg`;
-  };
-
-  const renderStandardCategory = () => {
-    if (!("premiumRange" in currentCategory)) return null;
-
-    const range =
-      activeRange === "premium"
-        ? currentCategory.premiumRange
-        : currentCategory.essentialRange;
-
-    if (!range) return null;
-
-    return (
-      <div className="category-content">
-        <div className="category-image-wrapper">
-          <img
-            src={getCategoryImage()}
-            alt={currentCategory.category}
-            className="category-image"
-            loading="lazy"
-          />
-        </div>
-        {currentCategory.headline && (
-          <h3 className="category-headline">{currentCategory.headline}</h3>
-        )}
-        {currentCategory.description && (
-          <p className="category-description">
-            {currentCategory.description}
-          </p>
-        )}
-        <div className="range-content">
-          <h4 className="range-title">{range.title}</h4>
-          {renderProductList(range.items)}
-        </div>
-      </div>
-    );
-  };
-
-  const renderComplexCategory = () => {
-    if (!("subCategories" in currentCategory)) return null;
-
-    return (
-      <div className="category-content">
-        <div className="category-image-wrapper">
-          <img
-            src={getCategoryImage()}
-            alt={currentCategory.category}
-            className="category-image"
-            loading="lazy"
-          />
-        </div>
-        {currentCategory.headline && (
-          <h3 className="category-headline">{currentCategory.headline}</h3>
-        )}
-        {currentCategory.description && (
-          <p className="category-description">
-            {currentCategory.description}
-          </p>
-        )}
-
-        <div className="subcategories">
-          {currentCategory.subCategories?.map((subcat, index) => {
-            const isExpanded = expandedSubcategories.has(index);
-            return (
-              <div key={index} className="subcategory">
-                <button
-                  className="subcategory-header"
-                  onClick={() => toggleSubcategory(index)}
-                >
-                  <span className="subcategory-title">
-                    {subcat.subCategory}
-                  </span>
-                  <span
-                    className={`subcategory-icon ${isExpanded ? "expanded" : ""}`}
-                  >
-                    ▼
-                  </span>
-                </button>
-
-                {isExpanded && (
-                  <div className="subcategory-content">
-                    {"description" in subcat && subcat.description && (
-                      <p className="subcategory-description">
-                        {subcat.description}
-                      </p>
-                    )}
-                    <div className="subcategory-ranges">
-                      <div className="subcat-range premium">
-                        <h5 className="subcat-range-title">
-                          {subcat.premiumRange.title}
-                        </h5>
-                        {renderProductList(subcat.premiumRange.items)}
-                      </div>
-                      <div className="subcat-range essential">
-                        <h5 className="subcat-range-title">
-                          {("classicRange" in subcat
-                            ? subcat.classicRange
-                            : subcat.essentialRange
-                          ).title}
-                        </h5>
-                        {renderProductList(
-                          ("classicRange" in subcat
-                            ? subcat.classicRange
-                            : subcat.essentialRange
-                          ).items,
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
-
-  const hasSubcategories = "subCategories" in currentCategory;
-
+const BrandCard: React.FC<BrandCardProps> = ({ brand, onClick }) => {
   return (
-    <section id="products" className="products">
-      <div className="products-header">
-        <h2 className="section-title">Our Products</h2>
-        <button className="comparison-btn" onClick={onOpenModal}>
-          View Comparison Guide
-        </button>
-      </div>
-
-      <div className="section-switcher">
-        <button
-          className={`section-btn ${activeSection === "housekeeping" ? "active" : ""}`}
-          onClick={() => handleSectionChange("housekeeping")}
-        >
-          {productSections.housekeeping.title}
-        </button>
-        <button
-          className={`section-btn ${activeSection === "foodAndBeverage" ? "active" : ""}`}
-          onClick={() => handleSectionChange("foodAndBeverage")}
-        >
-          {productSections.foodAndBeverage.title}
-        </button>
-      </div>
-
-      <div className="products-tabs">
-        {currentCategories.map((category, index) => (
-          <button
-            key={index}
-            className={`tab-button ${activeTab === index ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab(index);
-              setExpandedSubcategories(new Set());
-            }}
-          >
-            {category.category}
-          </button>
-        ))}
-      </div>
-
-      {!hasSubcategories && (
-        <div className="range-toggle">
-          <button
-            className={`range-btn ${activeRange === "premium" ? "active" : ""}`}
-            onClick={() => setActiveRange("premium")}
-          >
-            Premium Range
-          </button>
-          <button
-            className={`range-btn ${activeRange === "essential" ? "active" : ""}`}
-            onClick={() => setActiveRange("essential")}
-          >
-            Essential Range
-          </button>
+    <div className="brand-card" onClick={onClick}>
+      {brand.logo && (
+        <div className="brand-logo-wrapper">
+          <img
+            src={brand.logo}
+            alt={`${brand.name} logo`}
+            className="brand-logo"
+            loading="lazy"
+          />
         </div>
       )}
+      <h3 className="brand-name">{brand.name}</h3>
+      {brand.headline && <h4 className="brand-headline">{brand.headline}</h4>}
+    </div>
+  );
+};
 
-      <div className="products-content">
-        {hasSubcategories
-          ? renderComplexCategory()
-          : renderStandardCategory()}
+interface ProductDetailsModalProps {
+  product: ProductEntry | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOpen, onClose }) => {
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  if (!isOpen || !product) return null;
+
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  return (
+    <div className="modal-overlay" onClick={handleOverlayClick}>
+      <div className="modal-content">
+        <button className="modal-close-btn" onClick={onClose}>×</button>
+
+        <div className="modal-header">
+           {product.logo && (
+            <img src={product.logo} alt={product.name} className="modal-logo" />
+           )}
+           <div>
+             <h2 className="modal-title">{product.name}</h2>
+             {product.headline && <h4 className="modal-headline">{product.headline}</h4>}
+           </div>
+        </div>
+
+        <div className="modal-body">
+            <p className="brand-desc">{product.description}</p>
+
+            {product.subDescription && (
+              <p className="brand-desc">{product.subDescription}</p>
+            )}
+
+            {product.features && product.features.length > 0 && (
+              <>
+                <h5 className="ideal-for-label">Key Features</h5>
+                <ul className="features-list">
+                  {product.features.map((feature, idx) => (
+                    <li key={idx}>{feature}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {product.advantages && product.advantages.length > 0 && (
+              <>
+                <h5 className="ideal-for-label">Advantages</h5>
+                <ul className="features-list">
+                  {product.advantages.map((adv, idx) => (
+                    <li key={idx}>{adv}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {product.subItems && (
+              <div className="sub-items-container">
+                {product.subItems.map((sub, idx) => (
+                  <div key={idx} className="sub-item">
+                    <h5 className="sub-item-title">{sub.title}</h5>
+                    {sub.description && (
+                      <p className="sub-item-desc">{sub.description}</p>
+                    )}
+                    <ul className="features-list">
+                      {sub.items.map((item, itemIdx) => (
+                        <li key={itemIdx}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {product.extraInfo && (
+              <div className="extra-info-container">
+                {Object.entries(product.extraInfo).map(([key, value], idx) => (
+                  <div key={idx} className="extra-info-block">
+                    <h5 className="ideal-for-label">{key}</h5>
+                    {Array.isArray(value) ? (
+                      <ul className="features-list">
+                        {value.map((v, i) => <li key={i}>{v}</li>)}
+                      </ul>
+                    ) : (
+                      <p className="brand-desc">{value}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {product.idealFor && product.idealFor.length > 0 && (
+              <div className="ideal-for-section">
+                <span className="ideal-for-label">Ideal For</span>
+                <div className="tags-container">
+                  {product.idealFor.map((tag, idx) => (
+                    <span key={idx} className="tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {product.closing && (
+                <p className="brand-desc" style={{ marginTop: '1rem', fontStyle: 'italic' }}>{product.closing}</p>
+            )}
+        </div>
       </div>
-    </section>
+    </div>
+  );
+};
+
+const Products: React.FC = () => {
+  const [activeCategoryId, setActiveCategoryId] = useState<string>(
+    productCategories[0].id
+  );
+  const [selectedProduct, setSelectedProduct] = useState<ProductEntry | null>(null);
+
+  const activeCategory = productCategories.find(
+    (cat) => cat.id === activeCategoryId
+  );
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeCategoryId]);
+
+  return (
+    <div className="products-page">
+      <aside className="products-sidebar">
+        <h2 className="sidebar-title">Categories</h2>
+        <nav className="category-nav">
+          {productCategories.map((cat) => (
+            <button
+              key={cat.id}
+              className={`category-nav-btn ${
+                activeCategoryId === cat.id ? "active" : ""
+              }`}
+              onClick={() => setActiveCategoryId(cat.id)}
+            >
+              {cat.title}
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      <main className="products-main">
+        {activeCategory && (
+          <div className="category-container">
+            <header className="category-header">
+              <h1 className="category-title">{activeCategory.title}</h1>
+              <p className="category-desc">{activeCategory.description}</p>
+            </header>
+
+            <div className="brands-grid">
+              {activeCategory.brands.map((brand, index) =>
+                <BrandCard
+                  key={index}
+                  brand={brand}
+                  onClick={() => setSelectedProduct(brand)}
+                />
+              )}
+            </div>
+          </div>
+        )}
+      </main>
+
+      <ProductDetailsModal
+        product={selectedProduct}
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
+    </div>
   );
 };
 
