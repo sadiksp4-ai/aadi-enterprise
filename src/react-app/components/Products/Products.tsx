@@ -27,48 +27,53 @@ interface ProductCategory {
   brands: ProductEntry[];
 }
 
-// Helper type to match the JSON structure if needed, or cast data
+// Helper type to match the JSON structure
 const productCategories = data.productCategories as ProductCategory[];
 
-interface ProductsProps {
-  onOpenModal?: () => void; // Optional if we keep the prop for compatibility
+interface BrandCardProps {
+  brand: ProductEntry;
 }
 
-const Products: React.FC<ProductsProps> = () => {
-  const [activeCategoryId, setActiveCategoryId] = useState<string>(
-    productCategories[0].id
-  );
+const BrandCard: React.FC<BrandCardProps> = ({ brand }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const activeCategory = productCategories.find(
-    (cat) => cat.id === activeCategoryId
-  );
+  return (
+    <div className={`brand-card ${isExpanded ? "expanded" : ""}`}>
+      {brand.logo && (
+        <div className="brand-logo-wrapper">
+          <img
+            src={brand.logo}
+            alt={`${brand.name} logo`}
+            className="brand-logo"
+            loading="lazy"
+          />
+        </div>
+      )}
+      <h3 className="brand-name">{brand.name}</h3>
+      {brand.headline && <h4 className="brand-headline">{brand.headline}</h4>}
 
-  // Scroll to top when category changes
-  useEffect(() => {
-    const mainContent = document.querySelector(".products-main");
-    if (mainContent) {
-      mainContent.scrollTop = 0;
-    }
-  }, [activeCategoryId]);
+      <p className="brand-desc">
+        {brand.description}
+      </p>
 
-  const renderBrandCard = (brand: ProductEntry, index: number) => {
-    return (
-      <div className="brand-card" key={index}>
-        {brand.logo && (
-          <div className="brand-logo-wrapper">
-            <img
-              src={brand.logo}
-              alt={`${brand.name} logo`}
-              className="brand-logo"
-              loading="lazy"
-            />
+      {/* Always visible Ideal For tags (good for quick scanning) */}
+      {brand.idealFor && brand.idealFor.length > 0 && (
+        <div className="ideal-for-section-preview">
+          <div className="tags-container">
+            {brand.idealFor.slice(0, 3).map((tag, idx) => (
+              <span key={idx} className="tag">
+                {tag}
+              </span>
+            ))}
+            {brand.idealFor.length > 3 && (
+               <span className="tag-more">+{brand.idealFor.length - 3}</span>
+            )}
           </div>
-        )}
-        <h3 className="brand-name">{brand.name}</h3>
-        {brand.headline && <h4 className="brand-headline">{brand.headline}</h4>}
+        </div>
+      )}
 
-        <p className="brand-desc">{brand.description}</p>
-
+      {/* Expandable Content */}
+      <div className={`brand-details ${isExpanded ? "open" : ""}`}>
         {brand.subDescription && (
           <p className="brand-desc">{brand.subDescription}</p>
         )}
@@ -130,25 +135,49 @@ const Products: React.FC<ProductsProps> = () => {
           </div>
         )}
 
-        {brand.idealFor && brand.idealFor.length > 0 && (
-          <div className="ideal-for-section">
-            <span className="ideal-for-label">Ideal For</span>
-            <div className="tags-container">
-              {brand.idealFor.map((tag, idx) => (
-                <span key={idx} className="tag">
-                  {tag}
-                </span>
-              ))}
+        {/* Full Ideal For list in expanded view if truncated in preview */}
+        {brand.idealFor && brand.idealFor.length > 3 && (
+             <div className="ideal-for-section">
+                <span className="ideal-for-label">All Ideal For</span>
+                <div className="tags-container">
+                {brand.idealFor.map((tag, idx) => (
+                    <span key={idx} className="tag">
+                    {tag}
+                    </span>
+                ))}
+                </div>
             </div>
-          </div>
         )}
 
         {brand.closing && (
             <p className="brand-desc" style={{ marginTop: '1rem', fontStyle: 'italic' }}>{brand.closing}</p>
         )}
       </div>
-    );
-  };
+
+      <button
+        className="view-details-btn"
+        onClick={() => setIsExpanded(!isExpanded)}
+        aria-expanded={isExpanded}
+      >
+        {isExpanded ? "Show Less" : "View Details"}
+        <span className="btn-arrow">{isExpanded ? "▲" : "▼"}</span>
+      </button>
+    </div>
+  );
+};
+
+const Products: React.FC = () => {
+  const [activeCategoryId, setActiveCategoryId] = useState<string>(
+    productCategories[0].id
+  );
+
+  const activeCategory = productCategories.find(
+    (cat) => cat.id === activeCategoryId
+  );
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeCategoryId]);
 
   return (
     <div className="products-page">
@@ -179,7 +208,7 @@ const Products: React.FC<ProductsProps> = () => {
 
             <div className="brands-grid">
               {activeCategory.brands.map((brand, index) =>
-                renderBrandCard(brand, index)
+                <BrandCard key={index} brand={brand} />
               )}
             </div>
           </div>
