@@ -54,560 +54,890 @@
       "A female housekeeper carrying a basket of cleaning supplies."
     ]
   },
-  "productSections": {
-    "housekeeping": {
+  "productCategories": [
+    {
+      "id": "commercial-kitchen",
+      "title": "Commercial Kitchen",
+      "description": "Curated equipment from the world's finest brands, tailored for Hotels, Restaurants, and Institutional Catering.",
+      "brands": [
+        {
+          "name": "Rational Combi Oven",
+          "logo": "/rational.png",
+          "headline": "The Ultimate Combination of Precision, Power & Performance.",
+          "description": "The Rational Combi Oven is the industry benchmark for modern commercial kitchens—trusted by chefs in 5-star hotels, QSR chains, cloud kitchens, and high-volume production units. Designed for maximum output with minimal labour, Rational delivers consistent cooking results every single time.",
+          "subDescription": "Rational's intelligent cooking technology eliminates guesswork by automatically adjusting temperature, humidity, airflow, and cook time to match the food's needs. Whether you're grilling, baking, steaming, roasting, frying, or regenerating—Rational ensures: Uniform cooking across all trays, Significant energy savings, Reduced food waste, Higher yield & improved taste, Maximum safety & hygiene.",
+          "features": [
+            "iCombi Pro - Smart Cooking System - automatically senses load size & adjusts settings",
+            "SelfCookingCenter - handles over 90% of common menu items",
+            "Efficient LevelControl - cook multiple dishes simultaneously without flavour transfer",
+            "Ultra-Fast Cleaning - self-cleaning mode with minimal chemical use",
+            "Low Operational Cost - optimized heat transfer & steam management"
+          ],
+          "idealFor": [
+            "Hotels",
+            "Fine Dining",
+            "QSRs",
+            "Industrial Canteens",
+            "Cloud Kitchens",
+            "Banquet Kitchens"
+          ],
+          "closing": "If your kitchen demands speed, consistency, and premium results, Rational is the clear choice."
+        },
+        {
+          "name": "Winterhalter Commercial Dishwashers",
+          "logo": "/winterhalter.png",
+          "headline": "Hygiene You Can Trust. Performance You Can Measure.",
+          "description": "Winterhalter dishwashers are engineered for hospitality businesses that cannot compromise on cleanliness, speed, or reliability. Recognized globally for their precision German engineering, Winterhalter machines ensure spotless, hygienic, and streak-free wash results—every cycle, every load.",
+          "subDescription": "Why Winterhalter Leads the Market: Winterhalter combines smart wash technology with water, detergent, and energy optimization—giving you unmatched operational efficiency.",
+          "features": [
+            "VarioPower Pressure Control - adjusts pressure based on dish type",
+            "Thermostop Technology - guarantees perfect sanitization temperatures",
+            "Efficient Filtration System - ensures crystal-clear wash water",
+            "Low Chemical Consumption - reduces running cost",
+            "Rapid Wash Cycles - faster table turnaround",
+            "Noise-Reduced Operation - ideal for open kitchens & F&B service areas"
+          ],
+          "extraInfo": {
+            "Types of Machines": [
+              "Undercounter Glasswashers",
+              "Hood-Type Dishwashers",
+              "Conveyor & Flight-Type Systems",
+              "Rack Systems for High-Volume Operations"
+            ],
+            "Guaranteed Hygiene": "Certified to international hygiene standards, Winterhalter ensures 100% sanitization for hotels, restaurants, hospitals, and food production units."
+          },
+          "idealFor": [
+            "Hotels",
+            "Fine Dining",
+            "Bars",
+            "Cafés",
+            "Banquets",
+            "Cloud Kitchens",
+            "Hospitals"
+          ],
+          "closing": "Winterhalter delivers consistent hygiene, lower operating costs, and long-term reliability—a must-have for every modern kitchen."
+        },
+        {
+          "name": "Robot Coupe Food Preparation Equipment",
+          "logo": "/robot_coupe.png",
+          "headline": "Speed, Precision & Reliability for Every Prep Task.",
+          "description": "A global pioneer in food preparation solutions, Robot Coupe is the backbone of efficient commercial kitchens. Designed to save time, reduce labor, and deliver consistent results, Robot Coupe machines streamline all pre-prep operations with unmatched accuracy.",
+          "subDescription": "Why Robot Coupe? Robot Coupe equipment is engineered for high-volume kitchens and offers exceptional durability, cutting power, and precision across a wide variety of tasks.",
+          "features": [
+            "Vegetable Preparation - slicing, dicing, julienning, shredding",
+            "Blending & Mixing - soups, sauces, purées",
+            "Chopping & Emulsifying - consistent texture for any recipe",
+            "Grating & Grinding",
+            "High-Speed Performance - processes large volumes in seconds"
+          ],
+          "advantages": [
+            "Razor-sharp stainless-steel blades for consistent cuts",
+            "Heavy-duty motors designed for continuous operation",
+            "Multiple attachments for versatility",
+            "Time-saving output ideal for peak hours",
+            "Compact & ergonomic design",
+            "Easy cleaning & hygiene compliant"
+          ],
+          "idealFor": [
+            "Hotels",
+            "Restaurants",
+            "Industrial Kitchens",
+            "Cloud Kitchens",
+            "Bakeries",
+            "Catering Services"
+          ],
+          "closing": "Robot Coupe transforms your pre-preparation workflow—making it faster, more efficient, and more accurate."
+        },
+        {
+          "name": "100% Chef - Avant-Garde Culinary Tools",
+          "logo": "/100_chef.png",
+          "description": "100% Chef is a global leader in innovative culinary tools, molecular gastronomy equipment, and high-end presentationware. Designed for professional chefs, the brand revolutionizes plating, food styling, and modern gastronomy.",
+          "features": [
+            "Molecular gastronomy tools & chef instruments",
+            "Artistic serving pieces, bowls & showplates",
+            "Smoke domes, pipettes, liquid nitrogen accessories",
+            "Preferred by fine dining & Michelin-star restaurants"
+          ],
+          "closing": "Chefs choose 100% Chef to bring creativity, theatre, and precision to their dishes—perfect for tasting menus and signature presentations."
+        },
+        {
+          "name": "Atlantic Chef - Professional Chef Knives",
+          "logo": "/atlantic_chef.png",
+          "description": "Atlantic Chef delivers premium chef knives and professional kitchen tools engineered for accuracy, balance, and long-lasting sharpness. Built from high-grade stainless steel, these knives support daily use in commercial kitchens.",
+          "features": [
+            "High-carbon stainless-steel blades",
+            "Ergonomic, slip-resistant handles",
+            "Range includes chef knives, butcher tools, peelers & kitchen accessories",
+            "Extreme edge retention for professional usage"
+          ],
+          "idealFor": [
+            "Hotel kitchens",
+            "Standalone restaurants",
+            "Catering setups",
+            "Butchery sections"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fnb-service",
+      "title": "F&B Service",
+      "description": "Elevating the Art of Dining & Service.",
+      "brands": [
+        {
+          "name": "Ariane Porcelain",
+          "logo": "/ariane_porcelain.png",
+          "headline": "Crafted for Culinary Presentation Excellence",
+          "description": "Ariane is one of the most trusted names in premium vitrified porcelain, designed specifically for the demanding world of hospitality. At Aadi Enterprises, we supply the complete range of Ariane tableware—engineered to withstand heavy use while elevating food presentation to a fine-dining standard.",
+          "features": [
+            "Fully Vitrified Body - Strong, chip-resistant & built for commercial use",
+            "High Thermal Shock Resistance - Works seamlessly from oven to table",
+            "Lead-Free, Non-Porous Surface - Safe and hygienic for professional kitchens",
+            "Modern, Minimalist Designs - Enhances plating aesthetics",
+            "Microwave & Dishwasher Safe"
+          ],
+          "extraInfo": {
+            "Popular Collections": [
+              "Classic White Series",
+              "Contemporary Fine-Dining Plates",
+              "Bowls, Cups & Serveware",
+              "Buffet Display Range"
+            ]
+          },
+          "idealFor": [
+            "Hotels",
+            "Restaurants",
+            "Banquets",
+            "Cloud Kitchens",
+            "Catering",
+            "Resorts"
+          ],
+          "closing": "Ariane porcelain isn't just tableware—it's a canvas for culinary artistry."
+        },
+        {
+          "name": "Schott Zwiesel",
+          "logo": "/schott_zwiesel.png",
+          "headline": "German Glass Engineering at its Finest",
+          "description": "Schott Zwiesel is globally recognized for producing the most durable, brilliant, and elegant glassware using TRITAN® crystal technology. As an authorized supplier, Aadi Enterprises offers the complete range—from wine glasses to barware—to meet the highest standards in hospitality.",
+          "features": [
+            "TRITAN® Crystal Technology - Break-resistant, lead-free, and ultra-clear",
+            "Superior Brilliance & Shine - Retains clarity even after 1,000+ washes",
+            "Perfect Balance & Feel - Designed for sommeliers and mixologists",
+            "Dishwasher Safe & Eco-Friendly",
+            "Wide Range for Every Beverage"
+          ],
+          "extraInfo": {
+            "Glassware Categories": [
+              "Wine Glasses (Red & White)",
+              "Champagne Flutes",
+              "Whisky & Cocktail Glasses",
+              "Highballs, Tumblers & Barware",
+              "Carafes & Decanters"
+            ]
+          },
+          "idealFor": [
+            "Upscale restaurants",
+            "5-star hotels",
+            "Bars & lounges",
+            "Banquets",
+            "Resorts"
+          ],
+          "closing": "Schott Zwiesel isn't just glassware—it's a statement of luxury and performance."
+        },
+        {
+          "name": "Studio William",
+          "logo": "/studio_william.png",
+          "headline": "Fine-Dining Cutlery with British Craftsmanship",
+          "description": "Studio William is globally known for its award-winning cutlery, crafted with precision and designed to complement the luxury dining experience. Aadi Enterprises brings this iconic brand to India's finest hotels and restaurants.",
+          "features": [
+            "Premium 18/10 Stainless Steel - Exceptional shine, corrosion-resistant",
+            "Designer Aesthetics - Unique silhouettes that enhance table presentation",
+            "Perfect Weight & Balance - Enhances guest comfort and dining experience",
+            "Fine-Dining Collection Range - Suitable for luxury properties",
+            "Durable for Commercial Use"
+          ],
+          "extraInfo": {
+            "Popular Collections": [
+              "Mulberry Collection",
+              "Baobab Collection",
+              "Karri & Arolla Series",
+              "Steak Knives, Serving Tools & Specialty Pieces"
+            ]
+          },
+          "idealFor": [
+            "Fine-dining restaurants",
+            "5-star hotels",
+            "Chefs' tables",
+            "Banquets",
+            "Luxury hospitality"
+          ],
+          "closing": "Studio William is more than cutlery—it's a refinement of the dining ritual."
+        },
+        {
+          "name": "Utopia Tableware",
+          "logo": "/utopia.png",
+          "headline": "Premium Crockery for Modern Hospitality",
+          "description": "Utopia is one of the world's most trusted names in hotel crockery, offering a perfect balance of durability, elegance, and functionality. Designed for restaurants, hotels, cafes, banquets, and luxury dining environments, Utopia's crockery collection is engineered to withstand high-volume usage without compromising aesthetics.",
+          "features": [
+            "Chip-resistant, hotel-grade porcelain",
+            "Modern shapes and timeless designs",
+            "Wide range for buffet, fine dine, bar & banquet service",
+            "Ideal for high-heat environments and dishwashers"
+          ],
+          "idealFor": [
+            "5-star hotels",
+            "Fine dining restaurants",
+            "QSR chains",
+            "Banquets",
+            "Catering setups"
+          ]
+        },
+        {
+          "name": "Steelite",
+          "logo": "/steelite.png",
+          "headline": "World-Class Ceramics for Professional Chefs",
+          "description": "Steelite is renowned worldwide for its high-performance vitrified tableware used by leading hotels, Michelin-star restaurants, and global F&B chains. Manufactured in the UK, Steelite products deliver unmatched longevity with contemporary style.",
+          "features": [
+            "Industry-leading durability",
+            "Thermal shock resistant",
+            "Innovative chef-driven designs",
+            "Built for heavy-duty hospitality operations"
+          ],
+          "closing": "Perfect for premium dining, buffet presentation, and high-turnover service where longevity is essential."
+        },
+        {
+          "name": "Serax",
+          "logo": "/serax.png",
+          "headline": "Designer Hospitality Tableware from Belgium",
+          "description": "Serax brings luxury, artistry, and modern European design into professional dining spaces. Their collections—developed with world-famous designers—are ideal for hotels that want a distinctive, signature dining identity.",
+          "features": [
+            "Handcrafted, artisanal finishes",
+            "Unique shapes and textures for chef plating",
+            "Used globally by top fine-dine restaurants",
+            "Perfect blend of form and function"
+          ],
+          "idealFor": [
+            "Fine dining",
+            "Boutique hotels",
+            "Chef-driven tasting menus",
+            "Premium plating"
+          ]
+        },
+        {
+          "name": "LSA International",
+          "headline": "Modern Handcrafted Glass & Tableware",
+          "description": "LSA International is globally loved for its handmade mouth-blown glassware and minimalist tableware. Their products bring a sophisticated European aesthetic to hotel rooms, bars, and restaurant spaces.",
+          "features": [
+            "Handcrafted, mouth-blown crystal glass",
+            "Elegant, modern silhouettes",
+            "Suitable for luxury hotels, lounges & bars",
+            "Matching drinkware, serveware & décor collections"
+          ],
+          "idealFor": [
+            "Premium bars",
+            "Suites",
+            "Lounge service",
+            "Banquet VIP setups"
+          ]
+        },
+        {
+          "name": "Pasabahce",
+          "logo": "/pasabahce.png",
+          "headline": "High-Durability, Value-Driven Glassware",
+          "description": "Pasabahce (Turkey) is one of the world's largest glassware manufacturers, offering a reliable and affordable range of toughened hotel glassware ideal for heavy commercial usage.",
+          "features": [
+            "Tempered for extra strength",
+            "Cost-effective for high-volume operations",
+            "Suitable for restaurants, bars & banquet halls",
+            "Large range: water glasses, wine glasses, beer mugs, jars, bowls"
+          ],
+          "idealFor": [
+            "Hotels",
+            "QSR chains",
+            "Bars",
+            "Cafés",
+            "Catering services"
+          ]
+        },
+        {
+          "name": "NUDE Glassware",
+          "logo": "/nude.png",
+          "headline": "Contemporary Crystalware from Turkey",
+          "description": "NUDE is globally recognized for its lead-free crystal glassware crafted with exceptional clarity and minimalist European aesthetics. Designed in Istanbul, NUDE collections are loved by premium hotels, bars, and Michelin-star restaurants for their elegance and durability.",
+          "features": [
+            "Lead-free crystalline glass",
+            "Ultra-clear, lightweight yet durable",
+            "Modern, minimalist design philosophy",
+            "Wide range: wine glasses, cocktail glasses, decanters, barware"
+          ],
+          "closing": "Its refined silhouettes and premium finish elevate any bar or dining experience while remaining durable for high-volume hospitality service."
+        },
+        {
+          "name": "M.Style",
+          "logo": "/m_style.png",
+          "headline": "Japanese Craftsmanship in Tableware",
+          "description": "M.Style brings the essence of authentic Japanese design into modern hospitality. Known for its beautiful glazes, handcrafted textures, and timeless shapes, M.Style collections offer the perfect canvas for Asian and fusion cuisine.",
+          "features": [
+            "Authentic Japanese ceramic artistry",
+            "Perfect for sushi, ramen, dim-sum & fine-dine plating",
+            "Unique glazes, stoneware textures & handcrafted finishes",
+            "A favourite among pan-Asian restaurants & boutique hotels"
+          ],
+          "idealFor": [
+            "Asian restaurants",
+            "Omakase counters",
+            "Contemporary fine dining",
+            "Hotel specialty cuisines"
+          ]
+        },
+        {
+          "name": "Figgjo",
+          "logo": "/figgjo.png",
+          "headline": "Premium Porcelain from Norway",
+          "description": "Figgjo is Norway's iconic porcelain manufacturer known for its superior durability, clean Scandinavian design, and professional-grade performance. Its products are widely used in luxury hotels and innovative chef-driven kitchens across the world.",
+          "features": [
+            "Vitrified porcelain with exceptional durability",
+            "Scandinavian minimalism & timeless elegance",
+            "Ideal for high-temperature and high-usage environments",
+            "Designed in collaboration with leading chefs"
+          ],
+          "idealFor": [
+            "5-star hotels",
+            "Creative culinary presentation",
+            "Buffets",
+            "Fine dining",
+            "High-volume professional kitchens"
+          ]
+        },
+        {
+          "name": "ArtEvo",
+          "logo": "/artevo.png",
+          "headline": "Contemporary Designer Tableware for Modern Hospitality",
+          "description": "ArtEvo specializes in stylish, modern, and design-forward tableware made for professional hospitality environments. With unique textures, artistic finishes, and bold silhouettes, ArtEvo helps restaurants create a signature presentation aesthetic.",
+          "features": [
+            "Trending global designs",
+            "Crafted for hospitality durability",
+            "Unique stoneware, ceramics & reactive glazes",
+            "Perfect for chefs who value creativity in plating"
+          ],
+          "idealFor": [
+            "Boutique hotels",
+            "Modern restaurants",
+            "Gastro-pubs",
+            "Fusion menus",
+            "Fine dining concepts"
+          ]
+        },
+        {
+          "name": "Luigi Bormioli",
+          "logo": "/luigi_bormioli.png",
+          "headline": "Fine Italian Crystal Glassware",
+          "description": "Luigi Bormioli is globally renowned for its Italian-designed crystal glassware, offering unmatched clarity, elegance, and durability. Made with SON.hyx® crystal technology, these glasses are perfect for premium hotel bars, lounges, and fine-dining restaurants.",
+          "features": [
+            "Ultra-clear, lead-free crystal",
+            "Superior break and scratch resistance",
+            "Elegant silhouettes for wine, cocktails & spirits",
+            "Perfect balance, weight & hand-feel"
+          ],
+          "idealFor": [
+            "Fine dining",
+            "Luxury lounges",
+            "Wine service",
+            "Cocktail bars"
+          ]
+        },
+        {
+          "name": "T&G",
+          "logo": "/t&g.png",
+          "headline": "Stylish Tableware, Boards & Serveware",
+          "description": "T&G is a leading global brand known for high-quality serveware, wooden boards, table accessories, and kitchen essentials crafted with sustainable materials. Their collections enhance presentation while supporting durability needed in hospitality environments.",
+          "features": [
+            "Premium wooden boards, mills, and table accessories",
+            "Sustainable, eco-friendly material sourcing",
+            "Perfect for buffet, bakery, grill & casual dining concepts",
+            "Designed for both functionality and style"
+          ],
+          "idealFor": [
+            "Restaurants",
+            "Bakeries",
+            "Delis",
+            "Hotel buffets",
+            "Casual dining outlets"
+          ]
+        },
+        {
+          "name": "Shapes",
+          "headline": "Contemporary Tableware for Modern Dining",
+          "description": "Shapes is known for its stylish, functional and durable tableware crafted for hotels, restaurants, and banquets. With collections spanning porcelain, stoneware, melamine, and premium serveware, Shapes blends value with contemporary design.",
+          "features": [
+            "Wide range of patterns, colours & textures",
+            "Strong, hotel-grade durability",
+            "Perfect for buffets, banquets, cafés & casual dining",
+            "Cost-effective without compromising design"
+          ],
+          "idealFor": [
+            "Hotels",
+            "QSRs",
+            "Banquets",
+            "Lounges",
+            "Cafés",
+            "Pan-Asian restaurants"
+          ]
+        },
+        {
+          "name": "Bar Kraft",
+          "logo": "/bar_kraft.jpg",
+          "headline": "Professional Bar Tools & Mixology Essentials",
+          "description": "Bar Kraft offers a complete range of premium bar accessories and mixology tools designed for professional bartenders. Known for durability and modern aesthetics, Bar Kraft products enhance efficiency and elevate the bar experience.",
+          "features": [
+            "Stainless-steel shakers, strainers, jiggers & bar sets",
+            "Modern, ergonomic designs",
+            "Built for high-volume bar operations",
+            "Ideal for cocktails, mixology & beverage programs"
+          ],
+          "idealFor": [
+            "Bars",
+            "Nightclubs",
+            "Hotels",
+            "Restaurants",
+            "Catering bars",
+            "Premium lounges"
+          ]
+        },
+        {
+          "name": "Kaapi Solutions",
+          "logo": "/kaapi.png",
+          "headline": "Professional Coffee Equipment for Hotels & Cafés",
+          "description": "Kaapi Solutions is one of India's leading providers of premium coffee machines, grinders, and barista equipment, offering solutions for hotels, cafés, bakeries, and corporate spaces. Their range supports both speciality coffee and high-volume operations.",
+          "features": [
+            "Imported espresso machines from leading global brands",
+            "Precision coffee grinders",
+            "Barista tools & café accessories",
+            "AMC, training support & installation services"
+          ],
+          "closing": "Reliable, high-performance machines ideal for breakfast lounges, room service, fine dine restaurants, and lobby cafés."
+        },
+        {
+          "name": "Cothas Coffee",
+          "logo": "/cothas.png",
+          "headline": "Authentic Filter Coffee for Hotels & Cafés",
+          "description": "Cothas Coffee is one of India's most respected names in South Indian filter coffee, trusted by hotels, restaurants, cafés, and corporate establishments for its rich aroma and consistent taste. Made from premium hand-picked beans, Cothas delivers a bold, smooth, and authentic brew experience.",
+          "features": [
+            "Signature South Indian filter blend",
+            "Strong aroma and deep flavour profile",
+            "Perfect for buffet breakfast & in-room dining",
+            "Consistent quality for high-volume service"
+          ],
+          "idealFor": [
+            "Hotels",
+            "Restaurants",
+            "Corporate cafeterias",
+            "Cafés",
+            "Bakery setups"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "housekeeping-solutions",
       "title": "Housekeeping Solutions",
-      "categories": [
-    {
-      "category": "In-Room Collection",
-      "premiumRange": {
-        "title": "Premium Range",
-        "items": [
-          "Egyptian cotton bedsheets, duvets & pillow covers",
-          "Plush bathrobes & towels",
-          "Anti-allergy mattress toppers & protectors",
-          "Designer cushions & throws"
-        ]
-      },
-      "essentialRange": {
-        "title": "Essential Range",
-        "items": [
-          "Cotton-poly blend linen sets",
-          "Soft touch bath linen",
-          "Basic bed protectors & runners"
-        ]
-      },
-      "imageDescriptions": [
-        "A stack of white towels with AADI branded amenities on a bathroom counter.",
-        "A hotel room interior with a bed and a desk with a water bottle.",
-        "Two white candles in glass jars."
-      ]
-    },
-    {
-      "category": "Entrance Solutions",
-      "headline": "First Impressions That Last",
-      "description": "functional, Safe, and Stylish Solutions for Every Hotel Entry Point. From the grand hotel lobby to the service entrance, Aadi Enterprises provides durable, aesthetic, and functional entrance solutions designed to enhance safety, cleanliness, and brand appeal.",
-      "subCategories": [
+      "description": "Where Cleanliness Meets Engineering Excellence.",
+      "brands": [
         {
-          "subCategory": "Front of the House Solutions (Lobby Area)",
-          "premiumRange": {
-            "title": "Premium (Luxury/5★)",
-            "items": [
-              "Designer floor mats with logo engraving",
-              "Brass or stainless-steel queue managers",
-              "Luggage trolleys with polished finish",
-              "Decorative umbrella stands",
-              "Designer signage stands",
-              "Fragrance diffusers for entry",
-              "Sanitizer kiosks with branding"
+          "name": "Karcher",
+          "logo": "/kaercher_logo.png",
+          "headline": "German Cleaning Technology",
+          "description": "A global leader in professional cleaning systems, Karcher offers high-performance machines built for intensive hospitality use.",
+          "extraInfo": {
+            "Products supplied": [
+              "Professional Vacuum Cleaners",
+              "Scrubber-Dryers",
+              "Single Disc Machines",
+              "Carpet Extractors",
+              "Steam Cleaners",
+              "High-Pressure Jet Machines"
             ]
           },
-          "classicRange": {
-            "title": "Classic (Essential/3-4★)",
-            "items": [
-              "Heavy-duty coir or PVC mats",
-              "Powder-coated steel queue barriers",
-              "Standard chrome/SS luggage carts",
-              "Basic umbrella holders",
-              "Acrylic or metal signage boards",
+          "features": [
+            "German engineering",
+            "Faster cleaning cycles",
+            "Durable, long-life motors",
+            "Ideal for hotels, malls & hospitals"
+          ]
+        },
+        {
+          "name": "IPC",
+          "logo": "/ipcworldwide_logo.jpg",
+          "headline": "Professional Cleaning Systems",
+          "description": "IPC (Integrated Professional Cleaning) delivers reliable and efficient cleaning equipment suited for continuous commercial operations.",
+          "extraInfo": {
+            "Products supplied": [
+              "Wet & Dry Vacuums",
+              "Industrial Scrubbers",
+              "Carpet & Upholstery Machines",
+              "Janitorial Systems"
+            ]
+          },
+          "features": [
+            "Easy maintenance",
+            "Strong build quality",
+            "Cost-effective for large properties"
+          ]
+        },
+        {
+          "name": "Housekeeping & Utility Trolleys",
+          "description": "(Compatible with Karcher, IPC, and leading FM vendors)",
+          "extraInfo": {
+            "Types available": [
+              "Housekeeping trolleys",
+              "Room service carts",
+              "Linen trolleys",
+              "Janitor carts",
+              "Multi-purpose utility trolleys"
+            ]
+          },
+          "features": [
+            "Smooth movement",
+            "Heavy-duty build",
+            "Organized workflow"
+          ]
+        },
+        {
+          "name": "Waste Management Solutions",
+          "description": "We offer complete waste systems for hospitality & facilities.",
+          "extraInfo": {
+            "Products": [
+              "HDPE bins",
+              "Stainless-steel bins",
+              "Pedal bins",
+              "Segregation bins (2 / 3 / 4 compartment)",
+              "Outdoor waste systems"
+            ]
+          }
+        },
+        {
+          "name": "Dolphy",
+          "logo": "/dolphy_logo.jpg",
+          "headline": "Premium Hotel Amenities & Hygiene Equipment",
+          "description": "Dolphy offers a complete range of hotel amenities, hygiene products, and washroom automation solutions designed for modern hospitality environments. From automatic dispensers to guestroom equipment, Dolphy supports comfort and cleanliness across property operations.",
+          "features": [
+            "Automatic soap/sanitizer dispensers",
+            "Hand dryers, hair dryers, air fresheners",
+            "Guestroom electricals & accessories",
+            "Designed for durability and heavy hotel traffic"
+          ],
+          "idealFor": [
+            "Front office washrooms",
+            "Guest rooms",
+            "Public areas",
+            "Staff facilities",
+            "Hotel back-of-house hygiene"
+          ]
+        },
+        {
+          "name": "Euronics",
+          "logo": "/euronics_logo.jpg",
+          "headline": "Smart Hygiene & Washroom Automation Solutions",
+          "description": "Euronics is one of India's leading brands in automated washroom solutions, offering touchless hygiene products ideal for hotels, malls, airports, and premium facilities. Known for reliability and innovation, Euronics products enhance hygiene and guest experience.",
+          "features": [
+            "Touchless taps, soap dispensers, hand dryers",
+            "Professional-grade hygiene equipment",
+            "Energy efficient & low maintenance",
+            "Perfect for luxury washrooms & high-traffic areas"
+          ],
+          "idealFor": [
+            "Hotels",
+            "Corporate offices",
+            "Airports",
+            "Malls",
+            "Hospitals",
+            "Public restrooms"
+          ]
+        },
+        {
+          "name": "Vikan",
+          "logo": "/vikan.png",
+          "headline": "World-Class Hygienic Cleaning Tools",
+          "description": "Vikan is globally recognized for manufacturing the most hygienic, durable, and ergonomic cleaning tools for professional environments. Designed in Denmark, Vikan products are trusted by leading hotels, hospitals, and food facilities that demand the highest standards of cleanliness and safety.",
+          "features": [
+            "Color-Coded System - Prevents cross-contamination",
+            "Food-Grade Materials - Safe for F&B areas",
+            "Ergonomic Design - Lightweight tools reduce staff fatigue",
+            "Long-Life Durability - Heat-resistant, chemical-resistant",
+            "Hygienic Design Certified"
+          ],
+          "extraInfo": {
+            "Product Range": [
+              "Professional cleaning brushes",
+              "Color-coded microfibre cloths & mops",
+              "Squeegees, scrubbing pads",
+              "Dustpans & lobby pans",
+              "Food-grade cleaning kits for kitchens",
+              "High-reach cleaning tools"
+            ]
+          },
+          "idealFor": [
+            "Hotels",
+            "Resorts",
+            "Restaurants",
+            "Commercial Kitchens",
+            "Hospitals",
+            "Pharma",
+            "Industrial Facilities"
+          ]
+        },
+        {
+          "name": "Vileda Professional",
+          "logo": "/vileda_logo.jpg",
+          "headline": "Advanced Cleaning Solutions for Hospitality",
+          "description": "Vileda Professional is a global leader in microfibre cleaning technology, offering advanced and efficient tools designed for the hospitality and facility management sector. Their products are engineered to deliver maximum hygiene with minimum effort, reducing operational costs and improving cleaning efficiency.",
+          "features": [
+            "Superior Microfibre Technology - Removes 99%+ bacteria with just water",
+            "Lightweight & Ergonomic Tools - Designed for housekeeping speed and safety",
+            "High Durability - Long lifespan, ideal for heavy hotel usage",
+            "Chemical Savings - Lower detergent usage with high-absorption microfibres",
+            "Smart Cleaning Systems"
+          ],
+          "extraInfo": {
+            "Products We Supply": [
+              "Microfibre mops and mop frames",
+              "UltraSpin and Origo 2 trolley systems",
+              "Microfibre cloths and wipes",
+              "High-performance sponge scourers",
+              "Sweeping systems and dust control solutions",
+              "Washroom & hard-floor cleaning tools"
+            ]
+          },
+          "idealFor": [
+            "Hotels",
+            "FM Companies",
+            "Hospitals",
+            "Shopping Malls",
+            "Corporate Offices",
+            "High-traffic public facilities"
+          ]
+        },
+        {
+          "name": "Saraya / Mystair",
+          "logo": "/saraya.png",
+          "headline": "Complete Hand Hygiene & Disinfection Solutions",
+          "description": "Saraya and Mystair are trusted names in professional hygiene technology, offering advanced solutions for washrooms, kitchens, housekeeping areas, and guest touchpoints. With automatic dispensers, premium formulations, and reliable equipment, they help hotels maintain world-class hygiene standards.",
+          "features": [
+            "Touchless Dispensing Technology",
+            "Premium Handwash & Sanitizer Formulas",
+            "Modern, Minimalist Designs",
+            "Low Maintenance & Durable",
+            "Multiple Mounting Options"
+          ],
+          "extraInfo": {
+            "Product Range": [
+              "Automatic hand sanitizer dispensers",
+              "Manual soap and sanitizer dispensers",
+              "Refill cartridges",
+              "Hand dryers & tissue dispensers",
               "Air freshener dispensers",
-              "Standard sanitizer stands"
+              "Commercial cleaning & disinfection chemicals",
+              "Washroom hygiene accessories"
+            ]
+          },
+          "idealFor": [
+            "Guest Washrooms",
+            "Lobbies",
+            "Staff Areas",
+            "Restaurants",
+            "Back-of-House",
+            "Hospitals",
+            "Retail Spaces"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "laundry-solutions",
+      "title": "Laundry Solutions",
+      "description": "Professional Laundry Systems & Accessories.",
+      "brands": [
+        {
+          "name": "Commercial Laundry Machines",
+          "description": "We supply and execute fully equipped laundry setups using international-standard machines from leading OEMs.",
+          "extraInfo": {
+            "Products": [
+              "Washer Extractors",
+              "Tumble Dryers",
+              "Flatwork Ironers",
+              "Hydro Extractors",
+              "Steam Ironing Stations",
+              "Folding & Finishing Equipment"
+            ]
+          },
+          "features": [
+            "Energy-efficient washers",
+            "High-G extractors",
+            "Gas/Electric heated dryers",
+            "Heavy-duty ironers"
+          ]
+        },
+        {
+          "name": "Laundry Layout Planning & Execution",
+          "description": "Aadi Enterprises provides end-to-end execution for hotel laundries: Layout planning, Equipment sizing, Installation & commissioning, 3D workflow optimization, Maintenance & AMC. This ensures smoother operation, reduced labor effort, and consistent hygiene."
+        },
+        {
+          "name": "Laundry Accessories",
+          "description": "Compatible with all leading machine brands.",
+          "extraInfo": {
+            "Items": [
+              "Laundry trolleys",
+              "Sorting racks",
+              "Folding tables",
+              "Finishing tools",
+              "Special stain-treatment stations"
             ]
           }
         },
         {
-          "subCategory": "Back of the House/Service entrance",
-          "description": "Durable Utility Solutions for High-Traffic Areas",
-          "premiumRange": {
-            "title": "Premium (Luxury/5★)",
-            "items": [
-              "Industrial floor mats (anti-slip, chemical resistant)",
-              "Heavy-duty waste bins & ash urns",
-              "Rolling racks for supplies",
-              "Industrial signage boards (metal/reflective)",
-              "Staff sanitizer & hygiene stations",
-              "Boot cleaning & drying stations"
+          "name": "Electrolux Professional",
+          "logo": "/electrolux.png",
+          "headline": "The Gold Standard in Laundry Engineering",
+          "description": "Electrolux is globally recognized as the #1 premium laundry equipment manufacturer, offering unmatched energy efficiency and long-term performance.",
+          "extraInfo": {
+            "Products supplied": [
+              "Washer Extractors (Low & High Spin)",
+              "Tumble Dryers (Gas/Electric/Steam)",
+              "Flatwork Ironers",
+              "Barrier Washers for hospitals",
+              "Finishing equipment (steam irons, cabinets)"
             ]
           },
-          "classicRange": {
-            "title": "Classic (Essential/3-4★)",
-            "items": [
-              "Rubber grip mats",
-              "Standard dustbins",
-              "Basic hand trucks",
-              "PVC signage boards",
-              "Regular dispensers",
-              "Regular dispensers"
+          "features": [
+            "Lowest water & energy consumption in the industry",
+            "Smart, programmable controls",
+            "Long-lasting commercial reliability"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "in-room-amenities",
+      "title": "In-Room Amenities",
+      "brands": [
+        {
+          "name": "Elanpro",
+          "logo": "/elanpro.png",
+          "headline": "The Commercial Refrigeration Experts",
+          "description": "Elanpro is one of India's most trusted names in hotel refrigeration, offering high-performance minibars designed for silent operation, energy efficiency, and modern guest rooms.",
+          "features": [
+            "Energy-efficient cooling",
+            "Super-silent operation",
+            "Lockable options",
+            "Adjustable shelves",
+            "Available in multiple capacities (30L-60L)"
+          ],
+          "extraInfo": {
+            "Key Products": [
+              "Absorption Minibars",
+              "Compressor Minibars",
+              "Glass-door Minibars",
+              "Silent Series Minibars"
+            ]
+          }
+        },
+        {
+          "name": "JVD",
+          "logo": "/jvd_logo.jpg",
+          "headline": "French Hospitality Essentials for Modern Hotels",
+          "description": "JVD is a French brand known worldwide for premium hotel amenities, hygiene fixtures, and in-room comfort products. Its design, durability, and elegant aesthetics make it a preferred choice of luxury hotels across the globe.",
+          "features": [
+            "Elegant European design",
+            "Built for heavy-duty hotel operations",
+            "Safe, ergonomic, and energy-efficient",
+            "Premium finish options for modern interiors"
+          ],
+          "extraInfo": {
+            "Key Products": [
+              "Hand Dryers & Hair Dryers",
+              "Magnifying Mirrors",
+              "Kettles & Welcome Trays",
+              "Bathroom Accessories",
+              "Hygiene & Waste Management Solutions"
             ]
           }
         }
       ]
     },
     {
-      "category": "Guest Comfort Essentials",
-      "premiumRange": {
-        "title": "Premium Range",
-        "items": [
-          "Digital safes",
-          "Smart alarm clocks & docking stations",
-          "Designer kettles & coffee machines",
-          "Luxury bathroom slippers"
-        ]
-      },
-      "essentialRange": {
-        "title": "Essential Range",
-        "items": [
-          "Standard electric kettles",
-          "Manual alarm clocks",
-          "Regular slippers & trays"
-        ]
-      },
-      "imageDescriptions": [
-        "Hotel closet with wooden hangers and a digital safe.",
-        "A tray on a hotel room table with a kettle, mugs, and amenities.",
-        "A white laundry bag and slippers on a hotel room floor."
-      ]
-    },
-    {
-      "category": "Bathroom & Wellness Amenities",
-      "premiumRange": {
-        "title": "Premium Range",
-        "items": [
-          "LED shaving mirrors",
-          "Defogger mirrors",
-          "Sensor soap dispensers",
-          "Soft-touch towels & bath mats"
-        ]
-      },
-      "essentialRange": {
-        "title": "Essential Range",
-        "items": [
-          "Manual soap dispensers",
-          "Regular mirrors",
-          "Basic towel sets"
-        ]
-      },
-      "imageDescriptions": [
-        "A modern hotel bathroom with an illuminated mirror and marble sink.",
-        "An illustration of a bathroom scene with a bathtub and shower curtain."
-      ]
-    },
-    {
-      "category": "Room Accessories",
-      "premiumRange": {
-        "title": "Premium Range",
-        "items": [
-          "Faux leather notepad holders, tissue boxes, and remote holders",
-          "Customized minibar trays & organizers",
-          "Polished wooden luggage racks"
-        ]
-      },
-      "essentialRange": {
-        "title": "Essential Range",
-        "items": [
-          "MDF/PU leatherette accessories",
-          "Standard minibar & tissue setups"
-        ]
-      },
-      "imageDescriptions": [
-        "A black digital safe with the AADI logo inside a wooden cabinet.",
-        "A leatherette tissue box with the AADI logo on a table.",
-        "A breakfast tray with juice and croissants on a bed."
-      ]
-    },
-    {
-      "category": "Housekeeping Essentials",
-      "headline": "Smart Solutions for a Spotless Property",
-      "description": "From janitorial carts to electronic cleaning machines, our housekeeping products blend efficiency, safety, and design — empowering staff to maintain immaculate standards with minimal effort.",
-      "subCategories": [
+      "id": "leather-products",
+      "title": "Leather Products",
+      "description": "Premium Leather Products for Hotels & Hospitality.",
+      "brands": [
         {
-          "subCategory": "Cleaning Tools & Machines",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Karcher / IPC / Tennant equipment",
-              "High-pressure cleaners, steam machines",
-              "Electrostatic sprayers",
-              "Smart vacuum & extraction systems"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Manual mops, wringers, microfibers",
-              "Basic vacuum cleaners",
-              "Entry-level scrubbers"
-            ]
-          }
-        },
-        {
-          "subCategory": "Trolleys & Carts",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Stainless steel & faux leather finishes",
-              "Modular housekeeping & minibar trolleys",
-              "Ergonomic designs"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Powder-coated or plastic trolleys",
-              "Basic janitor & linen carts"
-            ]
-          }
-        },
-        {
-          "subCategory": "Waste Management & Public Area Solutions",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Designer dustbins, ash urns & smoking stations",
-              "Motion sensor bins",
-              "Imported public area accessories"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": ["Standard SS bins", "Basic waste segregation solutions"]
-          }
-        },
-        {
-          "subCategory": "Guest-Focused Add-Ons",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Aroma diffusers & air purifiers",
-              "Dehumidifiers & mosquito repellents",
-              "Yoga mats & comfort kits"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": ["Basic room heaters", "Manual diffusers"]
-          }
-        }
-      ]
-    }
-      ]
-    },
-    "foodAndBeverage": {
-      "title": "Food & Beverage Solutions",
-      "categories": [
-        {
-          "category": "Pre-Opening Hotel & Restaurant Consultation",
-          "headline": "Tailored to Your Specific Needs",
-          "description": "Expert consultation services for pre-opening hotels and restaurants, ensuring seamless setup and operational readiness.",
-          "premiumRange": {
-            "title": "Premium Services",
-            "items": [
-              "Complete property assessment & planning",
-              "Customized operational SOPs",
-              "Staff training programs",
-              "Vendor sourcing & management",
-              "Pre-opening timeline & project management"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Services",
-            "items": [
-              "Basic operational guidelines",
-              "Standard vendor recommendations",
-              "Essential staff training modules"
-            ]
-          }
-        },
-        {
-          "category": "Food & Beverage Equipment",
-          "headline": "High-Tech Beverage Dispensers, Blenders, and More",
-          "description": "Professional-grade F&B equipment designed for efficiency and reliability in demanding hospitality environments.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Commercial beverage dispensers with digital controls",
-              "High-performance commercial blenders",
-              "Professional coffee & espresso machines",
-              "Smart refrigeration units",
-              "Automated drink preparation systems"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Standard beverage dispensers",
-              "Basic commercial blenders",
-              "Entry-level coffee equipment",
-              "Standard refrigeration"
-            ]
-          }
-        },
-        {
-          "category": "Tableware & Buffet-Ware",
-          "headline": "Elegant and Stylish Dining Essentials",
-          "description": "Sophisticated tableware and buffet solutions that elevate the dining experience for your guests.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Fine bone china dinnerware sets",
-              "Designer flatware & cutlery collections",
-              "Crystal glassware & stemware",
-              "Elegant chafers & warming stations",
-              "Custom-branded serving pieces"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Durable porcelain dinnerware",
-              "Stainless steel flatware",
-              "Standard glassware",
-              "Basic buffet chafers",
-              "Standard serving trays & platters"
-            ]
-          }
-        },
-        {
-          "category": "Bar Equipment & Accessories",
-          "headline": "High-Quality Glassware and Serving Solutions",
-          "description": "Complete bar solutions featuring premium glassware, tools, and accessories for professional beverage service.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Crystal bar glassware collections",
-              "Professional cocktail toolkits",
-              "Premium ice machines & chillers",
-              "Designer wine storage solutions",
-              "Backlit bottle displays"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Standard bar glassware",
-              "Basic bartending tools",
-              "Standard ice makers",
-              "Wine racks & basic storage",
-              "Standard bottle organizers"
-            ]
-          }
-        },
-        {
-          "category": "Cooking Appliances",
-          "headline": "Advanced Kitchen Solutions for Efficiency",
-          "description": "State-of-the-art cooking equipment designed to streamline kitchen operations and enhance culinary excellence.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Commercial convection ovens",
-              "Induction cooking ranges",
-              "High-capacity fryers & griddles",
-              "Combi-steamers",
-              "Blast chillers & warming cabinets"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Standard gas ranges",
-              "Basic ovens",
-              "Entry-level fryers",
-              "Standard grills",
-              "Basic food warmers"
-            ]
-          }
-        },
-        {
-          "category": "Display Risers & Food Presentation",
-          "headline": "Acrylic, Wooden, Stainless Steel and Glass Food Buffet Display Riser",
-          "description": "Elegant display solutions that showcase your culinary creations with style and sophistication.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Custom acrylic tiered displays",
-              "Solid wood presentation boards",
-              "Stainless steel modular risers",
-              "Illuminated glass showcases",
-              "Designer buffet displays with branding"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Standard acrylic risers",
-              "Basic wooden serving boards",
-              "Standard metal displays",
-              "Simple glass platters",
-              "Basic buffet risers"
-            ]
-          }
-        },
-        {
-          "category": "Kitchen & F&B Layout Planning",
-          "headline": "Kitchen and F&B Layout Planning & End to End Setup",
-          "description": "Comprehensive planning and execution services for efficient kitchen design and F&B operation setup.",
-          "premiumRange": {
-            "title": "Premium Services",
-            "items": [
-              "3D kitchen layout design & visualization",
-              "Complete equipment procurement & installation",
-              "Workflow optimization consulting",
-              "Ventilation & exhaust system design",
-              "End-to-end project management"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Services",
-            "items": [
-              "Basic layout planning",
-              "Equipment sourcing assistance",
-              "Standard workflow recommendations",
-              "Basic installation support"
-            ]
-          }
-        },
-        {
-          "category": "Refrigeration & Walk-ins",
-          "headline": "Refrigeration and Walk Ins",
-          "description": "Professional refrigeration solutions ensuring optimal food storage and preservation.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Custom walk-in coolers & freezers",
-              "Energy-efficient commercial refrigeration",
-              "Digital temperature monitoring systems",
-              "Blast chillers",
-              "Specialized wine & beverage coolers"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Standard walk-in units",
-              "Commercial reach-in refrigerators",
-              "Basic freezers",
-              "Standard display coolers"
-            ]
-          }
-        },
-        {
-          "category": "Premium Linen Solutions",
-          "headline": "Premium Linen Solutions Crafted for Comfort, Durability, and Elegance",
-          "description": "Luxurious linen collections designed specifically for F&B and restaurant environments.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Egyptian cotton table linens",
-              "Designer napkins with custom embroidery",
-              "Stain-resistant tablecloths",
-              "Premium chef uniforms & aprons",
-              "Luxury service towels"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Cotton-poly blend table linens",
-              "Standard napkins",
-              "Basic tablecloths",
-              "Standard uniforms",
-              "Regular service towels"
-            ]
-          }
-        },
-        {
-          "category": "Complete Laundry Solutions",
-          "headline": "Complete Laundry Solutions with Machines, Designs and Execution",
-          "description": "Full-service laundry systems with installation, design, and operational support.",
-          "premiumRange": {
-            "title": "Premium Solutions",
-            "items": [
-              "Industrial washer-extractors",
-              "High-capacity dryers & ironers",
-              "Automated folding systems",
-              "Laundry management software",
-              "Complete facility design & installation"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Solutions",
-            "items": [
-              "Commercial washers & dryers",
-              "Basic ironing equipment",
-              "Standard laundry carts",
-              "Manual folding stations"
-            ]
-          }
-        },
-        {
-          "category": "Corporate Gifting & Bakery Packaging",
-          "headline": "Customized Corporate Gifting and Bakery Packaging Solutions",
-          "description": "Creative packaging and gifting solutions that blend functionality with brand identity.",
-          "premiumRange": {
-            "title": "Premium Range",
-            "items": [
-              "Custom-designed gift hampers",
-              "Luxury packaging with branding",
-              "Premium bakery boxes & displays",
-              "Branded corporate gift sets",
-              "Eco-luxury packaging solutions"
-            ]
-          },
-          "essentialRange": {
-            "title": "Essential Range",
-            "items": [
-              "Standard gift boxes",
-              "Basic bakery packaging",
-              "Simple branded bags",
-              "Standard packaging materials"
+          "name": "Luxury Leather Collection",
+          "logo": "/leathure.jpg",
+          "headline": "Upgrade your guest experience with our premium leather products.",
+          "description": "Designed exclusively for hotels, resorts, and hospitality facilities. From elegant in-room accessories to durable back-of-house operational bags, every item is crafted with precision, durability, and a modern luxury aesthetic.",
+          "subItems": [
+            {
+              "title": "Luxury Leather Room Accessories",
+              "description": "Enhance every guest room with high-quality leather accessories.",
+              "items": [
+                "Leather Guest Room Folders",
+                "Leather Tissue Boxes & Utility Trays",
+                "Remote & Stationery Holders"
+              ]
+            },
+            {
+              "title": "Front Office & Concierge Leather Accessories",
+              "description": "Make a powerful first impression with luxury leather products.",
+              "items": [
+                "Welcome & Document Folders",
+                "Hotel Key Card Holders",
+                "Front Desk Leather Organizers"
+              ]
+            },
+            {
+              "title": "F&B Leather Solutions",
+              "description": "Designed for high-traffic dining spaces.",
+              "items": [
+                "Leather Menu Covers & Bill Presenters",
+                "Leather Coasters & Placemats"
+              ]
+            },
+            {
+              "title": "Back-of-House Leather Bags & Utility Products",
+              "items": [
+                "Hotel Staff Utility Bags",
+                "Laundry & Valet Leather Bags",
+                "Housekeeping Trolley Leather Add-Ons"
+              ]
+            },
+            {
+              "title": "Corporate & Guest Gifting",
+              "items": [
+                "Executive Leather Laptop Bags",
+                "Conference Kits & Notepad Folders",
+                "Leather Amenity Pouches"
+              ]
+            }
+          ],
+          "features": [
+            "Crafted for high-usage hotel environments",
+            "Premium finishes suited for luxury and boutique hotels",
+            "Easy maintenance and long lifespan",
+            "Elegant, modern, minimalist design",
+            "Complete branding customization"
+          ],
+          "extraInfo": {
+            "Customization Options": [
+              "Logo embossing or debossing",
+              "Gold, silver, or rose-gold foil stamping",
+              "Custom PMS colour matching",
+              "Multiple leather options: Genuine, Vegan, PU",
+              "Custom stitching and size specifications"
             ]
           }
         }
       ]
     }
-  },
-  "trustedBrands": {
-    "title": "Our Trusted Brands",
-    "subtitle": "Powered by Global Excellence",
-    "brands": [
-      {
-        "name": "IPC (by Tennant Company)",
-        "description": "IPC (Integrated Professional Cleaning), a leading manufacturer of cleaning machines and equipment, is a part of the Tennant Company, USA"
-      },
-      {
-        "name": "Kärcher",
-        "description": "Kärcher is a family-owned global leader in cleaning technology. Discover the range of quality pressure washers, steam cleaners, window vacs & more"
-      },
-      {
-        "name": "Trust",
-        "description": "Trust Housekeeping services would likely focus on their expertise in providing professional and reliable cleaning solutions for businesses and commercial spaces"
-      },
-      {
-        "name": "Euronics",
-        "description": "Euronics, founded in 2002, aims to provide innovative products and services in public washroom automation for the growing Indian IT and hospitality sectors. It is now the largest brand in this market in India."
-      },
-      {
-        "name": "Dolphy",
-        "description": "Dolphy India Pvt. Ltd is India's leading single brand manufacturer and supplier of hygienic products. We make high quality durable product for customer's having best performance."
-      },
-      {
-        "name": "Vileda",
-        "description": "Vileda is a German-based company that specializes in the manufacture and sale of household and professional cleaning products."
-      },
-      {
-        "name": "JVD",
-        "description": "JVD is a French company founded in 1984 that designs and manufactures hygiene and hotel equipment. It offers a variety of products for guest rooms and public areas, including hairdryers, kettles, minibars, and soap dispensers."
-      },
-      {
-        "name": "Origami",
-        "description": "Origami is a prominent Indian manufacturer of disposable paper products, specializing in tissues and hygiene products."
-      },
-      {
-        "name": "Saraya Mystair",
-        "description": "Saraya Mystair Hygiene Private Limited, founded in 2010, is a top manufacturer and supplier in India of tissue paper items, dispensers, hand dryers, liquid soap, and more."
-      }
-    ]
-  },
+  ],
   "whyChooseUs": {
     "title": "Why Choose AADI",
     "reasons": [
