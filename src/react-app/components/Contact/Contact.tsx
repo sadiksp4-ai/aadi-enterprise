@@ -3,7 +3,7 @@ import "./Contact.css";
 import data from "../../../../aadi-info.json";
 
 const Contact = React.forwardRef<HTMLElement>((_, ref) => {
-  const { email, closingMessage, offices } = data.contactInfo;
+  const { email, linkedin, maps, closingMessage, offices } = data.contactInfo;
 
   return (
     <section id="contact" className="contact" ref={ref}>
@@ -12,6 +12,18 @@ const Contact = React.forwardRef<HTMLElement>((_, ref) => {
       <div className="contact-info">
         <p>
           Email: <a href={`mailto:${email}`}>{email}</a>
+        </p>
+        <p>
+          LinkedIn:{" "}
+          <a href={linkedin} target="_blank" rel="noopener noreferrer">
+            Connect with us
+          </a>
+        </p>
+        <p>
+          Location:{" "}
+          <a href={maps} target="_blank" rel="noopener noreferrer">
+            View on Google Maps
+          </a>
         </p>
         <div className="office-list">
           {offices.map((office, index) => (
