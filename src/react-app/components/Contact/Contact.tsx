@@ -2,11 +2,11 @@ import React from "react";
 import "./Contact.css";
 import data from "../../../../aadi-info.json";
 
-const Contact = React.forwardRef<HTMLElement>((_, ref) => {
+const Contact: React.FC = () => {
   const { email, linkedin, maps, closingMessage, offices } = data.contactInfo;
 
   return (
-    <section id="contact" className="contact" ref={ref}>
+    <section id="contact" className="contact">
       <h2 className="section-title">Contact Us</h2>
       <p className="contact-text">{closingMessage}</p>
       <div className="contact-info">
@@ -46,6 +46,6 @@ const Contact = React.forwardRef<HTMLElement>((_, ref) => {
       </form>
     </section>
   );
-});
+};
 
 export default Contact;

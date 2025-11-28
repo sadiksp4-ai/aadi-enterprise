@@ -14,11 +14,11 @@ const logoMap: { [key: string]: string } = {
   "Saraya Mystair": "/saraya_logo.jpg",
 };
 
-const Brands = React.forwardRef<HTMLElement>((_, ref) => {
+const Brands: React.FC = () => {
   const { title, subtitle, brands } = brandsData.trustedBrands;
 
   return (
-    <section id="brands" className="brands" ref={ref}>
+    <section id="brands" className="brands">
       <h2 className="section-title">{title}</h2>
       <p className="section-subtitle">{subtitle}</p>
       <div className="brands-grid">
@@ -35,6 +35,6 @@ const Brands = React.forwardRef<HTMLElement>((_, ref) => {
       </div>
     </section>
   );
-});
+};
 
 export default Brands;

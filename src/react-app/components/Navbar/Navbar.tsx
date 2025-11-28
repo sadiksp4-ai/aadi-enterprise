@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import logo from "/logo.png";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {
@@ -28,28 +34,48 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
-      <a href="#home" className="navbar-logo-link">
+      <Link to="/" className="navbar-logo-link">
         <div className="navbar-logo">
           <img src={logo} alt="AADI ENTERPRISES" />
           <span>AADI ENTERPRISES</span>
         </div>
-      </a>
+      </Link>
       <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
-        <a href="#about" onClick={toggleMenu}>
+        <Link
+          to="/about"
+          onClick={closeMenu}
+          className={location.pathname === "/about" ? "active" : ""}
+        >
           About
-        </a>
-        <a href="#products" onClick={toggleMenu}>
+        </Link>
+        <Link
+          to="/products"
+          onClick={closeMenu}
+          className={location.pathname === "/products" ? "active" : ""}
+        >
           Products
-        </a>
-        <a href="#brands" onClick={toggleMenu}>
+        </Link>
+        <Link
+          to="/brands"
+          onClick={closeMenu}
+          className={location.pathname === "/brands" ? "active" : ""}
+        >
           Brands
-        </a>
-        <a href="#clients" onClick={toggleMenu}>
+        </Link>
+        <Link
+          to="/clients"
+          onClick={closeMenu}
+          className={location.pathname === "/clients" ? "active" : ""}
+        >
           Clients
-        </a>
-        <a href="#contact" onClick={toggleMenu}>
+        </Link>
+        <Link
+          to="/contact"
+          onClick={closeMenu}
+          className={location.pathname === "/contact" ? "active" : ""}
+        >
           Contact
-        </a>
+        </Link>
       </div>
       <div className="hamburger" onClick={toggleMenu}>
         <span className="bar"></span>
@@ -61,3 +87,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+

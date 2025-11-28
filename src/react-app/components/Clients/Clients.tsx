@@ -12,9 +12,9 @@ const clients = [
   "Accor Hotels",
 ];
 
-const Clients = React.forwardRef<HTMLElement>((_, ref) => {
+const Clients: React.FC = () => {
   return (
-    <section id="clients" className="clients" ref={ref}>
+    <section id="clients" className="clients">
       <h2 className="section-title">Our Valued Clients</h2>
       <div className="clients-marquee">
         <div className="clients-slide">
@@ -32,6 +32,6 @@ const Clients = React.forwardRef<HTMLElement>((_, ref) => {
       </div>
     </section>
   );
-});
+};
 
 export default Clients;
