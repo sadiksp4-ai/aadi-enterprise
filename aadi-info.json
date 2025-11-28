@@ -325,6 +325,7 @@
         },
         {
           "name": "LSA International",
+          "logo": "/lsa.png",
           "headline": "Modern Handcrafted Glass & Tableware",
           "description": "LSA International is globally loved for its handmade mouth-blown glassware and minimalist tableware. Their products bring a sophisticated European aesthetic to hotel rooms, bars, and restaurant spaces.",
           "features": [
@@ -467,6 +468,7 @@
         },
         {
           "name": "Shapes",
+          "logo": "/shapes.png",
           "headline": "Contemporary Tableware for Modern Dining",
           "description": "Shapes is known for its stylish, functional and durable tableware crafted for hotels, restaurants, and banquets. With collections spanning porcelain, stoneware, melamine, and premium serveware, Shapes blends value with contemporary design.",
           "features": [
@@ -586,6 +588,7 @@
         },
         {
           "name": "Housekeeping & Utility Trolleys",
+          "logo": "/utility_trolley.png",
           "description": "(Compatible with Karcher, IPC, and leading FM vendors)",
           "extraInfo": {
             "Types available": [
@@ -604,6 +607,7 @@
         },
         {
           "name": "Waste Management Solutions",
+          "logo": "/waste_management.png",
           "description": "We offer complete waste systems for hospitality & facilities.",
           "extraInfo": {
             "Products": [
@@ -759,6 +763,7 @@
       "brands": [
         {
           "name": "Commercial Laundry Machines",
+          "logo": "/commercial_laundry.png",
           "description": "We supply and execute fully equipped laundry setups using international-standard machines from leading OEMs.",
           "extraInfo": {
             "Products": [
@@ -779,10 +784,12 @@
         },
         {
           "name": "Laundry Layout Planning & Execution",
+          "logo": "/laundry_planning.png",
           "description": "Aadi Enterprises provides end-to-end execution for hotel laundries: Layout planning, Equipment sizing, Installation & commissioning, 3D workflow optimization, Maintenance & AMC. This ensures smoother operation, reduced labor effort, and consistent hygiene."
         },
         {
           "name": "Laundry Accessories",
+          "logo": "/laundry_accessories.png",
           "description": "Compatible with all leading machine brands.",
           "extraInfo": {
             "Items": [
