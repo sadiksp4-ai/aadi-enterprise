@@ -80,7 +80,7 @@ function HomePage() {
              </div>
              <div className="trust-item">
                 <CheckCircle className="trust-icon" size={24} />
-                <span className="trust-text">Global Sourcing</span>
+                <span className="trust-text">FSSAI Compliant</span>
              </div>
           </div>
         </div>
