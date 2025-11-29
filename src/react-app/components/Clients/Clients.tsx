@@ -1,5 +1,6 @@
 import React from "react";
 import "./Clients.css";
+import { getAssetUrl } from "../../utils";
 
 const clientLogos = [
   "Accor.png",
@@ -67,7 +68,7 @@ const Clients: React.FC = () => {
            return (
             <div key={index} className="client-card">
               <img 
-                src={`/clients/${logo}`} 
+                src={getAssetUrl(`clients/${logo}`)} 
                 alt={name} 
                 className="client-logo-img"
                 loading="lazy"

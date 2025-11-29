@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Products.css";
 import data from "../../../../aadi-info.json";
+import { getAssetUrl } from "../../utils";
 
 interface ProductEntry {
   name: string;
@@ -41,7 +42,7 @@ const BrandCard: React.FC<BrandCardProps> = ({ brand, onClick }) => {
       {brand.logo && (
         <div className="brand-logo-wrapper">
           <img
-            src={brand.logo}
+            src={getAssetUrl(brand.logo)}
             alt={`${brand.name} logo`}
             className="brand-logo"
             loading="lazy"
@@ -86,7 +87,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOp
 
         <div className="modal-header">
            {product.logo && (
-            <img src={product.logo} alt={product.name} className="modal-logo" />
+            <img src={getAssetUrl(product.logo)} alt={product.name} className="modal-logo" />
            )}
            <div>
              <h2 className="modal-title">{product.name}</h2>

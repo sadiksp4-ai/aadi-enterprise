@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Award, CheckCircle, ShieldCheck, Globe, ArrowRight } from 'lucide-react';
 import './HomePage.css';
+import { getAssetUrl } from '../utils';
 
 const CLIENTS = [
   "Grand Hyatt", "Marriott", "Hilton", "JW Marriott", "Accor", 
@@ -14,9 +15,9 @@ const CATEGORIES = [
 ];
 
 const CATEGORY_IMAGES: Record<string, string> = {
-  "Commercial Kitchen": "/commercial_kitchen.jpg",
-  "F&B Service": "/f&b.jpg",
-  "Hygiene and HK": "/housekeeping.jpg",
+  "Commercial Kitchen": getAssetUrl("commercial_kitchen.jpg"),
+  "F&B Service": getAssetUrl("f&b.jpg"),
+  "Hygiene and HK": getAssetUrl("housekeeping.jpg"),
   "Front Office": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=800&auto=format&fit=crop",
   "Banquet": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800&auto=format&fit=crop"
 };
@@ -36,7 +37,7 @@ function HomePage() {
             playsInline 
             className="hero-video-element"
           >
-            <source src="/bg-video.mp4" type="video/mp4" />
+            <source src={getAssetUrl("bg-video.mp4")} type="video/mp4" />
           </video>
           <div className="hero-overlay"></div>
         </div>

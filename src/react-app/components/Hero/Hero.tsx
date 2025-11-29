@@ -1,9 +1,10 @@
 import React from "react";
 import "./Hero.css";
-import video from "/bg-video.mp4";
 import data from "../../../../aadi-info.json";
+import { getAssetUrl } from "../../utils";
 
 const Hero: React.FC = () => {
+  const video = getAssetUrl("bg-video.mp4");
   const { tagline } = data.companyInfo;
   const { title } = data.introduction;
 

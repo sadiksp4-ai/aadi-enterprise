@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./AboutPage.css";
+import { getAssetUrl } from "../utils";
 
 const AboutPage: React.FC = () => {
     return (
@@ -93,7 +94,7 @@ const AboutPage: React.FC = () => {
                         <div className="about-split-image">
                             <div className="about-image-wrapper">
                                 <img
-                                    src="/about_us_image.jpg"
+                                    src={getAssetUrl("about_us_image.jpg")}
                                     alt="Chef and consultant discussing kitchen blueprints"
                                     className="about-narrative-image"
                                 />
