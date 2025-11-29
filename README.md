@@ -1,90 +1,186 @@
-# React + Vite + Hono + Cloudflare Workers
+# Aadi Enterprises Website
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/vite-react-template)
+Company website for Aadi Enterprises Pune.
 
-This template provides a minimal setup for building a React application with TypeScript and Vite, designed to run on Cloudflare Workers. It features hot module replacement, ESLint integration, and the flexibility of Workers deployments.
+🌐 **Live Site:** [www.aadienterprisespune.com](https://www.aadienterprisespune.com)
 
-![React + TypeScript + Vite + Cloudflare Workers](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
+---
 
-<!-- dash-content-start -->
+## 📋 Prerequisites (One-time Setup)
 
-🚀 Supercharge your web development with this powerful stack:
+### 1. Install Node.js
 
-- [**React**](https://react.dev/) - A modern UI library for building interactive interfaces
-- [**Vite**](https://vite.dev/) - Lightning-fast build tooling and development server
-- [**Hono**](https://hono.dev/) - Ultralight, modern backend framework
-- [**Cloudflare Workers**](https://developers.cloudflare.com/workers/) - Edge computing platform for global deployment
+Node.js is required to run this project.
 
-### ✨ Key Features
+1. Go to [https://nodejs.org](https://nodejs.org)
+2. Download the **LTS** version (recommended)
+3. Run the installer and follow the prompts (keep all default settings)
+4. Restart your computer after installation
 
-- 🔥 Hot Module Replacement (HMR) for rapid development
-- 📦 TypeScript support out of the box
-- 🛠️ ESLint configuration included
-- ⚡ Zero-config deployment to Cloudflare's global network
-- 🎯 API routes with Hono's elegant routing
-- 🔄 Full-stack development setup
-- 🔎 Built-in Observability to monitor your Worker
-
-Get started in minutes with local development or deploy directly via the Cloudflare dashboard. Perfect for building modern, performant web applications at the edge.
-
-<!-- dash-content-end -->
-
-## Getting Started
-
-To start a new project with this template, run:
-
+**Verify installation:** Open Command Prompt or PowerShell and type:
 ```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/vite-react-template
+node --version
+```
+You should see something like `v20.x.x`
+
+### 2. Install Git
+
+Git is required to download and upload code.
+
+1. Go to [https://git-scm.com/downloads](https://git-scm.com/downloads)
+2. Download for Windows
+3. Run the installer (keep all default settings)
+4. Restart your computer after installation
+
+**Verify installation:**
+```bash
+git --version
 ```
 
-A live deployment of this template is available at:
-[https://react-vite-template.templates.workers.dev](https://react-vite-template.templates.workers.dev)
+### 3. Install VS Code (Recommended)
 
-## Development
+1. Go to [https://code.visualstudio.com](https://code.visualstudio.com)
+2. Download and install
 
-Install dependencies:
+---
+
+## 📥 Download the Project (Clone)
+
+Open Command Prompt or PowerShell and run:
+
+```bash
+cd Desktop
+git clone https://github.com/sadiksp4-ai/aadi-enterprise.git
+cd aadi-enterprise
+```
+
+This creates a folder called `aadi-enterprise` on your Desktop.
+
+---
+
+## 📦 Install Dependencies
+
+Inside the project folder, run:
 
 ```bash
 npm install
 ```
 
-Start the development server with:
+This downloads all the required packages. Wait for it to complete.
+
+---
+
+## 🚀 Run the Website Locally
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at [http://localhost:5173](http://localhost:5173).
+Open your browser and go to: **http://localhost:5173**
 
-## Production
+You'll see the website running on your computer!
 
-Build your project for production:
+**To stop the server:** Press `Ctrl + C` in the terminal.
 
-```bash
-npm run build
+---
+
+## ✏️ Making Changes
+
+### Project Structure
+
+```
+aadi-enterprise/
+├── src/react-app/
+│   ├── components/     ← Reusable parts (Navbar, Footer, etc.)
+│   ├── pages/          ← Full pages (HomePage, AboutPage, etc.)
+│   ├── App.tsx         ← Main app file with routes
+│   └── App.css         ← Global styles
+├── public/             ← Static files (images, favicon, etc.)
+└── index.html          ← Main HTML file
 ```
 
-Preview your build locally:
+### Common Changes
 
+**To edit text/content:**
+- Open the relevant file in `src/react-app/pages/` or `src/react-app/components/`
+- Find the text you want to change
+- Save the file
+- The browser will automatically refresh!
+
+**To add images:**
+1. Put your image in `public/` folder
+2. Reference it in code as `/your-image.png`
+
+---
+
+## 📤 Upload Your Changes (Push to GitHub)
+
+### First-time setup (only once)
+
+Configure your Git identity:
 ```bash
-npm run preview
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
 ```
 
-Deploy your project to Cloudflare Workers:
+### Every time you make changes
+
+1. **Check what changed:**
+   ```bash
+   git status
+   ```
+
+2. **Add all changes:**
+   ```bash
+   git add .
+   ```
+
+3. **Save changes with a message:**
+   ```bash
+   git commit -m "Describe what you changed"
+   ```
+   Example: `git commit -m "Updated phone number on contact page"`
+
+4. **Upload to GitHub:**
+   ```bash
+   git push
+   ```
+
+**That's it!** GitHub will automatically deploy your changes to the live website in ~2 minutes.
+
+---
+
+## 🔄 Get Latest Changes (Pull)
+
+If someone else made changes, get them with:
 
 ```bash
-npm run build && npm run deploy
+git pull
 ```
 
-Monitor your workers:
+Run this before making your own changes to avoid conflicts.
 
-```bash
-npx wrangler tail
-```
+---
 
-## Additional Resources
+## 🐛 Troubleshooting
 
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
-- [Vite Documentation](https://vitejs.dev/guide/)
-- [React Documentation](https://reactjs.org/)
-- [Hono Documentation](https://hono.dev/)
+### "npm is not recognized"
+→ Node.js not installed properly. Reinstall and restart your computer.
+
+### "git is not recognized"
+→ Git not installed properly. Reinstall and restart your computer.
+
+### "Permission denied" or authentication error on push
+→ You need to log in to GitHub. Run `git push` and follow the prompts to authenticate.
+
+### Website not updating after push
+→ Wait 2-3 minutes. Check GitHub Actions tab to see if deployment is running.
+
+### Changes not showing in browser
+→ Hard refresh: Press `Ctrl + Shift + R`
+
+---
+
+## 📞 Need Help?
+
+Contact the developer if you're stuck!
