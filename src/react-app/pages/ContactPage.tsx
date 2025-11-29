@@ -8,7 +8,7 @@ const ContactPage: React.FC = () => {
         name: "",
         company: "",
         email: "",
-        type: "New Project Setup",
+        type: "Pre-opening Consultation",
         message: "",
     });
 
@@ -20,7 +20,7 @@ const ContactPage: React.FC = () => {
             name: "",
             company: "",
             email: "",
-            type: "New Project Setup",
+            type: "Pre-opening Consultation",
             message: "",
         });
     };
@@ -53,7 +53,7 @@ const ContactPage: React.FC = () => {
                                             setFormData({ ...formData, name: e.target.value })
                                         }
                                         className="form-input"
-                                        placeholder="John Doe"
+                                        placeholder="Sameer"
                                     />
                                 </div>
                                 <div className="form-group">
@@ -65,7 +65,7 @@ const ContactPage: React.FC = () => {
                                             setFormData({ ...formData, company: e.target.value })
                                         }
                                         className="form-input"
-                                        placeholder="Hotel / Restaurant"
+                                        placeholder="Corporate Kitchen / Flight Kitchen Caterer"
                                     />
                                 </div>
                             </div>
@@ -80,7 +80,7 @@ const ContactPage: React.FC = () => {
                                         setFormData({ ...formData, email: e.target.value })
                                     }
                                     className="form-input"
-                                    placeholder="john@example.com"
+                                    placeholder="sameer@example.com"
                                 />
                             </div>
 
@@ -93,6 +93,7 @@ const ContactPage: React.FC = () => {
                                     }
                                     className="form-select"
                                 >
+                                    <option>Pre-opening Consultation</option>
                                     <option>New Project Setup</option>
                                     <option>Equipment Replacement</option>
                                     <option>Consultation</option>
