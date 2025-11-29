@@ -325,7 +325,7 @@
 @media (max-width: 1024px) {
   .products-page {
     flex-direction: column;
-    padding-top: 60px;
+    padding-top: 90px;
   }
 
   .products-sidebar {
@@ -389,5 +389,13 @@
 
   .modal-body {
       padding: 1.5rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      width: 100%;
+      box-sizing: border-box;
+  }
+
+  .modal-body * {
+      max-width: 100%;
   }
 }
