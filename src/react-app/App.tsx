@@ -11,7 +11,7 @@ import "./App.css";
 
 function App() {
   return (
-    <Router basename="/aadi-enterprise">
+    <Router>
       <div className="App">
         <Navbar />
         <main>
