@@ -1,31 +1,51 @@
 import React, { useState } from "react";
-import { MapPin, Mail, Clock, ArrowRight } from "lucide-react";
+import { useForm } from "react-hook-form";
+import useWeb3Forms from "@web3forms/react";
+import { MapPin, Mail, Clock, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 import data from "../../../aadi-info.json";
 import "./ContactPage.css";
 
+interface FormData {
+    name: string;
+    company: string;
+    email: string;
+    phone: string;
+    type: string;
+    message: string;
+    botcheck: boolean;
+}
+
 const ContactPage: React.FC = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        company: "",
-        email: "",
-        type: "Pre-opening Consultation",
-        message: "",
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitSuccessful, isSubmitting },
+    } = useForm<FormData>({
+        mode: "onTouched",
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Simulate form submission
-        alert("Thank you for your inquiry. Our team will contact you shortly.");
-        setFormData({
-            name: "",
-            company: "",
-            email: "",
-            type: "Pre-opening Consultation",
-            message: "",
-        });
-    };
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [message, setMessage] = useState("");
 
-    const { email, offices } = data.contactInfo;
+    const { submit: onSubmit } = useWeb3Forms({
+        access_key: "4c01bdc4-7391-495a-98af-27a45f30d65d",
+        settings: {
+            from_name: "Aadi Enterprises Website",
+            subject: "New Inquiry from Website Contact Form",
+        },
+        onSuccess: (msg) => {
+            setIsSuccess(true);
+            setMessage(msg);
+            reset();
+        },
+        onError: (msg) => {
+            setIsSuccess(false);
+            setMessage(msg);
+        },
+    });
+
+    const { email: contactEmail, offices } = data.contactInfo;
 
     return (
         <div className="contact-page">
@@ -41,63 +61,85 @@ const ContactPage: React.FC = () => {
                     {/* Contact Form */}
                     <div className="contact-form-wrapper">
                         <h3 className="form-title">Send us a Message</h3>
-                        <form onSubmit={handleSubmit} className="contact-form">
+                        <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
+                            {/* Honeypot for bot detection */}
+                            <input
+                                type="checkbox"
+                                className="hidden"
+                                style={{ display: "none" }}
+                                {...register("botcheck")}
+                            />
+
                             <div className="form-row">
                                 <div className="form-group">
                                     <label className="form-label">Your Name</label>
                                     <input
                                         type="text"
-                                        required
-                                        value={formData.name}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, name: e.target.value })
-                                        }
-                                        className="form-input"
+                                        className={`form-input ${errors.name ? "input-error" : ""}`}
                                         placeholder="Sameer"
+                                        {...register("name", {
+                                            required: "Name is required",
+                                            maxLength: { value: 80, message: "Name is too long" },
+                                        })}
                                     />
+                                    {errors.name && (
+                                        <span className="error-message">{errors.name.message}</span>
+                                    )}
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">Company Name</label>
                                     <input
                                         type="text"
-                                        value={formData.company}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, company: e.target.value })
-                                        }
                                         className="form-input"
-                                        placeholder="Corporate Kitchen / Flight Kitchen Caterer"
+                                        placeholder="Hotel / Restaurant"
+                                        {...register("company")}
                                     />
                                 </div>
                             </div>
 
-                            <div className="form-group">
-                                <label className="form-label">Email Address</label>
-                                <input
-                                    type="email"
-                                    required
-                                    value={formData.email}
-                                    onChange={(e) =>
-                                        setFormData({ ...formData, email: e.target.value })
-                                    }
-                                    className="form-input"
-                                    placeholder="sameer@example.com"
-                                />
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label className="form-label">Email Address</label>
+                                    <input
+                                        type="email"
+                                        className={`form-input ${errors.email ? "input-error" : ""}`}
+                                        placeholder="sameer@example.com"
+                                        {...register("email", {
+                                            required: "Email is required",
+                                            pattern: {
+                                                value: /^\S+@\S+$/i,
+                                                message: "Please enter a valid email",
+                                            },
+                                        })}
+                                    />
+                                    {errors.email && (
+                                        <span className="error-message">{errors.email.message}</span>
+                                    )}
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        className={`form-input ${errors.phone ? "input-error" : ""}`}
+                                        placeholder="+91 98765 43210"
+                                        {...register("phone", {
+                                            required: "Phone number is required",
+                                        })}
+                                    />
+                                    {errors.phone && (
+                                        <span className="error-message">{errors.phone.message}</span>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="form-group">
                                 <label className="form-label">Inquiry Type</label>
-                                <select
-                                    value={formData.type}
-                                    onChange={(e) =>
-                                        setFormData({ ...formData, type: e.target.value })
-                                    }
-                                    className="form-select"
-                                >
-                                    <option>Pre-opening Consultation</option>
-                                    <option>New Project Setup</option>
-                                    <option>Equipment Replacement</option>
-                                    <option>Consultation</option>
-                                    <option>After-Sales Support</option>
+                                <select className="form-select" {...register("type")}>
+                                    <option value="Pre-opening Consultation">Pre-opening Consultation</option>
+                                    <option value="New Project Setup">New Project Setup</option>
+                                    <option value="Equipment Replacement">Equipment Replacement</option>
+                                    <option value="Consultation">Consultation</option>
+                                    <option value="After-Sales Support">After-Sales Support</option>
                                 </select>
                             </div>
 
@@ -105,20 +147,67 @@ const ContactPage: React.FC = () => {
                                 <label className="form-label">Message</label>
                                 <textarea
                                     rows={4}
-                                    required
-                                    value={formData.message}
-                                    onChange={(e) =>
-                                        setFormData({ ...formData, message: e.target.value })
-                                    }
-                                    className="form-textarea"
+                                    className={`form-textarea ${errors.message ? "input-error" : ""}`}
                                     placeholder="Tell us about your requirements..."
+                                    {...register("message", {
+                                        required: "Message is required",
+                                    })}
                                 ></textarea>
+                                {errors.message && (
+                                    <span className="error-message">{errors.message.message}</span>
+                                )}
                             </div>
 
-                            <button type="submit" className="form-submit-btn">
-                                Submit Inquiry <ArrowRight size={18} className="btn-icon" />
+                            <button
+                                type="submit"
+                                className="form-submit-btn"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? (
+                                    <span className="btn-loading">
+                                        <svg
+                                            className="spinner"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="spinner-track"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                            />
+                                            <path
+                                                className="spinner-head"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                            />
+                                        </svg>
+                                        Sending...
+                                    </span>
+                                ) : (
+                                    <>
+                                        Submit Inquiry <ArrowRight size={18} className="btn-icon" />
+                                    </>
+                                )}
                             </button>
                         </form>
+
+                        {/* Success/Error Messages */}
+                        {isSubmitSuccessful && isSuccess && (
+                            <div className="form-message success">
+                                <CheckCircle size={20} />
+                                <span>{message || "Thank you! Your inquiry has been sent successfully."}</span>
+                            </div>
+                        )}
+                        {isSubmitSuccessful && !isSuccess && (
+                            <div className="form-message error">
+                                <AlertCircle size={20} />
+                                <span>{message || "Something went wrong. Please try again later."}</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* Contact Details */}
@@ -151,8 +240,8 @@ const ContactPage: React.FC = () => {
                                         </div>
                                         <div>
                                             <p className="info-main">Email Us</p>
-                                            <a href={`mailto:${email}`} className="info-link">
-                                                {email}
+                                            <a href={`mailto:${contactEmail}`} className="info-link">
+                                                {contactEmail}
                                             </a>
                                         </div>
                                     </div>

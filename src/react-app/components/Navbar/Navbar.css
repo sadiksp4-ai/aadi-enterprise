@@ -125,6 +125,23 @@
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 4%;
+    }
+
+    .navbar.scrolled {
+        padding: 0.75rem 4%;
+    }
+
+    .navbar-logo img {
+        height: 35px;
+        margin-right: 0.75rem;
+    }
+
+    .navbar-logo span {
+        font-size: 1.25rem;
+    }
+
     .hamburger {
         display: block;
     }
