@@ -29,7 +29,7 @@ const ContactPage: React.FC = () => {
     const [message, setMessage] = useState("");
 
     const { submit: onSubmit } = useWeb3Forms({
-        access_key: "4c01bdc4-7391-495a-98af-27a45f30d65d",
+        access_key: "255c983d-a0b4-474e-b591-cd287efa3236",
         settings: {
             from_name: "Aadi Enterprises Website",
             subject: "New Inquiry from Website Contact Form",

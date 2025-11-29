@@ -3,8 +3,10 @@ import { Award, CheckCircle, ShieldCheck, Globe, ArrowRight } from 'lucide-react
 import './HomePage.css';
 
 const CLIENTS = [
-  "Rational", "Winterhalter", "Robot Coupe", "Hoshizaki", "Electrolux", 
-  "Vileda", "Rubbermaid", "Cambro", "Sirman", "Hamilton Beach"
+  "Grand Hyatt", "Marriott", "Hilton", "JW Marriott", "Accor", 
+  "The Ritz-Carlton", "Westin", "Sheraton", "Radisson Blu", "Novotel",
+  "W Hotels", "Le Meridien", "Apollo Hospitals", "Conrad", "Fairfield by Marriott",
+  "Hyatt Regency", "Oakwood Premier", "Royal Western India Turf Club", "The Corinthians"
 ];
 
 const CATEGORIES = [
@@ -122,6 +124,26 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Clients Ticker */}
+      <section className="clients-section">
+        <div className="clients-container">
+          <h3 className="clients-title">Trusted By Leading Brands</h3>
+        </div>
+        <div className="ticker-wrapper">
+          <div className="ticker-content">
+            {[...CLIENTS, ...CLIENTS].map((client, idx) => (
+              <span 
+                key={idx} 
+                className="ticker-item"
+                onClick={() => navigate('/clients')}
+              >
+                {client}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Product Categories Preview */}
       <section className="categories-section">
         <div className="section-container">
@@ -161,22 +183,6 @@ function HomePage() {
            <div className="mobile-view-all">
              <button onClick={() => navigate('/products')} className="btn btn-primary">View All Products</button>
            </div>
-        </div>
-      </section>
-
-      {/* Clients Ticker */}
-      <section className="clients-section">
-        <div className="clients-container">
-          <h3 className="clients-title">Trusted By Leading Brands</h3>
-        </div>
-        <div className="ticker-wrapper">
-          <div className="ticker-content">
-            {[...CLIENTS, ...CLIENTS].map((client, idx) => (
-              <span key={idx} className="ticker-item">
-                {client}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
     </div>

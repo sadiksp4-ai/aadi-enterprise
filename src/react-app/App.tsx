@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
 import ClientsPage from "./pages/ClientsPage";
+import PartnersPage from "./pages/PartnersPage";
 import ContactPage from "./pages/ContactPage";
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/brands" element={<Navigate to="/products" replace />} />
             <Route path="/clients" element={<ClientsPage />} />
+            <Route path="/partners" element={<PartnersPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>

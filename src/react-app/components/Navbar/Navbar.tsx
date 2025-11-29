@@ -64,6 +64,13 @@ const Navbar: React.FC = () => {
           Clients
         </Link>
         <Link
+          to="/partners"
+          onClick={closeMenu}
+          className={location.pathname === "/partners" ? "active" : ""}
+        >
+          Partners
+        </Link>
+        <Link
           to="/contact"
           onClick={closeMenu}
           className={location.pathname === "/contact" ? "active" : ""}
