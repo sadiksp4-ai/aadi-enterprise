@@ -128,3 +128,42 @@ body::before {
     background: var(--primary-gold);
     color: var(--bg-primary);
 }
+
+/* Global Mobile Optimizations */
+@media (max-width: 768px) {
+    body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+    
+    /* Prevent horizontal scroll */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+    
+    /* Better touch targets */
+    a, button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Prevent input zoom on iOS */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Global text handling */
+h1, h2, h3, h4, h5, h6, p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Fix for long words */
+.section-title,
+.category-title,
+.modal-title {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
