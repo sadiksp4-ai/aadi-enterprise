@@ -10,13 +10,13 @@ const CLIENTS = [
 ];
 
 const CATEGORIES = [
-  "Commercial Kitchen", "F&B Service", "Hygiene and Housekeeping", "Front Office", "Banquet"
+  "Commercial Kitchen", "F&B Service", "Hygiene and HK", "Front Office", "Banquet"
 ];
 
 const CATEGORY_IMAGES: Record<string, string> = {
   "Commercial Kitchen": "/commercial_kitchen.jpg",
   "F&B Service": "/f&b.jpg",
-  "Hygiene and Housekeeping": "/housekeeping.jpg",
+  "Hygiene and HK": "/housekeeping.jpg",
   "Front Office": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=800&auto=format&fit=crop",
   "Banquet": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800&auto=format&fit=crop"
 };

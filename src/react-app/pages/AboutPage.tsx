@@ -224,11 +224,11 @@ const AboutPage: React.FC = () => {
                             <ul className="sectors-list">
                                 <li className="sector-item">
                                     <span className="sector-name">Hotels & Resorts</span>
-                                    <span className="sector-clients">Marriott, Taj, Hyatt</span>
+                                    <span className="sector-clients">Marriott, Ritz Carlton, Hyatt</span>
                                 </li>
                                 <li className="sector-item">
                                     <span className="sector-name">Corporate Institutions</span>
-                                    <span className="sector-clients">Barclays, Fujitsu</span>
+                                    <span className="sector-clients">Bajaj Finserv, Fujitsu</span>
                                 </li>
                                 <li className="sector-item">
                                     <span className="sector-name">Healthcare & Education</span>
