@@ -537,6 +537,62 @@
             "Cafés",
             "Bakery setups"
           ]
+        },
+        {
+          "name": "Wooden Salad Bowls, Plates & Buffet Display",
+          "logo": "/F&B/wooden_salad_bowl.png",
+          "headline": "Elegant, Sustainable & Food-Safe Serveware",
+          "description": "A premium collection of handcrafted wooden salad bowls, serving plates, display stands, and buffet accessories designed for hotels, restaurants, cafes, and banquets that want to elevate presentation with a natural look and reliable daily performance.",
+          "features": [
+            "Natural and sustainable wooden serveware",
+            "Premium aesthetic for buffet counters and table presentation",
+            "Moisture-resistant coatings for high-use F&B environments",
+            "Multi-purpose use for salads, pastas, snacks, breads, fruit displays, and buffet decor"
+          ],
+          "extraInfo": {
+            "Product Highlights": [
+              "Wooden salad bowls in mango wood, acacia, teak, and rubberwood",
+              "Wooden serving plates in flat, round, square, and rustic finishes",
+              "Buffet display risers and carved boards for cheese, bakery, and dessert counters",
+              "Heat-safe options for warm food depending on design"
+            ]
+          },
+          "idealFor": [
+            "Hotels",
+            "Restaurants",
+            "Banquet halls",
+            "Catering companies",
+            "Cafe and bakery counters",
+            "Farm-to-table restaurants"
+          ]
+        },
+        {
+          "name": "Acrylic Serving & Buffet Display Systems",
+          "logo": "/F&B/acrylic_buffet.png",
+          "headline": "Crystal-Clear, Lightweight & Break-Resistant",
+          "description": "High-quality acrylic bowls, trays, risers, stands, and display units designed for hotel buffet counters, live stations, bakery displays, and F&B service areas where clarity, hygiene, and presentation matter most.",
+          "features": [
+            "Shatterproof and lightweight for high-traffic buffet operations",
+            "Glass-like clarity with a premium hygienic appearance",
+            "Easy to clean, non-porous, and stain-resistant",
+            "Highly versatile across multiple shapes, sizes, and colors"
+          ],
+          "extraInfo": {
+            "Product Highlights": [
+              "Acrylic salad bowls and serving dishes for salads, desserts, and cold counters",
+              "Acrylic trays and platters in rectangular, oval, round, and geometric designs",
+              "Acrylic risers and display stands for height variation and food visibility",
+              "Acrylic domes and covers for pastries, breads, and cold items"
+            ]
+          },
+          "idealFor": [
+            "Hotel all-day dining",
+            "Banquets and events",
+            "Bakery and patisserie displays",
+            "Cruise catering",
+            "Corporate cafeterias",
+            "Cloud kitchens and catering"
+          ]
         }
       ]
     },
@@ -873,7 +929,7 @@
     },
     {
       "id": "leather-products",
-      "title": "Leather Products",
+      "title": "Leather/Leatherette",
       "description": "Premium Leather Products for Hotels & Hospitality.",
       "brands": [
         {
