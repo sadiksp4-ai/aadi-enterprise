@@ -35,6 +35,7 @@ function HomePage() {
             loop 
             muted 
             playsInline 
+            preload="metadata"
             className="hero-video-element"
           >
             <source src={getAssetUrl("bg-video.mp4")} type="video/mp4" />
@@ -169,6 +170,8 @@ function HomePage() {
                    src={CATEGORY_IMAGES[cat] || `https://picsum.photos/seed/${cat}/600/800`}
                    alt={cat} 
                    className="category-image"
+                   loading="lazy"
+                   decoding="async"
                  />
                  <div className="category-overlay"></div>
                  <div className="category-content">
