@@ -54,6 +54,25 @@
     --primary-color: var(--primary-gold);
     --text-color: var(--text-primary);
     --bg-color: var(--bg-primary);
+
+    /* V2 Premium Hospitality System (light editorial).
+       NOTE: The dark V1 tokens above are intentionally preserved — the
+       Clients, Partners, Products, About and Contact experiences still
+       reference them and must render unchanged. New work uses the tokens
+       below. */
+    --surface: #F7F5F0;
+    --surface-2: #F0EEE8;
+    --ink: #171717;
+    --ink-2: #57534E;
+    --ink-3: #6F6A64;
+    --accent: #B8945B;
+    --accent-deep: #8A713D;
+    --line: #E4E0D6;
+    --card: #FFFFFF;
+    --content-max: 76rem;
+
+    /* Consistent spacing system */
+    --section-pad: clamp(4.5rem, 8vw, 7.5rem);
 }
 
 html {
@@ -65,31 +84,22 @@ body {
     font-family: var(--font-secondary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: var(--gradient-dark);
-    background-attachment: fixed;
+    background: var(--surface);
     color: var(--text-primary);
     line-height: 1.6;
     letter-spacing: 0.01em;
 }
 
-/* Subtle texture overlay for luxury feel */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle at 20% 50%, rgba(212, 175, 122, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(212, 175, 122, 0.03) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-}
-
 #root {
     position: relative;
     z-index: 1;
+}
+
+/* Visible keyboard focus (V2 accessibility baseline) */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
 /* Custom Scrollbar for Luxury Feel */
@@ -98,8 +108,8 @@ body::before {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-    border-left: var(--border-subtle);
+    background: var(--surface-2);
+    border-left: 1px solid var(--line);
 }
 
 ::-webkit-scrollbar-thumb {

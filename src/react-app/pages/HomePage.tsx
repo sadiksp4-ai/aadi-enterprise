@@ -1,192 +1,342 @@
 import { useNavigate } from 'react-router-dom';
-import { Award, CheckCircle, ShieldCheck, Globe, ArrowRight } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ClipboardList,
+  Package,
+  Wrench,
+  HeartHandshake,
+  MessageCircle,
+} from 'lucide-react';
 import './HomePage.css';
 import { getAssetUrl } from '../utils';
+import {
+  WHATSAPP_DISPLAY_NUMBER,
+  getGeneralEnquiryMessage,
+  getWhatsAppUrl,
+} from '../utils/whatsapp';
+
+const SOLUTIONS = [
+  {
+    title: 'Professional Kitchen',
+    description:
+      'Cooking, refrigeration, warewashing and food-preparation equipment for demanding commercial kitchens.',
+    image: getAssetUrl('commercial_kitchen.jpg'),
+    alt: 'Commercial kitchen equipped for professional hospitality operations',
+  },
+  {
+    title: 'Food & Beverage',
+    description:
+      'Tableware, glassware, barware and service essentials that shape the dining experience.',
+    image: getAssetUrl('f&b.jpg'),
+    alt: 'Food and beverage service setup for hospitality dining',
+  },
+  {
+    title: 'Housekeeping & Hygiene',
+    description:
+      'Professional cleaning systems, laundry solutions and hygiene essentials for spotless properties.',
+    image: getAssetUrl('housekeeping.jpg'),
+    alt: 'Housekeeping team preparing a hotel room',
+  },
+  {
+    title: 'Guest Experience',
+    description:
+      'In-room amenities and thoughtful details that guests remember long after checkout.',
+    image: getAssetUrl('housekeeping/guest-comfort-essentials.jpg'),
+    alt: 'In-room guest amenities and comfort essentials',
+  },
+];
+
+const CAPABILITIES = [
+  {
+    icon: ClipboardList,
+    title: 'Kitchen & Project Planning',
+    description: 'Layout planning and equipment sizing for new and existing properties.',
+  },
+  {
+    icon: Package,
+    title: 'Product Sourcing',
+    description: 'Equipment and tableware sourced from global hospitality brands.',
+  },
+  {
+    icon: Wrench,
+    title: 'Installation & Commissioning',
+    description: 'Professional installation and commissioning support on site.',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'After-Sales Support',
+    description: 'Reliable after-sales service to keep operations running.',
+  },
+];
+
+const BRANDS = [
+  { name: 'Tramontina', file: 'brand_partners/Tramontina.png' },
+  { name: 'Karcher', file: 'brand_partners/Karcher.png' },
+  { name: 'Schott Zwiesel', file: 'brand_partners/schott zwiesel.png' },
+  { name: 'LSA', file: 'brand_partners/LSA Glassware.png' },
+  { name: 'Steelite', file: 'brand_partners/Steelite.png' },
+  { name: 'JVD', file: 'brand_partners/JVD.png' },
+  { name: 'Elanpro', file: 'brand_partners/Elanpro .png' },
+  { name: 'Utopia', file: 'brand_partners/Utopia.png' },
+];
 
 const CLIENTS = [
-  "Grand Hyatt", "Marriott", "Hilton", "JW Marriott", "Accor", 
-  "The Ritz-Carlton", "Westin", "Sheraton", "Radisson Blu", "Novotel",
-  "W Hotels", "Le Meridien", "Apollo Hospitals", "Conrad", "Fairfield by Marriott",
-  "Hyatt Regency", "Oakwood Premier", "Royal Western India Turf Club", "The Corinthians"
+  { name: 'Marriott', file: 'clients/Marriott.png' },
+  { name: 'Hyatt', file: 'clients/Hyatt.png' },
+  { name: 'Apollo Hospitals', file: 'clients/Apollo Hospitals.png' },
+  { name: 'Bajaj Finserv', file: 'clients/Bajaj Finserv.png' },
+  { name: 'Conrad Hotel', file: 'clients/Conrad Hotel.png' },
+  { name: 'Novotel Hotels', file: 'clients/Novotel Hotels.png' },
 ];
-
-const CATEGORIES = [
-  "Commercial Kitchen", "F&B Service", "Hygiene and HK", "Front Office", "Banquet"
-];
-
-const CATEGORY_IMAGES: Record<string, string> = {
-  "Commercial Kitchen": getAssetUrl("commercial_kitchen.jpg"),
-  "F&B Service": getAssetUrl("f&b.jpg"),
-  "Hygiene and HK": getAssetUrl("housekeeping.jpg"),
-  "Front Office": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=800&auto=format&fit=crop",
-  "Banquet": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800&auto=format&fit=crop"
-};
 
 function HomePage() {
   const navigate = useNavigate();
+  const whatsappUrl = getWhatsAppUrl(getGeneralEnquiryMessage());
 
   return (
-    <div className="home-page">
-      {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-background">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            preload="metadata"
-            className="hero-video-element"
-          >
-            <source src={getAssetUrl("bg-video.mp4")} type="video/mp4" />
-          </video>
-          <div className="hero-overlay"></div>
+    <div className="hx">
+      {/* Hero */}
+      <section className="hx-hero">
+        <div className="hx-hero-inner">
+          <div className="hx-hero-copy">
+            <p className="hx-eyebrow">Aadi Enterprises</p>
+            <h1 className="hx-hero-title">
+              Hospitality Solutions, Curated for Better Experiences.
+            </h1>
+            <p className="hx-hero-text">
+              Aadi Enterprises partners with hotels, restaurants and institutions on
+              professional kitchen, food &amp; beverage, housekeeping, hygiene and guest
+              experience requirements — from planning and sourcing to installation and
+              after-sales support.
+            </p>
+            <div className="hx-hero-actions">
+              <button type="button" className="hx-btn hx-btn-primary" onClick={() => navigate('/products')}>
+                Explore Solutions
+                <ArrowRight size={17} aria-hidden="true" />
+              </button>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hx-btn hx-btn-outline"
+              >
+                <MessageCircle size={17} aria-hidden="true" />
+                WhatsApp Enquiry
+              </a>
+            </div>
+          </div>
+          <div className="hx-hero-media">
+            <img
+              src={getAssetUrl('housekeeping/entrance-solutions.jpg')}
+              alt="Premium hotel lobby with marble reception desk, luggage carts and lounge seating"
+              className="hx-hero-image"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </div>
-        
-        <div className="hero-content-container">
-          <h1 className="hero-main-title">
-            World-Class <br/>
-            <span className="hero-highlight-text">Hospitality Solutions.</span>
-          </h1>
-          <p className="hero-description">
-             Your trusted partner for stylish & functional F&B equipment. From pre-opening consultation to premium installation.
-          </p>
-          <div className="hero-buttons">
-            <a 
-              href="https://drive.google.com/drive/folders/1f6st0JQ64rPWvfX-nhnfuVSjP5kFCohs?usp=sharing" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn btn-primary"
+      </section>
+
+      {/* Introduction */}
+      <section className="hx-intro">
+        <div className="hx-intro-inner">
+          <h2 className="hx-intro-title">
+            One Partner.
+            <br />
+            Multiple Hospitality
+            <br />
+            Solutions.
+          </h2>
+          <div className="hx-intro-copy">
+            <p>
+              Aadi Enterprises provides hospitality-focused products, equipment and
+              solutions across kitchen, food &amp; beverage, housekeeping, hygiene and
+              guest experience requirements.
+            </p>
+            <button
+              type="button"
+              className="hx-link"
+              onClick={() => navigate('/about')}
             >
-              Explore Solutions
-            </a>
-            <button 
-              onClick={() => navigate('/contact')} 
-              className="btn btn-outline"
-            >
-              Book Consultation
+              Learn more about us
+              <ArrowRight size={16} aria-hidden="true" />
             </button>
           </div>
         </div>
       </section>
 
-      {/* Trust Bar */}
-      <section className="trust-bar">
-        <div className="trust-container">
-          <div className="trust-content">
-             <div className="trust-item">
-                <Award className="trust-icon" size={24} />
-                <span className="trust-text">ISO 9001:2015</span>
-             </div>
-             <div className="trust-item">
-                <ShieldCheck className="trust-icon" size={24} />
-                <span className="trust-text">GeM Certified</span>
-             </div>
-             <div className="trust-item">
-                <CheckCircle className="trust-icon" size={24} />
-                <span className="trust-text">FSSAI Compliant</span>
-             </div>
+      {/* Solutions */}
+      <section className="hx-solutions" aria-labelledby="hx-solutions-title">
+        <div className="hx-section-inner">
+          <div className="hx-section-head">
+            <p className="hx-eyebrow">What we do</p>
+            <h2 id="hx-solutions-title" className="hx-section-title">
+              Solutions for every corner of your property
+            </h2>
           </div>
-        </div>
-      </section>
-
-      {/* Value Proposition */}
-      <section className="value-proposition-section">
-        <div className="section-container">
-           <div className="section-header">
-             <h2 className="section-title">Why Choose Aadi?</h2>
-             <div className="section-divider"></div>
-           </div>
-
-           <div className="value-grid">
-             {[
-               {
-                 icon: <Globe size={40} />,
-                 title: "Global Brands",
-                 desc: "Direct partners with Rational, Hoshizaki, Winterhalter, and other industry leaders."
-               },
-               {
-                 icon: <CheckCircle size={40} />,
-                 title: "End-to-End Execution",
-                 desc: "Kitchen layout planning, equipment sourcing, installation, and training."
-               },
-               {
-                 icon: <Award size={40} />,
-                 title: "Expert Consultation",
-                 desc: "Tailored pre-opening advice and reliable after-sales support for your property."
-               }
-             ].map((item, idx) => (
-               <div key={idx} className="value-card">
-                 <div className="value-icon">{item.icon}</div>
-                 <h3 className="value-title">{item.title}</h3>
-                 <p className="value-desc">{item.desc}</p>
-               </div>
-             ))}
-           </div>
-        </div>
-      </section>
-
-      {/* Clients Ticker */}
-      <section className="clients-section">
-        <div className="clients-container">
-          <h3 className="clients-title">Trusted By Leading Brands</h3>
-        </div>
-        <div className="ticker-wrapper">
-          <div className="ticker-content">
-            {[...CLIENTS, ...CLIENTS].map((client, idx) => (
-              <span 
-                key={idx} 
-                className="ticker-item"
-                onClick={() => navigate('/clients')}
-              >
-                {client}
-              </span>
+          <div className="hx-solutions-grid">
+            {SOLUTIONS.map((solution) => (
+              <article key={solution.title} className="hx-solution-card">
+                <button
+                  type="button"
+                  className="hx-solution-media"
+                  onClick={() => navigate('/products')}
+                  aria-label={`Explore ${solution.title} solutions`}
+                  tabIndex={-1}
+                >
+                  <img
+                    src={solution.image}
+                    alt={solution.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+                <h3 className="hx-solution-title">{solution.title}</h3>
+                <p className="hx-solution-text">{solution.description}</p>
+                <button
+                  type="button"
+                  className="hx-link"
+                  onClick={() => navigate('/products')}
+                >
+                  Explore
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </button>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Product Categories Preview */}
-      <section className="categories-section">
-        <div className="section-container">
-           <div className="categories-header">
-             <div>
-               <h2 className="section-title text-left">Our Categories</h2>
-               <p className="categories-subtitle">Comprehensive solutions for every corner of your hotel.</p>
-             </div>
-             <button onClick={() => navigate('/products')} className="view-all-btn">
-               View All <ArrowRight size={16} className="icon-ml" />
-             </button>
-           </div>
+      {/* Capabilities */}
+      <section className="hx-capabilities" aria-labelledby="hx-capabilities-title">
+        <div className="hx-section-inner">
+          <div className="hx-section-head">
+            <p className="hx-eyebrow">How we help</p>
+            <h2 id="hx-capabilities-title" className="hx-section-title">
+              More Than Products
+            </h2>
+            <p className="hx-section-text">
+              Support across every stage of your property lifecycle.
+            </p>
+          </div>
+          <ul className="hx-capabilities-list">
+            {CAPABILITIES.map(({ icon: Icon, title, description }) => (
+              <li key={title} className="hx-capability">
+                <span className="hx-capability-icon" aria-hidden="true">
+                  <Icon size={22} strokeWidth={1.5} />
+                </span>
+                <div>
+                  <h3 className="hx-capability-title">{title}</h3>
+                  <p className="hx-capability-text">{description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-           <div className="categories-grid">
-             {CATEGORIES.slice(0, 3).map((cat, idx) => (
-               <div 
-                key={idx} 
-                onClick={() => navigate('/products')}
-                className="category-card"
-               >
-                 <img 
-                   src={CATEGORY_IMAGES[cat] || `https://picsum.photos/seed/${cat}/600/800`}
-                   alt={cat} 
-                   className="category-image"
-                   loading="lazy"
-                   decoding="async"
-                 />
-                 <div className="category-overlay"></div>
-                 <div className="category-content">
-                   <h3 className="category-title">{cat}</h3>
-                   <span className="category-explore">
-                     Explore <ArrowRight size={14} className="icon-ml" />
-                   </span>
-                 </div>
-               </div>
-             ))}
-           </div>
-           
-           <div className="mobile-view-all">
-             <button onClick={() => navigate('/products')} className="btn btn-primary">View All Products</button>
-           </div>
+      {/* Brands */}
+      <section className="hx-brands" aria-labelledby="hx-brands-title">
+        <div className="hx-section-inner">
+          <div className="hx-section-head">
+            <p className="hx-eyebrow">Partnerships</p>
+            <h2 id="hx-brands-title" className="hx-section-title">
+              Brands We Work With
+            </h2>
+            <p className="hx-section-text">
+              A selection of the global manufacturers and hospitality brands we source from.
+            </p>
+          </div>
+          <ul className="hx-brand-list" aria-label="Selected partner brands">
+            {BRANDS.map((brand) => (
+              <li key={brand.name} className="hx-brand-item">
+                <img
+                  src={getAssetUrl(brand.file)}
+                  alt={`${brand.name} logo`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="hx-link"
+            onClick={() => navigate('/partners')}
+          >
+            View All Brands
+            <ArrowRight size={16} aria-hidden="true" />
+          </button>
+        </div>
+      </section>
+
+      {/* Clients */}
+      <section className="hx-clients" aria-labelledby="hx-clients-title">
+        <div className="hx-section-inner">
+          <div className="hx-section-head">
+            <p className="hx-eyebrow">Relationships</p>
+            <h2 id="hx-clients-title" className="hx-section-title">
+              Trusted Across Hospitality &amp; Industry
+            </h2>
+            <p className="hx-section-text">
+              A selection of the hotels, restaurants, healthcare providers, corporates
+              and institutions we work with.
+            </p>
+          </div>
+          <ul className="hx-client-list" aria-label="Selected clients">
+            {CLIENTS.map((client) => (
+              <li key={client.name} className="hx-client-item">
+                <img
+                  src={getAssetUrl(client.file)}
+                  alt={`${client.name} logo`}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="hx-client-name">{client.name}</span>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="hx-link"
+            onClick={() => navigate('/clients')}
+          >
+            View Our Clients
+            <ArrowRight size={16} aria-hidden="true" />
+          </button>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="hx-cta" aria-labelledby="hx-cta-title">
+        <div className="hx-cta-inner">
+          <h2 id="hx-cta-title" className="hx-cta-title">
+            Planning a New Property or Upgrading an Existing One?
+          </h2>
+          <p className="hx-cta-text">
+            Tell us about your requirement — our team will help you plan, source and
+            set up the right solution for your property.
+          </p>
+          <div className="hx-cta-actions">
+            <button
+              type="button"
+              className="hx-btn hx-btn-light"
+              onClick={() => navigate('/contact')}
+            >
+              Talk to Aadi Enterprises
+              <ArrowRight size={17} aria-hidden="true" />
+            </button>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hx-btn hx-btn-ghost-light"
+            >
+              <MessageCircle size={17} aria-hidden="true" />
+              WhatsApp Enquiry ({WHATSAPP_DISPLAY_NUMBER})
+            </a>
+          </div>
         </div>
       </section>
     </div>

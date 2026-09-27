@@ -137,6 +137,7 @@ const Partners: React.FC = () => {
   return (
     <section className="partners-page-section">
       <div className="partners-header">
+        <p className="partners-eyebrow">Partners</p>
         <h2 className="section-title">Our Brand Partners</h2>
         <p className="section-subtitle">Collaborating with the world's finest brands to deliver excellence.</p>
         <div className="section-divider"></div>

@@ -191,6 +191,7 @@ const Clients: React.FC = () => {
   return (
     <section className="clients-page-section">
       <div className="clients-header">
+        <p className="clients-eyebrow">Clients</p>
         <h2 className="section-title">Our Valued Clients</h2>
         <p className="section-subtitle">Trusted by industry leaders in hospitality and beyond.</p>
         <div className="section-divider"></div>
