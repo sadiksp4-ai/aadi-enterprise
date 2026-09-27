@@ -228,6 +228,7 @@ const Clients: React.FC = () => {
                     alt={`${client.name} logo`}
                     className="client-logo-img"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <p className="client-name">{client.name}</p>

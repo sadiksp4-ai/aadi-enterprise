@@ -169,6 +169,7 @@ const Partners: React.FC = () => {
                     alt={`${brand.name} logo`}
                     className="partner-logo-img"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <p className="partner-name">{brand.name}</p>

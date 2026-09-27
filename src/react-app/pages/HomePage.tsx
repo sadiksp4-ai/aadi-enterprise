@@ -132,6 +132,7 @@ function HomePage() {
               alt="Premium hotel lobby with marble reception desk, luggage carts and lounge seating"
               className="hx-hero-image"
               loading="eager"
+              fetchPriority="high"
               decoding="async"
             />
           </div>

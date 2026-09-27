@@ -126,6 +126,7 @@ function AboutPage() {
               alt="Sunlit luxury hotel lobby with marble reception desk, lounge seating and luggage cart"
               className="ax-hero-image"
               loading="eager"
+              fetchPriority="high"
               decoding="async"
             />
           </div>

@@ -8,11 +8,13 @@ import ClientsPage from "./pages/ClientsPage";
 import PartnersPage from "./pages/PartnersPage";
 import ContactPage from "./pages/ContactPage";
 import WhatsAppFloat from "./components/WhatsAppFloat/WhatsAppFloat";
+import Seo from "./components/Seo/Seo";
 import "./App.css";
 
 function App() {
   return (
     <Router>
+      <Seo />
       <div className="App">
         <Navbar />
         <main>

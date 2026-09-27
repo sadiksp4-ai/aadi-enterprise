@@ -127,6 +127,7 @@ const Footer: React.FC = () => {
             alt="Aadi Enterprises logo"
             className="footer-bottom-logo"
             loading="lazy"
+            decoding="async"
           />
           <p>&copy; {new Date().getFullYear()} AADI ENTERPRISES. All Rights Reserved.</p>
         </div>
