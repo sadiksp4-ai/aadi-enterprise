@@ -1,10 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MessageCircle } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import './Footer.css';
 import { getAssetUrl } from '../../utils';
 import { WHATSAPP_DISPLAY_NUMBER, getGeneralEnquiryMessage, getWhatsAppUrl } from '../../utils/whatsapp';
 import data from '../../../../aadi-info.json';
+
+const SOCIAL_LINKS = [
+  {
+    label: 'Aadi Enterprises on Facebook',
+    href: 'https://www.facebook.com/share/1JfupXt4k4/',
+    Icon: Facebook,
+  },
+  {
+    label: 'Aadi Enterprises on Instagram',
+    href: 'https://www.instagram.com/aadienterprises_/',
+    Icon: Instagram,
+  },
+  {
+    label: 'Aadi Enterprises on LinkedIn',
+    href: 'https://www.linkedin.com/in/aadi-enterprises-pune-300127391',
+    Icon: Linkedin,
+  },
+];
 
 const SOLUTION_LINKS = [
   'Professional Kitchen',
@@ -34,6 +52,22 @@ const Footer: React.FC = () => {
               Hospitality solutions partner for professional kitchen, food &amp; beverage,
               housekeeping, hygiene and guest experience requirements.
             </p>
+            <ul className="footer-social-list" aria-label="Aadi Enterprises on social media">
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    title={label}
+                    className="footer-social-link"
+                  >
+                    <Icon size={18} aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <nav className="footer-col" aria-label="Solutions">
