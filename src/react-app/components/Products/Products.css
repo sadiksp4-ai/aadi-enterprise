@@ -322,6 +322,37 @@
   font-style: italic;
 }
 
+.modal-enquiry-cta {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.whatsapp-enquire-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background-color: #25d366;
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.whatsapp-enquire-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.35);
+  color: #ffffff;
+}
+
 /* Mobile Responsive */
 @media (max-width: 1024px) {
   .products-page {

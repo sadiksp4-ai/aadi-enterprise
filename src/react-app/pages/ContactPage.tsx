@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useWeb3Forms from "@web3forms/react";
-import { MapPin, Mail, Clock, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
+import { MapPin, Mail, Clock, ArrowRight, CheckCircle, AlertCircle, MessageCircle } from "lucide-react";
 import data from "../../../aadi-info.json";
+import { WHATSAPP_DISPLAY_NUMBER, getContactPageEnquiryMessage, getWhatsAppUrl } from "../utils/whatsapp";
 import "./ContactPage.css";
 
 interface FormData {
@@ -193,6 +194,20 @@ const ContactPage: React.FC = () => {
                                     </>
                                 )}
                             </button>
+
+                            <div className="whatsapp-divider">
+                                <span>or</span>
+                            </div>
+
+                            <a
+                                href={getWhatsAppUrl(getContactPageEnquiryMessage())}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="whatsapp-alt-btn"
+                            >
+                                <MessageCircle size={18} />
+                                Chat on WhatsApp ({WHATSAPP_DISPLAY_NUMBER})
+                            </a>
                         </form>
 
                         {/* Success/Error Messages */}

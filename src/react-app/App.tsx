@@ -7,6 +7,7 @@ import ProductsPage from "./pages/ProductsPage";
 import ClientsPage from "./pages/ClientsPage";
 import PartnersPage from "./pages/PartnersPage";
 import ContactPage from "./pages/ContactPage";
+import WhatsAppFloat from "./components/WhatsAppFloat/WhatsAppFloat";
 import "./App.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <WhatsAppFloat />
       </div>
     </Router>
   );

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { MessageCircle } from "lucide-react";
 import "./Products.css";
 import data from "../../../../aadi-info.json";
 import { getAssetUrl } from "../../utils";
+import { getProductEnquiryMessage, getWhatsAppUrl } from "../../utils/whatsapp";
 
 interface ProductEntry {
   name: string;
@@ -12,7 +14,7 @@ interface ProductEntry {
   features?: string[];
   idealFor?: string[];
   closing?: string;
-  extraInfo?: Record<string, any>;
+  extraInfo?: Record<string, string | string[]>;
   subItems?: {
     title: string;
     description?: string;
@@ -59,9 +61,10 @@ interface ProductDetailsModalProps {
   product: ProductEntry | null;
   isOpen: boolean;
   onClose: () => void;
+  categoryTitle?: string;
 }
 
-const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOpen, onClose }) => {
+const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOpen, onClose, categoryTitle }) => {
   // Prevent background scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -175,6 +178,18 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, isOp
             {product.closing && (
                 <p className="brand-desc" style={{ marginTop: '1rem', fontStyle: 'italic' }}>{product.closing}</p>
             )}
+
+            <div className="modal-enquiry-cta">
+              <a
+                href={getWhatsAppUrl(getProductEnquiryMessage(product.name, categoryTitle))}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whatsapp-enquire-btn"
+              >
+                <MessageCircle size={18} />
+                Enquire on WhatsApp
+              </a>
+            </div>
         </div>
       </div>
     </div>
@@ -239,6 +254,7 @@ const Products: React.FC = () => {
         product={selectedProduct}
         isOpen={!!selectedProduct}
         onClose={() => setSelectedProduct(null)}
+        categoryTitle={activeCategory?.title}
       />
     </div>
   );
