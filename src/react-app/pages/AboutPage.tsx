@@ -180,14 +180,14 @@ function AboutPage() {
             <div className="ax-mv-block">
               <h3 className="ax-mv-label">Vision</h3>
               <p className="ax-mv-text">
-                TO BE THE MOST TRUSTED AND PREFERRED PARTNER FOR FOOD AND BEVERAGE
-                EQUIPMENT SOLUTIONS ACROSS INDIA, SETTING NEW BENCHMARKS IN QUALITY,
-                INNOVATION, AND CUSTOMER SATISFACTION.
+                To be the most trusted and preferred partner for food and beverage
+                equipment solutions across India, setting new benchmarks in quality,
+                innovation, and customer satisfaction.
               </p>
               <p className="ax-mv-text">
-                WE ENVISION A FUTURE WHERE EVERY HOSPITALITY BUSINESS CAN ACCESS
-                WORLD-CLASS EQUIPMENT THAT ELEVATES THEIR CULINARY EXCELLENCE AND
-                BRAND IDENTITY.
+                We envision a future where every hospitality business can access
+                world-class equipment that elevates their culinary excellence and
+                brand identity.
               </p>
             </div>
           </div>
