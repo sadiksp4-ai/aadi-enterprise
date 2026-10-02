@@ -195,7 +195,9 @@
   justify-content: flex-start;
   gap: 0.55rem;
   text-align: center;
-  min-height: 13.5rem;
+  /* Fixed height (not min-height) so every card has an identical footprint
+     regardless of name length or descriptor presence. */
+  height: 15rem;
   box-sizing: border-box;
   transition: border-color var(--transition-base), transform var(--transition-base);
 }
@@ -211,7 +213,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
+  /* Fixed (no flex growth) so the logo display area is identical on every card. */
+  flex: none;
 }
 
 .client-logo-img {
@@ -245,7 +248,7 @@
   }
 
   .client-card {
-    min-height: 11.5rem;
+    height: 13.5rem;
     padding: 1.1rem 0.75rem;
   }
 

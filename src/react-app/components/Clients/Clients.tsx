@@ -32,15 +32,18 @@ interface ClientCategory {
  * - Asset paths are preserved verbatim (including fragile names); display
  *   names follow the confirmed placement list; files are never renamed here.
  *
- * Duplicate resolution (compared by logo/name/file data):
- * - Merged (exact duplicates, one card kept):
- *   Accor.png ↔ new/clients/accor.png → kept clients/Accor.png
- *   Sheraton Hotels & Resort.png ↔ new/clients/sheraton.png → kept legacy
- *   Sujyoti.png ↔ new/clients/sujyoti.png → kept clients/Sujyoti.png
+ * Duplicate resolution (compared by logo/name/file data, logos visually verified):
+ * - Updated to newer supplied logo assets (same brand confirmed visually):
+ *   Accor: clients/Accor.png → new/clients/accor.png
+ *   Radisson Blu: clients/Radisson Blu.png → new/clients/radison.png
+ *   Sheraton Hotels & Resort: clients/Sheraton Hotels & Resort.png → new/clients/sheraton.png
+ *   Sujyoti: clients/Sujyoti.png → new/clients/sujyoti.png
+ * - Merged (same brand, one card kept):
+ *   Radisson Blu ↔ Radisson (both logos show Radisson BLU) → kept "Radisson Blu" with new/clients/radison.png
  *   Surya.png ↔ new/clients/surya.jpg → kept clients/Surya.png
  *   Marriott.png ↔ new/clients/marriotr.png (typo variant) → kept clients/Marriott.png
+ * - Removed per management: Eagle Forgings (new/clients/eagle.jpg).
  * - Retained separately (repo does not prove same property):
- *   Radisson Blu.png vs new/clients/radison.png (tier-specific vs generic)
  *   All Marriott/Hyatt family properties (Fairfield, JW, Courtyard, Grand Hyatt,
  *   Hyatt, Hyatt Residency, W, Westin, Ritz, InterContinental) kept distinct.
  * - Yogh Hospitality was not in the confirmed placement lists, so it renders
@@ -53,7 +56,7 @@ const clientCategories: ClientCategory[] = [
     filterLabel: "Hotels & Resorts",
     descriptor: "Hotels, resorts and hospitality groups.",
     clients: [
-      { name: "Accor", folder: "clients", file: "Accor.png", descriptor: "Hotel Group" },
+      { name: "Accor", folder: "new/clients", file: "accor.png", descriptor: "Hotel Group" },
       { name: "Conrad Hotel", folder: "clients", file: "Conrad Hotel.png", descriptor: "Hotel" },
       { name: "Fairfield by Marriott", folder: "clients", file: "Fairfield by Marriott.png", descriptor: "Hotel" },
       { name: "Grand Hyatt", folder: "clients", file: "Grand Hyatt.png", descriptor: "Hotel" },
@@ -66,10 +69,9 @@ const clientCategories: ClientCategory[] = [
       { name: "Novotel Hotels", folder: "clients", file: "Novotel Hotels.png", descriptor: "Hotel" },
       { name: "Oakwood Premier", folder: "clients", file: "Oakwood Premier.png", descriptor: "Hotel" },
       { name: "Park Ornate", folder: "clients", file: "Park Ornate.png", descriptor: "Hotel" },
-      { name: "Radisson Blu", folder: "clients", file: "Radisson Blu.png", descriptor: "Hotel" },
-      { name: "Radisson", folder: "new/clients", file: "radison.png", descriptor: "Hotel" },
+      { name: "Radisson Blu", folder: "new/clients", file: "radison.png", descriptor: "Hotel" },
       { name: "Rhythm Hotels & Resorts", folder: "clients", file: "Rhythm Hotels & Resort.png", descriptor: "Hotel" },
-      { name: "Sheraton Hotels & Resort", folder: "clients", file: "Sheraton Hotels & Resort.png", descriptor: "Hotel" },
+      { name: "Sheraton Hotels & Resort", folder: "new/clients", file: "sheraton.png", descriptor: "Hotel" },
       { name: "Spree Hospitality", folder: "clients", file: "Spree Hospitality.png", descriptor: "Hospitality Group" },
       { name: "Suba Group of Hotels", folder: "clients", file: "Suba groups of Hotel.png", descriptor: "Hotel Group" },
       { name: "The Corinthians Club Resort", folder: "clients", file: "The Corinthians Club Resort.png", descriptor: "Resort" },
@@ -147,7 +149,7 @@ const clientCategories: ClientCategory[] = [
     descriptor: "Additional organizations across hospitality and allied sectors.",
     clients: [
       { name: "Yogh Hospitality", folder: "clients", file: "Yogh Hospitality.png" },
-      { name: "Sujyoti", folder: "clients", file: "Sujyoti.png" },
+      { name: "Sujyoti", folder: "new/clients", file: "sujyoti.png" },
       { name: "Surya", folder: "clients", file: "Surya.png" },
       { name: "Samarpan", folder: "clients", file: "Samarpan.png" },
       { name: "Escalates", folder: "clients", file: "Escalates.png" },
@@ -157,7 +159,6 @@ const clientCategories: ClientCategory[] = [
       { name: "arcone", folder: "new/clients", file: "arcone.png" },
       { name: "basil", folder: "new/clients", file: "basil.png" },
       { name: "cosme", folder: "new/clients", file: "cosme.png" },
-      { name: "eagle", folder: "new/clients", file: "eagle.jpg" },
       { name: "eks", folder: "new/clients", file: "eks.png" },
       { name: "empires", folder: "new/clients", file: "empires.png" },
       { name: "es", folder: "new/clients", file: "es.png" },
