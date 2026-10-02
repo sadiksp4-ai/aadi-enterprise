@@ -166,23 +166,9 @@
   }
 }
 
-/* Compact grids for small categories (1-3 cards): fewer, capped columns so
-   short sections stay visually tight instead of leaving empty tracks. */
-@media (min-width: 640px) {
-  .clients-grid-container.compact-1 {
-    grid-template-columns: minmax(15rem, 22.5rem);
-    justify-content: start;
-  }
-
-  .clients-grid-container.compact-2 {
-    grid-template-columns: repeat(2, minmax(0, 22.5rem));
-    justify-content: start;
-  }
-
-  .clients-grid-container.compact-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+/* NOTE: no per-category column overrides. Every category uses the same grid
+   above, so short categories leave empty tracks instead of stretching cards —
+   all cards keep identical dimensions across the page. */
 
 .client-card {
   background-color: var(--card);

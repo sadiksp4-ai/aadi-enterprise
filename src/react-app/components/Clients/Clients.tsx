@@ -152,26 +152,26 @@ const clientCategories: ClientCategory[] = [
       { name: "Sujyoti", folder: "new/clients", file: "sujyoti.png" },
       { name: "Surya", folder: "clients", file: "Surya.png" },
       { name: "Samarpan", folder: "clients", file: "Samarpan.png" },
-      { name: "Escalates", folder: "clients", file: "Escalates.png" },
+      { name: "Escalates Tech India Pvt. Ltd.", folder: "clients", file: "Escalates.png" },
       { name: "Country Delight", folder: "clients", file: "Country Delight.png" },
-      { name: "24s", folder: "new/clients", file: "24s.png" },
-      { name: "altruist", folder: "new/clients", file: "altruist.png" },
-      { name: "arcone", folder: "new/clients", file: "arcone.png" },
-      { name: "basil", folder: "new/clients", file: "basil.png" },
-      { name: "cosme", folder: "new/clients", file: "cosme.png" },
-      { name: "eks", folder: "new/clients", file: "eks.png" },
-      { name: "empires", folder: "new/clients", file: "empires.png" },
-      { name: "es", folder: "new/clients", file: "es.png" },
-      { name: "felicia", folder: "new/clients", file: "felicia.png" },
-      { name: "goosebumps", folder: "new/clients", file: "goosebumps.png" },
-      { name: "nehilent", folder: "new/clients", file: "nehilent.png" },
-      { name: "nutra", folder: "new/clients", file: "nutra.jpg" },
-      { name: "oxford", folder: "new/clients", file: "oxford.png" },
-      { name: "poona", folder: "new/clients", file: "poona.png" },
-      { name: "posco", folder: "new/clients", file: "posco.png" },
-      { name: "ria", folder: "new/clients", file: "ria.png" },
-      { name: "tomatos", folder: "new/clients", file: "tomatos.png" },
-      { name: "wang", folder: "new/clients", file: "wang.png" },
+      { name: "24S Fitness & Beyond", folder: "new/clients", file: "24s.png" },
+      { name: "The Altruist Hotels", folder: "new/clients", file: "altruist.png" },
+      { name: "arcOne ai", folder: "new/clients", file: "arcone.png" },
+      { name: "Basil Hospitality Pvt. Ltd.", folder: "new/clients", file: "basil.png" },
+      { name: "Cosme Matias Menezes", folder: "new/clients", file: "cosme.png" },
+      { name: "EKA Design & Build", folder: "new/clients", file: "eks.png" },
+      { name: "Empires Bhubaneswar", folder: "new/clients", file: "empires.png" },
+      { name: "ES", folder: "new/clients", file: "es.png" },
+      { name: "Felice Pasticceria", folder: "new/clients", file: "felicia.png" },
+      { name: "Goose Bumps", folder: "new/clients", file: "goosebumps.png" },
+      { name: "Nihilent", folder: "new/clients", file: "nehilent.png" },
+      { name: "NutraDynamics", folder: "new/clients", file: "nutra.jpg" },
+      { name: "Oxford Golf Resort", folder: "new/clients", file: "oxford.png" },
+      { name: "The Poona Western Club", folder: "new/clients", file: "poona.png" },
+      { name: "Posco India", folder: "new/clients", file: "posco.png" },
+      { name: "RIA", folder: "new/clients", file: "ria.png" },
+      { name: "Tomatoes", folder: "new/clients", file: "tomatos.png" },
+      { name: "Wang Hospitality Equipment Private Limited", folder: "new/clients", file: "wang.png" },
     ],
   },
 ];
@@ -216,11 +216,7 @@ const Clients: React.FC = () => {
         <div key={category.id} className="clients-category">
           <h3 className="clients-category-title">{category.title}</h3>
           <p className="clients-category-descriptor">{category.descriptor}</p>
-          <div
-            className={`clients-grid-container${
-              category.clients.length <= 3 ? ` compact-${category.clients.length}` : ""
-            }`}
-          >
+          <div className="clients-grid-container">
             {category.clients.map((client) => (
               <div key={`${client.folder}/${client.file}`} className="client-card">
                 <div className="client-logo-area">
