@@ -26,7 +26,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Robot Coupe", folder: "brand_partners", file: "Robot Coupe.png", descriptor: "Food Preparation" },
       { name: "Vitamix", folder: "brand_partners", file: "Vitamix.png", descriptor: "Blending Equipment" },
       { name: "Santos", folder: "new/brand_partners", file: "santos.png", descriptor: "Juicing Equipment" },
-      { name: "Frontier", folder: "brand_partners", file: "Frontier.png", descriptor: "Kitchen Solutions" },
+      { name: "OZTI", folder: "new/brand_partners", file: "OZTI.png", descriptor: "Professional Kitchen Equipment" },
     ],
   },
   {
@@ -37,6 +37,8 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Expobar", folder: "brand_partners", file: "Expobar.png", descriptor: "Coffee Machines" },
       { name: "Cothas Coffee", folder: "new/brand_partners", file: "Cothas.png", descriptor: "Filter Coffee" },
       { name: "Kaapi Machines", folder: "brand_partners", file: "KAAPI MACHINES.png", descriptor: "Coffee Equipment" },
+      { name: "La Cimbali", folder: "new/brand_partners", file: "La-Cimbali.png", descriptor: "Coffee Equipment" },
+      { name: "Rancilio", folder: "new/brand_partners", file: "Rancilio.png", descriptor: "Coffee Equipment" },
       { name: "Smokey Cocktail", folder: "brand_partners", file: "Smokey Cocktail.png", descriptor: "Bar & Mixology" },
     ],
   },
@@ -52,6 +54,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Schott Zwiesel", folder: "brand_partners", file: "schott zwiesel.png", descriptor: "Glassware • Barware" },
       { name: "Glass Studio", folder: "new/brand_partners", file: "glassstudio.png", descriptor: "Glassware" },
       { name: "Onis", folder: "new/brand_partners", file: "onis.png", descriptor: "Glassware • Tabletop" },
+      { name: "RONA", folder: "new/brand_partners", file: "Rona.png", descriptor: "Glassware" },
     ],
   },
   {
@@ -68,6 +71,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Craster", folder: "new/brand_partners", file: "craster.png", descriptor: "Buffet • Tableware" },
       { name: "Cocoon", folder: "new/brand_partners", file: "cocoon.png", descriptor: "Tableware" },
       { name: "Gesign", folder: "new/brand_partners", file: "gesign.png", descriptor: "Facility Solutions" },
+      { name: "Kütahya", folder: "new/brand_partners", file: "Kütahya.jpg", descriptor: "Porcelain & Tableware" },
     ],
   },
   {
@@ -95,6 +99,8 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Washmax", folder: "new/brand_partners", file: "washmax.png", descriptor: "Cleaning & Hygiene" },
       { name: "Trust", folder: "brand_partners", file: "Trust.png", descriptor: "Hospitality Solutions" },
       { name: "Winterhalter", folder: "", file: "winterhalter.png", descriptor: "Commercial Dishwashers" },
+      { name: "Comenda", folder: "new/brand_partners", file: "Comenda.png", descriptor: "Commercial Dishwashers" },
+      { name: "Frontier Waste Solutions", folder: "brand_partners", file: "Frontier.png", descriptor: "Waste Solutions" },
     ],
   },
   {
