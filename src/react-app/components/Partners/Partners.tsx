@@ -35,7 +35,7 @@ const partnerCategories: PartnerCategory[] = [
     filterLabel: "Coffee & Bar",
     brands: [
       { name: "Expobar", folder: "brand_partners", file: "Expobar.png", descriptor: "Coffee Machines" },
-      { name: "Cothas Coffee", folder: "brand_partners", file: "Cothas Coffee.png", descriptor: "Filter Coffee" },
+      { name: "Cothas Coffee", folder: "new/brand_partners", file: "Cothas.png", descriptor: "Filter Coffee" },
       { name: "Kaapi Machines", folder: "brand_partners", file: "KAAPI MACHINES.png", descriptor: "Coffee Equipment" },
       { name: "Smokey Cocktail", folder: "brand_partners", file: "Smokey Cocktail.png", descriptor: "Bar & Mixology" },
     ],
@@ -78,7 +78,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Tramontina", folder: "brand_partners", file: "Tramontina.png", descriptor: "Cutlery • Kitchenware • Food Service" },
       { name: "Pujadas", folder: "new/brand_partners", file: "pujadas.png", descriptor: "Utensils • Food Service" },
       { name: "Japonois", folder: "new/brand_partners", file: "japonois.png", descriptor: "Cutlery • Utensils" },
-      { name: "Shapes", folder: "", file: "shapes.png", descriptor: "Food Service" },
+      { name: "Shapes", folder: "new/brand_partners", file: "Shapes.png", descriptor: "Food Service" },
     ],
   },
   {
