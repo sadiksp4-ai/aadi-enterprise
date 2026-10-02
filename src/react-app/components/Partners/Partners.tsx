@@ -59,7 +59,7 @@ const partnerCategories: PartnerCategory[] = [
     title: "Tableware, Porcelain & Buffet",
     filterLabel: "Tableware",
     brands: [
-      { name: "Ariane", folder: "brand_partners", file: "Ariane.png", descriptor: "Porcelain • Tableware" },
+      { name: "Ariane", folder: "new/brand_partners", file: "ariane.png", descriptor: "Porcelain • Tableware" },
       { name: "Art Evo", folder: "brand_partners", file: "Art Evo.png", descriptor: "Designer Tableware" },
       { name: "Steelite", folder: "brand_partners", file: "Steelite.png", descriptor: "Tableware • Porcelain" },
       { name: "Utopia", folder: "brand_partners", file: "Utopia.png", descriptor: "Tableware" },
@@ -67,6 +67,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Athena", folder: "new/brand_partners", file: "athena.png", descriptor: "Porcelain • Tableware" },
       { name: "Craster", folder: "new/brand_partners", file: "craster.png", descriptor: "Buffet • Tableware" },
       { name: "Cocoon", folder: "new/brand_partners", file: "cocoon.png", descriptor: "Tableware" },
+      { name: "Gesign", folder: "new/brand_partners", file: "gesign.png", descriptor: "Facility Solutions" },
     ],
   },
   {
@@ -77,6 +78,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Tramontina", folder: "brand_partners", file: "Tramontina.png", descriptor: "Cutlery • Kitchenware • Food Service" },
       { name: "Pujadas", folder: "new/brand_partners", file: "pujadas.png", descriptor: "Utensils • Food Service" },
       { name: "Japonois", folder: "new/brand_partners", file: "japonois.png", descriptor: "Cutlery • Utensils" },
+      { name: "Shapes", folder: "", file: "shapes.png", descriptor: "Food Service" },
     ],
   },
   {
@@ -91,7 +93,8 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Rubbermaid", folder: "brand_partners", file: "Rubbermaid.png", descriptor: "Facility Solutions" },
       { name: "Venta", folder: "new/brand_partners", file: "venta.png", descriptor: "Facility Solutions" },
       { name: "Washmax", folder: "new/brand_partners", file: "washmax.png", descriptor: "Cleaning & Hygiene" },
-      { name: "Gesign", folder: "new/brand_partners", file: "gesign.png", descriptor: "Facility Solutions" },
+      { name: "Trust", folder: "brand_partners", file: "Trust.png", descriptor: "Hospitality Solutions" },
+      { name: "Winterhalter", folder: "", file: "winterhalter.png", descriptor: "Commercial Dishwashers" },
     ],
   },
   {
@@ -113,10 +116,10 @@ const partnerCategories: PartnerCategory[] = [
     filterLabel: "In-Room & Guest",
     brands: [
       { name: "JVD", folder: "brand_partners", file: "JVD.png", descriptor: "In-Room Amenities" },
-      { name: "Trust", folder: "brand_partners", file: "Trust.png", descriptor: "Hospitality Solutions" },
-      { name: "Atlantis", folder: "brand_partners", file: "Atlantis.png", descriptor: "In-Room Amenities" },
       { name: "Lush", folder: "new/brand_partners", file: "lush.png", descriptor: "In-Room Amenities" },
       { name: "Zafferano", folder: "brand_partners", file: "zafferano.png", descriptor: "Hospitality Table Lamps" },
+      { name: "Dolphy", folder: "", file: "dolphy_logo.jpg", descriptor: "In-Room Amenities" },
+      { name: "Euronics", folder: "", file: "euronics_logo.jpg", descriptor: "Washroom Automation" },
     ],
   },
 ];
