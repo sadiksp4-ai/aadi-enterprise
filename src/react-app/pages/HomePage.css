@@ -246,6 +246,86 @@
   box-shadow: 0 24px 65px rgba(36, 39, 32, 0.13);
 }
 
+/* Featured-brand slideshow: full-width crossfade inside the hero. The fixed
+   height reserves layout space (no layout shift) and the banners are shown
+   uncropped in their supplied composition. */
+.hx-hero-slideshow {
+  position: relative;
+  width: 100%;
+  height: 66vh;
+  min-height: 26rem;
+  max-height: 44rem;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 24px 65px rgba(36, 39, 32, 0.13);
+}
+
+.hx-hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+
+.hx-hero-slide.is-active {
+  opacity: 1;
+}
+
+.hx-hero-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(247, 245, 240, 0.55);
+}
+
+.hx-hero-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(41, 58, 48, 0.35);
+  cursor: pointer;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.hx-hero-dot:hover {
+  background: rgba(41, 58, 48, 0.6);
+}
+
+.hx-hero-dot.is-active {
+  background: var(--hx-gold);
+  transform: scale(1.25);
+}
+
+@media (max-width: 768px) {
+  .hx-hero-slideshow {
+    height: 17rem;
+    min-height: 0;
+  }
+
+  .hx-hero-slide {
+    object-fit: contain;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-hero-slide {
+    transition: none;
+  }
+}
+
 /* Introduction */
 .hx-intro {
   border-top: 1px solid var(--hx-line);

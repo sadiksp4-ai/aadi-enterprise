@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -90,9 +91,47 @@ const CLIENTS = [
   { name: 'Novotel Hotels', file: 'clients/Novotel Hotels.png' },
 ];
 
+/* Featured-brand hero slideshow (5s fade loop). Images are supplied
+   full-composition banners, so no text is overlaid on top of them. */
+const HERO_SLIDES = [
+  {
+    file: 'new/home-hero/01-zafferano-lamp.png',
+    alt: 'Zafferano hospitality table lamps lighting a restaurant table — Lighting for Hospitality',
+  },
+  {
+    file: 'new/home-hero/02-tramontina-cookware.png',
+    alt: 'Tramontina professional cookware range — Professional Kitchen Solutions',
+  },
+  {
+    file: 'new/home-hero/03-zafferano-hospitality-lighting.png',
+    alt: 'Zafferano Poldina Pro Series colourful portable lamps — Portable Lighting for Modern Hospitality',
+  },
+  {
+    file: 'new/home-hero/04-tramontina-knives.png',
+    alt: 'Tramontina professional kitchen knives — Precision Tools for Professional Kitchens',
+  },
+  {
+    file: 'new/home-hero/05-tramontina-utensils.png',
+    alt: 'Tramontina premium stainless steel kitchen utensils — Reliability for Every Kitchen',
+  },
+];
+
+const HERO_SLIDE_INTERVAL_MS = 5000;
+
 function HomePage() {
   const navigate = useNavigate();
   const whatsappUrl = getWhatsAppUrl(getGeneralEnquiryMessage());
+  const [heroSlide, setHeroSlide] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    const timer = window.setInterval(() => {
+      setHeroSlide((current) => (current + 1) % HERO_SLIDES.length);
+    }, HERO_SLIDE_INTERVAL_MS);
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <div className="hx">
@@ -135,6 +174,37 @@ function HomePage() {
               fetchPriority="high"
               decoding="async"
             />
+          </div>
+        </div>
+        <div
+          className="hx-hero-slideshow"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Featured brand highlights"
+        >
+          {HERO_SLIDES.map((slide, index) => (
+            <img
+              key={slide.file}
+              src={getAssetUrl(slide.file)}
+              alt={slide.alt}
+              className={`hx-hero-slide${index === heroSlide ? ' is-active' : ''}`}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+              decoding="async"
+              aria-hidden={index === heroSlide ? undefined : true}
+            />
+          ))}
+          <div className="hx-hero-dots" role="group" aria-label="Choose slide">
+            {HERO_SLIDES.map((slide, index) => (
+              <button
+                key={slide.file}
+                type="button"
+                className={`hx-hero-dot${index === heroSlide ? ' is-active' : ''}`}
+                aria-label={`Show slide ${index + 1} of ${HERO_SLIDES.length}`}
+                aria-current={index === heroSlide ? true : undefined}
+                onClick={() => setHeroSlide(index)}
+              />
+            ))}
           </div>
         </div>
       </section>
