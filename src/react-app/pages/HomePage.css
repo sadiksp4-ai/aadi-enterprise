@@ -246,15 +246,14 @@
   box-shadow: 0 24px 65px rgba(36, 39, 32, 0.13);
 }
 
-/* Featured-brand slideshow: full-width crossfade inside the hero. The fixed
-   height reserves layout space (no layout shift) and the banners are shown
-   uncropped in their supplied composition. */
+/* Featured-brand slideshow: full-width crossfade inside the hero. The container
+   uses the supplied artwork's master ratio (1832/859) so every banner shows
+   completely with no cropping; aspect-ratio also reserves layout space. */
 .hx-hero-slideshow {
   position: relative;
   width: 100%;
-  height: 66vh;
-  min-height: 26rem;
-  max-height: 44rem;
+  aspect-ratio: 1832 / 859;
+  height: auto;
   margin-top: clamp(2rem, 4vw, 3.5rem);
   overflow: hidden;
   background: var(--surface);
@@ -266,7 +265,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   opacity: 0;
   transition: opacity 1.1s ease;
@@ -307,17 +306,6 @@
 .hx-hero-dot.is-active {
   background: var(--hx-gold);
   transform: scale(1.25);
-}
-
-@media (max-width: 768px) {
-  .hx-hero-slideshow {
-    height: 17rem;
-    min-height: 0;
-  }
-
-  .hx-hero-slide {
-    object-fit: contain;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
