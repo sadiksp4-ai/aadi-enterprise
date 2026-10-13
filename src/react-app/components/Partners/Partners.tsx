@@ -28,6 +28,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Santos", folder: "new/brand_partners", file: "santos.png", descriptor: "Juicing Equipment" },
       { name: "100% Chef", folder: "new/brand_partners", file: "100%Chef.png", descriptor: "Culinary Tools" },
       { name: "Vollrath", folder: "new/brand_partners", file: "Vollarth.png", descriptor: "Commercial Kitchen & Food Service" },
+      { name: "Sirman", folder: "new/brand_partners", file: "Sirman.png", descriptor: "Kitchen Equipment" },
     ],
   },
   {
@@ -55,6 +56,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "RONA", folder: "new/brand_partners", file: "Rona.png", descriptor: "Glassware" },
       { name: "La Rochère", folder: "new/brand_partners", file: "La Rochère.png", descriptor: "Glassware" },
       { name: "Strahl", folder: "new/brand_partners", file: "Strahl.jpg", descriptor: "Premium Drinkware" },
+      { name: "Arcoroc", folder: "new/brand_partners", file: "Arcoroc.png", descriptor: "Glassware" },
     ],
   },
   {
@@ -113,6 +115,7 @@ const partnerCategories: PartnerCategory[] = [
     brands: [
       { name: "Winterhalter", folder: "", file: "winterhalter.png", descriptor: "Commercial Dishwashers" },
       { name: "Comenda", folder: "new/brand_partners", file: "Comenda.png", descriptor: "Commercial Dishwashers" },
+      { name: "Hobart", folder: "new/brand_partners", file: "Hobart.png", descriptor: "Commercial Dishwashers" },
     ],
   },
   {
