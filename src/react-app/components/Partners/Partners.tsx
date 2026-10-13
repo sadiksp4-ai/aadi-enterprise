@@ -26,6 +26,8 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Robot Coupe", folder: "brand_partners", file: "Robot Coupe.png", descriptor: "Food Preparation" },
       { name: "Vitamix", folder: "brand_partners", file: "Vitamix.png", descriptor: "Blending Equipment" },
       { name: "Santos", folder: "new/brand_partners", file: "santos.png", descriptor: "Juicing Equipment" },
+      { name: "100% Chef", folder: "new/brand_partners", file: "100%Chef.png", descriptor: "Culinary Tools" },
+      { name: "Vollrath", folder: "new/brand_partners", file: "Vollarth.png", descriptor: "Commercial Kitchen & Food Service" },
     ],
   },
   {
@@ -37,6 +39,7 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Cothas Coffee", folder: "new/brand_partners", file: "Cothas.png", descriptor: "Filter Coffee" },
       { name: "La Cimbali", folder: "new/brand_partners", file: "La-Cimbali.png", descriptor: "Coffee Equipment" },
       { name: "Rancilio", folder: "new/brand_partners", file: "Rancilio.png", descriptor: "Coffee Equipment" },
+      { name: "BAR Professional", folder: "new/brand_partners", file: "BAR Professional.png", descriptor: "Professional Barware" },
     ],
   },
   {
@@ -50,6 +53,8 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Schott Zwiesel", folder: "brand_partners", file: "schott zwiesel.png", descriptor: "Glassware • Barware" },
       { name: "Glass Studio", folder: "new/brand_partners", file: "glassstudio.png", descriptor: "Glassware" },
       { name: "RONA", folder: "new/brand_partners", file: "Rona.png", descriptor: "Glassware" },
+      { name: "La Rochère", folder: "new/brand_partners", file: "La Rochère.png", descriptor: "Glassware" },
+      { name: "Strahl", folder: "new/brand_partners", file: "Strahl.jpg", descriptor: "Premium Drinkware" },
     ],
   },
   {
@@ -66,6 +71,14 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Craster", folder: "new/brand_partners", file: "craster.png", descriptor: "Buffet • Tableware" },
       { name: "Cocoon", folder: "new/brand_partners", file: "cocoon.png", descriptor: "Tableware" },
       { name: "Gesign", folder: "new/brand_partners", file: "gesign.png", descriptor: "Facility Solutions" },
+      { name: "Bugatti", folder: "new/brand_partners", file: "Bugatti.jpg", descriptor: "Premium Tableware & Serving" },
+      { name: "Dalebrook", folder: "new/brand_partners", file: "Dalebrook.jpg", descriptor: "Buffetware & Food Presentation" },
+      { name: "Moboo Buffet Solutions", folder: "new/brand_partners", file: "Moboo Buffet Solutions.jpg", descriptor: "Buffet Display Solutions" },
+      { name: "Serax", folder: "new/brand_partners", file: "Serax.png", descriptor: "Designer Tableware" },
+      { name: "Studio RAW", folder: "new/brand_partners", file: "Studio RAW.webp", descriptor: "Designer Tableware" },
+      { name: "Vista Alegre", folder: "new/brand_partners", file: "Vista Alegre.jpg", descriptor: "Premium Porcelain" },
+      { name: "Riva", folder: "new/brand_partners", file: "Riva.png", descriptor: "Tableware & Hospitality Design" },
+      { name: "Grad", folder: "new/brand_partners", file: "Grad.png", descriptor: "Tableware" },
     ],
   },
   {
@@ -77,6 +90,8 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Pujadas", folder: "new/brand_partners", file: "pujadas.png", descriptor: "Utensils • Food Service" },
       { name: "Japonois", folder: "new/brand_partners", file: "japonois.png", descriptor: "Cutlery • Utensils" },
       { name: "Shapes", folder: "new/brand_partners", file: "Shapes.png", descriptor: "Food Service" },
+      { name: "Studio William", folder: "new/brand_partners", file: "Studio William.png", descriptor: "Premium Cutlery" },
+      { name: "T&G (Bristol)", folder: "new/brand_partners", file: "T&G (Bristol).png", descriptor: "Kitchen & Table Accessories" },
     ],
   },
   {
