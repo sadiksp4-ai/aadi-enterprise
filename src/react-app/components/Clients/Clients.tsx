@@ -158,10 +158,8 @@ const clientCategories: ClientCategory[] = [
       { name: "The Altruist Hotels", folder: "new/clients", file: "altruist.png" },
       { name: "arcOne ai", folder: "new/clients", file: "arcone.png" },
       { name: "Basil Hospitality Pvt. Ltd.", folder: "new/clients", file: "basil.png" },
-      { name: "Cosme Matias Menezes", folder: "new/clients", file: "cosme.png" },
       { name: "EKA Design & Build", folder: "new/clients", file: "eks.png" },
       { name: "Empires Bhubaneswar", folder: "new/clients", file: "empires.png" },
-      { name: "ES", folder: "new/clients", file: "es.png" },
       { name: "Felice Pasticceria", folder: "new/clients", file: "felicia.png" },
       { name: "Goose Bumps", folder: "new/clients", file: "goosebumps.png" },
       { name: "Nihilent", folder: "new/clients", file: "nehilent.png" },
@@ -171,7 +169,6 @@ const clientCategories: ClientCategory[] = [
       { name: "Posco India", folder: "new/clients", file: "posco.png" },
       { name: "RIA", folder: "new/clients", file: "ria.png" },
       { name: "Tomatoes", folder: "new/clients", file: "tomatos.png" },
-      { name: "Wang Hospitality Equipment Private Limited", folder: "new/clients", file: "wang.png" },
     ],
   },
 ];

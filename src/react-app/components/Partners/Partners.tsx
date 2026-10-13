@@ -26,7 +26,6 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Robot Coupe", folder: "brand_partners", file: "Robot Coupe.png", descriptor: "Food Preparation" },
       { name: "Vitamix", folder: "brand_partners", file: "Vitamix.png", descriptor: "Blending Equipment" },
       { name: "Santos", folder: "new/brand_partners", file: "santos.png", descriptor: "Juicing Equipment" },
-      { name: "OZTI", folder: "new/brand_partners", file: "OZTI.png", descriptor: "Professional Kitchen Equipment" },
     ],
   },
   {
@@ -36,10 +35,8 @@ const partnerCategories: PartnerCategory[] = [
     brands: [
       { name: "Expobar", folder: "brand_partners", file: "Expobar.png", descriptor: "Coffee Machines" },
       { name: "Cothas Coffee", folder: "new/brand_partners", file: "Cothas.png", descriptor: "Filter Coffee" },
-      { name: "Kaapi Machines", folder: "brand_partners", file: "KAAPI MACHINES.png", descriptor: "Coffee Equipment" },
       { name: "La Cimbali", folder: "new/brand_partners", file: "La-Cimbali.png", descriptor: "Coffee Equipment" },
       { name: "Rancilio", folder: "new/brand_partners", file: "Rancilio.png", descriptor: "Coffee Equipment" },
-      { name: "Smokey Cocktail", folder: "brand_partners", file: "Smokey Cocktail.png", descriptor: "Bar & Mixology" },
     ],
   },
   {
@@ -69,7 +66,6 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Craster", folder: "new/brand_partners", file: "craster.png", descriptor: "Buffet • Tableware" },
       { name: "Cocoon", folder: "new/brand_partners", file: "cocoon.png", descriptor: "Tableware" },
       { name: "Gesign", folder: "new/brand_partners", file: "gesign.png", descriptor: "Facility Solutions" },
-      { name: "Kütahya", folder: "new/brand_partners", file: "Kütahya.jpg", descriptor: "Porcelain & Tableware" },
     ],
   },
   {
@@ -93,9 +89,6 @@ const partnerCategories: PartnerCategory[] = [
       { name: "Karcher", folder: "brand_partners", file: "Karcher.png", descriptor: "Cleaning Equipment" },
       { name: "IPC Tennant", folder: "brand_partners", file: "IPC Tennant.png", descriptor: "Cleaning Systems" },
       { name: "Vikan", folder: "brand_partners", file: "Vikan.png", descriptor: "Hygiene Tools" },
-      { name: "Roots", folder: "brand_partners", file: "Roots.png", descriptor: "Cleaning Equipment" },
-      { name: "Venta", folder: "new/brand_partners", file: "venta.png", descriptor: "Facility Solutions" },
-      { name: "Frontier Waste Solutions", folder: "brand_partners", file: "Frontier.png", descriptor: "Waste Solutions" },
     ],
   },
   {
