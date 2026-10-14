@@ -43,9 +43,26 @@ interface ClientCategory {
  *   Surya.png ↔ new/clients/surya.jpg → kept clients/Surya.png
  *   Marriott.png ↔ new/clients/marriotr.png (typo variant) → kept clients/Marriott.png
  * - Removed per management: Eagle Forgings (new/clients/eagle.jpg).
+ * - Excluded per management (never re-add): Cosme Matias Menezes
+ *   (new/clients/cosme.png, file deleted), ES (new/clients/es.png),
+ *   Wang Hospitality Equipment Private Limited (new/clients/wang.png,
+ *   file deleted).
  * - Retained separately (repo does not prove same property):
  *   All Marriott/Hyatt family properties (Fairfield, JW, Courtyard, Grand Hyatt,
  *   Hyatt, Hyatt Residency, W, Westin, Ritz, InterContinental) kept distinct.
+ * - Second logo batch (Oct 2026, 53 present files audited; filenames kept
+ *   verbatim, display names cleaned of underscores only):
+ *   Added 45 new cards, one per present file. Property-qualified hotel files
+ *   get their own cards alongside the pre-existing generic brand cards.
+ *   Skipped as same-entity duplicates (existing card reused): Amanora Mall,
+ *   Atmantan Wellness Centre, Endurance Technologies Ltd, Fujitsu Consulting
+ *   India, Hotel Park Ornate, Oakwood Residence Pune, Swastik Luxury Wellbeing
+ *   Sanctuary, The Corinthians Resort & Club, new/clients/surya.jpg.
+ *   Descriptors on new cards appear only when the filename itself verifies
+ *   them (Hotel/Resort/Mall/Insurance); all other new cards render name-only.
+ *   Lower-confidence placements (name gives no hospitality signal) sit under
+ *   "Other Hospitality & Organizations": King Mansion Goa, Luxe Puri,
+ *   The Astor Goa, The Grand Imperial.
  * - Yogh Hospitality was not in the confirmed placement lists, so it renders
  *   under "Other Hospitality & Organizations" (name only) rather than Hotels.
  */
@@ -80,6 +97,36 @@ const clientCategories: ClientCategory[] = [
       { name: "Courtyard", folder: "new/clients", file: "courtyard.png", descriptor: "Hotel" },
       { name: "InterContinental", folder: "new/clients", file: "intercontentinal.png", descriptor: "Hotel" },
       { name: "Ritz", folder: "new/clients", file: "ritz.png", descriptor: "Hotel" },
+      { name: "Anchaviyo Nature Resort", folder: "new/clients", file: "Anchaviyo_Nature_Resort.jpg", descriptor: "Resort" },
+      { name: "Conrad Pune (Hilton)", folder: "new/clients", file: "Conrad_Pune_(Hilton).jpg", descriptor: "Hotel" },
+      { name: "Courtyard by Marriott Hinjewadi", folder: "new/clients", file: "Courtyard by Marriott Hinjewadi.png", descriptor: "Hotel" },
+      { name: "Courtyard by Marriott Mahabaleshwar", folder: "new/clients", file: "Courtyard by Marriott Mahabaleshwar.jpg", descriptor: "Hotel" },
+      { name: "Fairfield by Marriott Anjuna", folder: "new/clients", file: "Fairfield_by_Marriott_Anjuna.jpg", descriptor: "Hotel" },
+      { name: "Fairfield by Marriott Kharadi", folder: "new/clients", file: "Fairfield_by_Marriott_Kharadi.jpg", descriptor: "Hotel" },
+      { name: "Four Points by Sheraton Nashik", folder: "new/clients", file: "Four Points by Sheraton Nashik.jpg", descriptor: "Hotel" },
+      { name: "Four Points by Sheraton Pune", folder: "new/clients", file: "Four Points by Sheraton Pune.jpg", descriptor: "Hotel" },
+      { name: "Hilton Goa Resort", folder: "new/clients", file: "Hilton_Goa_Resort.png", descriptor: "Resort" },
+      { name: "Hyatt Place Aurangabad", folder: "new/clients", file: "Hyatt Place Aurangabad.png", descriptor: "Hotel" },
+      { name: "Hyatt Place Hinjewadi", folder: "new/clients", file: "Hyatt Place Hinjewadi.png", descriptor: "Hotel" },
+      { name: "Hyatt Regency Pune", folder: "new/clients", file: "Hyatt_Regency_Pune.jpg", descriptor: "Hotel" },
+      { name: "ibis Styles Goa Vagator", folder: "new/clients", file: "ibis Styles Goa Vagator.png", descriptor: "Hotel" },
+      { name: "IRA by Orchid Bhavnagar", folder: "new/clients", file: "IRA By Orchid Bhavnagar.jpg", descriptor: "Hotel" },
+      { name: "JW Marriott Pune", folder: "new/clients", file: "JW_Marriott_Pune.png", descriptor: "Hotel" },
+      { name: "Kochi Marriott Hotel", folder: "new/clients", file: "Kochi_Marriott_Hotel.png", descriptor: "Hotel" },
+      { name: "Le Meridien Dehradun Resort & Spa", folder: "new/clients", file: "Le Meridien Dehradun Resort & Spa.jpg", descriptor: "Resort" },
+      { name: "Le Meridien Mahabaleshwar Resort & Spa", folder: "new/clients", file: "Le Meridien Mahabaleshwar Resort & Spa.jpg", descriptor: "Resort" },
+      { name: "Le Meridien Gurgaon", folder: "new/clients", file: "Le_Meridien_Gurgaon.jpg", descriptor: "Hotel" },
+      { name: "Lotus Eco Beach Resort", folder: "new/clients", file: "Lotus Eco Beach Resort.jpg", descriptor: "Resort" },
+      { name: "Novotel Imagicaa Khopoli", folder: "new/clients", file: "Novotel Imagicaa Khopoli.jpg", descriptor: "Hotel" },
+      { name: "Novotel Pune Nagar Road", folder: "new/clients", file: "Novotel Pune Nagar Road.jpg", descriptor: "Hotel" },
+      { name: "Radisson Blu Resort & Spa Khopoli", folder: "new/clients", file: "Radisson Blu Resort & Spa Khopoli.jpg", descriptor: "Resort" },
+      { name: "Renaissance Goa Resort", folder: "new/clients", file: "Renaissance_Goa_Resort.jpg", descriptor: "Resort" },
+      { name: "Rhythm Lonavala", folder: "new/clients", file: "Rhythm_Lonavala.jpg" },
+      { name: "Royal Goan Beach Resorts", folder: "new/clients", file: "Royal Goan Beach Resorts.jpg", descriptor: "Resort" },
+      { name: "The Fern Residency Pune", folder: "new/clients", file: "The Fern Residency Pune.jpg", descriptor: "Hotel" },
+      { name: "The O Hotel Pune", folder: "new/clients", file: "The O Hotel Pune.jpg", descriptor: "Hotel" },
+      { name: "W Goa", folder: "new/clients", file: "W_Goa.png", descriptor: "Hotel" },
+      { name: "The Westin Pune Koregaon Park", folder: "new/clients", file: "The_Westin_Pune_Koregaon_Park.jpg", descriptor: "Hotel" },
     ],
   },
   {
@@ -100,6 +147,7 @@ const clientCategories: ClientCategory[] = [
     descriptor: "Hospitals and healthcare organizations.",
     clients: [
       { name: "Apollo Hospitals", folder: "clients", file: "Apollo Hospitals.png", descriptor: "Hospital" },
+      { name: "Star Health & Allied Insurance", folder: "new/clients", file: "Star Health & Allied Insurance.png", descriptor: "Insurance" },
     ],
   },
   {
@@ -118,6 +166,12 @@ const clientCategories: ClientCategory[] = [
       { name: "Fulflex", folder: "clients", file: "Fulflex.png" },
       { name: "Kalpataru", folder: "clients", file: "Kalpataru.png" },
       { name: "Xolopak", folder: "clients", file: "Xolopak.png" },
+      { name: "Bajaj Finserv Direct", folder: "new/clients", file: "Bajaj Finserv Direct.jpg" },
+      { name: "Britannia Industries Ltd", folder: "new/clients", file: "Britannia Industries Ltd.jpg" },
+      { name: "Kokuyo Workplace India", folder: "new/clients", file: "Kokuyo Workplace India.jpg" },
+      { name: "Palmonas", folder: "new/clients", file: "Palmonas.png" },
+      { name: "Panchshil Infrastructure Holdings", folder: "new/clients", file: "Panchshil Infrastructure Holdings.jpg" },
+      { name: "Spectrum Electrical Technologies", folder: "new/clients", file: "Spectrum Electrical Technologies.png" },
     ],
   },
   {
@@ -140,6 +194,7 @@ const clientCategories: ClientCategory[] = [
       { name: "Swastik Wellness Resort", folder: "clients", file: "Swastik Wellness Resort.png", descriptor: "Wellness Resort" },
       { name: "Royal Western India Turf Club", folder: "clients", file: "Royal Western India Turf Club .png", descriptor: "Club" },
       { name: "Amanora Mall", folder: "clients", file: "Amnora Mall.png", descriptor: "Mall" },
+      { name: "The Pavillion Mall Pune", folder: "new/clients", file: "The Pavillion Mall Pune.jpg", descriptor: "Mall" },
     ],
   },
   {
@@ -169,6 +224,13 @@ const clientCategories: ClientCategory[] = [
       { name: "Posco India", folder: "new/clients", file: "posco.png" },
       { name: "RIA", folder: "new/clients", file: "ria.png" },
       { name: "Tomatoes", folder: "new/clients", file: "tomatos.png" },
+      { name: "Beejapuri Dairy", folder: "new/clients", file: "Beejapuri Dairy.png" },
+      { name: "Warana Dairy", folder: "new/clients", file: "Warana Dairy.jpg" },
+      { name: "Peony Foods", folder: "new/clients", file: "Peony Foods.jpg" },
+      { name: "King Mansion Goa", folder: "new/clients", file: "King Mansion Goa.jpg" },
+      { name: "Luxe Puri", folder: "new/clients", file: "Luxe Puri.jpg" },
+      { name: "The Astor Goa", folder: "new/clients", file: "The Astor Goa.jpg" },
+      { name: "The Grand Imperial", folder: "new/clients", file: "The Grand Imperial.jpg" },
     ],
   },
 ];
