@@ -10,6 +10,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import './HomePage.css';
+import InstagramFeed from '../components/InstagramFeed/InstagramFeed';
 import { getAssetUrl } from '../utils';
 import {
   WHATSAPP_DISPLAY_NUMBER,
@@ -378,6 +379,9 @@ function HomePage() {
           </button>
         </div>
       </section>
+
+      {/* Instagram — auto-refreshed via scheduled workflow (see .github/workflows/instagram-feed.yml) */}
+      <InstagramFeed />
 
       {/* Final CTA */}
       <section className="hx-cta" aria-labelledby="hx-cta-title">
