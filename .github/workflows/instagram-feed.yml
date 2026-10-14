@@ -1,0 +1,46 @@
+name: Refresh Instagram feed
+
+# Build-time refresh for the homepage Instagram section.
+# Fetches the 6 latest posts via Meta's official Instagram API (Instagram
+# Login) using the INSTAGRAM_ACCESS_TOKEN repo secret, self-hosts thumbnails
+# under public/instagram/, and commits public/instagram/feed.json.
+# The commit to main triggers the existing "Deploy to GitHub Pages"
+# workflow, so no Pages configuration changes are needed.
+# Token never leaves Actions: it is only an env var for the script step and
+# is never printed, logged, or committed.
+
+on:
+  schedule:
+    # Every 6 hours, off the top of the hour (UTC). GitHub may delay
+    # scheduled runs under load; manual runs are always available.
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch latest Instagram posts
+        run: node scripts/fetch-instagram.mjs
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+
+      - name: Commit refreshed feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Scoped to public/instagram/ only: stages additions, modifications,
+          # and deletions (pruned thumbnails). Succeeds when no .jpg files
+          # exist and can never stage unrelated working-tree changes.
+          git add -A -- public/instagram/
+          git diff --staged --quiet || git commit -m "Refresh Instagram feed"
+          git push
