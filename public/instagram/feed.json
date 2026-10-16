@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-15T21:31:40.613Z",
+  "updatedAt": "2026-10-16T04:42:53.662Z",
   "posts": [
+    {
+      "id": "18107227829149274",
+      "image": "instagram/18107227829149274.jpg",
+      "url": "https://www.instagram.com/reel/DeihnxxMzfT/",
+      "caption": "✨ One Collection. Distinctive Expressions.\n\nMeet Perpetua by Zafferano Italia — a distinctive lighting collection presented in elegant finishes, from understated black to refined gold and bold red.\n\nDesigned to make a st",
+      "mediaType": "VIDEO",
+      "productType": "REELS",
+      "publishedAt": "2026-10-16T03:05:38+0000"
+    },
     {
       "id": "18080094083533727",
       "image": "instagram/18080094083533727.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "IMAGE",
       "productType": "FEED",
       "publishedAt": "2026-10-06T05:45:58+0000"
-    },
-    {
-      "id": "17920918206439556",
-      "image": "instagram/17920918206439556.jpg",
-      "url": "https://www.instagram.com/p/DeGRW60jQrS/",
-      "caption": "Cheap crockery is the most expensive purchase a restaurant can make. A standard plate that chips within 35 wash cycles doesn't just cost money—it ruins guest presentation and forces unplanned emergency orders. Vitrified ",
-      "mediaType": "CAROUSEL_ALBUM",
-      "productType": "FEED",
-      "publishedAt": "2026-10-05T03:43:38+0000"
     }
   ]
 }
