@@ -72,19 +72,31 @@ const CAPABILITIES = [
   },
 ];
 
-const BRANDS: { name: string; file: string; className?: string }[] = [
+/* Row 1: Tramontina | Kärcher | Dolphy | Paşabahçe
+   Row 2: Nude Glass | Steelite | Artevo | Ice Make
+   Each logo carries its own sizing class because the source artwork ships with
+   very different amounts of transparent padding around the visible mark. */
+const BRANDS: { name: string; file: string; className: string }[] = [
   {
     name: 'Tramontina',
     file: 'brand_partners/Tramontina.png',
     className: 'hx-brand-item--tramontina',
   },
-  { name: 'Karcher', file: 'brand_partners/Karcher.png' },
-  { name: 'Paşabahçe', file: 'brand_partners/Pasabasche.png' },
-  { name: 'Nude Glass', file: 'brand_partners/Nude.png' },
-  { name: 'Steelite', file: 'brand_partners/Steelite.png' },
-  { name: 'Dolphy', file: 'dolphy_logo.jpg' },
-  { name: 'Ice Make', file: 'new/brand_partners/icemake.png' },
-  { name: 'Artevo', file: 'brand_partners/Art Evo.png' },
+  { name: 'Kärcher', file: 'brand_partners/Karcher.png', className: 'hx-brand-item--karcher' },
+  { name: 'Dolphy', file: 'dolphy_logo.jpg', className: 'hx-brand-item--dolphy' },
+  {
+    name: 'Paşabahçe',
+    file: 'brand_partners/Pasabasche.png',
+    className: 'hx-brand-item--pasabahce',
+  },
+  { name: 'Nude Glass', file: 'brand_partners/Nude.png', className: 'hx-brand-item--nude' },
+  { name: 'Steelite', file: 'brand_partners/Steelite.png', className: 'hx-brand-item--steelite' },
+  { name: 'Artevo', file: 'brand_partners/Art Evo.png', className: 'hx-brand-item--artevo' },
+  {
+    name: 'Ice Make',
+    file: 'new/brand_partners/icemake.png',
+    className: 'hx-brand-item--icemake',
+  },
 ];
 
 const CLIENTS = [
@@ -326,10 +338,7 @@ function HomePage() {
           </div>
           <ul className="hx-brand-list" aria-label="Selected partner brands">
             {BRANDS.map((brand) => (
-              <li
-                key={brand.name}
-                className={`hx-brand-item${brand.className ? ` ${brand.className}` : ''}`}
-              >
+              <li key={brand.name} className={`hx-brand-item ${brand.className}`}>
                 <img
                   src={getAssetUrl(brand.file)}
                   alt={`${brand.name} logo`}

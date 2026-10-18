@@ -473,6 +473,11 @@
 }
 
 /* Brands & clients */
+.hx-brands {
+  /* Single responsive multiplier for the per-logo brand sizing below. */
+  --hx-brand-scale: 1;
+}
+
 .hx-brands .hx-section-inner,
 .hx-clients .hx-section-inner {
   padding-top: clamp(4.5rem, 7vw, 6rem);
@@ -530,17 +535,6 @@
   max-height: 4rem;
   object-fit: contain;
   mix-blend-mode: multiply;
-}
-
-/* Tramontina.png is a square canvas with the wordmark occupying only a thin
-   centre band, so it needs a larger render size plus negative margins that
-   cancel the transparent padding — proportions and centring are preserved. */
-.hx-brand-item--tramontina img {
-  height: 9rem;
-  width: auto;
-  max-width: 100%;
-  max-height: none;
-  margin: -3.9rem 0;
 }
 
 .hx-client-name {
@@ -799,16 +793,108 @@
     max-height: 3.35rem;
   }
 
-  .hx-brand-item--tramontina img {
-    height: 8rem;
-    max-height: none;
-    margin: -3.5rem 0;
+  .hx-brands {
+    --hx-brand-scale: 0.72;
   }
 
   .hx-cta-inner {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
+}
+
+/* Declared widest-first so the narrowest tier always wins the cascade. */
+@media (max-width: 560px) {
+  .hx-brands {
+    --hx-brand-scale: 0.66;
+  }
+}
+
+@media (max-width: 400px) {
+  .hx-brands {
+    --hx-brand-scale: 0.54;
+  }
+}
+
+/* Brand logo sizing.
+   The source artwork ships with very different amounts of transparent padding
+   around the visible mark (e.g. Tramontina is a 320x320 canvas whose wordmark
+   occupies only 288x43px, while Artevo's seal fills 374x375px). Sizing by
+   canvas height alone would therefore render most logos far too small, so each
+   logo gets its own render height plus negative margins that cancel its own
+   top/bottom padding. The visible mark therefore sits in the centre of the tile
+   at the intended size, while the layout box collapses to the mark itself —
+   aspect ratio, transparency, centring, object-fit and tile metrics are
+   untouched, and no logo is cropped or stretched. */
+.hx-brand-item--tramontina img,
+.hx-brand-item--karcher img,
+.hx-brand-item--dolphy img,
+.hx-brand-item--pasabahce img,
+.hx-brand-item--nude img,
+.hx-brand-item--steelite img,
+.hx-brand-item--artevo img,
+.hx-brand-item--icemake img {
+  width: auto;
+  max-width: 100%;
+  max-height: none;
+}
+
+/* Wordmarks: wide marks, kept at roughly half the tile width. */
+.hx-brand-item--tramontina img {
+  height: calc(10.42rem * var(--hx-brand-scale));
+  margin:
+    calc(-4.49rem * var(--hx-brand-scale)) 0
+    calc(-4.53rem * var(--hx-brand-scale));
+}
+
+.hx-brand-item--pasabahce img {
+  height: calc(6.54rem * var(--hx-brand-scale));
+  margin:
+    calc(-2.26rem * var(--hx-brand-scale)) 0
+    calc(-2.54rem * var(--hx-brand-scale));
+}
+
+.hx-brand-item--karcher img {
+  height: calc(5.76rem * var(--hx-brand-scale));
+  margin:
+    calc(-2.02rem * var(--hx-brand-scale)) 0
+    calc(-1.27rem * var(--hx-brand-scale));
+}
+
+.hx-brand-item--nude img {
+  height: calc(6.36rem * var(--hx-brand-scale));
+  margin:
+    calc(-1.92rem * var(--hx-brand-scale)) 0
+    calc(-1.5rem * var(--hx-brand-scale));
+}
+
+/* Compact and square marks: sized to the tile's available height instead. */
+.hx-brand-item--icemake img {
+  height: calc(7.55rem * var(--hx-brand-scale));
+  margin:
+    calc(-2.17rem * var(--hx-brand-scale)) 0
+    calc(-2.08rem * var(--hx-brand-scale));
+}
+
+.hx-brand-item--steelite img {
+  height: calc(9.36rem * var(--hx-brand-scale));
+  margin:
+    calc(-2.19rem * var(--hx-brand-scale)) 0
+    calc(-2.51rem * var(--hx-brand-scale));
+}
+
+.hx-brand-item--dolphy img {
+  height: calc(10.9rem * var(--hx-brand-scale));
+  margin:
+    calc(-3.11rem * var(--hx-brand-scale)) 0
+    calc(-3.05rem * var(--hx-brand-scale));
+}
+
+.hx-brand-item--artevo img {
+  height: calc(5.51rem * var(--hx-brand-scale));
+  margin:
+    calc(-0.23rem * var(--hx-brand-scale)) 0
+    calc(-0.29rem * var(--hx-brand-scale));
 }
 
 @media (prefers-reduced-motion: reduce) {
