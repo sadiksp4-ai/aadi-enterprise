@@ -532,6 +532,17 @@
   mix-blend-mode: multiply;
 }
 
+/* Tramontina.png is a square canvas with the wordmark occupying only a thin
+   centre band, so it needs a larger render size plus negative margins that
+   cancel the transparent padding — proportions and centring are preserved. */
+.hx-brand-item--tramontina img {
+  height: 9rem;
+  width: auto;
+  max-width: 100%;
+  max-height: none;
+  margin: -3.9rem 0;
+}
+
 .hx-client-name {
   font-size: 0.8rem;
   font-weight: 500;
@@ -786,6 +797,12 @@
   .hx-brand-item img,
   .hx-client-item img {
     max-height: 3.35rem;
+  }
+
+  .hx-brand-item--tramontina img {
+    height: 8rem;
+    max-height: none;
+    margin: -3.5rem 0;
   }
 
   .hx-cta-inner {

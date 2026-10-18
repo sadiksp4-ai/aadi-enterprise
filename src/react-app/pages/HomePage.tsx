@@ -72,15 +72,19 @@ const CAPABILITIES = [
   },
 ];
 
-const BRANDS = [
-  { name: 'Tramontina', file: 'brand_partners/Tramontina.png' },
+const BRANDS: { name: string; file: string; className?: string }[] = [
+  {
+    name: 'Tramontina',
+    file: 'brand_partners/Tramontina.png',
+    className: 'hx-brand-item--tramontina',
+  },
   { name: 'Karcher', file: 'brand_partners/Karcher.png' },
-  { name: 'Schott Zwiesel', file: 'brand_partners/schott zwiesel.png' },
-  { name: 'LSA', file: 'brand_partners/LSA Glassware.png' },
+  { name: 'Paşabahçe', file: 'brand_partners/Pasabasche.png' },
+  { name: 'Nude Glass', file: 'brand_partners/Nude.png' },
   { name: 'Steelite', file: 'brand_partners/Steelite.png' },
-  { name: 'JVD', file: 'brand_partners/JVD.png' },
-  { name: 'Elanpro', file: 'brand_partners/Elanpro .png' },
-  { name: 'Utopia', file: 'brand_partners/Utopia.png' },
+  { name: 'Dolphy', file: 'dolphy_logo.jpg' },
+  { name: 'Ice Make', file: 'new/brand_partners/icemake.png' },
+  { name: 'Artevo', file: 'brand_partners/Art Evo.png' },
 ];
 
 const CLIENTS = [
@@ -322,7 +326,10 @@ function HomePage() {
           </div>
           <ul className="hx-brand-list" aria-label="Selected partner brands">
             {BRANDS.map((brand) => (
-              <li key={brand.name} className="hx-brand-item">
+              <li
+                key={brand.name}
+                className={`hx-brand-item${brand.className ? ` ${brand.className}` : ''}`}
+              >
                 <img
                   src={getAssetUrl(brand.file)}
                   alt={`${brand.name} logo`}
