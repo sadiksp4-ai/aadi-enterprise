@@ -149,16 +149,19 @@
           "closing": "Robot Coupe transforms your pre-preparation workflow—making it faster, more efficient, and more accurate."
         },
         {
-          "name": "100% Chef - Avant-Garde Culinary Tools",
-          "logo": "/100_chef.png",
-          "description": "100% Chef is a global leader in innovative culinary tools, molecular gastronomy equipment, and high-end presentationware. Designed for professional chefs, the brand revolutionizes plating, food styling, and modern gastronomy.",
+          "name": "Tramontina",
+          "logo": "/products/tramontina-cookware.png",
+          "brandLabel": "TRAMONTINA COOKWARE & KITCHENWARE",
+          "headline": "Professional Kitchen Essentials",
+          "description": "Tramontina offers a broad range of cookware and kitchen essentials, including stainless-steel cookware, tri-ply cookware, cast-iron pieces, knives and kitchen tools. Aadi Enterprises presents relevant Tramontina solutions for hospitality, commercial kitchens and food-service requirements.",
+          "cardDescription": "Discover Tramontina's cookware, cutlery and kitchen essentials, combining thoughtful design with practical performance for hospitality and professional food-service environments.",
           "features": [
-            "Molecular gastronomy tools & chef instruments",
-            "Artistic serving pieces, bowls & showplates",
-            "Smoke domes, pipettes, liquid nitrogen accessories",
-            "Preferred by fine dining & Michelin-star restaurants"
-          ],
-          "closing": "Chefs choose 100% Chef to bring creativity, theatre, and precision to their dishes—perfect for tasting menus and signature presentations."
+            "Cookware options across stainless steel, tri-ply and cast iron, depending on the collection",
+            "Fry pans, saucepans, casseroles and cookware sets",
+            "Kitchen knives, cutlery and practical food-preparation tools",
+            "Multiple product ranges to suit different kitchen applications",
+            "Solutions selected according to the client's operational requirements"
+          ]
         },
         {
           "name": "Atlantic Chef - Professional Chef Knives",

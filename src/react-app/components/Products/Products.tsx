@@ -9,8 +9,10 @@ import { getProductEnquiryMessage, getWhatsAppUrl } from "../../utils/whatsapp";
 interface ProductEntry {
   name: string;
   logo?: string;
+  brandLabel?: string;
   headline?: string;
   description: string;
+  cardDescription?: string;
   subDescription?: string;
   features?: string[];
   idealFor?: string[];
@@ -89,6 +91,8 @@ const ALL_PRODUCTS: CatalogProduct[] = rawCategories.flatMap((cat) =>
  *  terms like "vacuum" match records that mention them in specifications. */
 function haystack(product: CatalogProduct): string {
   const parts: string[] = [product.name, product.headline ?? "", product.description];
+  if (product.brandLabel) parts.push(product.brandLabel);
+  if (product.cardDescription) parts.push(product.cardDescription);
   if (product.subDescription) parts.push(product.subDescription);
   if (product.features) parts.push(product.features.join(" "));
   if (product.advantages) parts.push(product.advantages.join(" "));
@@ -117,6 +121,9 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
+  const cardBrand = product.brandLabel ?? (product.headline ? product.name : product.groupLabel);
+  const cardDescription = product.cardDescription ?? product.description;
+
   return (
     <article className="px-card">
       {product.logo && (
@@ -136,9 +143,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
           />
         </button>
       )}
-      <p className="px-card-brand">{product.headline ? product.name : product.groupLabel}</p>
+      <p className="px-card-brand">{cardBrand}</p>
       <h3 className="px-card-name">{product.headline ?? product.name}</h3>
-      <p className="px-card-desc">{product.description}</p>
+      <p className="px-card-desc">{cardDescription}</p>
       <div className="px-card-actions">
         <button type="button" className="px-link" onClick={onSelect}>
           View Details
