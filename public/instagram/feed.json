@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-18T20:53:36.771Z",
+  "updatedAt": "2026-10-19T04:53:51.365Z",
   "posts": [
+    {
+      "id": "18158724844452749",
+      "image": "instagram/18158724844452749.jpg",
+      "url": "https://www.instagram.com/p/DeqaonWjUJ1/",
+      "caption": "Thoughtful lighting makes a difference to the guest experience. 💡\n\nIn hospitality, the smallest design details can shape how a space feels. Zafferano Poldina Pro brings a distinctive, cordless lighting concept to restau",
+      "mediaType": "IMAGE",
+      "productType": "FEED",
+      "publishedAt": "2026-10-19T04:37:22+0000"
+    },
     {
       "id": "18358623097223380",
       "image": "instagram/18358623097223380.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "IMAGE",
       "productType": "FEED",
       "publishedAt": "2026-10-13T15:37:45+0000"
-    },
-    {
-      "id": "18105545093207923",
-      "image": "instagram/18105545093207923.jpg",
-      "url": "https://www.instagram.com/p/DeZcOfQgXgo/",
-      "caption": "Big spaces. High standards. Smarter cleaning. ✨\n\nWhen you're managing a hotel, hospital, mall or commercial facility, floor care is more than a daily task.\n\nIt's about maintaining presentation, managing time and deliveri",
-      "mediaType": "CAROUSEL_ALBUM",
-      "productType": "FEED",
-      "publishedAt": "2026-10-12T14:24:11+0000"
     }
   ]
 }
