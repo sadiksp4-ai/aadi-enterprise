@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-19T13:36:40.820Z",
+  "updatedAt": "2026-10-19T22:28:37.004Z",
   "posts": [
+    {
+      "id": "17880573696545950",
+      "image": "instagram/17880573696545950.jpg",
+      "url": "https://www.instagram.com/reel/DereDFRgB6G/",
+      "caption": "Some details don't just illuminate a space — they define its atmosphere.\n\nMeet Zafferano Poldina Pro, a cordless table lamp designed to bring refined lighting to carefully curated hospitality settings.\n\nFrom intimate res",
+      "mediaType": "VIDEO",
+      "productType": "REELS",
+      "publishedAt": "2026-10-19T14:29:19+0000"
+    },
     {
       "id": "18158724844452749",
       "image": "instagram/18158724844452749.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "CAROUSEL_ALBUM",
       "productType": "FEED",
       "publishedAt": "2026-10-15T05:47:14+0000"
-    },
-    {
-      "id": "18110691827177647",
-      "image": "instagram/18110691827177647.jpg",
-      "url": "https://www.instagram.com/p/DecJaWag8MS/",
-      "caption": "Aadi enterprises Complete hospitality Solutions \n\n#AadiEnterprises #HotelSupplies #kitchenessentials #housekeeping",
-      "mediaType": "IMAGE",
-      "productType": "FEED",
-      "publishedAt": "2026-10-13T15:37:45+0000"
     }
   ]
 }
