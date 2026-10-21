@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-21T12:01:59.139Z",
+  "updatedAt": "2026-10-21T17:22:05.814Z",
   "posts": [
+    {
+      "id": "18127200907861574",
+      "image": "instagram/18127200907861574.jpg",
+      "url": "https://www.instagram.com/p/Dewt_6_AhPh/",
+      "caption": "A little light. A little more possibility. ✨\n\nMeet Poldina Reverso Pro by Zafferano — where thoughtful design brings lighting and functionality together.\n\nMore than a table lamp, its distinctive form opens up creative po",
+      "mediaType": "IMAGE",
+      "productType": "FEED",
+      "publishedAt": "2026-10-21T15:22:04+0000"
+    },
     {
       "id": "17880573696545950",
       "image": "instagram/17880573696545950.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "VIDEO",
       "productType": "REELS",
       "publishedAt": "2026-10-16T03:05:38+0000"
-    },
-    {
-      "id": "18080094083533727",
-      "image": "instagram/18080094083533727.jpg",
-      "url": "https://www.instagram.com/p/DegPc5QgCnR/",
-      "caption": "✨ Light That Defines the Experience.\n\nThe finest hospitality spaces are remembered for how they make people feel — and lighting plays a part in every detail.\n\nDiscover Zafferano Italia — where distinctive Italian design ",
-      "mediaType": "CAROUSEL_ALBUM",
-      "productType": "FEED",
-      "publishedAt": "2026-10-15T05:47:14+0000"
     }
   ]
 }
