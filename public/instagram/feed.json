@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-26T04:58:38.488Z",
+  "updatedAt": "2026-10-26T13:18:07.231Z",
   "posts": [
+    {
+      "id": "18135460544508156",
+      "image": "instagram/18135460544508156.jpg",
+      "url": "https://www.instagram.com/p/De8utqMGItG/",
+      "caption": "A festive table is more than a beautiful spread; it's where traditions are shared, favourite recipes return, and every gathering feels a little more special.\n\nFrom the bold charm of Gradated Red to the refreshing Cactus ",
+      "mediaType": "CAROUSEL_ALBUM",
+      "productType": "FEED",
+      "publishedAt": "2026-10-26T07:19:08+0000"
+    },
     {
       "id": "18127200907861574",
       "image": "instagram/18127200907861574.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "CAROUSEL_ALBUM",
       "productType": "FEED",
       "publishedAt": "2026-10-17T07:46:03+0000"
-    },
-    {
-      "id": "18107227829149274",
-      "image": "instagram/18107227829149274.jpg",
-      "url": "https://www.instagram.com/reel/DeihnxxMzfT/",
-      "caption": "✨ One Collection. Distinctive Expressions.\n\nMeet Perpetua by Zafferano Italia — a distinctive lighting collection presented in elegant finishes, from understated black to refined gold and bold red.\n\nDesigned to make a st",
-      "mediaType": "VIDEO",
-      "productType": "REELS",
-      "publishedAt": "2026-10-16T03:05:38+0000"
     }
   ]
 }
