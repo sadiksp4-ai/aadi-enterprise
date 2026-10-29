@@ -156,30 +156,22 @@ function HomePage() {
       <section className="hx-hero">
         <div className="hx-hero-inner">
           <div className="hx-hero-copy">
-            <p className="hx-eyebrow">Aadi Enterprises</p>
+            <p className="hx-eyebrow">HOSPITALITY EQUIPMENT &amp; OPERATIONAL SOLUTIONS</p>
             <h1 className="hx-hero-title">
-              Hospitality Solutions, Curated for Better Experiences.
+              Complete Hospitality Solutions. From Kitchen to Guest Experience.
             </h1>
             <p className="hx-hero-text">
-              Aadi Enterprises partners with hotels, restaurants and institutions on
-              professional kitchen, food &amp; beverage, housekeeping, hygiene and guest
-              experience requirements — from planning and sourcing to installation and
-              after-sales support.
+              Equip your hospitality business with carefully sourced professional kitchen equipment, food and beverage service essentials, housekeeping solutions, and guest amenities — backed by expert guidance and dependable support.
             </p>
             <div className="hx-hero-actions">
               <button type="button" className="hx-btn hx-btn-primary" onClick={() => navigate('/products')}>
                 Explore Solutions
                 <ArrowRight size={17} aria-hidden="true" />
               </button>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hx-btn hx-btn-outline"
-              >
-                <MessageCircle size={17} aria-hidden="true" />
-                WhatsApp Enquiry
-              </a>
+              <button type="button" className="hx-btn hx-btn-outline" onClick={() => navigate('/contact')}>
+                Request a Quote
+                <ArrowRight size={17} aria-hidden="true" />
+              </button>
             </div>
           </div>
           <div className="hx-hero-media">
