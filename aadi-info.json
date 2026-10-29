@@ -961,6 +961,30 @@
             ]
           }
         }
+,
+        {
+          "name": "Ice Make",
+          "logo": "/products/Icemake.jpg",
+          "headline": "Commercial Refrigeration Unit",
+          "description": "Ice Make provides commercial refrigeration and cooling solutions for professional hospitality, food-service, and food-retail operations.",
+          "badge": "NEW",
+          "highlights": [
+            "Commercial Cooling Solutions",
+            "Food Storage & Preservation",
+            "Display & Merchandising",
+            "Hospitality & Food-Service Applications",
+            "Multiple Refrigeration Categories"
+          ],
+          "extraInfo": {
+            "Category": "Refrigeration & Cold Chain",
+            "Key Products": [
+              "Commercial Refrigeration Units",
+              "Freezers",
+              "Display Coolers",
+              "Ice Machines and Cold Storage Solutions"
+            ]
+          }
+        }
 ]
     },
     {

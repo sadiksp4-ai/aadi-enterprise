@@ -10,6 +10,8 @@ interface ProductEntry {
   name: string;
   logo?: string;
   brandLabel?: string;
+  badge?: string;
+  highlights?: string[];
   headline?: string;
   description: string;
   cardDescription?: string;
@@ -42,16 +44,6 @@ interface CatalogProduct extends ProductEntry {
   sourceCategoryTitle: string;
 }
 
-/**
- * Customer-facing groups mapped from the raw `aadi-info.json` taxonomy.
- * The underlying records are never modified; this only decides which pill a
- * product appears under. Two judgment calls, both documented:
- * - "Refrigeration & Cold Chain" has no raw category, so it shows Elanpro
- *   (whose record describes commercial refrigeration / minibars).
- * - "Laundry" is added because the dataset contains 4 laundry records that
- *   would otherwise be hidden; "Guest Experience" covers in-room amenities
- *   (minus Elanpro) plus the leather collection.
- */
 const GROUPS: { id: string; label: string }[] = [
   { id: "all", label: "All" },
   { id: "kitchen", label: "Kitchen" },
@@ -62,6 +54,15 @@ const GROUPS: { id: string; label: string }[] = [
   { id: "cold", label: "Refrigeration & Cold Chain" },
 ];
 
+const CATEGORY_IMAGES: Record<string, string> = {
+  kitchen: getAssetUrl("commercial_kitchen.jpg"),
+  fnb: getAssetUrl("f&b.jpg"),
+  hk: getAssetUrl("housekeeping.jpg"),
+  laundry: getAssetUrl("commercial_laundry.png"),
+  guest: getAssetUrl("housekeeping/in-room-collection.jpg"),
+  cold: getAssetUrl("elanpro.png"),
+};
+
 function groupFor(sourceId: string, name: string): { id: string; label: string } {
   if (sourceId === "commercial-kitchen") return { id: "kitchen", label: "Kitchen" };
   if (sourceId === "fnb-service") return { id: "fnb", label: "Food & Beverage" };
@@ -69,7 +70,7 @@ function groupFor(sourceId: string, name: string): { id: string; label: string }
   if (sourceId === "laundry-solutions") return { id: "laundry", label: "Laundry" };
   if (sourceId === "leather-products") return { id: "guest", label: "Guest Experience" };
   if (sourceId === "in-room-amenities") {
-    if (name === "Elanpro") return { id: "cold", label: "Refrigeration & Cold Chain" };
+    if (name === "Elanpro" || name === "Ice Make") return { id: "cold", label: "Refrigeration & Cold Chain" };
     return { id: "guest", label: "Guest Experience" };
   }
   return { id: "guest", label: "Guest Experience" };
@@ -82,13 +83,11 @@ const ALL_PRODUCTS: CatalogProduct[] = rawCategories.flatMap((cat) =>
       ...brand,
       groupId: group.id,
       groupLabel: group.label,
-      sourceCategoryTitle: cat.title,
+      sourceCategoryTitle: brand.name === "Ice Make" ? "Refrigeration & Cold Chain" : cat.title,
     };
   })
 );
 
-/** Searchable text for a product — every field comes from the dataset, so
- *  terms like "vacuum" match records that mention them in specifications. */
 function haystack(product: CatalogProduct): string {
   const parts: string[] = [product.name, product.headline ?? "", product.description];
   if (product.brandLabel) parts.push(product.brandLabel);
@@ -118,22 +117,24 @@ const BRAND_OPTIONS: string[] = [...new Set(ALL_PRODUCTS.map((p) => p.name))].so
 interface ProductCardProps {
   product: CatalogProduct;
   onSelect: () => void;
+  index: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, index }) => {
   const cardBrand = product.brandLabel ?? (product.headline ? product.name : product.groupLabel);
   const cardDescription = product.cardDescription ?? product.description;
 
   return (
-    <article className="px-card">
+    <article className="px-card" style={{ animationDelay: `${Math.min(index, 12) * 0.04}s` }}>
       {product.logo && (
         <button
           type="button"
           className="px-card-media"
           onClick={onSelect}
-          aria-label={`View details for ${product.name}`}
+          aria-label={`View details for ${product.headline ?? product.name}`}
           tabIndex={-1}
         >
+          {product.badge && <span className="px-card-badge">{product.badge}</span>}
           <img
             src={getAssetUrl(product.logo)}
             alt={`${product.name} product image`}
@@ -222,8 +223,8 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
         </button>
 
         <p className="px-eyebrow">{product.groupLabel}</p>
-        <h2 className="px-sheet-title">{product.name}</h2>
-        {product.headline && <p className="px-sheet-headline">{product.headline}</p>}
+        <h2 className="px-sheet-title">{product.headline ?? product.name}</h2>
+        {product.headline && <p className="px-sheet-headline">{product.name}</p>}
         {product.logo && (
           <img
             src={getAssetUrl(product.logo)}
@@ -256,7 +257,7 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
 
         {visibleFeatures && visibleFeatures.length > 0 && (
           <section className="px-spec" aria-label="Key features">
-            <h3 className="px-spec-title">Key Features</h3>
+            <h3 className="px-spec-title">Key features</h3>
             <ul className="px-spec-list">
               {visibleFeatures.map((feature, idx) => (
                 <li key={idx}>{feature}</li>
@@ -274,6 +275,17 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
                   : `Show all ${product.features!.length} features`}
               </button>
             )}
+          </section>
+        )}
+
+        {product.highlights && product.highlights.length > 0 && (
+          <section className="px-spec" aria-label="Key highlights">
+            <h3 className="px-spec-title">Key highlights</h3>
+            <ul className="px-spec-list">
+              {product.highlights.map((highlight, idx) => (
+                <li key={idx}>{highlight}</li>
+              ))}
+            </ul>
           </section>
         )}
 
@@ -306,7 +318,7 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
 
         {product.extraInfo && Object.keys(product.extraInfo).length > 0 && (
           <section className="px-spec" aria-label="Product information">
-            <h3 className="px-spec-title">Product Information</h3>
+            <h3 className="px-spec-title">Product information</h3>
             <dl className="px-dl">
               <div className="px-dl-row">
                 <dt>Category</dt>
@@ -324,7 +336,7 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
 
         {product.idealFor && product.idealFor.length > 0 && (
           <section className="px-spec" aria-label="Ideal for">
-            <h3 className="px-spec-title">Ideal For</h3>
+            <h3 className="px-spec-title">Ideal for</h3>
             <ul className="px-tag-list">
               {product.idealFor.map((tag, idx) => (
                 <li key={idx} className="px-tag">
@@ -388,123 +400,145 @@ const Products: React.FC = () => {
     setQuery("");
   };
 
+  const setGroup = (groupId: string) => {
+    const next = new URLSearchParams(searchParams);
+    if (groupId === "all") next.delete("group");
+    else next.set("group", groupId);
+    setSearchParams(next, { replace: true });
+  };
+
   return (
     <div className="px">
-      <header className="px-header">
-        <p className="px-eyebrow">Products</p>
-        <h1 className="px-title">
-          Hospitality equipment, supplies and solutions for professional properties.
-        </h1>
-        <p className="px-subtitle">
-          Explore products across kitchen, food &amp; beverage, housekeeping, hygiene,
-          refrigeration and guest experience.
-        </p>
+      <header className="px-hero">
+        <div className="px-hero-inner">
+          <p className="px-eyebrow">PRODUCTS & SOLUTIONS</p>
+          <h1 className="px-title">
+            Hospitality equipment, supplies and solutions for professional properties.
+          </h1>
+          <p className="px-subtitle">
+            Explore professional equipment and carefully selected essentials for
+            kitchens, food and beverage service, housekeeping, hygiene,
+            refrigeration and guest experience.
+          </p>
+          <label className="px-search">
+            <Search size={18} aria-hidden="true" className="px-search-icon" />
+            <span className="px-visually-hidden">Search products, brands or product codes</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search products, brands or product codes"
+              aria-label="Search products, brands or product codes"
+            />
+            {query && (
+              <button
+                type="button"
+                className="px-search-clear"
+                onClick={() => setQuery("")}
+                aria-label="Clear search"
+              >
+                <X size={15} aria-hidden="true" />
+              </button>
+            )}
+          </label>
+        </div>
       </header>
 
-      <div
-        className="px-groups"
-        role="group"
-        aria-label="Filter products by category"
-      >
-        {GROUPS.map((group) => {
-          const count =
-            group.id === "all"
-              ? ALL_PRODUCTS.length
-              : ALL_PRODUCTS.filter((p) => p.groupId === group.id).length;
-          return (
-            <button
-              key={group.id}
-              type="button"
-              className={`px-pill${activeGroupId === group.id ? " active" : ""}`}
-              aria-pressed={activeGroupId === group.id}
-              onClick={() => {
-                const next = new URLSearchParams(searchParams);
-                if (group.id === "all") next.delete("group");
-                else next.set("group", group.id);
-                setSearchParams(next, { replace: true });
-              }}
-            >
-              {group.label}
-              <span className="px-pill-count" aria-hidden="true">
-                {count}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+      <section className="px-categories" aria-labelledby="px-categories-title">
+        <div className="px-section-inner">
+          <div className="px-categories-head">
+            <h2 id="px-categories-title" className="px-categories-title">Browse by category</h2>
+            <p className="px-categories-text">
+              Select a category to filter the catalogue. Counts reflect the current product data.
+            </p>
+          </div>
+          <div className="px-category-grid">
+            {GROUPS.map((group) => {
+              const count =
+                group.id === "all"
+                  ? ALL_PRODUCTS.length
+                  : ALL_PRODUCTS.filter((p) => p.groupId === group.id).length;
+              return (
+                <button
+                  key={group.id}
+                  type="button"
+                  className={`px-category-tile${activeGroupId === group.id ? " is-active" : ""}`}
+                  aria-pressed={activeGroupId === group.id}
+                  onClick={() => setGroup(group.id)}
+                >
+                  {group.id !== "all" && (
+                    <img
+                      src={CATEGORY_IMAGES[group.id]}
+                      alt=""
+                      aria-hidden="true"
+                      className="px-category-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <span className="px-category-label">{group.label}</span>
+                  <span className="px-category-count">{count}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-      <div className="px-toolbar">
-        <label className="px-search">
-          <Search size={17} aria-hidden="true" className="px-search-icon" />
-          <span className="px-visually-hidden">Search products, brands or product codes</span>
-          <input
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search products, brands or product codes…"
-            aria-label="Search products, brands or product codes"
-          />
-          {query && (
-            <button
-              type="button"
-              className="px-search-clear"
-              onClick={() => setQuery("")}
-              aria-label="Clear search"
-            >
-              <X size={15} aria-hidden="true" />
-            </button>
+      <section className="px-toolbar-section" aria-labelledby="px-results-title">
+        <div className="px-section-inner">
+          <div className="px-toolbar">
+            <label className="px-brand-filter">
+              <span className="px-visually-hidden">Filter by brand</span>
+              <select
+                value={activeBrand}
+                onChange={(event) => setActiveBrand(event.target.value)}
+                aria-label="Filter by brand"
+              >
+                <option value="all">All brands</option>
+                {BRAND_OPTIONS.map((brand) => (
+                  <option key={brand} value={brand}>
+                    {brand}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            {filtersActive && (
+              <button type="button" className="px-link" onClick={clearFilters}>
+                Clear filters
+                <X size={14} aria-hidden="true" />
+              </button>
+            )}
+
+            <p id="px-results-title" className="px-count" role="status" aria-live="polite">
+              {filtered.length} {filtered.length === 1 ? "product" : "products"}
+              {filtersActive && " found"}
+            </p>
+          </div>
+
+          {filtered.length === 0 ? (
+            <div className="px-empty">
+              <h2 className="px-empty-title">No products found</h2>
+              <p className="px-empty-text">Try another product name, brand or category.</p>
+              <button type="button" className="px-btn px-btn-outline" onClick={clearFilters}>
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            <div className="px-grid">
+              {filtered.map((product, index) => (
+                <ProductCard
+                  key={`${product.groupId}-${product.name}-${product.headline ?? ""}`}
+                  product={product}
+                  index={index}
+                  onSelect={() => setSelected(product)}
+                />
+              ))}
+            </div>
           )}
-        </label>
-
-        <label className="px-brand-filter">
-          <span className="px-visually-hidden">Filter by brand</span>
-          <select
-            value={activeBrand}
-            onChange={(event) => setActiveBrand(event.target.value)}
-            aria-label="Filter by brand"
-          >
-            <option value="all">All brands</option>
-            {BRAND_OPTIONS.map((brand) => (
-              <option key={brand} value={brand}>
-                {brand}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <div className="px-meta">
-        <p className="px-count" role="status" aria-live="polite">
-          {filtered.length} {filtered.length === 1 ? "product" : "products"}
-          {filtersActive && " found"}
-        </p>
-        {filtersActive && (
-          <button type="button" className="px-link" onClick={clearFilters}>
-            Clear filters
-            <X size={14} aria-hidden="true" />
-          </button>
-        )}
-      </div>
-
-      {filtered.length === 0 ? (
-        <div className="px-empty">
-          <h2 className="px-empty-title">No products found</h2>
-          <p className="px-empty-text">Try another product name, brand or category.</p>
-          <button type="button" className="px-btn px-btn-outline" onClick={clearFilters}>
-            Clear filters
-          </button>
         </div>
-      ) : (
-        <div className="px-grid">
-          {filtered.map((product) => (
-            <ProductCard
-              key={`${product.groupId}-${product.name}-${product.headline ?? ""}`}
-              product={product}
-              onSelect={() => setSelected(product)}
-            />
-          ))}
-        </div>
-      )}
+      </section>
 
       <ProductSheet product={selected} onClose={() => setSelected(null)} />
     </div>
