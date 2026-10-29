@@ -928,7 +928,40 @@
             ]
           }
         }
-      ]
+      ,
+        {
+          "name": "Zafferano",
+          "logo": "/products/Pina Pro XXL_ Iconic Floor Lamp.png",
+          "headline": "Pina Pro",
+          "description": "Zafferano Pina Pro - where distinctive Italian design meets warm, cordless illumination for hospitality tables and guest spaces.",
+          "features": [
+            "Cordless portable lamp",
+            "Distinctive Italian design",
+            "Warm ambient illumination"
+          ],
+          "extraInfo": {
+            "Key Products": [
+              "Pina Pro cordless table lamp"
+            ]
+          }
+        },
+        {
+          "name": "Zafferano",
+          "logo": "/new/home-hero/03-zafferano-hospitality-lighting.png",
+          "headline": "Poldina Pro",
+          "description": "Zafferano Poldina Pro, a cordless table lamp designed to bring refined lighting to carefully curated hospitality settings.",
+          "features": [
+            "Cordless portable lamp",
+            "Refined hospitality lighting",
+            "Portable table lamp"
+          ],
+          "extraInfo": {
+            "Key Products": [
+              "Poldina Pro cordless table lamp"
+            ]
+          }
+        }
+]
     },
     {
       "id": "leather-products",

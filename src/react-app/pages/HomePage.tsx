@@ -20,32 +20,38 @@ import {
 
 const SOLUTIONS = [
   {
-    title: 'Professional Kitchen',
+    title: 'Commercial Kitchen Solutions',
     description:
-      'Cooking, refrigeration, warewashing and food-preparation equipment for demanding commercial kitchens.',
+      'Professional equipment for food preparation, cooking, and efficient commercial kitchen operations.',
     image: getAssetUrl('commercial_kitchen.jpg'),
-    alt: 'Commercial kitchen equipped for professional hospitality operations',
+    alt: 'Professional commercial kitchen equipment in a hospitality setting',
+    group: 'kitchen',
   },
   {
-    title: 'Food & Beverage',
+    title: 'Food & Beverage Service',
     description:
-      'Tableware, glassware, barware and service essentials that shape the dining experience.',
-    image: getAssetUrl('f&b.jpg'),
-    alt: 'Food and beverage service setup for hospitality dining',
+      'Tableware, glassware, cutlery, buffet essentials, and barware for exceptional food and beverage presentation.',
+    image: getAssetUrl('F&B/tableware-and-buffet-ware.jpg'),
+    alt: 'Refined hospitality table setting with premium tableware and glassware',
+    group: 'fnb',
   },
   {
     title: 'Housekeeping & Hygiene',
     description:
-      'Professional cleaning systems, laundry solutions and hygiene essentials for spotless properties.',
-    image: getAssetUrl('housekeeping.jpg'),
-    alt: 'Housekeeping team preparing a hotel room',
+      'Professional cleaning equipment and essential solutions for maintaining clean, efficient hospitality environments.',
+    image: getAssetUrl('housekeeping/housekeeping-essentials.jpg'),
+    alt: 'Commercial cleaning equipment in a professional hospitality facility',
+    group: 'hk',
   },
   {
-    title: 'Guest Experience',
+    title: 'Guest Room & In-Room Amenities',
     description:
-      'In-room amenities and thoughtful details that guests remember long after checkout.',
-    image: getAssetUrl('housekeeping/guest-comfort-essentials.jpg'),
-    alt: 'In-room guest amenities and comfort essentials',
+      'Carefully selected guest amenities and room essentials that enhance the hotel guest experience, including premium portable designer lighting and guest-room ambience.',
+    image: getAssetUrl('new/home-hero/01-zafferano-lamp.png'),
+    alt: 'Zafferano hospitality table lamp lighting a restaurant table',
+    group: 'guest',
+    brandLogo: 'brand_partners/zafferano.png',
+    brandName: 'Zafferano',
   },
 ];
 
@@ -218,6 +224,62 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Solutions */}
+      <section className="hx-solutions" aria-labelledby="hx-solutions-title">
+        <div className="hx-section-inner">
+          <div className="hx-section-head">
+            <p className="hx-eyebrow">OUR EXPERTISE</p>
+            <h2 id="hx-solutions-title" className="hx-section-title">
+              Explore Our Solutions
+            </h2>
+            <p className="hx-section-text">
+              Discover professional equipment and thoughtfully selected essentials for every stage of hospitality operations, from kitchen preparation and food service to housekeeping and guest comfort.
+            </p>
+          </div>
+          <div className="hx-solutions-grid">
+            {SOLUTIONS.map((solution) => (
+              <article key={solution.title} className="hx-solution-card">
+                <button
+                  type="button"
+                  className="hx-solution-media"
+                  onClick={() => navigate(`/products?group=${solution.group}`)}
+                  aria-label={`Explore ${solution.title} solutions`}
+                  tabIndex={-1}
+                >
+                  <img
+                    src={solution.image}
+                    alt={solution.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+                <h3 className="hx-solution-title">{solution.title}</h3>
+                <p className="hx-solution-text">{solution.description}</p>
+                {solution.brandLogo && (
+                  <div className="hx-solution-brand">
+                    <img
+                      src={getAssetUrl(solution.brandLogo)}
+                      alt={`${solution.brandName ?? 'Brand'} logo`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>{solution.brandName}</span>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className="hx-link"
+                  onClick={() => navigate(`/products?group=${solution.group}`)}
+                >
+                  Explore
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </button>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Introduction */}
       <section className="hx-intro">
         <div className="hx-intro-inner">
@@ -242,48 +304,6 @@ function HomePage() {
               Learn more about us
               <ArrowRight size={16} aria-hidden="true" />
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions */}
-      <section className="hx-solutions" aria-labelledby="hx-solutions-title">
-        <div className="hx-section-inner">
-          <div className="hx-section-head">
-            <p className="hx-eyebrow">What we do</p>
-            <h2 id="hx-solutions-title" className="hx-section-title">
-              Solutions for every corner of your property
-            </h2>
-          </div>
-          <div className="hx-solutions-grid">
-            {SOLUTIONS.map((solution) => (
-              <article key={solution.title} className="hx-solution-card">
-                <button
-                  type="button"
-                  className="hx-solution-media"
-                  onClick={() => navigate('/products')}
-                  aria-label={`Explore ${solution.title} solutions`}
-                  tabIndex={-1}
-                >
-                  <img
-                    src={solution.image}
-                    alt={solution.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </button>
-                <h3 className="hx-solution-title">{solution.title}</h3>
-                <p className="hx-solution-text">{solution.description}</p>
-                <button
-                  type="button"
-                  className="hx-link"
-                  onClick={() => navigate('/products')}
-                >
-                  Explore
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </button>
-              </article>
-            ))}
           </div>
         </div>
       </section>

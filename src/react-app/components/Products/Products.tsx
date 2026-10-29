@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowRight, MessageCircle, Search, X } from "lucide-react";
 import "./Products.css";
 import data from "../../../../aadi-info.json";
@@ -360,7 +360,10 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
 };
 
 const Products: React.FC = () => {
-  const [activeGroupId, setActiveGroupId] = useState<string>("all");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeGroupId = GROUPS.some((group) => group.id === searchParams.get("group"))
+    ? (searchParams.get("group") as string)
+    : "all";
   const [query, setQuery] = useState<string>("");
   const [activeBrand, setActiveBrand] = useState<string>("all");
   const [selected, setSelected] = useState<CatalogProduct | null>(null);
@@ -378,7 +381,9 @@ const Products: React.FC = () => {
   const filtersActive = activeGroupId !== "all" || activeBrand !== "all" || query.trim() !== "";
 
   const clearFilters = () => {
-    setActiveGroupId("all");
+    const next = new URLSearchParams(searchParams);
+    next.delete("group");
+    setSearchParams(next, { replace: true });
     setActiveBrand("all");
     setQuery("");
   };
@@ -412,7 +417,12 @@ const Products: React.FC = () => {
               type="button"
               className={`px-pill${activeGroupId === group.id ? " active" : ""}`}
               aria-pressed={activeGroupId === group.id}
-              onClick={() => setActiveGroupId(group.id)}
+              onClick={() => {
+                const next = new URLSearchParams(searchParams);
+                if (group.id === "all") next.delete("group");
+                else next.set("group", group.id);
+                setSearchParams(next, { replace: true });
+              }}
             >
               {group.label}
               <span className="px-pill-count" aria-hidden="true">
@@ -488,7 +498,7 @@ const Products: React.FC = () => {
         <div className="px-grid">
           {filtered.map((product) => (
             <ProductCard
-              key={`${product.groupId}-${product.name}`}
+              key={`${product.groupId}-${product.name}-${product.headline ?? ""}`}
               product={product}
               onSelect={() => setSelected(product)}
             />
