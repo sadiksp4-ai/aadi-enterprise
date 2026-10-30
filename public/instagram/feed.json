@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-30T06:00:26.683Z",
+  "updatedAt": "2026-10-30T13:10:58.803Z",
   "posts": [
+    {
+      "id": "17954426130297851",
+      "image": "instagram/17954426130297851.jpg",
+      "url": "https://www.instagram.com/p/DfG7tqxiRxi/",
+      "caption": "Built for professional kitchens. ✨\n\nDiscover Tramontina Aeion — tri-ply stainless-steel cookware designed for hotels, restaurants and HORECA kitchens.\n\n✔️ Even heat distribution \n✔️ NSF certified \n✔️ 5-year warranty \n\nEx",
+      "mediaType": "CAROUSEL_ALBUM",
+      "productType": "FEED",
+      "publishedAt": "2026-10-30T06:25:08+0000"
+    },
     {
       "id": "18108762350644655",
       "image": "instagram/18108762350644655.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "IMAGE",
       "productType": "FEED",
       "publishedAt": "2026-10-19T04:37:22+0000"
-    },
-    {
-      "id": "18358623097223380",
-      "image": "instagram/18358623097223380.jpg",
-      "url": "https://www.instagram.com/reel/DelqZjkMkYk/",
-      "caption": "Light that transforms the atmosphere.\n\nMeet Zafferano Pina Pro — where distinctive Italian design meets warm, cordless illumination.\n\nFrom intimate restaurant tables to elegant hotel lounges and outdoor terraces, Pina Pr",
-      "mediaType": "VIDEO",
-      "productType": "REELS",
-      "publishedAt": "2026-10-17T08:19:08+0000"
     }
   ]
 }
