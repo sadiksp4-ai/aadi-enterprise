@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-10-30T22:28:56.041Z",
+  "updatedAt": "2026-10-31T05:55:48.559Z",
   "posts": [
+    {
+      "id": "17934841476410012",
+      "image": "instagram/17934841476410012.jpg",
+      "url": "https://www.instagram.com/reel/DfJcouIgbUv/",
+      "caption": "Happy Halloween 🎃👻 \n\n#halloween #ınstagramreel #hotelsandresorts \n#AadiEnterprises",
+      "mediaType": "VIDEO",
+      "productType": "REELS",
+      "publishedAt": "2026-10-31T05:52:10+0000"
+    },
     {
       "id": "17954426130297851",
       "image": "instagram/17954426130297851.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "VIDEO",
       "productType": "REELS",
       "publishedAt": "2026-10-19T14:29:19+0000"
-    },
-    {
-      "id": "18158724844452749",
-      "image": "instagram/18158724844452749.jpg",
-      "url": "https://www.instagram.com/p/DeqaonWjUJ1/",
-      "caption": "Thoughtful lighting makes a difference to the guest experience. 💡\n\nIn hospitality, the smallest design details can shape how a space feels. Zafferano Poldina Pro brings a distinctive, cordless lighting concept to restau",
-      "mediaType": "IMAGE",
-      "productType": "FEED",
-      "publishedAt": "2026-10-19T04:37:22+0000"
     }
   ]
 }
