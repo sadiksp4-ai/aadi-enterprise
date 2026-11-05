@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-11-05T06:59:53.320Z",
+  "updatedAt": "2026-11-05T20:06:10.139Z",
   "posts": [
+    {
+      "id": "18132080665837294",
+      "image": "instagram/18132080665837294.jpg",
+      "url": "https://www.instagram.com/p/DfW8ih5DeLf/",
+      "caption": "Every detail makes a difference. ✨\n\nFrom thoughtfully selected crockery to elegant glassware and refined cutlery, create a table setting that elevates the dining experience.\n\nExplore hospitality tableware solutions with ",
+      "mediaType": "CAROUSEL_ALBUM",
+      "productType": "FEED",
+      "publishedAt": "2026-11-05T11:40:12+0000"
+    },
     {
       "id": "17934841476410012",
       "image": "instagram/17934841476410012.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "IMAGE",
       "productType": "FEED",
       "publishedAt": "2026-10-21T15:22:04+0000"
-    },
-    {
-      "id": "17880573696545950",
-      "image": "instagram/17880573696545950.jpg",
-      "url": "https://www.instagram.com/reel/DereDFRgB6G/",
-      "caption": "Some details don't just illuminate a space — they define its atmosphere.\n\nMeet Zafferano Poldina Pro, a cordless table lamp designed to bring refined lighting to carefully curated hospitality settings.\n\nFrom intimate res",
-      "mediaType": "VIDEO",
-      "productType": "REELS",
-      "publishedAt": "2026-10-19T14:29:19+0000"
     }
   ]
 }
