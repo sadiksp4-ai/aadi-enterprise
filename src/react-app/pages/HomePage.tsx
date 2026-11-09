@@ -149,11 +149,11 @@ const caseStudies = [
 
 const partnerBrands = [
   { name: 'Tramontina', logo: 'assets/brands/tramontina.png' },
-  { name: 'Zafferano', logo: 'assets/brands/zafferano.png' },
+  { name: 'Zafferano', logo: 'new/brand_partners/Zafferano_New.jpg' },
   { name: 'Kärcher', logo: 'assets/brands/karcher.png' },
   { name: 'Steelite', logo: 'assets/brands/steelite.png' },
   { name: 'Paşabahçe', logo: 'assets/brands/pasabahce.png' },
-  { name: 'Artevo', logo: 'assets/brands/artevo.png' },
+  { name: 'Artevo', logo: 'new/brand_partners/Artevo_New.png' },
   { name: 'Dolphy', logo: 'assets/brands/dolphy.png' },
   { name: 'Winterhalter', logo: 'assets/brands/winterhalter.png' },
 ];
@@ -441,7 +441,7 @@ function HomePage() {
                 <img
                   src={getAssetUrl(brand.logo)}
                   alt={brand.name}
-                  className="max-h-10 sm:max-h-12 w-auto max-w-[80%] object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="max-h-10 sm:max-h-12 w-auto max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
                 />
