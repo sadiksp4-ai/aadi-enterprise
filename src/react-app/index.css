@@ -1,30 +1,29 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
     /* Typography */
-    --font-primary: "Cormorant Garamond", serif;
-    --font-secondary: "Jost", sans-serif;
+    --font-primary: "Cormorant Garamond", Georgia, serif;
+    --font-secondary: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-    /* Colors - Enhanced Luxury Palette */
-    --primary-gold: #d4af7a;
-    --primary-gold-light: #e6c99a;
-    --primary-gold-dark: #b89960;
-    --text-primary: #f5f5f5;
-    --text-secondary: #c0c0c0;
-    --text-muted: #8a8a8a;
-    --bg-primary: #0a0f18;
-    --bg-secondary: #111827;
-    --bg-elevated: #1a2332;
+    /* Legacy aliases retained for the older shared components. */
+    --primary-gold: #0C9990;
+    --primary-gold-light: #0C9990;
+    --primary-gold-dark: #087F78;
+    --text-primary: #F3EFE5;
+    --text-secondary: #C9D3D0;
+    --text-muted: #96A6A2;
+    --bg-primary: #050909;
+    --bg-secondary: #082321;
+    --bg-elevated: #082321;
 
     /* Gradients */
-    --gradient-gold: linear-gradient(135deg, #d4af7a 0%, #b89960 100%);
-    --gradient-dark: linear-gradient(180deg, #0a0f18 0%, #111827 100%);
-    --gradient-overlay: linear-gradient(180deg, rgba(10, 15, 24, 0) 0%, rgba(10, 15, 24, 0.8) 100%);
+    --gradient-gold: linear-gradient(135deg, #0C9990 0%, #087F78 100%);
+    --gradient-dark: linear-gradient(180deg, #050909 0%, #082321 100%);
+    --gradient-overlay: linear-gradient(180deg, rgba(5, 9, 9, 0) 0%, rgba(5, 9, 9, 0.85) 100%);
 
     /* Shadows - Layered for Depth */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -62,54 +61,58 @@
     --text-color: var(--text-primary);
     --bg-color: var(--bg-primary);
 
-    /* V2 Premium Hospitality System (light editorial).
-       NOTE: The dark V1 tokens above are intentionally preserved — the
-       Clients, Partners, Products, About and Contact experiences still
-       reference them and must render unchanged. New work uses the tokens
-       below. */
-    --surface: #F7F5F0;
-    --surface-2: #F0EEE8;
-    --ink: #171717;
-    --ink-2: #57534E;
-    --ink-3: #6F6A64;
-    --accent: #B8945B;
-    --accent-deep: #8A713D;
-    --line: #E4E0D6;
-    --card: #FFFFFF;
+    /* V2 Hospitality System — approved Stage 2 dark palette.
+       Six approved tokens, retained exactly:
+       background #050909 · background-secondary #082321
+       accent #087F78 · accent-hover #0C9990
+       foreground #F3EFE5 · border #263432 */
+    --background: #050909;
+    --background-secondary: #082321;
+    --accent: #087F78;
+    --accent-hover: #0C9990;
+    --foreground: #F3EFE5;
+    --border: #263432;
+
+    /* Component aliases mapped to the approved palette. */
+    --surface: var(--background);
+    --surface-2: var(--background-secondary);
+    --ink: var(--foreground);
+    --ink-2: #C9D3D0;
+    --ink-3: #96A6A2;
+    --accent-deep: var(--accent-hover);
+    --line: var(--border);
+    --card: var(--background-secondary);
     --content-max: 76rem;
 
     /* Consistent spacing system */
     --section-pad: clamp(4.5rem, 8vw, 7.5rem);
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
+    --card-foreground: var(--foreground);
+    --popover: var(--background-secondary);
+    --popover-foreground: var(--foreground);
+    --primary: var(--accent);
+    --primary-foreground: var(--foreground);
+    --secondary: var(--background-secondary);
+    --secondary-foreground: var(--foreground);
+    --muted: #0B1413;
+    --muted-foreground: #96A6A2;
+    --accent-foreground: var(--foreground);
+    --destructive: #D96B63;
+    --input: var(--border);
+    --ring: var(--accent-hover);
+    --chart-1: #0C9990;
+    --chart-2: #087F78;
+    --chart-3: #F3EFE5;
+    --chart-4: #96A6A2;
+    --chart-5: #263432;
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar: var(--background-secondary);
+    --sidebar-foreground: var(--foreground);
+    --sidebar-primary: var(--accent);
+    --sidebar-primary-foreground: var(--foreground);
+    --sidebar-accent: #0B1413;
+    --sidebar-accent-foreground: var(--foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--accent-hover);
 }
 
 html {
@@ -121,8 +124,8 @@ body {
     font-family: var(--font-secondary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: var(--surface);
-    color: var(--text-primary);
+    background: var(--background);
+    color: var(--foreground);
     line-height: 1.6;
     letter-spacing: 0.01em;
 }
@@ -134,46 +137,46 @@ body {
 
 /* Visible keyboard focus (V2 accessibility baseline) */
 :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-hover);
     outline-offset: 3px;
     border-radius: 2px;
 }
 
-/* Custom Scrollbar for Luxury Feel */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--surface-2);
-    border-left: 1px solid var(--line);
+    background: var(--background);
+    border-left: 1px solid var(--border);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--primary-gold-dark) 0%, var(--primary-gold) 100%);
+    background: var(--border);
     border-radius: 6px;
-    border: 2px solid var(--bg-primary);
+    border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+    background: var(--accent);
 }
 
 /* Firefox Scrollbar */
 * {
     scrollbar-width: thin;
-    scrollbar-color: var(--primary-gold) var(--bg-primary);
+    scrollbar-color: var(--border) var(--background);
 }
 
 /* Selection Styling */
 ::selection {
-    background: var(--primary-gold);
-    color: var(--bg-primary);
+    background: var(--accent);
+    color: var(--foreground);
 }
 
 ::-moz-selection {
-    background: var(--primary-gold);
-    color: var(--bg-primary);
+    background: var(--accent);
+    color: var(--foreground);
 }
 
 /* Global Mobile Optimizations */
@@ -216,8 +219,8 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-heading: var(--font-primary);
+    --font-sans: var(--font-secondary);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -253,7 +256,7 @@ h1, h2, h3, h4, h5, h6, p {
     --color-surface: var(--surface);
     --color-surface-hover: var(--surface-2);
     --color-surface-raised: var(--surface-2);
-    --color-border-hover: #D6CFC0;
+    --color-border-hover: var(--accent-hover);
     --color-text-primary: var(--ink);
     --color-text-secondary: var(--ink-2);
     --color-text-muted: var(--ink-3);
@@ -277,37 +280,37 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --background: #050909;
+    --foreground: #F3EFE5;
+    --card: #082321;
+    --card-foreground: #F3EFE5;
+    --popover: #082321;
+    --popover-foreground: #F3EFE5;
+    --primary: #087F78;
+    --primary-foreground: #F3EFE5;
+    --secondary: #082321;
+    --secondary-foreground: #F3EFE5;
+    --muted: #0B1413;
+    --muted-foreground: #96A6A2;
+    --accent: #0C9990;
+    --accent-foreground: #F3EFE5;
+    --destructive: #D96B63;
+    --border: #263432;
+    --input: #263432;
+    --ring: #0C9990;
+    --chart-1: #0C9990;
+    --chart-2: #087F78;
+    --chart-3: #F3EFE5;
+    --chart-4: #96A6A2;
+    --chart-5: #263432;
+    --sidebar: #082321;
+    --sidebar-foreground: #F3EFE5;
+    --sidebar-primary: #087F78;
+    --sidebar-primary-foreground: #F3EFE5;
+    --sidebar-accent: #0B1413;
+    --sidebar-accent-foreground: #F3EFE5;
+    --sidebar-border: #263432;
+    --sidebar-ring: #0C9990;
 }
 
 @layer base {
