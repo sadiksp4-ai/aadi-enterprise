@@ -198,13 +198,13 @@ function HomePage() {
 
   return (
     <div
-      className="hx bg-[#0a1412] text-white"
-      style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+      className="hx bg-[#080808] text-white"
+      style={{ backgroundColor: '#080808', color: '#ffffff' }}
     >
       {/* Cinematic hero */}
       <section
-        className="hx-hero bg-[#0a1412] text-white"
-        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        className="hx-hero bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
         aria-label="Aadi Enterprises hospitality solutions"
       >
         <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -222,7 +222,7 @@ function HomePage() {
             <source src="/videos/hero-hospitality.mp4" type="video/mp4" />
           </video>
           {/* Dark cinematic vignette overlay so white headline text remains legible */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1412]/80 via-[#0a1412]/60 to-[#0a1412]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/80 via-[#080808]/60 to-[#080808]" />
         </div>
         <div className="hx-hero-inner">
           <div className="hx-hero-copy">
@@ -258,8 +258,8 @@ function HomePage() {
 
       {/* Solution areas */}
       <section
-        className="hx-solutions bg-[#0a1412] text-white"
-        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        className="hx-solutions bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
         aria-labelledby="hx-solutions-title"
       >
         <div className="hx-solutions-inner">
@@ -277,8 +277,8 @@ function HomePage() {
             {solutionsData.map((solution) => (
               <li
                 key={solution.id}
-                className="hx-solution-card bg-[#0d1614] text-white border border-white/10"
-                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+                className="hx-solution-card bg-[#121214] text-white border border-white/10"
+                style={{ backgroundColor: '#121214', color: '#ffffff' }}
               >
                 <Link
                   to={solution.href}
@@ -314,8 +314,8 @@ function HomePage() {
 
       {/* Featured Zafferano — large image-led split layout */}
       <section
-        className="hx-feature bg-[#0a1412] text-white"
-        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        className="hx-feature bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
         aria-labelledby="hx-feature-title"
       >
         <div className="hx-feature-inner">
@@ -350,8 +350,8 @@ function HomePage() {
 
       {/* Capabilities — editorial layout */}
       <section
-        className="hx-capabilities bg-[#0a1412] text-white"
-        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        className="hx-capabilities bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
         aria-labelledby="hx-capabilities-title"
       >
         <div className="hx-section-inner">
@@ -369,8 +369,8 @@ function HomePage() {
             {CAPABILITIES.map(({ icon: Icon, title, description }) => (
               <li
                 key={title}
-                className="hx-capability group flex items-start gap-4 p-5 rounded-xl border border-white/10 bg-[#0d1614] transition-all duration-300 hover:border-teal-500/30 hover:bg-[#111e1a]"
-                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+                className="hx-capability group flex items-start gap-4 p-5 rounded-xl border border-white/10 bg-[#121214] transition-all duration-300 hover:border-teal-500/30 hover:bg-[#1a1a1e]"
+                style={{ backgroundColor: '#121214', color: '#ffffff' }}
               >
                 <span
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-teal-500/20 bg-teal-500/10 text-teal-400"
@@ -392,8 +392,8 @@ function HomePage() {
 
       {/* Case studies — balanced B2B installation grid */}
       <section
-        className="hx-cases bg-[#0a1412] text-white"
-        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        className="hx-cases bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
         aria-labelledby="hx-cases-title"
       >
         <div className="hx-cases-inner">
@@ -412,8 +412,8 @@ function HomePage() {
             {caseStudies.map((project) => (
               <article
                 key={project.id}
-                className="hx-case-card bg-[#0d1614] text-white border border-white/10"
-                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+                className="hx-case-card bg-[#121214] text-white border border-white/10"
+                style={{ backgroundColor: '#121214', color: '#ffffff' }}
               >
                 <div className="hx-case-media">
                   <img
@@ -444,36 +444,38 @@ function HomePage() {
 
       {/* Brand partners — unified monochrome tile grid */}
       <section
-        className="hx-brands bg-[#0a1412] text-white"
-        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        className="hx-brands bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
         aria-labelledby="hx-brands-title"
       >
         <div className="hx-brands-inner">
-          <header className="hx-brands-head">
-            <p className="hx-brands-eyebrow">PARTNERS &amp; AUTHORIZED DISTRIBUTION</p>
-            <h2 id="hx-brands-title" className="hx-brands-title">
-              Engineered for Enterprise Reliability
-            </h2>
-            <p className="hx-brands-subtitle">
-              Authorized distribution, sales, and service partners for world-leading
-              hospitality and industrial equipment brands.
+          <header className="hx-brands-head text-center">
+            <span className="font-mono text-xs uppercase tracking-wider text-teal-400">
+              CURATED BRAND ECOSYSTEM
+            </span>
+            <h3
+              id="hx-brands-title"
+              className="text-3xl md:text-4xl font-light text-white tracking-tight mt-1"
+            >
+              Premium Brands We Supply &amp; Support
+            </h3>
+            <p className="text-zinc-400 text-sm max-w-2xl mx-auto text-center mt-2 mb-10">
+              Supplying industry-benchmark culinary equipment, fine porcelain, glassware,
+              and commercial machinery from leading global manufacturers.
             </p>
           </header>
           <ul className="hx-brand-list" aria-label="Selected partner brands">
             {partnerBrands.map((brand) => (
-              <li
-                key={brand.name}
-                className="hx-brand-tile group bg-[#0d1614] text-white border border-white/10"
-                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
-              >
-                <img
-                  src={getAssetUrl(brand.logo)}
-                  alt={`${brand.name} logo`}
-                  className="h-8 md:h-10 w-auto max-w-[130px] object-contain filter grayscale brightness-200 opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:brightness-100 group-hover:opacity-100"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="hx-brand-category">{brand.category}</span>
+              <li key={brand.name}>
+                <div className="group flex items-center justify-center p-4 rounded-xl bg-white shadow-sm border border-white/10 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/60 h-20 sm:h-24">
+                  <img
+                    src={getAssetUrl(brand.logo)}
+                    alt={`${brand.name} logo`}
+                    className="max-h-10 sm:max-h-12 w-auto max-w-[80%] object-contain transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </li>
             ))}
           </ul>
@@ -485,8 +487,8 @@ function HomePage() {
 
       {/* Contact CTA — deep petrol */}
       <section
-        className="hx-cta bg-[#0d1614] text-white"
-        style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+        className="hx-cta bg-[#121214] text-white"
+        style={{ backgroundColor: '#121214', color: '#ffffff' }}
         aria-labelledby="hx-cta-title"
       >
         <div className="hx-cta-inner">

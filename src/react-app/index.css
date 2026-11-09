@@ -16,14 +16,14 @@
     --text-primary: #F3EFE5;
     --text-secondary: #C9D3D0;
     --text-muted: #96A6A2;
-    --bg-primary: #050909;
-    --bg-secondary: #082321;
-    --bg-elevated: #082321;
+    --bg-primary: #080808;
+    --bg-secondary: #121214;
+    --bg-elevated: #121214;
 
     /* Gradients */
     --gradient-gold: linear-gradient(135deg, #0C9990 0%, #087F78 100%);
-    --gradient-dark: linear-gradient(180deg, #050909 0%, #082321 100%);
-    --gradient-overlay: linear-gradient(180deg, rgba(5, 9, 9, 0) 0%, rgba(5, 9, 9, 0.85) 100%);
+    --gradient-dark: linear-gradient(180deg, #080808 0%, #121214 100%);
+    --gradient-overlay: linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.85) 100%);
 
     /* Shadows - Layered for Depth */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -63,15 +63,15 @@
 
     /* V2 Hospitality System — approved Stage 2 dark palette.
        Six approved tokens, retained exactly:
-       background #050909 · background-secondary #082321
+       background #080808 · background-secondary #121214
        accent #087F78 · accent-hover #0C9990
-       foreground #F3EFE5 · border #263432 */
-    --background: #050909;
-    --background-secondary: #082321;
+       foreground #F3EFE5 · border #27272a */
+    --background: #080808;
+    --background-secondary: #121214;
     --accent: #087F78;
     --accent-hover: #0C9990;
     --foreground: #F3EFE5;
-    --border: #263432;
+    --border: #27272a;
 
     /* Component aliases mapped to the approved palette. */
     --surface: var(--background);
@@ -93,7 +93,7 @@
     --primary-foreground: var(--foreground);
     --secondary: var(--background-secondary);
     --secondary-foreground: var(--foreground);
-    --muted: #0B1413;
+    --muted: #121214;
     --muted-foreground: #96A6A2;
     --accent-foreground: var(--foreground);
     --destructive: #D96B63;
@@ -103,13 +103,13 @@
     --chart-2: #087F78;
     --chart-3: #F3EFE5;
     --chart-4: #96A6A2;
-    --chart-5: #263432;
+    --chart-5: #27272a;
     --radius: 0.625rem;
     --sidebar: var(--background-secondary);
     --sidebar-foreground: var(--foreground);
     --sidebar-primary: var(--accent);
     --sidebar-primary-foreground: var(--foreground);
-    --sidebar-accent: #0B1413;
+    --sidebar-accent: #121214;
     --sidebar-accent-foreground: var(--foreground);
     --sidebar-border: var(--border);
     --sidebar-ring: var(--accent-hover);
@@ -280,36 +280,36 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .dark {
-    --background: #050909;
+    --background: #080808;
     --foreground: #F3EFE5;
-    --card: #082321;
+    --card: #121214;
     --card-foreground: #F3EFE5;
-    --popover: #082321;
+    --popover: #121214;
     --popover-foreground: #F3EFE5;
     --primary: #087F78;
     --primary-foreground: #F3EFE5;
-    --secondary: #082321;
+    --secondary: #121214;
     --secondary-foreground: #F3EFE5;
-    --muted: #0B1413;
+    --muted: #121214;
     --muted-foreground: #96A6A2;
     --accent: #0C9990;
     --accent-foreground: #F3EFE5;
     --destructive: #D96B63;
-    --border: #263432;
-    --input: #263432;
+    --border: #27272a;
+    --input: #27272a;
     --ring: #0C9990;
     --chart-1: #0C9990;
     --chart-2: #087F78;
     --chart-3: #F3EFE5;
     --chart-4: #96A6A2;
-    --chart-5: #263432;
-    --sidebar: #082321;
+    --chart-5: #27272a;
+    --sidebar: #121214;
     --sidebar-foreground: #F3EFE5;
     --sidebar-primary: #087F78;
     --sidebar-primary-foreground: #F3EFE5;
-    --sidebar-accent: #0B1413;
+    --sidebar-accent: #121214;
     --sidebar-accent-foreground: #F3EFE5;
-    --sidebar-border: #263432;
+    --sidebar-border: #27272a;
     --sidebar-ring: #0C9990;
 }
 

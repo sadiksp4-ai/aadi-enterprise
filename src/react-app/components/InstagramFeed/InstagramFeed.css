@@ -30,7 +30,7 @@
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
-  background: #0d1614;
+  background: #121214;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
@@ -108,7 +108,7 @@
   aspect-ratio: 1 / 1;
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(100deg, #0b1413 40%, #142220 50%, #0b1413 60%);
+  background: linear-gradient(100deg, #121214 40%, #1a1a1e 50%, #121214 60%);
   background-size: 200% 100%;
   animation: hx-instagram-shimmer 1.4s linear infinite;
 }

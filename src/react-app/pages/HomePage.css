@@ -647,13 +647,13 @@
   padding: 1.25rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
-  background: #0d1614;
+  background: #121214;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .hx-case-card:hover {
   border-color: rgba(20, 184, 166, 0.4);
-  background: #111e1a;
+  background: #1a1a1e;
 }
 
 .hx-case-media {
@@ -802,68 +802,6 @@
   gap: 1rem;
 }
 
-.hx-brand-tile {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 6rem;
-  padding: 1.5rem;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 0.75rem;
-  background: #0d1614;
-  transition:
-    border-color 0.3s ease,
-    background-color 0.3s ease;
-}
-
-.hx-brand-tile:hover {
-  border-color: rgba(12, 153, 144, 0.3);
-  background: #111e1a;
-}
-
-.hx-brand-tile img {
-  object-fit: contain;
-}
-
-.hx-brand-tile:hover img {
-  opacity: 1;
-}
-
-.hx-brand-category {
-  display: none;
-  position: absolute;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  left: 0.5rem;
-  max-width: calc(100% - 1rem);
-  overflow: hidden;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  line-height: 1.4;
-  text-align: center;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--accent-hover);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-@media (min-width: 1024px) {
-  .hx-brand-category {
-    display: block;
-  }
-}
-
-.hx-brand-tile:hover .hx-brand-category {
-  opacity: 1;
-}
-
 @media (min-width: 640px) {
   .hx-cases-inner,
   .hx-brands-inner {
@@ -883,14 +821,6 @@
   .hx-brand-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
-  }
-
-  .hx-brand-tile {
-    height: 7rem;
-  }
-
-  .hx-brand-category {
-    font-size: 10px;
   }
 }
 

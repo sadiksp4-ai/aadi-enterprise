@@ -17,8 +17,8 @@ function App() {
     <Router>
       <Seo />
       <div
-        className="App min-h-screen bg-[#0a1412] text-white"
-        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        className="App min-h-screen bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
       >
         <Navbar />
         <main>
