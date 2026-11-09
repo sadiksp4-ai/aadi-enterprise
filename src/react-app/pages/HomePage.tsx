@@ -367,15 +367,20 @@ function HomePage() {
             {CAPABILITIES.map(({ icon: Icon, title, description }) => (
               <li
                 key={title}
-                className="hx-capability bg-[#0d1614] text-white border border-white/10"
+                className="hx-capability group flex items-start gap-4 p-5 rounded-xl border border-white/10 bg-[#0d1614] transition-all duration-300 hover:border-teal-500/30 hover:bg-[#111e1a]"
                 style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
               >
-                <span className="hx-icon-box" aria-hidden="true">
+                <span
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-teal-500/20 bg-teal-500/10 text-teal-400"
+                  aria-hidden="true"
+                >
                   <Icon {...ICON_PROPS} />
                 </span>
-                <div className="hx-capability-body">
-                  <h3 className="hx-capability-title">{title}</h3>
-                  <p className="hx-capability-text">{description}</p>
+                <div>
+                  <h3 className="text-base font-medium text-white">{title}</h3>
+                  <p className="text-sm text-zinc-400 mt-1 leading-relaxed">
+                    {description}
+                  </p>
                 </div>
               </li>
             ))}
@@ -456,12 +461,13 @@ function HomePage() {
             {partnerBrands.map((brand) => (
               <li
                 key={brand.name}
-                className="hx-brand-tile bg-[#0d1614] text-white border border-white/10"
+                className="hx-brand-tile group bg-[#0d1614] text-white border border-white/10"
                 style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
               >
                 <img
                   src={getAssetUrl(brand.logo)}
                   alt={`${brand.name} logo`}
+                  className="h-8 md:h-10 w-auto max-w-[130px] object-contain filter grayscale brightness-200 opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:brightness-100 group-hover:opacity-100"
                   loading="lazy"
                   decoding="async"
                 />

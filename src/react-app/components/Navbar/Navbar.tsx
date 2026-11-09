@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
+import { getAssetUrl } from "../../utils";
 
 const NAV_LINKS = [
   { to: "/about", label: "About" },
@@ -49,9 +50,26 @@ const Navbar: React.FC = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className={`navbar${isScrolled ? " scrolled" : ""}`}>
+    <nav
+      className={`navbar fixed top-0 left-0 z-[1000] flex w-full items-center justify-between border-b border-white/10 bg-[#0a1412]/90 text-white backdrop-blur-md transition-all duration-300 ${
+        isScrolled
+          ? "bg-[#0a1412]/95 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+          : "py-4"
+      }`}
+    >
       <Link to="/" className="navbar-logo-link" onClick={closeMenu} aria-label="Aadi Enterprises — home">
-        <span className="navbar-logo">Aadi Enterprises</span>
+        <img
+          src={getAssetUrl("logo.png")}
+          alt=""
+          className="navbar-logo-img"
+          width={44}
+          height={40}
+          decoding="async"
+        />
+        <span className="navbar-logo-text">
+          <span className="navbar-logo-name text-white">Aadi Enterprises</span>
+          <span className="navbar-logo-tag">Hospitality Solutions</span>
+        </span>
       </Link>
       <div className={`navbar-links${isMenuOpen ? " active" : ""}`} id="primary-navigation">
         {NAV_LINKS.map(({ to, label }) => (
@@ -59,12 +77,21 @@ const Navbar: React.FC = () => {
             key={to}
             to={to}
             onClick={closeMenu}
-            className={location.pathname === to ? "active" : ""}
+            className={`text-zinc-300 hover:text-teal-400 font-medium transition-colors ${
+              location.pathname === to ? "active text-white" : ""
+            }`}
             aria-current={location.pathname === to ? "page" : undefined}
           >
             {label}
           </Link>
         ))}
+        <Link
+          to="/contact"
+          onClick={closeMenu}
+          className="navbar-cta bg-teal-500 hover:bg-teal-400 text-black font-semibold px-4 py-2 rounded-lg transition-all"
+        >
+          Request a Quote
+        </Link>
       </div>
       <button
         type="button"
