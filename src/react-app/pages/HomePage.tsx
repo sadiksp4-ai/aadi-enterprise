@@ -148,46 +148,14 @@ const caseStudies = [
 ];
 
 const partnerBrands = [
-  {
-    name: 'Kärcher',
-    category: 'Industrial Cleaning & Scrubbers',
-    logo: 'assets/brands/karcher.png',
-  },
-  {
-    name: 'Kütahya Porselen',
-    category: 'Fine Porcelain Tableware',
-    logo: 'assets/brands/kutahya.png',
-  },
-  {
-    name: 'Tramontina',
-    category: 'Commercial Cookware & Cutlery',
-    logo: 'assets/brands/tramontina.png',
-  },
-  {
-    name: 'Steelite',
-    category: 'Buffet & Tabletop Systems',
-    logo: 'assets/brands/steelite.png',
-  },
-  {
-    name: 'Paşabahçe',
-    category: 'Commercial Glassware',
-    logo: 'assets/brands/pasabahce.png',
-  },
-  {
-    name: 'Dolphy',
-    category: 'Washroom & Hygiene Automation',
-    logo: 'assets/brands/dolphy.png',
-  },
-  {
-    name: 'Winterhalter',
-    category: 'Commercial Warewashing',
-    logo: 'assets/brands/winterhalter.png',
-  },
-  {
-    name: 'Ice Make',
-    category: 'Commercial Refrigeration & Cold Rooms',
-    logo: 'assets/brands/icemake.png',
-  },
+  { name: 'Tramontina', logo: 'assets/brands/tramontina.png' },
+  { name: 'Zafferano', logo: 'assets/brands/zafferano.png' },
+  { name: 'Kärcher', logo: 'assets/brands/karcher.png' },
+  { name: 'Steelite', logo: 'assets/brands/steelite.png' },
+  { name: 'Paşabahçe', logo: 'assets/brands/pasabahce.png' },
+  { name: 'Artevo', logo: 'assets/brands/artevo.png' },
+  { name: 'Dolphy', logo: 'assets/brands/dolphy.png' },
+  { name: 'Winterhalter', logo: 'assets/brands/winterhalter.png' },
 ];
 
 const ICON_PROPS = { size: 24, strokeWidth: 1.5 } as const;
@@ -464,21 +432,22 @@ function HomePage() {
               and commercial machinery from leading global manufacturers.
             </p>
           </header>
-          <ul className="hx-brand-list" aria-label="Selected partner brands">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
             {partnerBrands.map((brand) => (
-              <li key={brand.name}>
-                <div className="group flex items-center justify-center p-4 rounded-xl bg-white shadow-sm border border-white/10 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/60 h-20 sm:h-24">
-                  <img
-                    src={getAssetUrl(brand.logo)}
-                    alt={`${brand.name} logo`}
-                    className="max-h-10 sm:max-h-12 w-auto max-w-[80%] object-contain transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              </li>
+              <div
+                key={brand.name}
+                className="group flex items-center justify-center p-4 rounded-xl bg-white shadow-sm border border-white/10 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/60 h-20 sm:h-24"
+              >
+                <img
+                  src={getAssetUrl(brand.logo)}
+                  alt={brand.name}
+                  className="max-h-10 sm:max-h-12 w-auto max-w-[80%] object-contain transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 

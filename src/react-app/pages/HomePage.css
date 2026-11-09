@@ -592,8 +592,7 @@
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-.hx-cases-eyebrow,
-.hx-brands-eyebrow {
+.hx-cases-eyebrow {
   margin: 0 0 1rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 0.7rem;
@@ -603,29 +602,21 @@
   color: var(--accent-hover);
 }
 
-.hx-cases-title,
-.hx-brands-title {
+.hx-cases-title {
   margin: 0;
   font-family: var(--font-primary);
   font-weight: 300;
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--foreground);
-}
-
-.hx-cases-title {
   max-width: 46rem;
   font-size: 1.875rem;
 }
 
-.hx-cases-subtitle,
-.hx-brands-subtitle {
+.hx-cases-subtitle {
   margin: 0.75rem 0 0;
   line-height: 1.7;
   color: var(--ink-3);
-}
-
-.hx-cases-subtitle {
   max-width: 48rem;
   font-size: 0.875rem;
 }
@@ -782,26 +773,6 @@
   text-align: center;
 }
 
-.hx-brands-title {
-  font-size: 1.5rem;
-}
-
-.hx-brands-subtitle {
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 0.875rem;
-}
-
-.hx-brand-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
 @media (min-width: 640px) {
   .hx-cases-inner,
   .hx-brands-inner {
@@ -809,18 +780,12 @@
     padding-right: 1.5rem;
   }
 
-  .hx-cases-subtitle,
-  .hx-brands-subtitle {
+  .hx-cases-subtitle {
     font-size: 1rem;
   }
 
   .hx-case-text {
     font-size: 0.875rem;
-  }
-
-  .hx-brand-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem;
   }
 }
 
@@ -833,18 +798,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hx-brands-title {
-    font-size: 1.875rem;
-  }
-
-  .hx-brand-list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.5rem;
-  }
-
-  .hx-brand-tile img {
-    max-height: 2.25rem;
-  }
 }
 
 @media (min-width: 1024px) {
