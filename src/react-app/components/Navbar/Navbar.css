@@ -98,6 +98,9 @@
 
 .navbar-links a.navbar-cta {
     margin-left: 1.85rem;
+    padding: 0.5rem 1rem;
+    line-height: 1.25;
+    white-space: nowrap;
     color: #000000;
 }
 
