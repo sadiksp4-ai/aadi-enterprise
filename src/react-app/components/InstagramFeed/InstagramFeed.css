@@ -1,50 +1,42 @@
-/* Instagram feed — premium minimalist, consistent with hx-sections. */
-
 .hx-instagram {
-  border-top: 1px solid var(--hx-line, #e4dfd4);
-  background: var(--surface);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--background);
 }
 
 .hx-instagram-handle {
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   font-weight: 600;
   text-decoration: none;
 }
 
 .hx-instagram-handle:hover {
-  color: var(--hx-forest, #293a30);
+  color: var(--foreground);
   text-decoration: underline;
 }
 
-/* 6 posts → 3×2 on desktop, 3 cols on tablet, 2 cols on mobile. */
 .hx-instagram-grid {
   list-style: none;
   margin: 0 0 1.35rem;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
 .hx-instagram-card {
   position: relative;
   display: block;
-  border: 1px solid var(--hx-line, #e4dfd4);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background: var(--surface-2);
-  /* Reserve space before images load → no layout shift. */
   aspect-ratio: 1 / 1;
-  transition:
-    border-color var(--transition-base),
-    box-shadow var(--transition-base),
-    transform var(--transition-base);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  background: #0d1614;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.hx-instagram-card:hover {
-  border-color: rgba(173, 137, 81, 0.55);
-  box-shadow: 0 12px 28px rgba(45, 42, 34, 0.07);
-  transform: translateY(-3px);
+.hx-instagram-card:hover,
+.hx-instagram-card:focus-visible {
+  border-color: rgba(20, 184, 166, 0.4);
 }
 
 .hx-instagram-card img {
@@ -52,6 +44,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease-out;
+}
+
+.hx-instagram-card:hover img,
+.hx-instagram-card:focus-visible img {
+  transform: scale(1.05);
 }
 
 .hx-instagram-overlay {
@@ -60,15 +58,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  background: rgba(41, 58, 48, 0.28);
+  color: #5eead4;
+  background: rgba(0, 0, 0, 0);
   opacity: 0;
-  transition: opacity var(--transition-base);
+  transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .hx-instagram-card:hover .hx-instagram-overlay,
 .hx-instagram-card:focus-visible .hx-instagram-overlay {
+  background: rgba(0, 0, 0, 0.4);
   opacity: 1;
+}
+
+.hx-instagram-overlay svg {
+  filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.55));
 }
 
 .hx-instagram-badge {
@@ -84,8 +87,8 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #fff;
-  background: rgba(23, 23, 23, 0.72);
+  color: var(--foreground);
+  background: rgba(5, 9, 9, 0.72);
 }
 
 .hx-instagram-note {
@@ -97,16 +100,15 @@
 }
 
 .hx-instagram-note a {
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   font-weight: 600;
 }
 
-/* Skeleton placeholders keep the same 3×2 footprint while loading. */
 .hx-instagram-skeleton {
   aspect-ratio: 1 / 1;
   border-radius: 0.75rem;
-  border: 1px solid var(--hx-line, #e4dfd4);
-  background: linear-gradient(100deg, #f0eee8 40%, #e7e2d6 50%, #f0eee8 60%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(100deg, #0b1413 40%, #142220 50%, #0b1413 60%);
   background-size: 200% 100%;
   animation: hx-instagram-shimmer 1.4s linear infinite;
 }
@@ -115,15 +117,22 @@
   from {
     background-position: 180% 0;
   }
+
   to {
     background-position: -20% 0;
   }
 }
 
-@media (max-width: 720px) {
+@media (min-width: 768px) {
   .hx-instagram-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hx-instagram-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 
@@ -131,7 +140,9 @@
   .hx-instagram-skeleton {
     animation: none;
   }
+
   .hx-instagram-card,
+  .hx-instagram-card img,
   .hx-instagram-overlay {
     transition: none;
   }

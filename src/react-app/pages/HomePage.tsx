@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
-  ArrowUpRight,
   ClipboardList,
   Package,
   Wrench,
@@ -18,45 +16,67 @@ import {
   getWhatsAppUrl,
 } from '../utils/whatsapp';
 
-const SOLUTIONS = [
+const solutionsData = [
   {
+    id: '01',
+    tag: 'CULINARY',
     title: 'Commercial Kitchen Solutions',
-    description:
-      'Professional equipment for food preparation, cooking, and efficient commercial kitchen operations.',
-    image: getAssetUrl('commercial_kitchen.jpg'),
-    alt: 'Professional commercial kitchen equipment in a hospitality setting',
-    group: 'kitchen',
+    desc: 'High-performance cooking ranges, refrigeration, combi ovens, and custom stainless prep stations.',
+    href: '/products?group=kitchen',
+    image: getAssetUrl('images/solutions/commercial-kitchen.webp'),
+    alt: 'Professional commercial kitchen with stainless steel equipment',
   },
   {
+    id: '02',
+    tag: 'DINING',
     title: 'Food & Beverage Service',
-    description:
-      'Tableware, glassware, cutlery, buffet essentials, and barware for exceptional food and beverage presentation.',
-    image: getAssetUrl('F&B/tableware-and-buffet-ware.jpg'),
-    alt: 'Refined hospitality table setting with premium tableware and glassware',
-    group: 'fnb',
+    desc: 'Porcelain tableware, premium glassware, cutlery, and modular buffet presentation systems.',
+    href: '/products?group=fnb',
+    image: getAssetUrl('images/solutions/food-beverage.webp'),
+    alt: 'Premium tabletop and buffet presentation setup',
   },
   {
-    title: 'Housekeeping & Hygiene',
-    description:
-      'Professional cleaning equipment and essential solutions for maintaining clean, efficient hospitality environments.',
-    image: getAssetUrl('housekeeping/housekeeping-essentials.jpg'),
-    alt: 'Commercial cleaning equipment in a professional hospitality facility',
-    group: 'hk',
+    id: '03',
+    tag: 'HOUSEKEEPING',
+    title: 'Housekeeping & Floor Care',
+    desc: 'Commercial ride-on and walk-behind scrubbers, high-pressure washers, wet/dry vacuums, and janitorial carts.',
+    href: '/products?group=hk',
+    image: getAssetUrl('images/solutions/housekeeping-scrubbers.webp'),
+    alt: 'Commercial floor scrubbers and cleaning machines in a shopping mall',
   },
   {
+    id: '04',
+    tag: 'GUEST ROOMS',
     title: 'Guest Room & In-Room Amenities',
-    description:
-      'Carefully selected guest amenities and room essentials that enhance the hotel guest experience, including premium portable designer lighting and guest-room ambience.',
-    image: getAssetUrl('new/home-hero/01-zafferano-lamp.png'),
-    alt: 'Zafferano hospitality table lamp lighting a restaurant table',
-    group: 'guest',
+    desc: 'Designer hospitality lighting, in-room safes, kettles, minibar units, and premium guest accessories.',
+    href: '/products?group=guest',
+    image: getAssetUrl('images/solutions/guestroom-amenities.webp'),
+    alt: 'Housekeeper preparing a premium hotel guest room',
+  },
+  {
+    id: '05',
+    tag: 'LAUNDRY',
+    title: 'Commercial Laundry Solutions',
+    desc: 'Industrial washers, dryers, ironers, and complete linen care systems for high-throughput operations.',
+    href: '/products?group=laundry',
+    image: getAssetUrl('images/solutions/commercial-laundry.webp'),
+    alt: 'Commercial laundry solutions for hospitality linen operations',
+  },
+  {
+    id: '06',
+    tag: 'BANQUET',
+    title: 'Banquet Operations',
+    desc: 'Mobile buffet stations, display risers, chafing dishes, and event service equipment for seamless delivery.',
+    href: '/products?group=fnb',
+    image: getAssetUrl('images/solutions/banquet-operations.webp'),
+    alt: 'Banquet display risers and food presentation equipment',
   },
 ];
 
 const CAPABILITIES = [
   {
     icon: ClipboardList,
-    title: 'Kitchen & Project Planning',
+    title: 'Consulting & Planning',
     description: 'Layout planning and equipment sizing for new and existing properties.',
   },
   {
@@ -67,253 +87,266 @@ const CAPABILITIES = [
   {
     icon: Wrench,
     title: 'Installation & Commissioning',
-    description: 'Professional installation and commissioning support on site.',
+    description: 'Professional on-site installation and commissioning support.',
   },
   {
     icon: HeartHandshake,
     title: 'After-Sales Support',
-    description: 'Reliable after-sales service to keep operations running.',
+    description: 'Reliable service to keep operations running smoothly.',
   },
 ];
 
-/* Row 1: Tramontina | Kärcher | Dolphy | Paşabahçe
-   Row 2: Nude Glass | Steelite | Artevo | Ice Make
-   Each logo carries its own sizing class because the source artwork ships with
-   very different amounts of transparent padding around the visible mark. */
-const BRANDS: { name: string; file: string; className: string }[] = [
+const caseStudies = [
+  {
+    id: 'cs-01',
+    client: '5-Star Business Hotel & Convention Centre',
+    location: 'Pune, Maharashtra',
+    category: 'Turnkey Kitchen & Cold Storage',
+    title: 'High-Volume Main Kitchen & Cold Room Execution',
+    description:
+      'End-to-end AutoCAD workflow design, stainless steel custom cooking ranges, combi steamers, and modular cold room integration for a 600-cover simultaneous banquet facility.',
+    specs: [
+      'Custom 304 SS Worktables & Hoods',
+      'Modular Walk-In Cold Room',
+      'Combi Ovens & Fryer Batteries',
+    ],
+    image: getAssetUrl('images/installations/convention-centre-kitchen.webp'),
+    alt: 'Stainless steel commercial kitchen with cooking ranges, ovens and prep stations',
+  },
+  {
+    id: 'cs-02',
+    client: 'Luxury Shopping & Entertainment Mall',
+    location: 'Pune MIDC / Wakad',
+    category: 'Mechanized Housekeeping Fleet',
+    title: 'Automated Facility Cleaning Fleet Deployment',
+    description:
+      'Supply and AMC commissioning of Kärcher ride-on scrubber-driers and industrial wet/dry vacuum fleets covering 1.2M sq. ft. of commercial floor space.',
+    specs: [
+      'Ride-on Floor Scrubbers',
+      'Walk-Behind Scrubbers',
+      'Preventive Maintenance SLA',
+    ],
+    image: getAssetUrl('images/installations/mall-cleaning-fleet.webp'),
+    alt: 'Fleet of ride-on scrubbers and wet/dry vacuums deployed in a shopping mall',
+  },
+  {
+    id: 'cs-03',
+    client: 'Premium Fine-Dining & Rooftop Lounge',
+    location: 'Koregaon Park, Pune',
+    category: 'Tableware & Banquet Fit-Out',
+    title: 'Artisanal Porcelain & Barware Curation',
+    description:
+      'Complete dining room tabletop package featuring Turkish fine porcelain, crystal lead-free glassware, and cordless architectural table lighting.',
+    specs: [
+      'Kütahya Porcelain Lines',
+      'Curated Lead-Free Glassware',
+      'Rechargeable Table Lamps',
+    ],
+    image: getAssetUrl('images/installations/fine-dining-tabletop.webp'),
+    alt: 'Fine dining table setting with porcelain, glassware and silver cutlery',
+  },
+];
+
+const partnerBrands = [
+  {
+    name: 'Kärcher',
+    category: 'Industrial Cleaning & Scrubbers',
+    logo: 'assets/brands/karcher.png',
+  },
+  {
+    name: 'Kütahya Porselen',
+    category: 'Fine Porcelain Tableware',
+    logo: 'assets/brands/kutahya.png',
+  },
   {
     name: 'Tramontina',
-    file: 'brand_partners/Tramontina.png',
-    className: 'hx-brand-item--tramontina',
+    category: 'Commercial Cookware & Cutlery',
+    logo: 'assets/brands/tramontina.png',
   },
-  { name: 'Kärcher', file: 'brand_partners/Karcher.png', className: 'hx-brand-item--karcher' },
-  { name: 'Dolphy', file: 'dolphy_logo.jpg', className: 'hx-brand-item--dolphy' },
+  {
+    name: 'Steelite',
+    category: 'Buffet & Tabletop Systems',
+    logo: 'assets/brands/steelite.png',
+  },
   {
     name: 'Paşabahçe',
-    file: 'brand_partners/Pasabasche.png',
-    className: 'hx-brand-item--pasabahce',
+    category: 'Commercial Glassware',
+    logo: 'assets/brands/pasabahce.png',
   },
-  { name: 'Nude Glass', file: 'brand_partners/Nude.png', className: 'hx-brand-item--nude' },
-  { name: 'Steelite', file: 'brand_partners/Steelite.png', className: 'hx-brand-item--steelite' },
-  { name: 'Artevo', file: 'brand_partners/Art Evo.png', className: 'hx-brand-item--artevo' },
+  {
+    name: 'Dolphy',
+    category: 'Washroom & Hygiene Automation',
+    logo: 'assets/brands/dolphy.png',
+  },
+  {
+    name: 'Winterhalter',
+    category: 'Commercial Warewashing',
+    logo: 'assets/brands/winterhalter.png',
+  },
   {
     name: 'Ice Make',
-    file: 'new/brand_partners/icemake.png',
-    className: 'hx-brand-item--icemake',
+    category: 'Commercial Refrigeration & Cold Rooms',
+    logo: 'assets/brands/icemake.png',
   },
 ];
 
-const CLIENTS = [
-  { name: 'Marriott', file: 'clients/Marriott.png' },
-  { name: 'Hyatt', file: 'clients/Hyatt.png' },
-  { name: 'Apollo Hospitals', file: 'clients/Apollo Hospitals.png' },
-  { name: 'Bajaj Finserv', file: 'clients/Bajaj Finserv.png' },
-  { name: 'Conrad Hotel', file: 'clients/Conrad Hotel.png' },
-  { name: 'Novotel Hotels', file: 'clients/Novotel Hotels.png' },
-];
-
-/* Featured-brand hero slideshow (5s fade loop). Images are supplied
-   full-composition banners, so no text is overlaid on top of them. */
-const HERO_SLIDES = [
-  {
-    file: 'new/home-hero/01-zafferano-lamp.png',
-    alt: 'Zafferano hospitality table lamps lighting a restaurant table — Lighting for Hospitality',
-  },
-  {
-    file: 'new/home-hero/02-tramontina-cookware.png',
-    alt: 'Tramontina professional cookware range — Professional Kitchen Solutions',
-  },
-  {
-    file: 'new/home-hero/03-zafferano-hospitality-lighting.png',
-    alt: 'Zafferano Poldina Pro Series colourful portable lamps — Portable Lighting for Modern Hospitality',
-  },
-  {
-    file: 'new/home-hero/04-tramontina-knives.png',
-    alt: 'Tramontina professional kitchen knives — Precision Tools for Professional Kitchens',
-  },
-  {
-    file: 'new/home-hero/05-tramontina-utensils.png',
-    alt: 'Tramontina premium stainless steel kitchen utensils — Reliability for Every Kitchen',
-  },
-];
-
-const HERO_SLIDE_INTERVAL_MS = 5000;
+const ICON_PROPS = { size: 24, strokeWidth: 1.5 } as const;
 
 function HomePage() {
   const navigate = useNavigate();
   const whatsappUrl = getWhatsAppUrl(getGeneralEnquiryMessage());
-  const [heroSlide, setHeroSlide] = useState(0);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-    const timer = window.setInterval(() => {
-      setHeroSlide((current) => (current + 1) % HERO_SLIDES.length);
-    }, HERO_SLIDE_INTERVAL_MS);
-    return () => window.clearInterval(timer);
-  }, []);
 
   return (
     <div className="hx">
-      {/* Hero */}
-      <section className="hx-hero">
+      {/* Cinematic hero */}
+      <section className="hx-hero" aria-label="Aadi Enterprises hospitality solutions">
+        <div className="hx-hero-video-wrap">
+          <video
+            className="hx-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={getAssetUrl('about-hero.jpg')}
+            aria-hidden="true"
+          >
+            <source src={getAssetUrl('Videos/hero-hospitality.mp4')} type="video/mp4" />
+          </video>
+        </div>
+        <div className="hx-hero-gradient" aria-hidden="true" />
         <div className="hx-hero-inner">
           <div className="hx-hero-copy">
-            <p className="hx-eyebrow">HOSPITALITY EQUIPMENT &amp; OPERATIONAL SOLUTIONS</p>
             <h1 className="hx-hero-title">
-              Complete Hospitality Solutions. From Kitchen to Guest Experience.
+              <span className="hx-hero-title-line">Complete</span>{' '}
+              <span className="hx-hero-title-line">Hospitality.</span>{' '}
+              <span className="hx-hero-title-line">Perfectly</span>{' '}
+              <span className="hx-hero-title-line">Equipped.</span>
             </h1>
-            <p className="hx-hero-text">
-              Equip your hospitality business with carefully sourced professional kitchen equipment, food and beverage service essentials, housekeeping solutions, and guest amenities — backed by expert guidance and dependable support.
+            <p className="hx-hero-lead">
+              From professional kitchens to exceptional guest experiences.
             </p>
             <div className="hx-hero-actions">
-              <button type="button" className="hx-btn hx-btn-primary" onClick={() => navigate('/products')}>
+              <button
+                type="button"
+                className="hx-btn hx-btn-primary"
+                onClick={() => navigate('/products')}
+              >
                 Explore Solutions
-                <ArrowRight size={17} aria-hidden="true" />
+                <ArrowRight size={20} aria-hidden="true" />
               </button>
-              <button type="button" className="hx-btn hx-btn-outline" onClick={() => navigate('/contact')}>
-                Request a Quote
-                <ArrowRight size={17} aria-hidden="true" />
+              <button
+                type="button"
+                className="hx-btn hx-btn-outline"
+                onClick={() => navigate('/contact')}
+              >
+                Request a Consultation
               </button>
             </div>
           </div>
-          <div className="hx-hero-media">
-            <img
-              src={getAssetUrl('housekeeping/entrance-solutions.jpg')}
-              alt="Premium hotel lobby with marble reception desk, luggage carts and lounge seating"
-              className="hx-hero-image"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </div>
-        </div>
-        <div
-          className="hx-hero-slideshow"
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="Featured brand highlights"
-        >
-          {HERO_SLIDES.map((slide, index) => (
-            <img
-              key={slide.file}
-              src={getAssetUrl(slide.file)}
-              alt={slide.alt}
-              className={`hx-hero-slide${index === heroSlide ? ' is-active' : ''}`}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              fetchPriority={index === 0 ? 'high' : 'auto'}
-              decoding="async"
-              aria-hidden={index === heroSlide ? undefined : true}
-            />
-          ))}
-          <div className="hx-hero-dots" role="group" aria-label="Choose slide">
-            {HERO_SLIDES.map((slide, index) => (
-              <button
-                key={slide.file}
-                type="button"
-                className={`hx-hero-dot${index === heroSlide ? ' is-active' : ''}`}
-                aria-label={`Show slide ${index + 1} of ${HERO_SLIDES.length}`}
-                aria-current={index === heroSlide ? true : undefined}
-                onClick={() => setHeroSlide(index)}
-              />
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Solutions */}
+      {/* Solution areas */}
       <section className="hx-solutions" aria-labelledby="hx-solutions-title">
-        <div className="hx-section-inner">
-          <div className="hx-section-head">
-            <p className="hx-eyebrow">OUR EXPERTISE</p>
-            <h2 id="hx-solutions-title" className="hx-section-title">
-              Explore Our Solutions
+        <div className="hx-solutions-inner">
+          <header className="hx-solutions-head">
+            <p className="hx-solutions-eyebrow">SOLUTIONS</p>
+            <h2 id="hx-solutions-title" className="hx-solutions-title">
+              Complete Solutions to Equip Your Hospitality Property
             </h2>
-            <p className="hx-section-text">
-              Discover professional equipment and thoughtfully selected essentials for every stage of hospitality operations, from kitchen preparation and food service to housekeeping and guest comfort.
+            <p className="hx-solutions-subtitle">
+              From high-volume commercial kitchens to guest room comfort, explore our
+              end-to-end equipment, tableware, and facility care lines.
             </p>
-          </div>
-          <div className="hx-solutions-grid">
-            {SOLUTIONS.map((solution) => (
-              <article key={solution.title} className="hx-solution-card">
-                <button
-                  type="button"
-                  className="hx-solution-media"
-                  onClick={() => navigate(`/products?group=${solution.group}`)}
-                  aria-label={`Explore ${solution.title} solutions`}
-                  tabIndex={-1}
+          </header>
+          <ul className="hx-solutions-grid">
+            {solutionsData.map((solution) => (
+              <li key={solution.id} className="hx-solution-card">
+                <Link
+                  to={solution.href}
+                  className="hx-solution-link"
+                  aria-label={`Explore ${solution.title}`}
                 >
-                  <img
-                    src={solution.image}
-                    alt={solution.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </button>
-                <h3 className="hx-solution-title">{solution.title}</h3>
-                <p className="hx-solution-text">{solution.description}</p>
-                <button
-                  type="button"
-                  className="hx-link"
-                  onClick={() => navigate(`/products?group=${solution.group}`)}
-                >
-                  Explore
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </button>
-              </article>
+                  <div className="hx-solution-media">
+                    <img
+                      src={solution.image}
+                      alt={solution.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="hx-solution-meta" aria-hidden="true">
+                      <span className="hx-solution-id">{solution.id}</span>
+                      <span className="hx-solution-tag">{solution.tag}</span>
+                    </div>
+                  </div>
+                  <div className="hx-solution-body">
+                    <h3 className="hx-solution-title">{solution.title}</h3>
+                    <p className="hx-solution-text">{solution.desc}</p>
+                    <span className="hx-solution-cta" aria-hidden="true">
+                      Explore Solutions
+                      <ArrowRight size={15} />
+                    </span>
+                  </div>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* Introduction */}
-      <section className="hx-intro">
-        <div className="hx-intro-inner">
-          <h2 className="hx-intro-title">
-            One Partner.
-            <br />
-            Multiple Hospitality
-            <br />
-            Solutions.
-          </h2>
-          <div className="hx-intro-copy">
-            <p>
-              Aadi Enterprises provides hospitality-focused products, equipment and
-              solutions across kitchen, food &amp; beverage, housekeeping, hygiene and
-              guest experience requirements.
+      {/* Featured Zafferano — large image-led split layout */}
+      <section className="hx-feature" aria-labelledby="hx-feature-title">
+        <div className="hx-feature-inner">
+          <div className="hx-feature-media">
+            <img
+              src={getAssetUrl('images/spotlight/zafferano-poldina-pro.webp')}
+              alt="Zafferano Poldina Pro cordless table lamps in red, purple and orange on a restaurant table"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="hx-feature-copy">
+            <p className="hx-eyebrow">Featured</p>
+            <h2 id="hx-feature-title" className="hx-feature-title">
+              Zafferano — Designed for Hospitality
+            </h2>
+            <p className="hx-feature-text">
+              Cordless, rechargeable and made to move. Zafferano portable lamps bring
+              adaptable colour and warmth to restaurant tables, hotel rooms and lounges.
             </p>
             <button
               type="button"
-              className="hx-link"
-              onClick={() => navigate('/about')}
+              className="hx-btn hx-btn-primary"
+              onClick={() => navigate('/products?group=guest')}
             >
-              Learn more about us
-              <ArrowRight size={16} aria-hidden="true" />
+              Explore Tabletop Lighting
+              <ArrowRight size={20} aria-hidden="true" />
             </button>
           </div>
         </div>
       </section>
 
-      {/* Capabilities */}
+      {/* Capabilities — editorial layout */}
       <section className="hx-capabilities" aria-labelledby="hx-capabilities-title">
         <div className="hx-section-inner">
-          <div className="hx-section-head">
-            <p className="hx-eyebrow">How we help</p>
+          <div className="hx-capabilities-intro">
+            <p className="hx-eyebrow">How we work</p>
             <h2 id="hx-capabilities-title" className="hx-section-title">
-              More Than Products
+              One partner. Multiple hospitality solutions.
             </h2>
             <p className="hx-section-text">
-              Support across every stage of your property lifecycle.
+              From planning to post-sales support, we help properties source, install and
+              maintain the right equipment across every operational area.
             </p>
           </div>
           <ul className="hx-capabilities-list">
             {CAPABILITIES.map(({ icon: Icon, title, description }) => (
               <li key={title} className="hx-capability">
-                <span className="hx-capability-icon" aria-hidden="true">
-                  <Icon size={22} strokeWidth={1.5} />
+                <span className="hx-icon-box" aria-hidden="true">
+                  <Icon {...ICON_PROPS} />
                 </span>
-                <div>
+                <div className="hx-capability-body">
                   <h3 className="hx-capability-title">{title}</h3>
                   <p className="hx-capability-text">{description}</p>
                 </div>
@@ -323,108 +356,109 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Brands */}
-      <section className="hx-brands" aria-labelledby="hx-brands-title">
-        <div className="hx-section-inner">
-          <div className="hx-section-head">
-            <p className="hx-eyebrow">Partnerships</p>
-            <h2 id="hx-brands-title" className="hx-section-title">
-              Brands We Work With
+      {/* Case studies — balanced B2B installation grid */}
+      <section className="hx-cases" aria-labelledby="hx-cases-title">
+        <div className="hx-cases-inner">
+          <header className="hx-cases-head">
+            <p className="hx-cases-eyebrow">PROVEN FIT-OUTS</p>
+            <h2 id="hx-cases-title" className="hx-cases-title">
+              Recent Hospitality &amp; Commercial Installations
             </h2>
-            <p className="hx-section-text">
-              A selection of the global manufacturers and hospitality brands we source from.
+            <p className="hx-cases-subtitle">
+              Explore real turnkey commercial kitchen deployments, automated housekeeping
+              fleets, and banquet fit-outs delivered across leading hospitality properties.
             </p>
+          </header>
+
+          <div className="hx-cases-grid">
+            {caseStudies.map((project) => (
+              <article key={project.id} className="hx-case-card">
+                <div className="hx-case-media">
+                  <img
+                    src={project.image}
+                    alt={project.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="hx-case-badge">{project.category}</span>
+                </div>
+                <p className="hx-case-meta">
+                  <span className="hx-case-client">{project.client}</span>
+                  {' · '}
+                  <span className="hx-case-location">{project.location}</span>
+                </p>
+                <h3 className="hx-case-title">{project.title}</h3>
+                <p className="hx-case-text">{project.description}</p>
+                <ul className="hx-case-specs">
+                  {project.specs.map((spec) => (
+                    <li key={spec}>{spec}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* Brand partners — unified monochrome tile grid */}
+      <section className="hx-brands" aria-labelledby="hx-brands-title">
+        <div className="hx-brands-inner">
+          <header className="hx-brands-head">
+            <p className="hx-brands-eyebrow">PARTNERS &amp; AUTHORIZED DISTRIBUTION</p>
+            <h2 id="hx-brands-title" className="hx-brands-title">
+              Engineered for Enterprise Reliability
+            </h2>
+            <p className="hx-brands-subtitle">
+              Authorized distribution, sales, and service partners for world-leading
+              hospitality and industrial equipment brands.
+            </p>
+          </header>
           <ul className="hx-brand-list" aria-label="Selected partner brands">
-            {BRANDS.map((brand) => (
-              <li key={brand.name} className={`hx-brand-item ${brand.className}`}>
+            {partnerBrands.map((brand) => (
+              <li key={brand.name} className="hx-brand-tile">
                 <img
-                  src={getAssetUrl(brand.file)}
+                  src={getAssetUrl(brand.logo)}
                   alt={`${brand.name} logo`}
                   loading="lazy"
                   decoding="async"
                 />
+                <span className="hx-brand-category">{brand.category}</span>
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            className="hx-link"
-            onClick={() => navigate('/partners')}
-          >
-            View All Brands
-            <ArrowRight size={16} aria-hidden="true" />
-          </button>
         </div>
       </section>
 
-      {/* Clients */}
-      <section className="hx-clients" aria-labelledby="hx-clients-title">
-        <div className="hx-section-inner">
-          <div className="hx-section-head">
-            <p className="hx-eyebrow">Relationships</p>
-            <h2 id="hx-clients-title" className="hx-section-title">
-              Trusted Across Hospitality &amp; Industry
-            </h2>
-            <p className="hx-section-text">
-              A selection of the hotels, restaurants, healthcare providers, corporates
-              and institutions we work with.
-            </p>
-          </div>
-          <ul className="hx-client-list" aria-label="Selected clients">
-            {CLIENTS.map((client) => (
-              <li key={client.name} className="hx-client-item">
-                <img
-                  src={getAssetUrl(client.file)}
-                  alt={`${client.name} logo`}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="hx-client-name">{client.name}</span>
-              </li>
-            ))}
-          </ul>
-          <button
-            type="button"
-            className="hx-link"
-            onClick={() => navigate('/clients')}
-          >
-            View Our Clients
-            <ArrowRight size={16} aria-hidden="true" />
-          </button>
-        </div>
-      </section>
-
-      {/* Instagram — auto-refreshed via scheduled workflow (see .github/workflows/instagram-feed.yml) */}
+      {/* Instagram */}
       <InstagramFeed />
 
-      {/* Final CTA */}
+      {/* Contact CTA — deep petrol */}
       <section className="hx-cta" aria-labelledby="hx-cta-title">
         <div className="hx-cta-inner">
           <h2 id="hx-cta-title" className="hx-cta-title">
-            Planning a New Property or Upgrading an Existing One?
+            Ready to equip your property?
           </h2>
           <p className="hx-cta-text">
-            Tell us about your requirement — our team will help you plan, source and
-            set up the right solution for your property.
+            Talk to our team about planning, sourcing and installing the right
+            hospitality solutions.
           </p>
           <div className="hx-cta-actions">
             <button
               type="button"
-              className="hx-btn hx-btn-light"
+              className="hx-btn hx-btn-primary"
               onClick={() => navigate('/contact')}
             >
-              Talk to Aadi Enterprises
-              <ArrowRight size={17} aria-hidden="true" />
+              Request a Consultation
+              <ArrowRight size={20} aria-hidden="true" />
             </button>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hx-btn hx-btn-ghost-light"
+              className="hx-btn hx-btn-outline"
             >
-              <MessageCircle size={17} aria-hidden="true" />
-              WhatsApp Enquiry ({WHATSAPP_DISPLAY_NUMBER})
+              <MessageCircle size={20} aria-hidden="true" />
+              WhatsApp ({WHATSAPP_DISPLAY_NUMBER})
             </a>
           </div>
         </div>

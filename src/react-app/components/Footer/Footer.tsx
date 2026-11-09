@@ -25,10 +25,12 @@ const SOCIAL_LINKS = [
 ];
 
 const SOLUTION_LINKS = [
-  'Professional Kitchen',
-  'Food & Beverage',
-  'Housekeeping & Hygiene',
-  'Guest Experience',
+  { label: 'Professional Kitchen', group: 'kitchen' },
+  { label: 'Food & Beverage', group: 'fnb' },
+  { label: 'Housekeeping & Hygiene', group: 'hk' },
+  { label: 'Laundry', group: 'laundry' },
+  { label: 'Guest Experience', group: 'guest' },
+  { label: 'Refrigeration & Cold Chain', group: 'cold' },
 ];
 
 const COMPANY_LINKS = [
@@ -39,8 +41,15 @@ const COMPANY_LINKS = [
   { to: '/contact', label: 'Contact' },
 ];
 
+const OFFICE_CONTACTS = [
+  { label: 'Pune (HQ)', phone: '+91-9076304428' },
+  { label: 'Mumbai', phone: '+91-9076304428' },
+  { label: 'Bengaluru', phone: '+91-9270075682' },
+  { label: 'Delhi NCR', phone: '+91-9834921872' },
+];
+
 const Footer: React.FC = () => {
-  const { email, offices } = data.contactInfo;
+  const { email } = data.contactInfo;
 
   return (
     <footer className="footer">
@@ -50,7 +59,7 @@ const Footer: React.FC = () => {
             <p className="footer-brand">Aadi Enterprises</p>
             <p className="footer-text">
               Hospitality solutions partner for professional kitchen, food &amp; beverage,
-              housekeeping, hygiene and guest experience requirements.
+              housekeeping, laundry, cold chain and guest experience requirements.
             </p>
             <ul className="footer-social-list" aria-label="Aadi Enterprises on social media">
               {SOCIAL_LINKS.map(({ label, href, Icon }) => (
@@ -74,8 +83,8 @@ const Footer: React.FC = () => {
             <p className="footer-heading">Solutions</p>
             <ul className="footer-list">
               {SOLUTION_LINKS.map((solution) => (
-                <li key={solution}>
-                  <Link to="/products">{solution}</Link>
+                <li key={solution.group}>
+                  <Link to={`/products?group=${solution.group}`}>{solution.label}</Link>
                 </li>
               ))}
             </ul>
@@ -95,13 +104,13 @@ const Footer: React.FC = () => {
           <div className="footer-col">
             <p className="footer-heading">Contact</p>
             <ul className="footer-list footer-contact-list">
-              {offices.map((office) => (
+              {OFFICE_CONTACTS.map((office) => (
                 <li key={office.label}>
-                  <span className="footer-contact-label">{office.label.replace(' Office', '')}</span>{' '}
-                  <a href={`tel:${office.phone}`}>{office.phone}</a>
+                  <strong className="footer-contact-label">{office.label}:</strong>{' '}
+                  <a href={`tel:${office.phone.replace(/[^+\d]/g, '')}`}>{office.phone}</a>
                 </li>
               ))}
-              <li>
+              <li className="footer-contact-email">
                 <a href={`mailto:${email}`}>{email}</a>
               </li>
               <li>
