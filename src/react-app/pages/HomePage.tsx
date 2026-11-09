@@ -207,21 +207,23 @@ function HomePage() {
         style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
         aria-label="Aadi Enterprises hospitality solutions"
       >
-        <div className="hx-hero-video-wrap">
+        <div className="absolute inset-0 -z-10 overflow-hidden">
           <video
-            className="hx-hero-video"
             autoPlay
-            muted
             loop
+            muted
             playsInline
-            preload="metadata"
-            poster={getAssetUrl('about-hero.jpg')}
+            className="h-full w-full object-cover"
+            poster="/images/hero-fallback.jpg"
             aria-hidden="true"
           >
-            <source src={getAssetUrl('Videos/hero-hospitality.mp4')} type="video/mp4" />
+            <source src="/Videos/hero-hospitality.mp4" type="video/mp4" />
+            {/* Fallback if folder was renamed to lowercase */}
+            <source src="/videos/hero-hospitality.mp4" type="video/mp4" />
           </video>
+          {/* Dark cinematic vignette overlay so white headline text remains legible */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1412]/80 via-[#0a1412]/60 to-[#0a1412]" />
         </div>
-        <div className="hx-hero-gradient" aria-hidden="true" />
         <div className="hx-hero-inner">
           <div className="hx-hero-copy">
             <h1 className="hx-hero-title">
