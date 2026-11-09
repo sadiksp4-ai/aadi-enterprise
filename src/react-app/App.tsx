@@ -7,6 +7,7 @@ import ProductsPage from "./pages/ProductsPage";
 import ClientsPage from "./pages/ClientsPage";
 import PartnersPage from "./pages/PartnersPage";
 import ContactPage from "./pages/ContactPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import WhatsAppFloat from "./components/WhatsAppFloat/WhatsAppFloat";
 import Seo from "./components/Seo/Seo";
 import "./App.css";
@@ -15,7 +16,10 @@ function App() {
   return (
     <Router>
       <Seo />
-      <div className="App">
+      <div
+        className="App min-h-screen bg-[#0a1412] text-white"
+        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+      >
         <Navbar />
         <main>
           <Routes>
@@ -26,6 +30,7 @@ function App() {
             <Route path="/clients" element={<ClientsPage />} />
             <Route path="/partners" element={<PartnersPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />

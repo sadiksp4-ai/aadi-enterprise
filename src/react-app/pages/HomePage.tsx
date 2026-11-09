@@ -197,9 +197,16 @@ function HomePage() {
   const whatsappUrl = getWhatsAppUrl(getGeneralEnquiryMessage());
 
   return (
-    <div className="hx">
+    <div
+      className="hx bg-[#0a1412] text-white"
+      style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+    >
       {/* Cinematic hero */}
-      <section className="hx-hero" aria-label="Aadi Enterprises hospitality solutions">
+      <section
+        className="hx-hero bg-[#0a1412] text-white"
+        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        aria-label="Aadi Enterprises hospitality solutions"
+      >
         <div className="hx-hero-video-wrap">
           <video
             className="hx-hero-video"
@@ -248,7 +255,11 @@ function HomePage() {
       </section>
 
       {/* Solution areas */}
-      <section className="hx-solutions" aria-labelledby="hx-solutions-title">
+      <section
+        className="hx-solutions bg-[#0a1412] text-white"
+        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        aria-labelledby="hx-solutions-title"
+      >
         <div className="hx-solutions-inner">
           <header className="hx-solutions-head">
             <p className="hx-solutions-eyebrow">SOLUTIONS</p>
@@ -262,7 +273,11 @@ function HomePage() {
           </header>
           <ul className="hx-solutions-grid">
             {solutionsData.map((solution) => (
-              <li key={solution.id} className="hx-solution-card">
+              <li
+                key={solution.id}
+                className="hx-solution-card bg-[#0d1614] text-white border border-white/10"
+                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+              >
                 <Link
                   to={solution.href}
                   className="hx-solution-link"
@@ -296,7 +311,11 @@ function HomePage() {
       </section>
 
       {/* Featured Zafferano — large image-led split layout */}
-      <section className="hx-feature" aria-labelledby="hx-feature-title">
+      <section
+        className="hx-feature bg-[#0a1412] text-white"
+        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        aria-labelledby="hx-feature-title"
+      >
         <div className="hx-feature-inner">
           <div className="hx-feature-media">
             <img
@@ -328,7 +347,11 @@ function HomePage() {
       </section>
 
       {/* Capabilities — editorial layout */}
-      <section className="hx-capabilities" aria-labelledby="hx-capabilities-title">
+      <section
+        className="hx-capabilities bg-[#0a1412] text-white"
+        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        aria-labelledby="hx-capabilities-title"
+      >
         <div className="hx-section-inner">
           <div className="hx-capabilities-intro">
             <p className="hx-eyebrow">How we work</p>
@@ -342,7 +365,11 @@ function HomePage() {
           </div>
           <ul className="hx-capabilities-list">
             {CAPABILITIES.map(({ icon: Icon, title, description }) => (
-              <li key={title} className="hx-capability">
+              <li
+                key={title}
+                className="hx-capability bg-[#0d1614] text-white border border-white/10"
+                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+              >
                 <span className="hx-icon-box" aria-hidden="true">
                   <Icon {...ICON_PROPS} />
                 </span>
@@ -357,7 +384,11 @@ function HomePage() {
       </section>
 
       {/* Case studies — balanced B2B installation grid */}
-      <section className="hx-cases" aria-labelledby="hx-cases-title">
+      <section
+        className="hx-cases bg-[#0a1412] text-white"
+        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        aria-labelledby="hx-cases-title"
+      >
         <div className="hx-cases-inner">
           <header className="hx-cases-head">
             <p className="hx-cases-eyebrow">PROVEN FIT-OUTS</p>
@@ -372,7 +403,11 @@ function HomePage() {
 
           <div className="hx-cases-grid">
             {caseStudies.map((project) => (
-              <article key={project.id} className="hx-case-card">
+              <article
+                key={project.id}
+                className="hx-case-card bg-[#0d1614] text-white border border-white/10"
+                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+              >
                 <div className="hx-case-media">
                   <img
                     src={project.image}
@@ -401,7 +436,11 @@ function HomePage() {
       </section>
 
       {/* Brand partners — unified monochrome tile grid */}
-      <section className="hx-brands" aria-labelledby="hx-brands-title">
+      <section
+        className="hx-brands bg-[#0a1412] text-white"
+        style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+        aria-labelledby="hx-brands-title"
+      >
         <div className="hx-brands-inner">
           <header className="hx-brands-head">
             <p className="hx-brands-eyebrow">PARTNERS &amp; AUTHORIZED DISTRIBUTION</p>
@@ -415,7 +454,11 @@ function HomePage() {
           </header>
           <ul className="hx-brand-list" aria-label="Selected partner brands">
             {partnerBrands.map((brand) => (
-              <li key={brand.name} className="hx-brand-tile">
+              <li
+                key={brand.name}
+                className="hx-brand-tile bg-[#0d1614] text-white border border-white/10"
+                style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+              >
                 <img
                   src={getAssetUrl(brand.logo)}
                   alt={`${brand.name} logo`}
@@ -433,7 +476,11 @@ function HomePage() {
       <InstagramFeed />
 
       {/* Contact CTA — deep petrol */}
-      <section className="hx-cta" aria-labelledby="hx-cta-title">
+      <section
+        className="hx-cta bg-[#0d1614] text-white"
+        style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
+        aria-labelledby="hx-cta-title"
+      >
         <div className="hx-cta-inner">
           <h2 id="hx-cta-title" className="hx-cta-title">
             Ready to equip your property?

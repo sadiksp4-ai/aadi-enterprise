@@ -1,0 +1,97 @@
+.nf {
+  min-height: 100vh;
+  padding: clamp(7rem, 12vh, 10rem) 1.25rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(12, 153, 144, 0.08), transparent 45rem),
+    var(--background);
+  color: var(--foreground);
+  text-align: center;
+}
+
+.nf-inner {
+  max-width: 42rem;
+}
+
+.nf-eyebrow {
+  display: inline-block;
+  font-family: var(--font-primary);
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+
+.nf-title {
+  font-family: var(--font-primary);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--foreground);
+  margin: 0 0 1.25rem;
+}
+
+.nf-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+  margin: 0 auto 2rem;
+  max-width: 30rem;
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.85rem 1.55rem;
+  border-radius: 999px;
+  font-family: var(--font-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+}
+
+.nf-btn-primary {
+  background: var(--accent);
+  color: var(--foreground);
+  border-color: var(--accent);
+}
+
+.nf-btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.nf-btn-outline {
+  background: transparent;
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+.nf-btn-outline:hover {
+  border-color: var(--accent-hover);
+  background: rgba(12, 153, 144, 0.08);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 560px) {
+  .nf-actions .nf-btn {
+    width: 100%;
+  }
+}

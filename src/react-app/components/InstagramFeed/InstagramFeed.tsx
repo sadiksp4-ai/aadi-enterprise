@@ -80,7 +80,11 @@ export default function InstagramFeed() {
     status === "error" || (status === "ready" && visible.length === 0);
 
   return (
-    <section className="hx-instagram" aria-labelledby="hx-instagram-title">
+    <section
+      className="hx-instagram bg-[#0a1412] text-white"
+      style={{ backgroundColor: '#0a1412', color: '#ffffff' }}
+      aria-labelledby="hx-instagram-title"
+    >
       <div className="hx-section-inner">
         <div className="hx-section-head">
           <p className="hx-eyebrow">Instagram</p>
@@ -104,7 +108,12 @@ export default function InstagramFeed() {
         {status === "loading" && (
           <ul className="hx-instagram-grid" aria-label="Loading Instagram posts" aria-busy="true">
             {Array.from({ length: POST_LIMIT }).map((_, i) => (
-              <li key={i} className="hx-instagram-skeleton" aria-hidden="true" />
+              <li
+            key={i}
+            className="hx-instagram-skeleton bg-[#0d1614] border border-white/10"
+            style={{ backgroundColor: '#0d1614' }}
+            aria-hidden="true"
+          />
             ))}
           </ul>
         )}
@@ -117,7 +126,8 @@ export default function InstagramFeed() {
                   href={post.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hx-instagram-card"
+                  className="hx-instagram-card bg-[#0d1614] text-white border border-white/10"
+                  style={{ backgroundColor: '#0d1614', color: '#ffffff' }}
                   aria-label={`Open Instagram post ${index + 1} in a new tab`}
                 >
                   <img
