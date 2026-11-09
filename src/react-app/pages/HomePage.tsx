@@ -50,8 +50,6 @@ const SOLUTIONS = [
     image: getAssetUrl('new/home-hero/01-zafferano-lamp.png'),
     alt: 'Zafferano hospitality table lamp lighting a restaurant table',
     group: 'guest',
-    brandLogo: 'brand_partners/zafferano.png',
-    brandName: 'Zafferano',
   },
 ];
 
@@ -255,17 +253,6 @@ function HomePage() {
                 </button>
                 <h3 className="hx-solution-title">{solution.title}</h3>
                 <p className="hx-solution-text">{solution.description}</p>
-                {solution.brandLogo && (
-                  <div className="hx-solution-brand">
-                    <img
-                      src={getAssetUrl(solution.brandLogo)}
-                      alt={`${solution.brandName ?? 'Brand'} logo`}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span>{solution.brandName}</span>
-                  </div>
-                )}
                 <button
                   type="button"
                   className="hx-link"
