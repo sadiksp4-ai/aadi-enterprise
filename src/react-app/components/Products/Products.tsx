@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle, Search, X } from "lucide-react";
 import "./Products.css";
 import data from "../../../../aadi-info.json";
@@ -53,15 +54,6 @@ const GROUPS: { id: string; label: string }[] = [
   { id: "guest", label: "Guest Experience" },
   { id: "cold", label: "Refrigeration & Cold Chain" },
 ];
-
-const CATEGORY_IMAGES: Record<string, string> = {
-  kitchen: getAssetUrl("commercial_kitchen.jpg"),
-  fnb: getAssetUrl("f&b.jpg"),
-  hk: getAssetUrl("housekeeping.jpg"),
-  laundry: getAssetUrl("commercial_laundry.png"),
-  guest: getAssetUrl("housekeeping/in-room-collection.jpg"),
-  cold: getAssetUrl("elanpro.png"),
-};
 
 function groupFor(sourceId: string, name: string): { id: string; label: string } {
   if (sourceId === "commercial-kitchen") return { id: "kitchen", label: "Kitchen" };
@@ -452,32 +444,52 @@ const Products: React.FC = () => {
               Select a category to filter the catalogue. Counts reflect the current product data.
             </p>
           </div>
-          <div className="px-category-grid">
+          <div
+            className="px-category-pills no-scrollbar flex snap-x snap-mandatory items-center gap-2 overflow-x-auto pb-2 md:flex-wrap md:justify-start md:overflow-visible md:pb-0 md:snap-none"
+            role="tablist"
+            aria-label="Filter products by category"
+          >
             {GROUPS.map((group) => {
               const count =
                 group.id === "all"
                   ? ALL_PRODUCTS.length
                   : ALL_PRODUCTS.filter((p) => p.groupId === group.id).length;
+              const isActive = activeGroupId === group.id;
               return (
                 <button
                   key={group.id}
                   type="button"
-                  className={`px-category-tile${activeGroupId === group.id ? " is-active" : ""}`}
-                  aria-pressed={activeGroupId === group.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls="px-category-results"
+                  aria-label={`${group.label} (${count})`}
                   onClick={() => setGroup(group.id)}
+                  className={`relative inline-flex shrink-0 snap-start items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/25 focus-visible:ring-offset-2 ${
+                    isActive
+                      ? "border-transparent text-white"
+                      : "border-neutral-200 bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
+                  }`}
                 >
-                  {group.id !== "all" && (
-                    <img
-                      src={CATEGORY_IMAGES[group.id]}
-                      alt=""
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeTab"
                       aria-hidden="true"
-                      className="px-category-image"
-                      loading="lazy"
-                      decoding="async"
+                      className="absolute inset-0 rounded-full bg-[#1f2937] shadow-sm"
+                      transition={{ type: "spring", stiffness: 380, damping: 32, mass: 0.8 }}
                     />
                   )}
-                  <span className="px-category-label">{group.label}</span>
-                  <span className="px-category-count">{count}</span>
+                  <span className="relative z-10 flex items-center gap-2">
+                    {group.label}
+                    <span
+                      className={`inline-flex min-w-6 items-center justify-center rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums ${
+                        isActive
+                          ? "bg-white/20 text-white"
+                          : "bg-white text-neutral-600 ring-1 ring-neutral-200"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </span>
                 </button>
               );
             })}
@@ -485,7 +497,11 @@ const Products: React.FC = () => {
         </div>
       </section>
 
-      <section className="px-toolbar-section" aria-labelledby="px-results-title">
+      <section
+        id="px-category-results"
+        className="px-toolbar-section"
+        aria-labelledby="px-results-title"
+      >
         <div className="px-section-inner">
           <div className="px-toolbar">
             <label className="px-brand-filter">

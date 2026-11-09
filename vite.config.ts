@@ -1,4 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
+import { fileURLToPath } from "node:url";
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 
 /**
@@ -27,6 +29,11 @@ function spaRouteFallbacks(): Plugin {
 }
 
 export default defineConfig({
-	plugins: [react(), spaRouteFallbacks()],
+	plugins: [react(), tailwindcss(), spaRouteFallbacks()],
+	resolve: {
+		alias: {
+			"@": fileURLToPath(new URL("./src/react-app", import.meta.url)),
+		},
+	},
 	base: "/", // Custom domain serves from root
 });

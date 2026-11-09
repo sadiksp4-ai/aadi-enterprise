@@ -154,75 +154,17 @@
   margin: 0;
 }
 
-.px-category-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
+.px-category-pills {
+  -webkit-overflow-scrolling: touch;
 }
 
-.px-category-tile {
-  display: grid;
-  grid-template-columns: 3.25rem 1fr auto;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: left;
-  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.px-category-tile:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(36, 39, 32, 0.06);
-}
-
-.px-category-tile.is-active {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--surface);
-}
-
-.px-category-tile.is-active .px-category-count {
-  color: var(--surface);
-  background: rgba(247, 245, 240, 0.18);
-}
-
-.px-category-image {
-  width: 3.25rem;
-  height: 3.25rem;
-  object-fit: contain;
-  border-radius: 2px;
-  background: var(--surface);
-  padding: 0.35rem;
-  box-sizing: border-box;
-}
-
-.px-category-label {
-  font-family: var(--font-secondary);
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.3;
-  min-width: 0;
-}
-
-.px-category-count {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--ink-3);
-  background: rgba(23, 23, 23, 0.06);
-  border-radius: 999px;
-  padding: 0.15rem 0.6rem;
-  min-width: 1.6rem;
-  text-align: center;
-}
-
-.px-category-tile.is-active .px-category-label,
-.px-category-tile.is-active .px-category-count {
-  color: var(--surface);
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Toolbar */
@@ -829,10 +771,6 @@
   .px-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .px-category-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (min-width: 1024px) {
@@ -871,10 +809,6 @@
   .px-dl-row {
     grid-template-columns: 1fr;
     gap: 0.2rem;
-  }
-
-  .px-category-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
