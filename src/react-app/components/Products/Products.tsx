@@ -1,11 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle, Search, X } from "lucide-react";
+import { ArrowRight, MessageCircle, X } from "lucide-react";
 import "./Products.css";
 import data from "../../../../aadi-info.json";
 import { getAssetUrl } from "../../utils";
 import { getProductEnquiryMessage, getWhatsAppUrl } from "../../utils/whatsapp";
+import { AnimatedTabs, type TabItem } from "../ui/animated-tabs";
+import { Combobox, type ComboboxOption } from "../ui/combobox";
+import { ExpandableSearch } from "../ui/expandable-search";
+import { MorphingDialog } from "../ui/morphing-dialog";
+import { Skeleton } from "../ui/skeleton";
 
 interface ProductEntry {
   name: string;
@@ -106,6 +111,28 @@ const BRAND_OPTIONS: string[] = [...new Set(ALL_PRODUCTS.map((p) => p.name))].so
   a.localeCompare(b)
 );
 
+/** Shared-layout key — the card media and the details dialog morph between these. */
+function productKey(product: CatalogProduct): string {
+  return `px-product-${product.groupId}-${product.name}-${product.headline ?? ""}`;
+}
+
+const BRAND_COMBO_OPTIONS: ComboboxOption[] = [
+  { value: "all", label: "All brands" },
+  ...BRAND_OPTIONS.map((brand) => ({ value: brand, label: brand })),
+];
+
+const categoryCount = (groupId: string): number =>
+  groupId === "all"
+    ? ALL_PRODUCTS.length
+    : ALL_PRODUCTS.filter((p) => p.groupId === groupId).length;
+
+const CATEGORY_TABS: TabItem[] = GROUPS.map((group) => ({
+  id: group.id,
+  label: group.label,
+  badge: categoryCount(group.id),
+  ariaLabel: `${group.label} (${categoryCount(group.id)})`,
+}));
+
 interface ProductCardProps {
   product: CatalogProduct;
   onSelect: () => void;
@@ -115,26 +142,34 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, index }) => {
   const cardBrand = product.brandLabel ?? (product.headline ? product.name : product.groupLabel);
   const cardDescription = product.cardDescription ?? product.description;
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <article className="px-card" style={{ animationDelay: `${Math.min(index, 12) * 0.04}s` }}>
       {product.logo && (
-        <button
+        <motion.button
           type="button"
           className="px-card-media"
           onClick={onSelect}
           aria-label={`View details for ${product.headline ?? product.name}`}
           tabIndex={-1}
+          layoutId={productKey(product)}
         >
           {product.badge && <span className="px-card-badge">{product.badge}</span>}
+          {!imageLoaded && (
+            /* EasyUI skeleton: quiet sweep over the ivory tile until the logo decodes. */
+            <Skeleton className="absolute inset-0 rounded-[3px] bg-foreground [--sk:rgb(8_8_8/0.06)]" />
+          )}
           <img
             src={getAssetUrl(product.logo)}
             alt={`${product.name} product image`}
             className="px-card-image"
             loading="lazy"
             decoding="async"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(true)}
           />
-        </button>
+        </motion.button>
       )}
       <p className="px-card-brand">{cardBrand}</p>
       <h3 className="px-card-name">{product.headline ?? product.name}</h3>
@@ -159,29 +194,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, index }) =
   );
 };
 
-interface ProductSheetProps {
+interface ProductDialogProps {
   product: CatalogProduct | null;
+  open: boolean;
   onClose: () => void;
+  onExited: () => void;
 }
 
-const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
+/**
+ * Details sheet, now hosted by the EasyUI morphing dialog.
+ *
+ * The surface reuses the approved `.px-sheet` treatment (framer-motion owns
+ * the entrance, see `.px-sheet--motion`) and morphs from the clicked card's
+ * media via the shared `layoutId` (see `productKey`). Escape, scroll lock,
+ * focus trap and focus return are provided by the dialog component.
+ */
+const ProductDialog: React.FC<ProductDialogProps> = ({ product, open, onClose, onExited }) => {
   const navigate = useNavigate();
   const [overviewExpanded, setOverviewExpanded] = useState(false);
   const [featuresExpanded, setFeaturesExpanded] = useState(false);
-
-  useEffect(() => {
-    if (!product) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => {
-      document.body.style.overflow = previous;
-      window.removeEventListener("keydown", handleKey);
-    };
-  }, [product, onClose]);
 
   useEffect(() => {
     setOverviewExpanded(false);
@@ -189,10 +220,6 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
   }, [product?.name]);
 
   if (!product) return null;
-
-  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) onClose();
-  };
 
   const visibleFeatures =
     product.features && product.features.length > 6 && !featuresExpanded
@@ -202,30 +229,30 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
   const showOverviewToggle = product.description.length > 220;
 
   return (
-    <div
-      className="px-overlay"
-      onClick={handleOverlayClick}
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${product.name} details`}
+    <MorphingDialog
+      id={productKey(product)}
+      open={open}
+      onOpenChange={(next) => {
+        if (!next) onClose();
+      }}
+      onExitComplete={onExited}
+      title={`${product.headline ?? product.name} details`}
+      showHeader={false}
+      className="px-sheet px-sheet--motion"
+      closeClassName="px-sheet-close"
     >
-      <div className="px-sheet">
-        <button type="button" className="px-sheet-close" onClick={onClose} aria-label="Close details">
-          <X size={20} aria-hidden="true" />
-        </button>
-
-        <p className="px-eyebrow">{product.groupLabel}</p>
-        <h2 className="px-sheet-title">{product.headline ?? product.name}</h2>
-        {product.headline && <p className="px-sheet-headline">{product.name}</p>}
-        {product.logo && (
-          <img
-            src={getAssetUrl(product.logo)}
-            alt={`${product.name} product image`}
-            className="px-sheet-image"
-            loading="lazy"
-            decoding="async"
-          />
-        )}
+      <p className="px-eyebrow">{product.groupLabel}</p>
+      <h2 className="px-sheet-title">{product.headline ?? product.name}</h2>
+      {product.headline && <p className="px-sheet-headline">{product.name}</p>}
+      {product.logo && (
+        <img
+          src={getAssetUrl(product.logo)}
+          alt={`${product.name} product image`}
+          className="px-sheet-image"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
 
         <section className="px-spec px-spec-first" aria-label="Overview">
           <h3 className="px-spec-title">Overview</h3>
@@ -358,8 +385,7 @@ const ProductSheet: React.FC<ProductSheetProps> = ({ product, onClose }) => {
             WhatsApp Enquiry
           </a>
         </div>
-      </div>
-    </div>
+    </MorphingDialog>
   );
 };
 
@@ -371,6 +397,7 @@ const Products: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [activeBrand, setActiveBrand] = useState<string>("all");
   const [selected, setSelected] = useState<CatalogProduct | null>(null);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -399,6 +426,11 @@ const Products: React.FC = () => {
     setSearchParams(next, { replace: true });
   };
 
+  const selectProduct = (product: CatalogProduct) => {
+    setSelected(product);
+    setSheetOpen(true);
+  };
+
   return (
     <div className="px">
       <header className="px-hero">
@@ -412,27 +444,14 @@ const Products: React.FC = () => {
             kitchens, food and beverage service, housekeeping, hygiene,
             refrigeration and guest experience.
           </p>
-          <label className="px-search">
-            <Search size={18} aria-hidden="true" className="px-search-icon" />
-            <span className="px-visually-hidden">Search products, brands or product codes</span>
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search products, brands or product codes"
-              aria-label="Search products, brands or product codes"
-            />
-            {query && (
-              <button
-                type="button"
-                className="px-search-clear"
-                onClick={() => setQuery("")}
-                aria-label="Clear search"
-              >
-                <X size={15} aria-hidden="true" />
-              </button>
-            )}
-          </label>
+          {/* EasyUI expandable search on the approved `.px-search` shell —
+              grows from 36rem to the approved 40rem while typing; ⌘K focuses. */}
+          <ExpandableSearch
+            value={query}
+            onValueChange={setQuery}
+            placeholder="Search products, brands or product codes"
+            ariaLabel="Search products, brands or product codes"
+          />
         </div>
       </header>
 
@@ -444,56 +463,24 @@ const Products: React.FC = () => {
               Select a category to filter the catalogue. Counts reflect the current product data.
             </p>
           </div>
-          <div
-            className="px-category-pills no-scrollbar flex snap-x snap-mandatory items-center gap-2 overflow-x-auto pb-2 md:flex-wrap md:justify-start md:overflow-visible md:pb-0 md:snap-none"
-            role="tablist"
-            aria-label="Filter products by category"
-          >
-            {GROUPS.map((group) => {
-              const count =
-                group.id === "all"
-                  ? ALL_PRODUCTS.length
-                  : ALL_PRODUCTS.filter((p) => p.groupId === group.id).length;
-              const isActive = activeGroupId === group.id;
-              return (
-                <button
-                  key={group.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-controls="px-category-results"
-                  aria-label={`${group.label} (${count})`}
-                  onClick={() => setGroup(group.id)}
-                  className={`relative inline-flex shrink-0 snap-start items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/25 focus-visible:ring-offset-2 ${
-                    isActive
-                      ? "border-transparent text-white"
-                      : "border-neutral-200 bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeTab"
-                      aria-hidden="true"
-                      className="absolute inset-0 rounded-full bg-[#1f2937] shadow-sm"
-                      transition={{ type: "spring", stiffness: 380, damping: 32, mass: 0.8 }}
-                    />
-                  )}
-                  <span className="relative z-10 flex items-center gap-2">
-                    {group.label}
-                    <span
-                      className={`inline-flex min-w-6 items-center justify-center rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums ${
-                        isActive
-                          ? "bg-white/20 text-white"
-                          : "bg-white text-neutral-600 ring-1 ring-neutral-200"
-                      }`}
-                    >
-                      {count}
-                    </span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          {/* EasyUI animated tabs on the approved `.px-tab` pills — the strip
+              keeps its exact classes; the indicator slides via layoutId. */}
+          <AnimatedTabs
+            tabs={CATEGORY_TABS}
+            activeTab={activeGroupId}
+            onChange={setGroup}
+            renderContent={false}
+            layoutId="px-category-pill"
+            tabsContainerClassName="px-category-pills no-scrollbar flex snap-x snap-mandatory items-center gap-2 overflow-x-auto pb-2 md:flex-wrap md:justify-start md:overflow-visible md:pb-0 md:snap-none"
+            tabClassName="px-tab"
+            activeTabClassName="active"
+            indicatorClassName="px-tab-active-bg"
+            badgeClassName="px-tab-badge"
+            tablistAria={{
+              label: "Filter products by category",
+              controls: "px-category-results",
+            }}
+          />
         </div>
       </section>
 
@@ -504,21 +491,20 @@ const Products: React.FC = () => {
       >
         <div className="px-section-inner">
           <div className="px-toolbar">
-            <label className="px-brand-filter">
-              <span className="px-visually-hidden">Filter by brand</span>
-              <select
+            {/* EasyUI combobox replaces the native select on the approved
+                `.px-brand-filter` slot — searchable, keyboard-navigable. */}
+            <div className="px-brand-filter">
+              <Combobox
+                options={BRAND_COMBO_OPTIONS}
                 value={activeBrand}
-                onChange={(event) => setActiveBrand(event.target.value)}
+                onValueChange={(brand) => setActiveBrand(brand ?? "all")}
+                placeholder="All brands"
+                searchPlaceholder="Search brands…"
+                emptyText="No matching brands."
                 aria-label="Filter by brand"
-              >
-                <option value="all">All brands</option>
-                {BRAND_OPTIONS.map((brand) => (
-                  <option key={brand} value={brand}>
-                    {brand}
-                  </option>
-                ))}
-              </select>
-            </label>
+                className="w-full"
+              />
+            </div>
 
             {filtersActive && (
               <button type="button" className="px-link" onClick={clearFilters}>
@@ -548,7 +534,7 @@ const Products: React.FC = () => {
                   key={`${product.groupId}-${product.name}-${product.headline ?? ""}`}
                   product={product}
                   index={index}
-                  onSelect={() => setSelected(product)}
+                  onSelect={() => selectProduct(product)}
                 />
               ))}
             </div>
@@ -556,7 +542,14 @@ const Products: React.FC = () => {
         </div>
       </section>
 
-      <ProductSheet product={selected} onClose={() => setSelected(null)} />
+      {/* Keep `selected` until the closing morph finishes so the sheet can
+          morph back onto its card before the content unmounts. */}
+      <ProductDialog
+        product={selected}
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        onExited={() => setSelected(null)}
+      />
     </div>
   );
 };

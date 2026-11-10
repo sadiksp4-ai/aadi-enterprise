@@ -16,8 +16,8 @@
 .px-hero {
   padding: clamp(7rem, 10vw, 9rem) 0 clamp(2.5rem, 4vw, 4rem);
   background:
-    radial-gradient(ellipse at 88% 20%, rgba(226, 219, 204, 0.42), transparent 30rem),
-    var(--surface);
+    radial-gradient(ellipse at 88% 20%, rgba(12, 153, 144, 0.09), transparent 30rem),
+    var(--background);
 }
 
 .px-hero-inner {
@@ -34,7 +34,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   margin: 0 0 1rem;
   display: inline-flex;
   align-items: center;
@@ -81,7 +81,7 @@
 
 .px-search:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(184, 148, 91, 0.12);
+  box-shadow: 0 0 0 3px rgba(8, 127, 120, 0.18);
 }
 
 .px-search-icon {
@@ -131,7 +131,7 @@
   padding: clamp(2rem, 4vw, 3.5rem) 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  background: var(--surface-2);
+  background: var(--background-secondary);
 }
 
 .px-categories-head {
@@ -167,6 +167,73 @@
   display: none;
 }
 
+/* Category pills */
+.px-tab {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink-2);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.px-tab:hover {
+  border-color: var(--accent-hover);
+  color: var(--foreground);
+}
+
+.px-tab.active {
+  border-color: transparent;
+  color: var(--foreground);
+}
+
+.px-tab-active-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 4px 12px rgba(8, 127, 120, 0.22);
+}
+
+.px-tab-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.px-tab-badge {
+  display: inline-flex;
+  min-width: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: var(--background);
+  color: var(--ink-2);
+  border: 1px solid var(--border);
+}
+
+.px-tab-badge.active {
+  background: rgba(243, 239, 229, 0.15);
+  color: var(--foreground);
+  border-color: transparent;
+}
+
 /* Toolbar */
 .px-toolbar-section {
   padding: clamp(2rem, 4vw, 3.5rem) 0;
@@ -191,7 +258,7 @@
   width: 100%;
   appearance: none;
   background-color: var(--card);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238A713D' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230C9990' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   border: 1px solid var(--line);
@@ -220,13 +287,15 @@
   font-family: var(--font-secondary);
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
+  transition: color var(--transition-base);
 }
 
 .px-link:hover {
+  color: var(--foreground);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -292,7 +361,7 @@
   margin: 0 0 1.2rem;
   padding: 1.25rem;
   box-sizing: border-box;
-  background: var(--card);
+  background: var(--foreground);
   border: 1px solid var(--line);
   border-radius: 4px;
   cursor: pointer;
@@ -314,16 +383,16 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
-  background: rgba(247, 245, 240, 0.92);
-  border: 1px solid var(--line);
+  color: var(--foreground);
+  background: rgba(5, 9, 9, 0.78);
+  border: 1px solid var(--border);
   border-radius: 2px;
   pointer-events: none;
 }
 
 .px-card-media:hover {
-  border-color: var(--accent);
-  box-shadow: 0 12px 28px rgba(36, 39, 32, 0.08);
+  border-color: var(--accent-hover);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
 }
 
 .px-card-media:hover .px-card-image {
@@ -334,7 +403,6 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  mix-blend-mode: multiply;
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -437,24 +505,25 @@
 }
 
 .px-btn-primary {
-  background: var(--ink);
-  color: var(--surface);
-  border-color: var(--ink);
+  background: var(--accent);
+  color: var(--foreground);
+  border-color: var(--accent);
 }
 
 .px-btn-primary:hover {
-  background: #000;
-  color: var(--surface);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .px-btn-outline {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--ink-3);
+  color: var(--foreground);
+  border-color: var(--border);
 }
 
 .px-btn-outline:hover {
-  border-color: var(--ink);
+  border-color: var(--accent-hover);
+  background: rgba(12, 153, 144, 0.08);
 }
 
 /* Details sheet */
@@ -466,7 +535,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(23, 23, 23, 0.45);
+  background: rgba(5, 9, 9, 0.72);
   box-sizing: border-box;
   animation: px-overlay-in 0.25s ease both;
 }
@@ -549,7 +618,7 @@
   width: 100%;
   max-height: 18rem;
   object-fit: contain;
-  background: var(--card);
+  background: var(--foreground);
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 1.5rem;
@@ -746,24 +815,25 @@
 }
 
 .px-btn-primary {
-  background: var(--ink);
-  color: var(--surface);
-  border-color: var(--ink);
+  background: var(--accent);
+  color: var(--foreground);
+  border-color: var(--accent);
 }
 
 .px-btn-primary:hover {
-  background: #000;
-  color: var(--surface);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .px-btn-outline {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--ink-3);
+  color: var(--foreground);
+  border-color: var(--border);
 }
 
 .px-btn-outline:hover {
-  border-color: var(--ink);
+  border-color: var(--accent-hover);
+  background: rgba(12, 153, 144, 0.08);
 }
 
 /* Responsive */
@@ -821,4 +891,29 @@
   .px-sheet {
     animation: none;
   }
+}
+
+/* ---- EasyUI micro-interaction support (Phase 2) ---- */
+
+/* The morphing dialog hosts the approved sheet shell; framer-motion owns the
+   entrance/exit so the CSS keyframe animations are disabled on this variant.
+   The flat editorial sheet carries no drop shadow, so the EasyUI surface
+   default is neutralised as well. */
+.px-sheet--motion {
+  animation: none;
+  box-shadow: none;
+}
+
+/* AnimatedTabs renders the active state class on the tab button, not on the
+   badge — mirror the approved active badge treatment through the button. */
+.px-tab.active .px-tab-badge {
+  background: rgba(243, 239, 229, 0.15);
+  color: var(--foreground);
+  border-color: transparent;
+}
+
+/* Keep the approved flat close-button hover when the EasyUI dialog supplies
+   its own hover-fill utility. */
+.px-sheet-close:hover {
+  background: transparent;
 }
