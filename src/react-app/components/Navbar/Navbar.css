@@ -112,6 +112,11 @@
     color: #000000;
 }
 
+.navbar-links button.navbar-cta {
+    margin-left: 1.85rem;
+    white-space: nowrap;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -162,6 +167,10 @@
         margin-left: 1.15rem;
         padding: 0.68rem 1rem;
         font-size: 0.82rem;
+    }
+
+    .navbar-links button.navbar-cta {
+        margin-left: 1.15rem;
     }
 
     .navbar-logo-tag {
@@ -218,6 +227,10 @@
         margin: 1.25rem 0 0;
         font-family: var(--font-secondary);
         font-size: 0.95rem;
+    }
+
+    .navbar-links button.navbar-cta {
+        margin: 1.25rem 0 0;
     }
 }
 

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { getAssetUrl } from "../../utils";
+import { EnquiryDrawer } from "../EnquiryDrawer";
+import { MorphingButton } from "../ui/morphing-button";
+import { DirectionalTooltip } from "../ui/directional-tooltip";
 
 const NAV_LINKS = [
   { to: "/about", label: "About" },
@@ -14,6 +17,7 @@ const NAV_LINKS = [
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -85,26 +89,29 @@ const Navbar: React.FC = () => {
             {label}
           </Link>
         ))}
-        <Link
-          to="/contact"
-          onClick={closeMenu}
-          className="navbar-cta bg-teal-500 hover:bg-teal-400 text-black font-semibold px-4 py-2 rounded-lg transition-all"
-        >
-          Request a Quote
-        </Link>
+        <MorphingButton
+          idleText="Request a Quote"
+          variant="primary"
+          className="navbar-cta text-xs sm:text-sm"
+          onClick={() => setIsQuoteOpen(true)}
+        />
       </div>
-      <button
-        type="button"
-        className={`hamburger${isMenuOpen ? " open" : ""}`}
-        onClick={toggleMenu}
-        aria-expanded={isMenuOpen}
-        aria-controls="primary-navigation"
-        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-      >
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </button>
+      <DirectionalTooltip content={isMenuOpen ? "Close menu" : "Open menu"} side="bottom" delayDuration={200}>
+        <button
+          type="button"
+          className={`hamburger${isMenuOpen ? " open" : ""}`}
+          onClick={toggleMenu}
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+        >
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </button>
+      </DirectionalTooltip>
+
+      <EnquiryDrawer open={isQuoteOpen} onOpenChange={setIsQuoteOpen} />
     </nav>
   );
 };
