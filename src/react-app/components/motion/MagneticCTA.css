@@ -1,0 +1,55 @@
+/* MagneticCTA — EasyUI magnetic pull layered over the approved .hx-btn CTA
+   system.
+
+   Hover lift (-2px) and press travel (+1px) stay CSS-driven, but they live
+   on this wrapper span while framer-motion springs drive the button's own
+   transform (the magnetic pull). Keeping the two transform channels on
+   separate elements prevents CSS :hover/inline-style conflicts.
+
+   The approved .hx-btn rules are unlayered CSS and therefore win over the
+   vendored EasyUI utilities on the button (background, border, padding,
+   radius, gap, shadow, focus), so no EasyUI colour ever reaches the page. */
+
+.hx-cta-magnetic {
+  display: inline-flex;
+  transition: transform var(--transition-base);
+}
+
+.hx-cta-magnetic:hover {
+  transform: translateY(-2px);
+}
+
+.hx-cta-magnetic:active {
+  transform: translateY(1px);
+}
+
+/* The button's transform is written imperatively by framer-motion every
+   frame — keep the transform channel out of the CSS transition so the
+   magnetic pull stays crisp, and keep the approved icon/label rhythm. */
+.hx-cta-magnetic .hx-btn {
+  transition-property: background-color, border-color, color, box-shadow;
+}
+
+.hx-cta-magnetic .hx-btn > span {
+  gap: 0.65rem;
+}
+
+/* Mobile: hero/CTA action rows expect full-width buttons. */
+@media (max-width: 768px) {
+  .hx-hero-actions .hx-cta-magnetic,
+  .hx-cta-actions .hx-cta-magnetic {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-cta-magnetic,
+  .hx-cta-magnetic .hx-btn {
+    transition: none;
+  }
+
+  .hx-cta-magnetic:hover,
+  .hx-cta-magnetic:active {
+    transform: none;
+  }
+}

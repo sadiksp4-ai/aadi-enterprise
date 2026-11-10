@@ -15,6 +15,13 @@ import {
   getGeneralEnquiryMessage,
   getWhatsAppUrl,
 } from '../utils/whatsapp';
+import { MagneticCTA } from '../components/motion/MagneticCTA';
+import { SpotlightCard } from '../components/ui/spotlight-card';
+import { PeekCard } from '../components/ui/peek-card';
+import { RevealCard } from '../components/ui/reveal-card';
+import { StoryCards } from '../components/ui/story-card';
+import { useIsMobileViewport } from '../lib/use-media-query';
+import catalog from '../../../aadi-info.json';
 
 const solutionsData = [
   {
@@ -23,6 +30,7 @@ const solutionsData = [
     title: 'Commercial Kitchen Solutions',
     desc: 'High-performance cooking ranges, refrigeration, combi ovens, and custom stainless prep stations.',
     href: '/products?group=kitchen',
+    peekCategory: 'commercial-kitchen',
     image: getAssetUrl('images/solutions/commercial-kitchen.webp'),
     alt: 'Professional commercial kitchen with stainless steel equipment',
   },
@@ -32,6 +40,7 @@ const solutionsData = [
     title: 'Food & Beverage Service',
     desc: 'Porcelain tableware, premium glassware, cutlery, and modular buffet presentation systems.',
     href: '/products?group=fnb',
+    peekCategory: 'fnb-service',
     image: getAssetUrl('images/solutions/food-beverage.webp'),
     alt: 'Premium tabletop and buffet presentation setup',
   },
@@ -41,6 +50,7 @@ const solutionsData = [
     title: 'Housekeeping & Floor Care',
     desc: 'Commercial ride-on and walk-behind scrubbers, high-pressure washers, wet/dry vacuums, and janitorial carts.',
     href: '/products?group=hk',
+    peekCategory: 'housekeeping-solutions',
     image: getAssetUrl('images/solutions/housekeeping-scrubbers.webp'),
     alt: 'Commercial floor scrubbers and cleaning machines in a shopping mall',
   },
@@ -50,6 +60,7 @@ const solutionsData = [
     title: 'Guest Room & In-Room Amenities',
     desc: 'Designer hospitality lighting, in-room safes, kettles, minibar units, and premium guest accessories.',
     href: '/products?group=guest',
+    peekCategory: 'in-room-amenities',
     image: getAssetUrl('images/solutions/guestroom-amenities.webp'),
     alt: 'Housekeeper preparing a premium hotel guest room',
   },
@@ -59,6 +70,7 @@ const solutionsData = [
     title: 'Commercial Laundry Solutions',
     desc: 'Industrial washers, dryers, ironers, and complete linen care systems for high-throughput operations.',
     href: '/products?group=laundry',
+    peekCategory: 'laundry-solutions',
     image: getAssetUrl('images/solutions/commercial-laundry.webp'),
     alt: 'Commercial laundry solutions for hospitality linen operations',
   },
@@ -68,6 +80,7 @@ const solutionsData = [
     title: 'Banquet Operations',
     desc: 'Mobile buffet stations, display risers, chafing dishes, and event service equipment for seamless delivery.',
     href: '/products?group=fnb',
+    peekCategory: 'fnb-service',
     image: getAssetUrl('images/solutions/banquet-operations.webp'),
     alt: 'Banquet display risers and food presentation equipment',
   },
@@ -158,11 +171,42 @@ const partnerBrands = [
   { name: 'Winterhalter', logo: 'assets/brands/winterhalter.png' },
 ];
 
+/* Range previews for the solution-card PeekCard hovers — read from the
+   single product catalogue source (aadi-info.json), never duplicated. */
+interface PeekCatalogBrand {
+  name: string;
+}
+
+interface PeekCatalogCategory {
+  id: string;
+  title: string;
+  brands: PeekCatalogBrand[];
+}
+
+const peekCatalog = (
+  catalog as { productCategories: PeekCatalogCategory[] }
+).productCategories;
+
+const peekCategoryById = new Map(
+  peekCatalog.map((category) => [category.id, category])
+);
+
+/* Mobile-only brand carousel input (<md viewport; desktop keeps the tile
+   grid). Logos reuse the exact approved tile treatment via the tile
+   variant. */
+const partnerBrandTiles = partnerBrands.map((brand) => ({
+  id: brand.name,
+  title: brand.name,
+  image: getAssetUrl(brand.logo),
+  imageAlt: `${brand.name} logo`,
+}));
+
 const ICON_PROPS = { size: 24, strokeWidth: 1.5 } as const;
 
 function HomePage() {
   const navigate = useNavigate();
   const whatsappUrl = getWhatsAppUrl(getGeneralEnquiryMessage());
+  const isMobileViewport = useIsMobileViewport();
 
   return (
     <div
@@ -204,21 +248,17 @@ function HomePage() {
               From professional kitchens to exceptional guest experiences.
             </p>
             <div className="hx-hero-actions">
-              <button
-                type="button"
-                className="hx-btn hx-btn-primary"
-                onClick={() => navigate('/products')}
-              >
+              <MagneticCTA type="button" onClick={() => navigate('/products')}>
                 Explore Solutions
                 <ArrowRight size={20} aria-hidden="true" />
-              </button>
-              <button
+              </MagneticCTA>
+              <MagneticCTA
                 type="button"
-                className="hx-btn hx-btn-outline"
+                variant="outline"
                 onClick={() => navigate('/contact')}
               >
                 Request a Consultation
-              </button>
+              </MagneticCTA>
             </div>
           </div>
         </div>
@@ -248,32 +288,82 @@ function HomePage() {
                 className="hx-solution-card bg-[#121214] text-white border border-white/10"
                 style={{ backgroundColor: '#121214', color: '#ffffff' }}
               >
-                <Link
-                  to={solution.href}
-                  className="hx-solution-link"
-                  aria-label={`Explore ${solution.title}`}
+                {/* EasyUI spotlight: cursor-following border illumination.
+                    Visuals stay on the approved .hx-solution-link below —
+                    the wrapper is fully transparent (EasyUI hexes overridden). */}
+                <SpotlightCard
+                  className="h-full rounded-[0.35rem] border-transparent bg-transparent p-0 hover:border-transparent overflow-visible"
                 >
-                  <div className="hx-solution-media">
-                    <img
-                      src={solution.image}
-                      alt={solution.alt}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="hx-solution-meta" aria-hidden="true">
-                      <span className="hx-solution-id">{solution.id}</span>
-                      <span className="hx-solution-tag">{solution.tag}</span>
+                  <Link
+                    to={solution.href}
+                    className="hx-solution-link"
+                    aria-label={`Explore ${solution.title}`}
+                  >
+                    <div className="hx-solution-media">
+                      <img
+                        src={solution.image}
+                        alt={solution.alt}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="hx-solution-meta" aria-hidden="true">
+                        <span className="hx-solution-id">{solution.id}</span>
+                        <span className="hx-solution-tag">{solution.tag}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="hx-solution-body">
-                    <h3 className="hx-solution-title">{solution.title}</h3>
-                    <p className="hx-solution-text">{solution.desc}</p>
-                    <span className="hx-solution-cta" aria-hidden="true">
-                      Explore Solutions
-                      <ArrowRight size={15} />
-                    </span>
-                  </div>
-                </Link>
+                    <div className="hx-solution-body">
+                      <h3 className="hx-solution-title">{solution.title}</h3>
+                      <p className="hx-solution-text">{solution.desc}</p>
+                      {/* EasyUI peek: hover/focus preview of the range behind
+                          this card. Clicks still navigate through the link. */}
+                      <PeekCard
+                        className="mt-auto"
+                        renderContent={() => {
+                          const category = peekCategoryById.get(
+                            solution.peekCategory
+                          );
+                          const brands = category?.brands ?? [];
+                          return (
+                            <div className="space-y-2.5">
+                              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-text-muted">
+                                Range preview
+                              </p>
+                              <p className="text-sm font-medium text-foreground">
+                                {category?.title ?? solution.title}
+                              </p>
+                              {brands.length > 0 && (
+                                <ul className="space-y-1.5">
+                                  {brands.slice(0, 4).map((brand) => (
+                                    <li
+                                      key={brand.name}
+                                      className="flex items-center gap-2 text-xs text-text-secondary"
+                                    >
+                                      <span
+                                        className="h-1 w-1 rounded-full bg-accent"
+                                        aria-hidden="true"
+                                      />
+                                      {brand.name}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                              {brands.length > 4 && (
+                                <p className="text-[11px] text-text-muted">
+                                  + {brands.length - 4} more in this range
+                                </p>
+                              )}
+                            </div>
+                          );
+                        }}
+                      >
+                        <span className="hx-solution-cta" aria-hidden="true">
+                          Explore Solutions
+                          <ArrowRight size={15} />
+                        </span>
+                      </PeekCard>
+                    </div>
+                  </Link>
+                </SpotlightCard>
               </li>
             ))}
           </ul>
@@ -304,14 +394,13 @@ function HomePage() {
               Cordless, rechargeable and made to move. Zafferano portable lamps bring
               adaptable colour and warmth to restaurant tables, hotel rooms and lounges.
             </p>
-            <button
+            <MagneticCTA
               type="button"
-              className="hx-btn hx-btn-primary"
               onClick={() => navigate('/products?group=guest')}
             >
               Explore Tabletop Lighting
               <ArrowRight size={20} aria-hidden="true" />
-            </button>
+            </MagneticCTA>
           </div>
         </div>
       </section>
@@ -378,33 +467,41 @@ function HomePage() {
 
           <div className="hx-cases-grid">
             {caseStudies.map((project) => (
-              <article
+              /* EasyUI reveal: gentle 6° hover tilt with an ivory glare.
+                 The approved .hx-case-card visuals stay on the article —
+                 the motion wrapper is fully transparent (hexes overridden). */
+              <RevealCard
                 key={project.id}
-                className="hx-case-card bg-[#121214] text-white border border-white/10"
-                style={{ backgroundColor: '#121214', color: '#ffffff' }}
+                maxTilt={6}
+                className="h-full rounded-md border-transparent bg-transparent p-0 hover:border-transparent"
               >
-                <div className="hx-case-media">
-                  <img
-                    src={project.image}
-                    alt={project.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span className="hx-case-badge">{project.category}</span>
-                </div>
-                <p className="hx-case-meta">
-                  <span className="hx-case-client">{project.client}</span>
-                  {' · '}
-                  <span className="hx-case-location">{project.location}</span>
-                </p>
-                <h3 className="hx-case-title">{project.title}</h3>
-                <p className="hx-case-text">{project.description}</p>
-                <ul className="hx-case-specs">
-                  {project.specs.map((spec) => (
-                    <li key={spec}>{spec}</li>
-                  ))}
-                </ul>
-              </article>
+                <article
+                  className="hx-case-card bg-[#121214] text-white border border-white/10"
+                  style={{ backgroundColor: '#121214', color: '#ffffff' }}
+                >
+                  <div className="hx-case-media">
+                    <img
+                      src={project.image}
+                      alt={project.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="hx-case-badge">{project.category}</span>
+                  </div>
+                  <p className="hx-case-meta">
+                    <span className="hx-case-client">{project.client}</span>
+                    {' · '}
+                    <span className="hx-case-location">{project.location}</span>
+                  </p>
+                  <h3 className="hx-case-title">{project.title}</h3>
+                  <p className="hx-case-text">{project.description}</p>
+                  <ul className="hx-case-specs">
+                    {project.specs.map((spec) => (
+                      <li key={spec}>{spec}</li>
+                    ))}
+                  </ul>
+                </article>
+              </RevealCard>
             ))}
           </div>
         </div>
@@ -432,22 +529,36 @@ function HomePage() {
               and commercial machinery from leading global manufacturers.
             </p>
           </header>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
-            {partnerBrands.map((brand) => (
-              <div
-                key={brand.name}
-                className="group flex items-center justify-center p-4 rounded-xl bg-white shadow-sm border border-white/10 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/60 h-20 sm:h-24"
-              >
-                <img
-                  src={getAssetUrl(brand.logo)}
-                  alt={brand.name}
-                  className="max-h-10 sm:max-h-12 w-auto max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            ))}
-          </div>
+          {/* EasyUI story cards: mobile-only (<md) brand carousel in the
+              approved tile treatment. Desktop keeps the unchanged grid. */}
+          {isMobileViewport ? (
+            <StoryCards
+              variant="tile"
+              itemLabel="Brand"
+              title=""
+              subtitle=""
+              aria-label="Brand partners"
+              enableWheelScroll={false}
+              cards={partnerBrandTiles}
+            />
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
+              {partnerBrands.map((brand) => (
+                <div
+                  key={brand.name}
+                  className="group flex items-center justify-center p-4 rounded-xl bg-white shadow-sm border border-white/10 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-black/60 h-20 sm:h-24"
+                >
+                  <img
+                    src={getAssetUrl(brand.logo)}
+                    alt={brand.name}
+                    className="max-h-10 sm:max-h-12 w-auto max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -469,14 +580,10 @@ function HomePage() {
             hospitality solutions.
           </p>
           <div className="hx-cta-actions">
-            <button
-              type="button"
-              className="hx-btn hx-btn-primary"
-              onClick={() => navigate('/contact')}
-            >
+            <MagneticCTA type="button" onClick={() => navigate('/contact')}>
               Request a Consultation
               <ArrowRight size={20} aria-hidden="true" />
-            </button>
+            </MagneticCTA>
             <a
               href={whatsappUrl}
               target="_blank"
