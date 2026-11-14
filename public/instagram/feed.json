@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-11-13T19:51:45.231Z",
+  "updatedAt": "2026-11-14T06:43:04.922Z",
   "posts": [
+    {
+      "id": "18110681950948449",
+      "image": "instagram/18110681950948449.jpg",
+      "url": "https://www.instagram.com/reel/DftZ_GJsNAN/",
+      "caption": "Italian design, zero cords, pure table ambiance. ✨🇮🇹\n\nMeet the Zafferano Doldina Pro—touch-dimmable, weather-resistant, and built for modern hospitality.\n\nDM Aadi Enterprises for commercial orders and hotel pricing. 📩",
+      "mediaType": "VIDEO",
+      "productType": "REELS",
+      "publishedAt": "2026-11-14T05:01:54+0000"
+    },
     {
       "id": "18132080665837294",
       "image": "instagram/18132080665837294.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "CAROUSEL_ALBUM",
       "productType": "FEED",
       "publishedAt": "2026-10-26T07:19:08+0000"
-    },
-    {
-      "id": "18127200907861574",
-      "image": "instagram/18127200907861574.jpg",
-      "url": "https://www.instagram.com/p/Dewt_6_AhPh/",
-      "caption": "A little light. A little more possibility. ✨\n\nMeet Poldina Reverso Pro by Zafferano — where thoughtful design brings lighting and functionality together.\n\nMore than a table lamp, its distinctive form opens up creative po",
-      "mediaType": "IMAGE",
-      "productType": "FEED",
-      "publishedAt": "2026-10-21T15:22:04+0000"
     }
   ]
 }
