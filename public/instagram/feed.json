@@ -1,6 +1,15 @@
 {
-  "updatedAt": "2026-11-18T20:41:22.220Z",
+  "updatedAt": "2026-11-19T07:39:01.399Z",
   "posts": [
+    {
+      "id": "18129946339901466",
+      "image": "instagram/18129946339901466.jpg",
+      "url": "https://www.instagram.com/p/Df6VgkFmNHY/",
+      "caption": "Professional floor care starts with the right equipment. ⚡\n\nMeet the Kärcher BDS 43/165 C Classic — a versatile single-disc floor cleaning machine featuring an 800 W motor and 430 mm working width.\n\nDesigned for practica",
+      "mediaType": "CAROUSEL_ALBUM",
+      "productType": "FEED",
+      "publishedAt": "2026-11-19T05:31:49+0000"
+    },
     {
       "id": "18349442176284448",
       "image": "instagram/18349442176284448.jpg",
@@ -45,15 +54,6 @@
       "mediaType": "CAROUSEL_ALBUM",
       "productType": "FEED",
       "publishedAt": "2026-10-30T06:25:08+0000"
-    },
-    {
-      "id": "18108762350644655",
-      "image": "instagram/18108762350644655.jpg",
-      "url": "https://www.instagram.com/p/DfEYceElXj4/",
-      "caption": "Another successful delivery by Aadi Enterprises 🖤💛\n\nPowering cleaner, smarter spaces with Kärcher Professional Cleaning Solutions.\n\n🤝 Trusted partnerships. Reliable solutions. Professional results.\n\n#AadiEnterprises #",
-      "mediaType": "CAROUSEL_ALBUM",
-      "productType": "FEED",
-      "publishedAt": "2026-10-29T06:38:29+0000"
     }
   ]
 }
