@@ -16,10 +16,10 @@
 .section-title {
     font-family: var(--font-primary);
     font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 600;
-    color: var(--primary-gold);
+    font-weight: 700;
+    color: var(--foreground);
     margin-bottom: var(--space-lg);
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
     text-align: center;
     position: relative;
     display: inline-block;
@@ -32,7 +32,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
-    height: 2px;
-    background: var(--gradient-gold);
+    height: 3px;
+    background: var(--accent);
     border-radius: 2px;
 }

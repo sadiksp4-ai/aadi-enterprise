@@ -200,3 +200,6 @@ dist
 
 # Gemini
 .gemini/
+
+# Confidential commercial pricing workbook (kept outside the repository)
+/Aadi Master Product Sheet.xlsx

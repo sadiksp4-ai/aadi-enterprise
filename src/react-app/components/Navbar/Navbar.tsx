@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
     >
       <Link to="/" className="navbar-logo-link" onClick={closeMenu} aria-label="Aadi Enterprises — home">
         <img
-          src={getAssetUrl("logo.png")}
+          src={getAssetUrl("logo.webp")}
           alt=""
           className="navbar-logo-img"
           width={44}

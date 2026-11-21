@@ -1,422 +1,400 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle, X } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  MessageCircle,
+  Snowflake,
+  X,
+} from "lucide-react";
 import "./Products.css";
-import data from "../../../../aadi-info.json";
 import { getAssetUrl } from "../../utils";
-import { getProductEnquiryMessage, getWhatsAppUrl } from "../../utils/whatsapp";
+import {
+  getGeneralEnquiryMessage,
+  getProductEnquiryMessage,
+  getWhatsAppUrl,
+} from "../../utils/whatsapp";
+import { matchesCatalogueQuery } from "../../lib/catalogue-search";
+import { usePrefersReducedMotion } from "../../lib/use-reduced-motion";
+import {
+  EASE_OUT,
+  SECTION_VIEWPORT,
+  heroReveal,
+  revealItem,
+  sectionHeadVariants,
+  staggerParent,
+} from "../../lib/catalogue-motion";
+import { brandDirectory } from "../../data/brand-directory";
+import { CATALOGUE_GROUPS } from "../../data/catalogue-groups";
+import {
+  buildRecordSections,
+  selectRecordDescription,
+} from "../../data/catalogue-display";
+import { getFeaturedCatalogue } from "../../data/featured-products";
+import type {
+  CatalogueGroupId,
+  CataloguePendingRecord,
+  CatalogueRange,
+  CatalogueRecord,
+} from "../../data/catalogue.types";
 import { AnimatedTabs, type TabItem } from "../ui/animated-tabs";
 import { Combobox, type ComboboxOption } from "../ui/combobox";
 import { ExpandableSearch } from "../ui/expandable-search";
 import { MorphingDialog } from "../ui/morphing-dialog";
-import { Skeleton } from "../ui/skeleton";
 
-interface ProductEntry {
-  name: string;
-  logo?: string;
-  brandLabel?: string;
-  badge?: string;
-  highlights?: string[];
-  headline?: string;
-  description: string;
-  cardDescription?: string;
-  subDescription?: string;
-  features?: string[];
-  idealFor?: string[];
-  closing?: string;
-  extraInfo?: Record<string, string | string[]>;
-  subItems?: {
-    title: string;
-    description?: string;
-    items: string[];
-  }[];
-  advantages?: string[];
+/* -------------------------------------------------------------------------
+ * View model built from the validated data layer.
+ *
+ * Every confirmed range and every pending record is represented once, so the
+ * compact full-catalogue disclosure can preserve the complete search surface
+ * without repeating catalogue content on the discovery sections above it.
+ * ---------------------------------------------------------------------- */
+
+type EntryKind = "range" | "collection" | "service" | "unverified";
+
+interface CatalogueEntry {
+  readonly key: string;
+  readonly kind: EntryKind;
+  readonly record: CatalogueRecord;
+  readonly range?: CatalogueRange;
+  readonly brandName?: string;
+  readonly brandSlug?: string;
+  readonly title: string;
+  readonly groupId: CatalogueGroupId;
+  readonly groupLabel: string;
+  readonly categoryTitle: string;
+  readonly kindLabel: string;
+  readonly description?: string;
 }
 
-interface RawCategory {
-  id: string;
-  title: string;
-  description?: string;
-  brands: ProductEntry[];
-}
-
-const rawCategories = (data as { productCategories: RawCategory[] }).productCategories;
-
-interface CatalogProduct extends ProductEntry {
-  /** Customer-facing group label (UI mapping only — raw records untouched). */
-  groupId: string;
-  groupLabel: string;
-  sourceCategoryTitle: string;
-}
-
-const GROUPS: { id: string; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "kitchen", label: "Kitchen" },
-  { id: "fnb", label: "Food & Beverage" },
-  { id: "hk", label: "Housekeeping & Hygiene" },
-  { id: "laundry", label: "Laundry" },
-  { id: "guest", label: "Guest Experience" },
-  { id: "cold", label: "Refrigeration & Cold Chain" },
-];
-
-function groupFor(sourceId: string, name: string): { id: string; label: string } {
-  if (sourceId === "commercial-kitchen") return { id: "kitchen", label: "Kitchen" };
-  if (sourceId === "fnb-service") return { id: "fnb", label: "Food & Beverage" };
-  if (sourceId === "housekeeping-solutions") return { id: "hk", label: "Housekeeping & Hygiene" };
-  if (sourceId === "laundry-solutions") return { id: "laundry", label: "Laundry" };
-  if (sourceId === "leather-products") return { id: "guest", label: "Guest Experience" };
-  if (sourceId === "in-room-amenities") {
-    if (name === "Elanpro" || name === "Ice Make") return { id: "cold", label: "Refrigeration & Cold Chain" };
-    return { id: "guest", label: "Guest Experience" };
-  }
-  return { id: "guest", label: "Guest Experience" };
-}
-
-const ALL_PRODUCTS: CatalogProduct[] = rawCategories.flatMap((cat) =>
-  cat.brands.map((brand) => {
-    const group = groupFor(cat.id, brand.name);
-    return {
-      ...brand,
-      groupId: group.id,
-      groupLabel: group.label,
-      sourceCategoryTitle: brand.name === "Ice Make" ? "Refrigeration & Cold Chain" : cat.title,
-    };
-  })
-);
-
-function haystack(product: CatalogProduct): string {
-  const parts: string[] = [product.name, product.headline ?? "", product.description];
-  if (product.brandLabel) parts.push(product.brandLabel);
-  if (product.cardDescription) parts.push(product.cardDescription);
-  if (product.subDescription) parts.push(product.subDescription);
-  if (product.features) parts.push(product.features.join(" "));
-  if (product.advantages) parts.push(product.advantages.join(" "));
-  if (product.closing) parts.push(product.closing);
-  if (product.idealFor) parts.push(product.idealFor.join(" "));
-  if (product.subItems) {
-    for (const sub of product.subItems) {
-      parts.push(sub.title, sub.description ?? "", sub.items.join(" "));
-    }
-  }
-  if (product.extraInfo) {
-    for (const [key, value] of Object.entries(product.extraInfo)) {
-      parts.push(key, Array.isArray(value) ? value.join(" ") : value);
-    }
-  }
-  return parts.join(" ").toLowerCase();
-}
-
-const BRAND_OPTIONS: string[] = [...new Set(ALL_PRODUCTS.map((p) => p.name))].sort((a, b) =>
-  a.localeCompare(b)
-);
-
-/** Shared-layout key — the card media and the details dialog morph between these. */
-function productKey(product: CatalogProduct): string {
-  return `px-product-${product.groupId}-${product.name}-${product.headline ?? ""}`;
-}
-
-const BRAND_COMBO_OPTIONS: ComboboxOption[] = [
-  { value: "all", label: "All brands" },
-  ...BRAND_OPTIONS.map((brand) => ({ value: brand, label: brand })),
-];
-
-const categoryCount = (groupId: string): number =>
-  groupId === "all"
-    ? ALL_PRODUCTS.length
-    : ALL_PRODUCTS.filter((p) => p.groupId === groupId).length;
-
-const CATEGORY_TABS: TabItem[] = GROUPS.map((group) => ({
-  id: group.id,
-  label: group.label,
-  badge: categoryCount(group.id),
-  ariaLabel: `${group.label} (${categoryCount(group.id)})`,
-}));
-
-interface ProductCardProps {
-  product: CatalogProduct;
-  onSelect: () => void;
-  index: number;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, index }) => {
-  const cardBrand = product.brandLabel ?? (product.headline ? product.name : product.groupLabel);
-  const cardDescription = product.cardDescription ?? product.description;
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  return (
-    <article className="px-card" style={{ animationDelay: `${Math.min(index, 12) * 0.04}s` }}>
-      {product.logo && (
-        <motion.button
-          type="button"
-          className="px-card-media"
-          onClick={onSelect}
-          aria-label={`View details for ${product.headline ?? product.name}`}
-          tabIndex={-1}
-          layoutId={productKey(product)}
-        >
-          {product.badge && <span className="px-card-badge">{product.badge}</span>}
-          {!imageLoaded && (
-            /* EasyUI skeleton: quiet sweep over the ivory tile until the logo decodes. */
-            <Skeleton className="absolute inset-0 rounded-[3px] bg-foreground [--sk:rgb(8_8_8/0.06)]" />
-          )}
-          <img
-            src={getAssetUrl(product.logo)}
-            alt={`${product.name} product image`}
-            className="px-card-image"
-            loading="lazy"
-            decoding="async"
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageLoaded(true)}
-          />
-        </motion.button>
-      )}
-      <p className="px-card-brand">{cardBrand}</p>
-      <h3 className="px-card-name">{product.headline ?? product.name}</h3>
-      <p className="px-card-desc">{cardDescription}</p>
-      <div className="px-card-actions">
-        <button type="button" className="px-link" onClick={onSelect}>
-          View Details
-          <ArrowRight size={15} aria-hidden="true" />
-        </button>
-        <a
-          href={getWhatsAppUrl(getProductEnquiryMessage(product.name, product.groupLabel))}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-wa-link"
-          aria-label={`Enquire about ${product.name} on WhatsApp`}
-        >
-          <MessageCircle size={15} aria-hidden="true" />
-          WhatsApp Enquiry
-        </a>
-      </div>
-    </article>
-  );
+const KIND_LABELS: Record<EntryKind, string> = {
+  range: "Product range",
+  collection: "Curated collection",
+  service: "Aadi service",
+  unverified: "Verification pending",
 };
 
-interface ProductDialogProps {
-  product: CatalogProduct | null;
-  open: boolean;
-  onClose: () => void;
-  onExited: () => void;
+function pendingKind(
+  classification: CataloguePendingRecord["classification"]
+): EntryKind {
+  if (classification === "service") return "service";
+  if (classification === "unverified") return "unverified";
+  return "collection";
 }
+
+const RANGE_ENTRIES: CatalogueEntry[] = brandDirectory.ranges.map((range) => {
+  const brand = brandDirectory.brandById.get(range.brandId);
+  return {
+    key: `range:${range.id}`,
+    kind: "range",
+    record: range.record,
+    range,
+    brandName: brand?.displayName,
+    brandSlug: range.brandSlug,
+    title: range.displayName,
+    groupId: range.record.groupId,
+    groupLabel: range.record.groupLabel,
+    categoryTitle: range.record.categoryTitle,
+    kindLabel: KIND_LABELS.range,
+    description: selectRecordDescription(range.record),
+  };
+});
+
+const PENDING_ENTRIES: CatalogueEntry[] = brandDirectory.pendingRecords.map(
+  (pending) => {
+    const kind = pendingKind(pending.classification);
+    return {
+      key: `pending:${pending.record.slug}`,
+      kind,
+      record: pending.record,
+      title: pending.record.name,
+      groupId: pending.record.groupId,
+      groupLabel: pending.record.groupLabel,
+      categoryTitle: pending.record.categoryTitle,
+      kindLabel: KIND_LABELS[kind],
+      description: selectRecordDescription(pending.record),
+    };
+  }
+);
+
+/** Legacy order is preserved so search results feel identical to before. */
+const ALL_ENTRIES: CatalogueEntry[] = [...RANGE_ENTRIES, ...PENDING_ENTRIES].sort(
+  (a, b) => a.record.sourceIndex - b.record.sourceIndex
+);
+
+/* -------------------------------------------------------------------------
+ * Discovery content
+ * ---------------------------------------------------------------------- */
 
 /**
- * Details sheet, now hosted by the EasyUI morphing dialog.
- *
- * The surface reuses the approved `.px-sheet` treatment (framer-motion owns
- * the entrance, see `.px-sheet--motion`) and morphs from the clicked card's
- * media via the shared `layoutId` (see `productKey`). Escape, scroll lock,
- * focus trap and focus return are provided by the dialog component.
+ * The three brands with published product catalogues. Counts are read from the
+ * approved featured catalogue at render time — never hard-coded — so the tiles
+ * cannot drift from the collection pages.
  */
-const ProductDialog: React.FC<ProductDialogProps> = ({ product, open, onClose, onExited }) => {
-  const navigate = useNavigate();
-  const [overviewExpanded, setOverviewExpanded] = useState(false);
-  const [featuresExpanded, setFeaturesExpanded] = useState(false);
+const FEATURED_COLLECTION_IDS = ["karcher", "tramontina", "dolphy"] as const;
 
-  useEffect(() => {
-    setOverviewExpanded(false);
-    setFeaturesExpanded(false);
-  }, [product?.name]);
+const FEATURED_COLLECTIONS = FEATURED_COLLECTION_IDS.flatMap((brandId) => {
+  const brand = brandDirectory.brandBySlug.get(brandId);
+  const catalogue = getFeaturedCatalogue(brandId);
+  const cover = catalogue?.products[0];
+  if (!brand || !catalogue || !cover) return [];
 
-  if (!product) return null;
+  return [
+    {
+      brandId,
+      slug: brand.slug,
+      // Presentation spelling for the official brand mark; data stays untouched.
+      name: brandId === "karcher" ? "Kärcher" : brand.displayName,
+      count: catalogue.products.length,
+      image: cover.imagePath,
+      imageAlt: `${brand.displayName} ${cover.name}`,
+    },
+  ];
+});
 
-  const visibleFeatures =
-    product.features && product.features.length > 6 && !featuresExpanded
-      ? product.features.slice(0, 6)
-      : product.features;
-  const showFeaturesToggle = product.features && product.features.length > 6;
-  const showOverviewToggle = product.description.length > 220;
+/** Twelve logo plates keep the partner section compact. */
+const FEATURED_BRAND_SLUGS = [
+  "rational",
+  "winterhalter",
+  "robot-coupe",
+  "tramontina",
+  "ariane",
+  "schott-zwiesel",
+  "steelite",
+  "zafferano",
+  "karcher",
+  "electrolux-professional",
+  "elanpro",
+  "ice-make",
+] as const;
 
-  return (
-    <MorphingDialog
-      id={productKey(product)}
-      open={open}
-      onOpenChange={(next) => {
-        if (!next) onClose();
-      }}
-      onExitComplete={onExited}
-      title={`${product.headline ?? product.name} details`}
-      showHeader={false}
-      className="px-sheet px-sheet--motion"
-      closeClassName="px-sheet-close"
-    >
-      <p className="px-eyebrow">{product.groupLabel}</p>
-      <h2 className="px-sheet-title">{product.headline ?? product.name}</h2>
-      {product.headline && <p className="px-sheet-headline">{product.name}</p>}
-      {product.logo && (
-        <img
-          src={getAssetUrl(product.logo)}
-          alt={`${product.name} product image`}
-          className="px-sheet-image"
-          loading="lazy"
-          decoding="async"
-        />
-      )}
+const FEATURED_BRANDS = FEATURED_BRAND_SLUGS.flatMap((slug) => {
+  const brand = brandDirectory.brandBySlug.get(slug);
+  return brand ? [brand] : [];
+});
 
-        <section className="px-spec px-spec-first" aria-label="Overview">
-          <h3 className="px-spec-title">Overview</h3>
-          <p className={`px-sheet-desc${!overviewExpanded ? " px-clamped" : ""}`}>
-            {product.description}
-          </p>
-          {product.subDescription && (
-            <p className="px-sheet-desc">{product.subDescription}</p>
-          )}
-          {showOverviewToggle && (
-            <button
-              type="button"
-              className="px-text-toggle"
-              onClick={() => setOverviewExpanded((v) => !v)}
-              aria-expanded={overviewExpanded}
-            >
-              {overviewExpanded ? "Show less" : "Read more"}
-            </button>
-          )}
-        </section>
+const ALL_BRANDS = [...brandDirectory.brands].sort((a, b) =>
+  a.displayName.localeCompare(b.displayName)
+);
 
-        {visibleFeatures && visibleFeatures.length > 0 && (
-          <section className="px-spec" aria-label="Key features">
-            <h3 className="px-spec-title">Key features</h3>
-            <ul className="px-spec-list">
-              {visibleFeatures.map((feature, idx) => (
-                <li key={idx}>{feature}</li>
-              ))}
-            </ul>
-            {showFeaturesToggle && (
-              <button
-                type="button"
-                className="px-text-toggle"
-                onClick={() => setFeaturesExpanded((v) => !v)}
-                aria-expanded={featuresExpanded}
-              >
-                {featuresExpanded
-                  ? "Show fewer features"
-                  : `Show all ${product.features!.length} features`}
-              </button>
-            )}
-          </section>
-        )}
-
-        {product.highlights && product.highlights.length > 0 && (
-          <section className="px-spec" aria-label="Key highlights">
-            <h3 className="px-spec-title">Key highlights</h3>
-            <ul className="px-spec-list">
-              {product.highlights.map((highlight, idx) => (
-                <li key={idx}>{highlight}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {product.advantages && product.advantages.length > 0 && (
-          <section className="px-spec" aria-label="Advantages">
-            <h3 className="px-spec-title">Advantages</h3>
-            <ul className="px-spec-list">
-              {product.advantages.map((advantage, idx) => (
-                <li key={idx}>{advantage}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {product.subItems && product.subItems.length > 0 && (
-          <section className="px-spec" aria-label="Product ranges">
-            {product.subItems.map((sub, idx) => (
-              <div key={idx} className="px-sub-block">
-                <h3 className="px-spec-title">{sub.title}</h3>
-                {sub.description && <p className="px-sheet-desc">{sub.description}</p>}
-                <ul className="px-spec-list">
-                  {sub.items.map((item, itemIdx) => (
-                    <li key={itemIdx}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {product.extraInfo && Object.keys(product.extraInfo).length > 0 && (
-          <section className="px-spec" aria-label="Product information">
-            <h3 className="px-spec-title">Product information</h3>
-            <dl className="px-dl">
-              <div className="px-dl-row">
-                <dt>Category</dt>
-                <dd>{product.sourceCategoryTitle}</dd>
-              </div>
-              {Object.entries(product.extraInfo).map(([key, value], idx) => (
-                <div key={idx} className="px-dl-row">
-                  <dt>{key}</dt>
-                  <dd>{Array.isArray(value) ? value.join(", ") : value}</dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-        )}
-
-        {product.idealFor && product.idealFor.length > 0 && (
-          <section className="px-spec" aria-label="Ideal for">
-            <h3 className="px-spec-title">Ideal for</h3>
-            <ul className="px-tag-list">
-              {product.idealFor.map((tag, idx) => (
-                <li key={idx} className="px-tag">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        <div className="px-sheet-actions">
-          <button
-            type="button"
-            className="px-btn px-btn-primary"
-            onClick={() => navigate("/contact")}
-          >
-            Request a Quote
-            <ArrowRight size={16} aria-hidden="true" />
-          </button>
-          <a
-            href={getWhatsAppUrl(getProductEnquiryMessage(product.name, product.groupLabel))}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-btn px-btn-outline"
-          >
-            <MessageCircle size={16} aria-hidden="true" />
-            WhatsApp Enquiry
-          </a>
-        </div>
-    </MorphingDialog>
-  );
+/**
+ * Presentation labels for the six catalogue groups. The data layer keeps the
+ * short labels used by the footer and URL contract; discovery sections read
+ * better with the full commercial names.
+ */
+const CATEGORY_LABELS: Record<CatalogueGroupId, string> = {
+  kitchen: "Professional Kitchen",
+  fnb: "Food & Beverage",
+  hk: "Housekeeping & Hygiene",
+  laundry: "Commercial Laundry",
+  guest: "Guest Experience",
+  cold: "Refrigeration & Cold Chain",
 };
+
+const GROUP_STATS = CATALOGUE_GROUPS.map((group) => {
+  const ranges = RANGE_ENTRIES.filter((entry) => entry.groupId === group.id).length;
+  const solutions = PENDING_ENTRIES.filter(
+    (entry) => entry.groupId === group.id
+  ).length;
+  return {
+    ...group,
+    displayLabel: CATEGORY_LABELS[group.id],
+    records: ranges + solutions,
+  };
+});
+
+/** Shorter tab labels keep the strip readable on tablet widths. */
+const TAB_LABELS: Partial<Record<CatalogueGroupId, string>> = {
+  hk: "Housekeeping",
+  cold: "Cold Chain",
+};
+
+const CATEGORY_TABS: TabItem[] = [
+  {
+    id: "all",
+    label: "All",
+    badge: ALL_ENTRIES.length,
+    ariaLabel: `All catalogue records (${ALL_ENTRIES.length})`,
+  },
+  ...GROUP_STATS.map((group) => ({
+    id: group.id,
+    label: TAB_LABELS[group.id] ?? group.label,
+    badge: group.records,
+    ariaLabel: `${group.displayLabel} (${group.records})`,
+  })),
+];
+
+const BRAND_COMBO_OPTIONS: ComboboxOption[] = [
+  { value: "all", label: "All brand partners" },
+  ...ALL_BRANDS.map((brand) => ({
+    value: brand.slug,
+    label: brand.displayName,
+    description: `${brand.rangeIds.length} ${
+      brand.rangeIds.length === 1 ? "range" : "ranges"
+    }`,
+  })),
+];
+
+/** One verified photograph per category; cold chain has no approved image. */
+const CATEGORY_MEDIA: Partial<
+  Record<CatalogueGroupId, { image: string; alt: string }>
+> = {
+  kitchen: {
+    image: "/images/solutions/commercial-kitchen.webp",
+    alt: "Stainless-steel commercial kitchen with professional cooking equipment",
+  },
+  fnb: {
+    image: "/images/installations/fine-dining-tabletop.webp",
+    alt: "Fine-dining table setting with glassware and tableware",
+  },
+  hk: {
+    image: "/images/solutions/housekeeping-scrubbers.webp",
+    alt: "Fleet of professional floor-scrubbers and cleaning machines",
+  },
+  laundry: {
+    image: "/images/solutions/commercial-laundry.webp",
+    alt: "Commercial laundry with a row of industrial washer-extractors",
+  },
+  guest: {
+    image: "/images/solutions/guestroom-amenities.webp",
+    alt: "Housekeeping attendant preparing a guest bed",
+  },
+};
+
+const INITIAL_VISIBLE_ENTRIES = 12;
+
+function enquiryName(entry: CatalogueEntry): string {
+  if (entry.brandName && entry.brandName !== entry.title) {
+    return `${entry.brandName} ${entry.title}`;
+  }
+  return entry.record.name;
+}
+
+function whatsappHref(entry: CatalogueEntry): string {
+  return getWhatsAppUrl(
+    getProductEnquiryMessage(enquiryName(entry), entry.groupLabel)
+  );
+}
+
+/* -------------------------------------------------------------------------
+ * Motion
+ *
+ * Shared variants live in `lib/catalogue-motion.ts`. Only the hero line mask
+ * is local, because it is the one composition unique to this page.
+ * ---------------------------------------------------------------------- */
+
+interface HeroLineProps {
+  children: React.ReactNode;
+  delay: number;
+  reduced: boolean;
+}
+
+/** A single masked headline line that rises into place on load. */
+const HeroLine: React.FC<HeroLineProps> = ({ children, delay, reduced }) => (
+  <span className="px-hero-line">
+    <motion.span
+      initial={reduced ? { opacity: 0 } : { y: "112%" }}
+      animate={reduced ? { opacity: 1 } : { y: "0%" }}
+      transition={{
+        duration: reduced ? 0.3 : 0.9,
+        delay: reduced ? 0 : delay,
+        ease: EASE_OUT,
+      }}
+    >
+      {children}
+    </motion.span>
+  </span>
+);
+
+/* -------------------------------------------------------------------------
+ * Page
+ * ---------------------------------------------------------------------- */
 
 const Products: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeGroupId = GROUPS.some((group) => group.id === searchParams.get("group"))
-    ? (searchParams.get("group") as string)
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const groupParam = searchParams.get("group");
+  const activeGroupId: CatalogueGroupId | "all" = CATALOGUE_GROUPS.some(
+    (group) => group.id === groupParam
+  )
+    ? (groupParam as CatalogueGroupId)
     : "all";
-  const [query, setQuery] = useState<string>("");
-  const [activeBrand, setActiveBrand] = useState<string>("all");
-  const [selected, setSelected] = useState<CatalogProduct | null>(null);
+
+  const [query, setQuery] = useState("");
+  const [activeBrand, setActiveBrand] = useState("all");
+  const [showAllEntries, setShowAllEntries] = useState(false);
+  const [catalogueOpen, setCatalogueOpen] = useState(
+    () => activeGroupId !== "all"
+  );
+  const [selected, setSelected] = useState<CatalogueEntry | null>(null);
+  const [selectedLayoutId, setSelectedLayoutId] = useState<string | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return ALL_PRODUCTS.filter((product) => {
-      if (activeGroupId !== "all" && product.groupId !== activeGroupId) return false;
-      if (activeBrand !== "all" && product.name !== activeBrand) return false;
-      if (q && !haystack(product).includes(q)) return false;
+    return ALL_ENTRIES.filter((entry) => {
+      if (activeGroupId !== "all" && entry.groupId !== activeGroupId) {
+        return false;
+      }
+      if (activeBrand !== "all" && entry.brandSlug !== activeBrand) {
+        return false;
+      }
+      if (query.trim() && !matchesCatalogueQuery(entry.record, query)) {
+        return false;
+      }
       return true;
     });
   }, [activeGroupId, activeBrand, query]);
 
-  const filtersActive = activeGroupId !== "all" || activeBrand !== "all" || query.trim() !== "";
+  const filtersActive =
+    activeGroupId !== "all" || activeBrand !== "all" || query.trim() !== "";
 
-  const clearFilters = () => {
-    const next = new URLSearchParams(searchParams);
-    next.delete("group");
-    setSearchParams(next, { replace: true });
-    setActiveBrand("all");
-    setQuery("");
+  const isFiltering = filtersActive;
+
+  const visibleEntries = isFiltering
+    ? filtered
+    : filtered.slice(
+        0,
+        showAllEntries ? filtered.length : INITIAL_VISIBLE_ENTRIES
+      );
+
+  const activeGroupLabel =
+    activeGroupId === "all" ? "" : CATEGORY_LABELS[activeGroupId];
+
+  const activeBrandName =
+    activeBrand === "all"
+      ? ""
+      : brandDirectory.brandBySlug.get(activeBrand)?.displayName ?? "";
+
+  // Typing in the hero search reveals the catalogue it filters.
+  useEffect(() => {
+    if (query.trim()) setCatalogueOpen(true);
+  }, [query]);
+
+  // A `?group=` deep link (footer, category tile, shared URL) must never leave
+  // the matching records hidden behind a collapsed disclosure.
+  useEffect(() => {
+    if (activeGroupId !== "all") setCatalogueOpen(true);
+  }, [activeGroupId]);
+
+  const scrollToId = (id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const startY = window.scrollY;
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? "instant" : "smooth",
+      block: "start",
+    });
+    // Some embedded/headless browsers suppress smooth programmatic scrolling.
+    // If nothing moved, jump to the same position instead of doing nothing.
+    window.setTimeout(() => {
+      if (Math.abs(window.scrollY - startY) < 2) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 104;
+        window.scrollTo({ top: Math.max(0, top), behavior: "instant" });
+      }
+    }, 280);
   };
 
   const setGroup = (groupId: string) => {
@@ -426,131 +404,830 @@ const Products: React.FC = () => {
     setSearchParams(next, { replace: true });
   };
 
-  const selectProduct = (product: CatalogProduct) => {
-    setSelected(product);
+  const clearFilters = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("group");
+    setSearchParams(next, { replace: true });
+    setActiveBrand("all");
+    setQuery("");
+    setShowAllEntries(false);
+  };
+
+  const selectCategory = (groupId: CatalogueGroupId) => {
+    setGroup(activeGroupId === groupId ? "all" : groupId);
+    setActiveBrand("all");
+    setCatalogueOpen(true);
+    scrollToId("catalogue");
+  };
+
+  const viewResults = () => {
+    setCatalogueOpen(true);
+    scrollToId("catalogue");
+  };
+
+  const openEntry = (entry: CatalogueEntry, layoutId?: string) => {
+    setSelected(entry);
+    setSelectedLayoutId(layoutId ?? null);
     setSheetOpen(true);
   };
 
   return (
     <div className="px">
+      {/* 1 — Hero ------------------------------------------------------- */}
       <header className="px-hero">
-        <div className="px-hero-inner">
-          <p className="px-eyebrow">PRODUCTS & SOLUTIONS</p>
-          <h1 className="px-title">
-            Hospitality equipment, supplies and solutions for professional properties.
-          </h1>
-          <p className="px-subtitle">
-            Explore professional equipment and carefully selected essentials for
-            kitchens, food and beverage service, housekeeping, hygiene,
-            refrigeration and guest experience.
-          </p>
-          {/* EasyUI expandable search on the approved `.px-search` shell —
-              grows from 36rem to the approved 40rem while typing; ⌘K focuses. */}
-          <ExpandableSearch
-            value={query}
-            onValueChange={setQuery}
-            placeholder="Search products, brands or product codes"
-            ariaLabel="Search products, brands or product codes"
-          />
+        <div className="px-shell px-hero-grid">
+          <div className="px-hero-copy">
+            <motion.p
+              className="px-eyebrow"
+              {...heroReveal(0.05, prefersReducedMotion)}
+            >
+              Products &amp; Solutions
+            </motion.p>
+
+            <h1 className="px-hero-title">
+              <HeroLine delay={0.12} reduced={prefersReducedMotion}>
+                The essentials behind{" "}
+              </HeroLine>
+              <HeroLine delay={0.2} reduced={prefersReducedMotion}>
+                <em>exceptional</em>{" "}
+              </HeroLine>
+              <HeroLine delay={0.28} reduced={prefersReducedMotion}>
+                hospitality.
+              </HeroLine>
+            </h1>
+
+            <motion.p
+              className="px-hero-text"
+              {...heroReveal(0.38, prefersReducedMotion)}
+            >
+              Verified products from the brands that equip hotels, restaurants
+              and institutions.
+            </motion.p>
+
+            <motion.div
+              className="px-hero-search"
+              {...heroReveal(0.46, prefersReducedMotion)}
+            >
+              <ExpandableSearch
+                value={query}
+                onValueChange={setQuery}
+                placeholder="Search products or brands"
+                ariaLabel="Search products, brands or applications"
+              />
+            </motion.div>
+
+            {query.trim() && (
+              <motion.div
+                className="px-hero-searchmeta"
+                role="status"
+                aria-live="polite"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, ease: EASE_OUT }}
+              >
+                <span>
+                  {filtered.length === 0
+                    ? "No matching records."
+                    : `${filtered.length} matching ${
+                        filtered.length === 1 ? "record" : "records"
+                      }`}
+                </span>
+                {filtered.length > 0 && (
+                  <button
+                    type="button"
+                    className="px-link"
+                    onClick={viewResults}
+                  >
+                    View results
+                    <ArrowDown size={14} aria-hidden="true" />
+                  </button>
+                )}
+              </motion.div>
+            )}
+          </div>
+
+          <motion.figure
+            className="px-hero-media"
+            initial={{
+              opacity: 0,
+              scale: prefersReducedMotion ? 1 : 0.99,
+            }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: prefersReducedMotion ? 0.3 : 1,
+              delay: prefersReducedMotion ? 0 : 0.18,
+              ease: EASE_OUT,
+            }}
+          >
+            <div className="px-hero-frame px-media px-media--hero">
+              <motion.img
+                src={getAssetUrl(
+                  "/images/installations/convention-centre-kitchen.webp"
+                )}
+                alt="Stainless-steel commercial kitchen equipped for a hospitality project"
+                loading="eager"
+                decoding="async"
+                initial={{ scale: prefersReducedMotion ? 1 : 1.055 }}
+                animate={{ scale: 1 }}
+                transition={{
+                  duration: prefersReducedMotion ? 0.3 : 1.6,
+                  delay: prefersReducedMotion ? 0 : 0.18,
+                  ease: EASE_OUT,
+                }}
+              />
+            </div>
+          </motion.figure>
         </div>
       </header>
 
-      <section className="px-categories" aria-labelledby="px-categories-title">
-        <div className="px-section-inner">
-          <div className="px-categories-head">
-            <h2 id="px-categories-title" className="px-categories-title">Browse by category</h2>
-            <p className="px-categories-text">
-              Select a category to filter the catalogue. Counts reflect the current product data.
-            </p>
-          </div>
-          {/* EasyUI animated tabs on the approved `.px-tab` pills — the strip
-              keeps its exact classes; the indicator slides via layoutId. */}
-          <AnimatedTabs
-            tabs={CATEGORY_TABS}
-            activeTab={activeGroupId}
-            onChange={setGroup}
-            renderContent={false}
-            layoutId="px-category-pill"
-            tabsContainerClassName="px-category-pills no-scrollbar flex snap-x snap-mandatory items-center gap-2 overflow-x-auto pb-2 md:flex-wrap md:justify-start md:overflow-visible md:pb-0 md:snap-none"
-            tabClassName="px-tab"
-            activeTabClassName="active"
-            indicatorClassName="px-tab-active-bg"
-            badgeClassName="px-tab-badge"
-            tablistAria={{
-              label: "Filter products by category",
-              controls: "px-category-results",
-            }}
-          />
+      {/* 2 — Featured product catalogues -------------------------------- */}
+      <section
+        className="px-section px-section--flush px-section--alt"
+        aria-labelledby="px-collections-title"
+      >
+        <div className="px-shell">
+          <motion.div
+            className="px-block-head"
+            variants={sectionHeadVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={SECTION_VIEWPORT}
+          >
+            <h2 id="px-collections-title" className="px-section-title">
+              Collections.
+            </h2>
+          </motion.div>
+
+          <motion.ul
+            className="px-collection-grid"
+            variants={staggerParent}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {FEATURED_COLLECTIONS.map((collection) => (
+              <motion.li key={collection.brandId} variants={revealItem}>
+                <Link
+                  to={`/products/brand/${collection.slug}`}
+                  className="px-collection"
+                  aria-label={`Explore the ${collection.name} catalogue, ${collection.count} products`}
+                >
+                  <span className="px-collection-media px-media px-media--portrait px-media--zoom">
+                    <img
+                      src={getAssetUrl(collection.image)}
+                      alt={collection.imageAlt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                  <span className="px-collection-head">
+                    <span className="px-collection-name">{collection.name}</span>
+                    <span className="px-collection-meta">
+                      <span className="px-collection-count">
+                        {collection.count} products
+                      </span>
+                      <ArrowUpRight
+                        size={15}
+                        aria-hidden="true"
+                        className="px-collection-arrow"
+                      />
+                    </span>
+                  </span>
+                </Link>
+              </motion.li>
+            ))}
+          </motion.ul>
         </div>
       </section>
 
+      {/* 3 — Category discovery ---------------------------------------- */}
       <section
-        id="px-category-results"
-        className="px-toolbar-section"
-        aria-labelledby="px-results-title"
+        id="categories"
+        className="px-section"
+        aria-labelledby="px-categories-title"
       >
-        <div className="px-section-inner">
-          <div className="px-toolbar">
-            {/* EasyUI combobox replaces the native select on the approved
-                `.px-brand-filter` slot — searchable, keyboard-navigable. */}
-            <div className="px-brand-filter">
-              <Combobox
-                options={BRAND_COMBO_OPTIONS}
-                value={activeBrand}
-                onValueChange={(brand) => setActiveBrand(brand ?? "all")}
-                placeholder="All brands"
-                searchPlaceholder="Search brands…"
-                emptyText="No matching brands."
-                aria-label="Filter by brand"
-                className="w-full"
-              />
+        <div className="px-shell">
+          <motion.div
+            className="px-block-head"
+            variants={sectionHeadVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={SECTION_VIEWPORT}
+          >
+            <h2 id="px-categories-title" className="px-section-title">
+              Categories.
+            </h2>
+          </motion.div>
+
+          <motion.ul
+            className="px-category-grid no-scrollbar"
+            variants={staggerParent}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {GROUP_STATS.map((group) => {
+              const media = CATEGORY_MEDIA[group.id];
+              const isActive = activeGroupId === group.id;
+              return (
+                <motion.li key={group.id} variants={revealItem}>
+                  <button
+                    type="button"
+                    className={`px-category${
+                      media ? "" : " px-category--type"
+                    }${isActive ? " is-active" : ""}`}
+                    onClick={() => selectCategory(group.id)}
+                    aria-pressed={isActive}
+                    aria-label={`${group.displayLabel}, ${group.records} records`}
+                  >
+                    {media ? (
+                      <img
+                        src={getAssetUrl(media.image)}
+                        alt={media.alt}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <Snowflake
+                        className="px-category-glyph"
+                        size={150}
+                        strokeWidth={0.6}
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="px-category-shade" aria-hidden="true" />
+                    <span className="px-category-top">
+                      <span className="px-category-arrow" aria-hidden="true">
+                        <ArrowUpRight size={16} />
+                      </span>
+                    </span>
+                    <span className="px-category-title">
+                      {group.displayLabel}
+                    </span>
+                  </button>
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+
+          {/* Secondary discovery: the complete catalogue, collapsed by default. */}
+          <div id="catalogue" className="px-catalogue">
+            <div className="px-catalogue-head">
+              <div>
+                <h3 className="px-catalogue-title">Full catalogue</h3>
+              </div>
+              <button
+                type="button"
+                className="px-btn px-btn-secondary"
+                onClick={() => setCatalogueOpen((value) => !value)}
+                aria-expanded={catalogueOpen}
+                aria-controls="px-catalogue-body"
+              >
+                {catalogueOpen
+                  ? "Hide catalogue"
+                  : `Browse all ${ALL_ENTRIES.length} records`}
+                <ArrowDown
+                  size={15}
+                  aria-hidden="true"
+                  className={catalogueOpen ? "px-flip" : undefined}
+                />
+              </button>
             </div>
 
-            {filtersActive && (
-              <button type="button" className="px-link" onClick={clearFilters}>
-                Clear filters
-                <X size={14} aria-hidden="true" />
+            {catalogueOpen && (
+              <div id="px-catalogue-body" className="px-catalogue-body">
+                <div className="px-index-toolbar">
+                  <div className="px-index-tabs-row">
+                    <AnimatedTabs
+                      tabs={CATEGORY_TABS}
+                      activeTab={activeGroupId}
+                      onChange={setGroup}
+                      className="px-index-tabs"
+                      renderContent={false}
+                      layoutId="px-category-indicator"
+                      tabsContainerClassName="px-tabs no-scrollbar"
+                      tabClassName="px-tab"
+                      activeTabClassName="is-active"
+                      indicatorClassName="px-tab-bg"
+                      badgeClassName="px-tab-badge"
+                      tablistAria={{
+                        label: "Filter the catalogue by category",
+                        controls: "px-index-results",
+                      }}
+                    />
+                    <p
+                      className="px-index-count"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <motion.strong
+                        key={filtered.length}
+                        initial={{ opacity: 0.35 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.24, ease: EASE_OUT }}
+                      >
+                        {filtered.length}
+                      </motion.strong>{" "}
+                      of {ALL_ENTRIES.length}
+                    </p>
+                  </div>
+
+                  <div className="px-index-filters">
+                    <div className="px-brand-filter">
+                      <Combobox
+                        options={BRAND_COMBO_OPTIONS}
+                        value={activeBrand}
+                        onValueChange={(brand) => {
+                          setActiveBrand(brand ?? "all");
+                        }}
+                        placeholder="All brand partners"
+                        searchPlaceholder="Search brand partners…"
+                        emptyText="No matching brands."
+                        aria-label="Filter by brand partner"
+                        className="w-full"
+                      />
+                    </div>
+
+                    {filtersActive && (
+                      <div className="px-active-filters">
+                        {activeGroupId !== "all" && (
+                          <span className="px-chip">
+                            {activeGroupLabel}
+                            <button
+                              type="button"
+                              onClick={() => setGroup("all")}
+                              aria-label="Remove category filter"
+                            >
+                              <X size={12} aria-hidden="true" />
+                            </button>
+                          </span>
+                        )}
+                        {activeBrand !== "all" && (
+                          <span className="px-chip">
+                            {activeBrandName}
+                            <button
+                              type="button"
+                              onClick={() => setActiveBrand("all")}
+                              aria-label="Remove brand filter"
+                            >
+                              <X size={12} aria-hidden="true" />
+                            </button>
+                          </span>
+                        )}
+                        {query.trim() && (
+                          <span className="px-chip">
+                            “{query.trim()}”
+                            <button
+                              type="button"
+                              onClick={() => setQuery("")}
+                              aria-label="Remove search filter"
+                            >
+                              <X size={12} aria-hidden="true" />
+                            </button>
+                          </span>
+                        )}
+                        <button
+                          type="button"
+                          className="px-reset"
+                          onClick={clearFilters}
+                        >
+                          Reset all
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <motion.div
+                  id="px-index-results"
+                  key={`${activeGroupId}:${activeBrand}`}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: prefersReducedMotion ? 0.15 : 0.28,
+                    ease: EASE_OUT,
+                  }}
+                >
+                  {filtered.length === 0 ? (
+                    <div className="px-empty">
+                      <h3 className="px-empty-title">No records found</h3>
+                      <p className="px-empty-text">
+                        Try another product name, brand or category.
+                      </p>
+                      <button
+                        type="button"
+                        className="px-btn px-btn-secondary"
+                        onClick={clearFilters}
+                      >
+                        Reset filters
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <ul className="px-index-list">
+                        {visibleEntries.map((entry) => {
+                          const brandLabel =
+                            entry.brandName && entry.brandName !== entry.title
+                              ? entry.brandName
+                              : entry.kindLabel;
+                          return (
+                            <li key={entry.key} className="px-index-item">
+                              <div className="px-index-media px-media px-media--editorial">
+                                {entry.record.logo && (
+                                  <img
+                                    src={getAssetUrl(entry.record.logo)}
+                                    alt=""
+                                    loading="lazy"
+                                    decoding="async"
+                                  />
+                                )}
+                              </div>
+
+                              <div className="px-index-identity">
+                                <span
+                                  className={`px-index-brand px-index-brand--${entry.kind}`}
+                                >
+                                  {brandLabel}
+                                </span>
+                                <button
+                                  type="button"
+                                  className="px-index-title"
+                                  onClick={() => openEntry(entry)}
+                                >
+                                  {entry.title}
+                                </button>
+                                <span className="px-index-meta">
+                                  {entry.groupLabel}
+                                  {entry.kind !== "range" && (
+                                    <> · {entry.kindLabel}</>
+                                  )}
+                                </span>
+                              </div>
+
+                              <div className="px-index-actions">
+                                <button
+                                  type="button"
+                                  className="px-index-action"
+                                  onClick={() => openEntry(entry)}
+                                  aria-label={`View details for ${entry.title}`}
+                                >
+                                  Details
+                                  <ArrowUpRight size={14} aria-hidden="true" />
+                                </button>
+                                <a
+                                  href={whatsappHref(entry)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="px-index-action px-index-action--wa"
+                                  aria-label={`Enquire about ${enquiryName(
+                                    entry
+                                  )} on WhatsApp`}
+                                >
+                                  <MessageCircle size={15} aria-hidden="true" />
+                                </a>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+
+                      {!isFiltering &&
+                        !showAllEntries &&
+                        filtered.length > INITIAL_VISIBLE_ENTRIES && (
+                          <div className="px-index-more">
+                            <button
+                              type="button"
+                              className="px-btn px-btn-secondary"
+                              onClick={() => setShowAllEntries(true)}
+                            >
+                              Browse all {filtered.length} records
+                              <ArrowDown size={15} aria-hidden="true" />
+                            </button>
+                          </div>
+                        )}
+
+                      {!isFiltering &&
+                        showAllEntries &&
+                        filtered.length > INITIAL_VISIBLE_ENTRIES && (
+                          <div className="px-index-more">
+                            <button
+                              type="button"
+                              className="px-link"
+                              onClick={() => {
+                                setShowAllEntries(false);
+                                scrollToId("catalogue");
+                              }}
+                            >
+                              Show fewer records
+                            </button>
+                          </div>
+                        )}
+                    </>
+                  )}
+                </motion.div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 4 — Brand partners -------------------------------------------- */}
+      <section
+        className="px-section px-section--alt"
+        aria-labelledby="px-brands-title"
+      >
+        <div className="px-shell">
+          <motion.div
+            className="px-block-head"
+            variants={sectionHeadVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={SECTION_VIEWPORT}
+          >
+            <h2 id="px-brands-title" className="px-section-title">
+              Trusted brands.
+            </h2>
+            <Link to="/products/brands" className="px-link">
+              All {brandDirectory.brands.length} brands
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </Link>
+          </motion.div>
+
+          <motion.ul
+            className="px-brand-strip"
+            variants={staggerParent}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            {FEATURED_BRANDS.map((brand) => (
+              <motion.li key={brand.id} variants={revealItem}>
+                <span className="px-brand-plate px-media">
+                  {brand.logo && (
+                    <img
+                      src={getAssetUrl(brand.logo)}
+                      alt={brand.displayName}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                </span>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
+      </section>
+
+      {/* 5 — Enquiry ---------------------------------------------------- */}
+      <section className="px-cta-section" aria-labelledby="px-cta-title">
+        <div className="px-shell">
+          <motion.div
+            className="px-cta"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
+            variants={revealItem}
+          >
+            <div className="px-cta-media px-media px-media--bare">
+              <img
+                src={getAssetUrl("/images/solutions/banquet-operations.webp")}
+                alt="Banquet buffet display prepared for a hospitality event"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div className="px-cta-body">
+              <h2 id="px-cta-title" className="px-cta-title">
+                Sourcing for an opening or refurbishment?
+              </h2>
+              <p className="px-cta-text">
+                Share your requirement and we will prepare a consolidated
+                quotation.
+              </p>
+              <div className="px-cta-actions">
+                <Link to="/contact" className="px-btn px-btn-primary">
+                  Request a Quote
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+                <a
+                  href={getWhatsAppUrl(getGeneralEnquiryMessage())}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-btn px-btn-secondary"
+                >
+                  <MessageCircle size={16} aria-hidden="true" />
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <EntryDialog
+        entry={selected}
+        layoutId={selectedLayoutId}
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        onExited={() => {
+          setSelected(null);
+          setSelectedLayoutId(null);
+        }}
+      />
+    </div>
+  );
+};
+
+/* -------------------------------------------------------------------------
+ * Details dialog
+ * ---------------------------------------------------------------------- */
+
+interface EntryDialogProps {
+  entry: CatalogueEntry | null;
+  layoutId: string | null;
+  open: boolean;
+  onClose: () => void;
+  onExited: () => void;
+}
+
+const EntryDialog: React.FC<EntryDialogProps> = ({
+  entry,
+  layoutId,
+  open,
+  onClose,
+  onExited,
+}) => {
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    setExpanded({});
+  }, [entry?.key]);
+
+  if (!entry) return null;
+
+  const sections = buildRecordSections(entry.record);
+  const isRange = entry.kind === "range";
+
+  return (
+    <MorphingDialog
+      id={layoutId ?? "px-entry-dialog"}
+      open={open}
+      onOpenChange={(next) => {
+        if (!next) onClose();
+      }}
+      onExitComplete={onExited}
+      title={`${entry.title} details`}
+      showHeader={false}
+      className="px-sheet px-sheet--motion"
+      closeClassName="px-sheet-close"
+    >
+      <p className="px-eyebrow">{entry.groupLabel}</p>
+      <h2 className="px-sheet-title">{entry.title}</h2>
+      {entry.record.headline && (
+        <p className="px-sheet-headline">{entry.record.headline}</p>
+      )}
+
+      <p className="px-sheet-meta">
+        <span>
+          {entry.brandName && entry.brandName !== entry.title
+            ? entry.brandName
+            : isRange
+              ? "Confirmed brand range"
+              : entry.kindLabel}
+        </span>
+        <span>{entry.categoryTitle}</span>
+      </p>
+
+      {entry.record.logo && (
+        <img
+          src={getAssetUrl(entry.record.logo)}
+          alt={`${entry.title} logo`}
+          className="px-sheet-image"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+
+      {sections.map((section) => {
+        const isExpanded = expanded[section.id] ?? false;
+        const isOverview = section.id === "overview";
+        const showBodyToggle =
+          isOverview && !!section.body && section.body.length > 240;
+        const showItemsToggle = !!section.items && section.items.length > 6;
+        const visibleItems =
+          section.items && showItemsToggle && !isExpanded
+            ? section.items.slice(0, 6)
+            : section.items;
+
+        return (
+          <section
+            key={section.id}
+            className="px-spec"
+            aria-label={section.heading}
+          >
+            <h3 className="px-spec-title">{section.heading}</h3>
+
+            {section.body && (
+              <p
+                className={`px-sheet-desc${
+                  showBodyToggle && !isExpanded ? " px-clamped" : ""
+                }`}
+              >
+                {section.body}
+              </p>
+            )}
+
+            {visibleItems && visibleItems.length > 0 && (
+              <ul className="px-spec-list">
+                {visibleItems.map((item, index) => (
+                  <li key={`${section.id}-${index}`}>{item}</li>
+                ))}
+              </ul>
+            )}
+
+            {section.subItems &&
+              section.subItems.map((sub, index) => (
+                <div key={`${section.id}-${index}`} className="px-sub-block">
+                  <h4 className="px-spec-title">{sub.title}</h4>
+                  {sub.description && (
+                    <p className="px-sheet-desc">{sub.description}</p>
+                  )}
+                  <ul className="px-spec-list">
+                    {sub.items.map((item, itemIndex) => (
+                      <li key={`${section.id}-${index}-${itemIndex}`}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+            {section.entries && section.entries.length > 0 && (
+              <dl className="px-dl">
+                {section.entries.map((item) => (
+                  <div key={item.label} className="px-dl-row">
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+
+            {showBodyToggle && (
+              <button
+                type="button"
+                className="px-text-toggle"
+                onClick={() =>
+                  setExpanded((current) => ({
+                    ...current,
+                    [section.id]: !isExpanded,
+                  }))
+                }
+                aria-expanded={isExpanded}
+              >
+                {isExpanded ? "Show less" : "Read more"}
               </button>
             )}
 
-            <p id="px-results-title" className="px-count" role="status" aria-live="polite">
-              {filtered.length} {filtered.length === 1 ? "product" : "products"}
-              {filtersActive && " found"}
-            </p>
-          </div>
-
-          {filtered.length === 0 ? (
-            <div className="px-empty">
-              <h2 className="px-empty-title">No products found</h2>
-              <p className="px-empty-text">Try another product name, brand or category.</p>
-              <button type="button" className="px-btn px-btn-outline" onClick={clearFilters}>
-                Clear filters
+            {showItemsToggle && (
+              <button
+                type="button"
+                className="px-text-toggle"
+                onClick={() =>
+                  setExpanded((current) => ({
+                    ...current,
+                    [section.id]: !isExpanded,
+                  }))
+                }
+                aria-expanded={isExpanded}
+              >
+                {isExpanded
+                  ? "Show fewer"
+                  : `Show all ${section.items?.length ?? 0}`}
               </button>
-            </div>
-          ) : (
-            <div className="px-grid">
-              {filtered.map((product, index) => (
-                <ProductCard
-                  key={`${product.groupId}-${product.name}-${product.headline ?? ""}`}
-                  product={product}
-                  index={index}
-                  onSelect={() => selectProduct(product)}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+            )}
+          </section>
+        );
+      })}
 
-      {/* Keep `selected` until the closing morph finishes so the sheet can
-          morph back onto its card before the content unmounts. */}
-      <ProductDialog
-        product={selected}
-        open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
-        onExited={() => setSelected(null)}
-      />
-    </div>
+      <div className="px-sheet-actions">
+        <Link
+          to="/contact"
+          className="px-btn px-btn-primary"
+          onClick={onClose}
+        >
+          Request a Quote
+          <ArrowRight size={16} aria-hidden="true" />
+        </Link>
+        <a
+          href={whatsappHref(entry)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-btn px-btn-secondary"
+        >
+          <MessageCircle size={16} aria-hidden="true" />
+          WhatsApp Enquiry
+        </a>
+      </div>
+    </MorphingDialog>
   );
 };
 

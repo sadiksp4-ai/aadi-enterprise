@@ -52,12 +52,12 @@ const REASONS = [
 ];
 
 const HELP_LINKS = [
-    { label: "Professional Kitchen", to: "/products" },
-    { label: "Food & Beverage", to: "/products" },
-    { label: "Housekeeping & Hygiene", to: "/products" },
-    { label: "Guest Experience", to: "/products" },
-    { label: "Hospitality Procurement", to: "/products" },
-    { label: "Project & Property Solutions", to: "/about" },
+    { label: "Professional Kitchen", to: "/products?group=kitchen" },
+    { label: "Food & Beverage", to: "/products?group=fnb" },
+    { label: "Housekeeping & Hygiene", to: "/products?group=hk" },
+    { label: "Laundry", to: "/products?group=laundry" },
+    { label: "Guest Experience", to: "/products?group=guest" },
+    { label: "Refrigeration & Cold Chain", to: "/products?group=cold" },
 ];
 
 const ContactPage: React.FC = () => {

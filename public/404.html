@@ -6,7 +6,10 @@
     <script>
       // Single Page Apps for GitHub Pages
       // https://github.com/rafgraph/spa-github-pages
-      var pathSegmentsToKeep = 1; // for project pages (not user pages)
+      // Custom domain serves the site from the root, so no path segments
+      // are part of the deployment prefix. Keeping 1 here caused /brands and
+      // every unknown path to redirect to itself (an infinite 404 loop).
+      var pathSegmentsToKeep = 0;
       var l = window.location;
       l.replace(
         l.protocol +

@@ -1,0 +1,999 @@
+/* =========================================================================
+   Products experience — shared dark editorial foundation (Stage 1)
+
+   One presentation layer for:
+     /products  ·  /products/brands  ·  /products/brand/:slug
+
+   This file replaces the duplicated `px-*` primitives that previously lived
+   inside Products.css, and adds the shared typography, spacing, media, button,
+   focus and motion rules that all three pages rely on.
+
+   Colour tokens and fonts are unchanged. Every value below resolves to the
+   approved palette in index.css.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   Tokens
+   ---------------------------------------------------------------------- */
+
+:root {
+  /* Layout --------------------------------------------------------------- */
+  --ed-content: var(--content-max);
+  --ed-gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --ed-section-space: clamp(3rem, 5.5vw, 4.5rem);
+  --ed-section-space-lg: clamp(4.5rem, 8vw, 7rem);
+  --ed-hero-top: clamp(8rem, 11vw, 10rem);
+  --ed-section-gap: clamp(1.75rem, 3vw, 2.5rem);
+  --ed-grid-gap: 1.25rem;
+  --ed-header-offset: 6.5rem;
+
+  /* Type scale ----------------------------------------------------------- */
+  --ed-text-display: clamp(2.6rem, 4.9vw, 4.4rem);
+  --ed-text-h2: clamp(2rem, 3.6vw, 3.15rem);
+  --ed-text-cta: clamp(1.85rem, 3.2vw, 2.75rem);
+  --ed-text-h3: clamp(1.45rem, 2vw, 1.85rem);
+  --ed-text-h4: 1.28rem;
+  --ed-text-lead: 1.02rem;
+  --ed-text-body: 0.92rem;
+  --ed-text-small: 0.82rem;
+  --ed-text-meta: 0.72rem;
+  --ed-text-eyebrow: 0.72rem;
+
+  --ed-leading-display: 1.02;
+  --ed-leading-heading: 1.08;
+  --ed-leading-body: 1.7;
+  --ed-tracking-display: -0.03em;
+  --ed-tracking-heading: -0.02em;
+  --ed-tracking-eyebrow: 0.2em;
+
+  /* Editorial image ratios ---------------------------------------------- */
+  --ed-ratio-hero: 6 / 5;
+  --ed-ratio-wide: 16 / 9;
+  --ed-ratio-cinema: 16 / 6;
+  --ed-ratio-editorial: 4 / 3;
+  --ed-ratio-portrait: 3 / 4;
+  --ed-ratio-square: 1 / 1;
+  --ed-ratio-logo: 16 / 10;
+
+  /* Motion --------------------------------------------------------------- */
+  --ed-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ed-duration-fast: 160ms;
+  --ed-duration-base: 280ms;
+  --ed-duration-slow: 560ms;
+  --ed-duration-image: 900ms;
+
+  /* Focus ---------------------------------------------------------------- */
+  --ed-focus-width: 2px;
+  --ed-focus-offset: 3px;
+}
+
+/* Mobile-specific scale. Keeps the same hierarchy, just tighter. */
+@media (max-width: 767px) {
+  :root {
+    --ed-gutter: 1.25rem;
+    --ed-section-space: clamp(3rem, 9vw, 4rem);
+    --ed-hero-top: 7rem;
+    --ed-section-gap: 1.5rem;
+    --ed-grid-gap: 0.8rem;
+    --ed-text-display: clamp(2.2rem, 8.6vw, 3rem);
+    --ed-text-h2: clamp(1.85rem, 7vw, 2.5rem);
+    --ed-text-cta: clamp(1.7rem, 6.6vw, 2.25rem);
+    --ed-text-h3: 1.35rem;
+    --ed-text-lead: 0.98rem;
+    --ed-text-body: 0.9rem;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Page base
+   ---------------------------------------------------------------------- */
+
+.px {
+  background: var(--background);
+  color: var(--ink);
+  overflow-x: clip;
+}
+
+.px *,
+.px *::before,
+.px *::after {
+  box-sizing: border-box;
+}
+
+.px img {
+  max-width: 100%;
+}
+
+.px section[id],
+.px [id] {
+  scroll-margin-top: var(--ed-header-offset);
+}
+
+/* -------------------------------------------------------------------------
+   Section spacing and content widths
+   ---------------------------------------------------------------------- */
+
+.px-shell {
+  width: 100%;
+  max-width: var(--ed-content);
+  margin-inline: auto;
+  padding-inline: var(--ed-gutter);
+}
+
+.px-section {
+  padding-block: var(--ed-section-space);
+  border-top: 1px solid var(--line);
+}
+
+.px-section--flush {
+  border-top: 0;
+}
+
+.px-section--alt {
+  background: var(--background-secondary);
+}
+
+.px-section--tall {
+  padding-block: var(--ed-section-space-lg);
+}
+
+.px-cta-section {
+  padding-block: var(--ed-section-space);
+  border-top: 1px solid var(--line);
+}
+
+.px-cta-section--alt {
+  background: var(--background-secondary);
+}
+
+/* -------------------------------------------------------------------------
+   Typography hierarchy
+   ---------------------------------------------------------------------- */
+
+.px-display,
+.px-heading,
+.px-subheading {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.px-display {
+  font-size: var(--ed-text-display);
+  line-height: var(--ed-leading-display);
+  letter-spacing: var(--ed-tracking-display);
+}
+
+.px-heading {
+  font-size: var(--ed-text-h2);
+  line-height: var(--ed-leading-heading);
+  letter-spacing: var(--ed-tracking-heading);
+}
+
+.px-subheading {
+  font-size: var(--ed-text-h3);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+}
+
+.px-lead,
+.px-copy {
+  margin: 0;
+  color: var(--ink-2);
+}
+
+.px-lead {
+  max-width: 38rem;
+  font-size: var(--ed-text-lead);
+  line-height: var(--ed-leading-body);
+}
+
+.px-copy {
+  max-width: 36rem;
+  font-size: var(--ed-text-body);
+  line-height: var(--ed-leading-body);
+}
+
+.px-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1rem;
+  font-family: var(--font-secondary);
+  font-size: var(--ed-text-eyebrow);
+  font-weight: 700;
+  letter-spacing: var(--ed-tracking-eyebrow);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--accent-hover);
+}
+
+.px-eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.px-section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: end;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  margin-bottom: var(--ed-section-gap);
+}
+
+.px-section-head > * {
+  min-width: 0;
+}
+
+.px-section-title {
+  max-width: 28ch;
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: var(--ed-text-h2);
+  font-weight: 700;
+  line-height: var(--ed-leading-heading);
+  letter-spacing: var(--ed-tracking-heading);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.px-meta {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--ed-text-meta);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* -------------------------------------------------------------------------
+   Buttons and text links
+   ---------------------------------------------------------------------- */
+
+.px-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  padding: 0.8rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  font-family: var(--font-secondary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+    border-color var(--transition-base), color var(--transition-base),
+    box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.px-btn svg {
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.px-btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  /* Dark text keeps the filled CTA at 5.7:1 against the teal surface. */
+  color: var(--background);
+}
+
+.px-btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 12px 30px -18px rgba(12, 153, 144, 0.9);
+}
+
+.px-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+.px-btn-secondary,
+.px-btn-outline {
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+.px-btn-secondary:hover,
+.px-btn-outline:hover {
+  border-color: var(--accent-hover);
+  background: rgba(12, 153, 144, 0.08);
+}
+
+/* Physical feedback only where hover and full motion are appropriate. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .px-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .px-btn:active {
+    transform: translateY(0);
+  }
+}
+
+.px-link,
+.px-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-hover);
+  font-family: var(--font-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.px-link:hover,
+.px-text-link:hover {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.px-flip {
+  transform: rotate(180deg);
+}
+
+/* -------------------------------------------------------------------------
+   Chips, filters and inline reset
+   ---------------------------------------------------------------------- */
+
+.px-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 100%;
+  padding: 0.25rem 0.25rem 0.25rem 0.6rem;
+  border: 1px solid rgba(12, 153, 144, 0.45);
+  background: rgba(12, 153, 144, 0.08);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: var(--foreground);
+  overflow-wrap: anywhere;
+}
+
+.px-chip button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.px-chip button:hover {
+  color: var(--accent-hover);
+}
+
+.px-reset {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.2rem 0;
+  border: 0;
+  background: none;
+  color: var(--accent-hover);
+  font-family: var(--font-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.px-reset:hover {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* -------------------------------------------------------------------------
+   Search field — shared by all three discovery surfaces
+   ---------------------------------------------------------------------- */
+
+.px-search {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 40rem;
+  padding: 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--background-secondary);
+  transition: border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.px-search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(8, 127, 120, 0.18);
+}
+
+.px-search:hover {
+  border-color: rgba(12, 153, 144, 0.4);
+}
+
+.px-search-icon {
+  flex-shrink: 0;
+  color: var(--ink-3);
+}
+
+.px-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.95rem 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-secondary);
+  font-size: 0.98rem;
+  color: var(--ink);
+  caret-color: var(--accent-hover);
+}
+
+.px-search input::placeholder {
+  color: var(--ink-3);
+}
+
+.px-search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  min-width: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.px-search-clear:hover {
+  background: var(--background);
+  color: var(--ink);
+}
+
+/* -------------------------------------------------------------------------
+   Editorial media
+   ---------------------------------------------------------------------- */
+
+.px-media {
+  position: relative;
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--background-secondary);
+}
+
+.px-media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.px-media--hero {
+  aspect-ratio: var(--ed-ratio-hero);
+}
+
+.px-media--wide {
+  aspect-ratio: var(--ed-ratio-wide);
+}
+
+.px-media--bare {
+  border: 0;
+  background: transparent;
+}
+
+.px-media--cinema {
+  aspect-ratio: var(--ed-ratio-cinema);
+}
+
+.px-media--editorial {
+  aspect-ratio: var(--ed-ratio-editorial);
+}
+
+.px-media--portrait {
+  aspect-ratio: var(--ed-ratio-portrait);
+}
+
+.px-media--square {
+  aspect-ratio: var(--ed-ratio-square);
+}
+
+/* Light logo plate: logos are contained, never cropped or tinted. */
+.px-media--logo {
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 1.6vw, 1.1rem);
+  border: 0;
+  background: #f3efe5;
+}
+
+.px-media--logo > img {
+  object-fit: contain;
+}
+
+.px-media--zoom > img {
+  transition: transform var(--ed-duration-slow) var(--ed-ease);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .px-media--zoom:hover > img,
+  a:hover > .px-media--zoom > img,
+  button:hover > .px-media--zoom > img {
+    transform: scale(1.035);
+  }
+}
+
+.px-caption {
+  margin: 0;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-secondary);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* -------------------------------------------------------------------------
+   Breadcrumbs
+   ---------------------------------------------------------------------- */
+
+.px-crumbs-nav {
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.px-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-secondary);
+  font-size: var(--ed-text-meta);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.px-crumbs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.px-crumbs a:hover {
+  color: var(--accent-hover);
+}
+
+.px-crumbs [aria-current="page"] {
+  color: var(--foreground);
+}
+
+.px-crumb-sep {
+  display: inline-flex;
+  align-items: center;
+  color: var(--line);
+}
+
+/* -------------------------------------------------------------------------
+   Empty states
+   ---------------------------------------------------------------------- */
+
+.px-empty {
+  margin-top: 0.5rem;
+  padding: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+  border: 1px solid var(--line);
+  background: var(--background-secondary);
+  text-align: center;
+}
+
+.px-empty-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.px-empty-text {
+  margin: 0 0 1.5rem;
+  color: var(--ink-2);
+}
+
+/* -------------------------------------------------------------------------
+   Enquiry CTA copy (layout stays page-specific)
+   ---------------------------------------------------------------------- */
+
+.px-cta-title {
+  max-width: 22ch;
+  margin: 0 0 1rem;
+  font-family: var(--font-primary);
+  font-size: var(--ed-text-cta);
+  font-weight: 700;
+  line-height: var(--ed-leading-heading);
+  letter-spacing: var(--ed-tracking-heading);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.px-cta-text {
+  max-width: 38rem;
+  margin: 0;
+  font-size: var(--ed-text-body);
+  line-height: var(--ed-leading-body);
+  color: var(--ink-2);
+}
+
+.px-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.75rem;
+}
+
+.px-cta-number {
+  margin: 1rem 0 0;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.px-cta-number a {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+.px-cta-number a:hover {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* -------------------------------------------------------------------------
+   Detail sheet — shared by catalogue, brand and product dialogs
+   ---------------------------------------------------------------------- */
+
+.px-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 46rem;
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  padding: 2.5rem 2.25rem 0;
+  overflow-x: clip;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--background-secondary);
+  box-sizing: border-box;
+}
+
+.px-sheet-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.px-sheet-close:hover {
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.px-sheet-title {
+  margin: 0 0 0.4rem;
+  padding-right: 2.5rem;
+  font-family: var(--font-primary);
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.px-sheet-headline {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--accent-hover);
+}
+
+.px-sheet-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.px-sheet-meta span + span::before {
+  content: "·";
+  margin-right: 0.5rem;
+  color: var(--accent);
+}
+
+.px-sheet-image {
+  display: block;
+  width: 100%;
+  max-height: 16rem;
+  margin: 0 0 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: #f3efe5;
+  object-fit: contain;
+  box-sizing: border-box;
+}
+
+.px-sheet-desc {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+  overflow-wrap: break-word;
+}
+
+.px-sheet-desc:last-child {
+  margin-bottom: 0;
+}
+
+.px-clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.px-text-toggle {
+  min-height: 44px;
+  padding: 0.5rem 0;
+  border: 0;
+  background: none;
+  color: var(--accent-hover);
+  font-family: var(--font-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.px-text-toggle:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.px-spec {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.px-spec-title {
+  margin: 0 0 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.px-spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.px-spec-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.px-spec-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.68em;
+  left: 0.2rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.px-sub-block + .px-sub-block {
+  margin-top: 1.5rem;
+}
+
+.px-dl {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--background);
+  overflow: hidden;
+}
+
+.px-dl-row {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.8rem 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.px-dl-row + .px-dl-row {
+  border-top: 1px solid var(--line);
+}
+
+.px-dl-row dt {
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+.px-dl-row dd {
+  margin: 0;
+  color: var(--ink-2);
+  overflow-wrap: break-word;
+}
+
+.px-sheet-actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 2rem -2.25rem 0;
+  padding: 1.25rem 2.25rem 1.5rem;
+  border-top: 1px solid var(--line);
+  background: var(--background-secondary);
+}
+
+/* -------------------------------------------------------------------------
+   Focus
+   ---------------------------------------------------------------------- */
+
+.px :focus-visible {
+  outline: var(--ed-focus-width) solid var(--accent-hover);
+  outline-offset: var(--ed-focus-offset);
+  border-radius: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   Reduced motion
+   ---------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .px *,
+  .px *::before,
+  .px *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  /* Reveal wrappers must never leave content hidden. */
+  .px-section-head,
+  .px-cta,
+  .px-cta-media img {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .px-media--zoom > img {
+    transform: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Mobile composition
+   ---------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .px-section-head {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 0.85rem;
+  }
+
+  .px-section-title {
+    max-width: 24ch;
+  }
+
+  .px-cta-actions .px-btn {
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 559px) {
+  .px-cta-actions .px-btn {
+    width: 100%;
+  }
+
+  .px-sheet {
+    padding: 2.25rem 1.25rem 0;
+  }
+
+  .px-sheet-actions {
+    margin: 1.75rem -1.25rem 0;
+    padding: 1.1rem 1.25rem 1.25rem;
+  }
+
+  .px-sheet-actions .px-btn {
+    width: 100%;
+  }
+
+  .px-dl-row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+}

@@ -1,8 +1,8 @@
 .clients-page-section {
   padding: 7.5rem 0 5rem;
-  background-color: var(--surface);
+  background-color: var(--background);
   min-height: 80vh;
-  color: var(--ink);
+  color: var(--foreground);
   overflow-x: clip;
 }
 
@@ -20,7 +20,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   margin: 0 0 1rem;
 }
 
@@ -174,15 +174,13 @@
   background-color: var(--card);
   border: 1px solid var(--line);
   border-radius: 4px;
-  padding: 1.5rem 1rem;
+  padding: 1.25rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: 0.55rem;
   text-align: center;
-  /* Fixed height (not min-height) so every card has an identical footprint
-     regardless of name length or descriptor presence. */
   height: 15rem;
   box-sizing: border-box;
   transition: border-color var(--transition-base), transform var(--transition-base);
@@ -190,7 +188,7 @@
 
 .client-card:hover {
   transform: translateY(-2px);
-  border-color: var(--accent);
+  border-color: var(--accent-hover);
 }
 
 .client-logo-area {
@@ -199,8 +197,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Fixed (no flex growth) so the logo display area is identical on every card. */
   flex: none;
+  background: var(--foreground);
+  border-radius: 4px;
+  padding: 0.5rem;
 }
 
 .client-logo-img {
@@ -214,7 +214,7 @@
   font-family: var(--font-secondary);
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--foreground);
   letter-spacing: 0.01em;
   overflow-wrap: break-word;
 }
