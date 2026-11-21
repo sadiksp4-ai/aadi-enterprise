@@ -115,6 +115,14 @@
 .navbar-links button.navbar-cta {
     margin-left: 1.85rem;
     white-space: nowrap;
+    /* Match the editorial CTA surface: bright teal with dark text (5.7:1). */
+    background-color: var(--accent);
+    color: var(--background);
+}
+
+.navbar-links button.navbar-cta:hover {
+    background-color: #0b8f87;
+    color: var(--background);
 }
 
 .hamburger {

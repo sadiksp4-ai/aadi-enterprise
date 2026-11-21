@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
       <div className="footer-bottom">
         <div className="footer-bottom-inner">
           <img
-            src={getAssetUrl('logo.png')}
+            src={getAssetUrl('logo.webp')}
             alt="Aadi Enterprises logo"
             className="footer-bottom-logo"
             loading="lazy"

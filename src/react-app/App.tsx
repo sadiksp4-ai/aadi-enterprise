@@ -5,6 +5,8 @@ import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
+import BrandDirectoryPage from "./pages/BrandDirectoryPage";
+import BrandCollectionPage from "./pages/BrandCollectionPage";
 import ClientsPage from "./pages/ClientsPage";
 import PartnersPage from "./pages/PartnersPage";
 import ContactPage from "./pages/ContactPage";
@@ -29,6 +31,9 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/products/brand" element={<Navigate to="/products/brands" replace />} />
+              <Route path="/products/brand/:brandSlug" element={<BrandCollectionPage />} />
+              <Route path="/products/brands" element={<BrandDirectoryPage />} />
               <Route path="/products" element={<ProductsPage />} />
               <Route path="/brands" element={<Navigate to="/products" replace />} />
               <Route path="/clients" element={<ClientsPage />} />

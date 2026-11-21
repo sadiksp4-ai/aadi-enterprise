@@ -1,0 +1,615 @@
+/* =========================================================================
+   Brand Directory — Stage 3 composition
+   Shared shell, typography, buttons, media, focus and motion live in
+   `src/react-app/styles/editorial.css` (Stage 1 foundation).
+   Namespaced `.bd-*`: only additive classes.
+   ========================================================================= */
+
+/* A — Hero ---------------------------------------------------------------- */
+
+.bd-hero {
+  padding-top: var(--ed-hero-top);
+  padding-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.bd-hero-inner {
+  max-width: 46rem;
+}
+
+.bd-hero-title {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: var(--ed-text-display);
+  font-weight: 700;
+  line-height: var(--ed-leading-display);
+  letter-spacing: var(--ed-tracking-display);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* B — Brands with product catalogues -------------------------------------- */
+
+.bd-catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bd-catalogue-grid > li {
+  display: flex;
+  min-width: 0;
+}
+
+.bd-catalogue-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--background);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.bd-catalogue-card:hover {
+  border-color: rgba(12, 153, 144, 0.55);
+  background: #101011;
+}
+
+.bd-catalogue-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.bd-catalogue-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--ed-duration-slow) var(--ed-ease);
+}
+
+.bd-catalogue-body {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.bd-catalogue-name {
+  font-family: var(--font-primary);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.bd-catalogue-count {
+  margin-left: auto;
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--accent-hover);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-catalogue-arrow {
+  flex-shrink: 0;
+  color: var(--ink-3);
+  transition: transform var(--transition-base), color var(--transition-base);
+}
+
+.bd-catalogue-card:hover .bd-catalogue-arrow {
+  transform: translate(2px, -2px);
+  color: var(--accent-hover);
+}
+
+/* C — All confirmed brands ------------------------------------------------ */
+
+.bd-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.bd-search {
+  flex: 1 1 18rem;
+  max-width: 24rem;
+  padding: 0 0.9rem;
+}
+
+.bd-search input {
+  padding: 0.75rem 0;
+  font-size: 0.9rem;
+}
+
+.bd-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.bd-filter {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color var(--transition-base),
+    background-color var(--transition-base), color var(--transition-base);
+}
+
+.bd-filter:hover {
+  border-color: rgba(12, 153, 144, 0.45);
+  color: var(--foreground);
+}
+
+.bd-filter[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: rgba(8, 127, 120, 0.14);
+  color: var(--foreground);
+}
+
+.bd-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.bd-result {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bd-grid > li {
+  display: flex;
+  min-width: 0;
+}
+
+.bd-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--background);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.bd-card:hover {
+  border-color: rgba(12, 153, 144, 0.5);
+  background: #101011;
+}
+
+.bd-card-logo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.bd-card-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--ed-duration-slow) var(--ed-ease);
+}
+
+.bd-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.7rem 0.8rem 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.bd-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.bd-card-name {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.bd-card-cat {
+  font-family: var(--font-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+.bd-card-arrow {
+  flex-shrink: 0;
+  color: var(--ink-3);
+  transition: transform var(--transition-base), color var(--transition-base);
+}
+
+.bd-card:hover .bd-card-arrow {
+  transform: translate(2px, -2px);
+  color: var(--accent-hover);
+}
+
+/* Pending records — kept visually separate from the confirmed directory. */
+
+.bd-pending {
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.bd-pending summary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.bd-pending summary::-webkit-details-marker {
+  display: none;
+}
+
+.bd-pending summary::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid var(--line);
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--ink-2);
+}
+
+.bd-pending[open] summary::before {
+  content: "−";
+}
+
+.bd-pending-count {
+  margin-left: auto;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-pending-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem 1.5rem;
+  margin: 0.75rem 0 0;
+  padding: 0 0 0.5rem 1.85rem;
+  list-style: none;
+}
+
+.bd-pending-item {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+/* D — B2B enquiry --------------------------------------------------------- */
+
+.bd-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+}
+
+.bd-cta .px-cta-title {
+  margin: 0;
+}
+
+.bd-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+/* Preview panel ----------------------------------------------------------- */
+
+.bd-sheet {
+  max-width: 40rem;
+}
+
+.bd-sheet-logo {
+  width: 9.5rem;
+  aspect-ratio: 16 / 10;
+  margin: 0 0 1.4rem;
+}
+
+.bd-sheet-subtitle {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.bd-sheet-ranges ul {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.bd-sheet-range {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 48px;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.bd-sheet-range:hover {
+  color: var(--accent-hover);
+}
+
+.bd-sheet-range-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.bd-sheet-range-name {
+  font-family: var(--font-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.bd-sheet-range-group {
+  font-family: var(--font-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.bd-sheet-range svg {
+  flex-shrink: 0;
+  color: var(--ink-3);
+  transition: transform var(--transition-base), color var(--transition-base);
+}
+
+.bd-sheet-range:hover svg {
+  transform: translate(1px, -1px);
+  color: var(--accent-hover);
+}
+
+/* Hover physics only where hover and full motion are appropriate. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .bd-card:hover .bd-card-logo img,
+  .bd-catalogue-card:hover .bd-catalogue-media img {
+    transform: scale(1.035);
+  }
+}
+
+/* Responsive ------------------------------------------------------------- */
+
+@media (max-width: 1199px) {
+  .bd-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .bd-search {
+    flex-basis: 100%;
+    max-width: 28rem;
+  }
+}
+
+@media (max-width: 899px) {
+  .bd-catalogue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bd-catalogue-card {
+    flex-direction: row;
+  }
+
+  .bd-catalogue-media {
+    width: 9rem;
+    flex-shrink: 0;
+    aspect-ratio: auto;
+  }
+
+  .bd-catalogue-body {
+    flex: 1;
+    flex-wrap: wrap;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+
+  .bd-catalogue-name {
+    flex: 1 1 100%;
+  }
+
+  .bd-catalogue-count {
+    margin-left: 0;
+  }
+
+  .bd-catalogue-arrow {
+    margin-left: auto;
+  }
+
+  .bd-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bd-pending-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .bd-hero {
+    padding-bottom: 1.75rem;
+  }
+
+  .bd-hero-title {
+    margin-bottom: 0.75rem;
+  }
+
+  .bd-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 599px) {
+  .bd-search {
+    max-width: none;
+  }
+
+  /* Single scrollable filter rail keeps the toolbar compact on phones. */
+  .bd-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .bd-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bd-filter {
+    flex: 0 0 auto;
+  }
+
+  .bd-catalogue-media {
+    width: 7rem;
+  }
+
+  .bd-catalogue-body {
+    padding: 0.8rem 0.85rem;
+  }
+
+  .bd-catalogue-name {
+    font-size: 1.15rem;
+  }
+
+  .bd-card-body {
+    padding: 0.65rem 0.7rem 0.7rem;
+  }
+
+  .bd-card-name {
+    font-size: 0.92rem;
+  }
+
+  .bd-pending-list {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+  }
+
+  .bd-cta-actions {
+    width: 100%;
+  }
+
+  .bd-cta-actions .px-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 359px) {
+  .bd-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduced motion: reveal wrappers must never leave content hidden. */
+@media (prefers-reduced-motion: reduce) {
+  .bd-catalogue-grid > li,
+  .bd-grid > li,
+  .bd-cta {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .bd-card-logo img,
+  .bd-catalogue-media img,
+  .bd-card-arrow,
+  .bd-catalogue-arrow,
+  .bd-sheet-range svg {
+    transition: none;
+  }
+}

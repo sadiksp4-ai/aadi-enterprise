@@ -20,7 +20,7 @@ function spaRouteFallbacks(): Plugin {
 			const dir = options.dir ?? "dist";
 			const { readFile, writeFile, mkdir } = await import("node:fs/promises");
 			const shell = await readFile(`${dir}/index.html`, "utf8");
-			for (const route of ["about", "products", "clients", "partners", "contact"]) {
+			for (const route of ["about", "products", "brands", "clients", "partners", "contact"]) {
 				await mkdir(`${dir}/${route}`, { recursive: true });
 				await writeFile(`${dir}/${route}/index.html`, shell);
 			}
@@ -36,4 +36,12 @@ export default defineConfig({
 		},
 	},
 	base: "/", // Custom domain serves from root
+	server: {
+		watch: {
+			// Excel workbooks in the repo root are frequently open in Excel,
+			// which locks them on Windows and crashes Vite's watcher with
+			// EBUSY. They are source material, never imported by the app.
+			ignored: ["**/*.xlsx"],
+		},
+	},
 });

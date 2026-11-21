@@ -35,12 +35,13 @@
 }
 
 .cx-inline-link {
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   font-weight: 500;
   text-decoration: none;
 }
 
 .cx-inline-link:hover {
+  color: var(--foreground);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -63,14 +64,14 @@
 }
 
 .cx-btn-primary {
-  background: var(--ink);
-  color: var(--surface);
-  border-color: var(--ink);
+  background: var(--accent);
+  color: var(--foreground);
+  border-color: var(--accent);
 }
 
 .cx-btn-primary:hover {
-  background: #000;
-  color: var(--surface);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .cx-btn-primary:disabled {
@@ -80,34 +81,35 @@
 
 .cx-btn-outline {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--ink-3);
+  color: var(--foreground);
+  border-color: var(--border);
 }
 
 .cx-btn-outline:hover {
-  border-color: var(--ink);
+  border-color: var(--accent-hover);
+  background: rgba(12, 153, 144, 0.08);
 }
 
 .cx-btn-light {
-  background: var(--surface);
-  color: var(--ink);
-  border-color: var(--surface);
+  background: var(--accent);
+  color: var(--foreground);
+  border-color: var(--accent);
 }
 
 .cx-btn-light:hover {
-  background: #fff;
-  border-color: #fff;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .cx-btn-ghost-light {
   background: transparent;
-  color: var(--surface);
-  border-color: rgba(247, 245, 240, 0.45);
+  color: var(--foreground);
+  border-color: var(--border);
 }
 
 .cx-btn-ghost-light:hover {
-  border-color: var(--surface);
-  color: #fff;
+  border-color: var(--accent-hover);
+  background: rgba(12, 153, 144, 0.08);
 }
 
 /* Hero */
@@ -203,7 +205,7 @@
 }
 
 .cx-office-phone:hover {
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -244,7 +246,7 @@
 }
 
 .cx-direct-row dd a:hover {
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -344,12 +346,12 @@
 
 .cx-field input[aria-invalid="true"],
 .cx-field textarea[aria-invalid="true"] {
-  border-color: #B3261E;
+  border-color: #D96B63;
 }
 
 .cx-field select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B8945B' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230C9990' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
@@ -359,7 +361,7 @@
 .cx-error {
   font-size: 0.85rem;
   line-height: 1.5;
-  color: #B3261E;
+  color: #F2A6A0;
   margin-top: 0.35rem;
 }
 
@@ -381,15 +383,15 @@
 }
 
 .cx-status-success {
-  background: #F2F7EF;
-  border-color: #C9DCC2;
-  color: #2F5D33;
+  background: #0B1C17;
+  border-color: #0C9990;
+  color: #93D7D1;
 }
 
 .cx-status-error {
-  background: #FBF1F0;
-  border-color: #E5B8B4;
-  color: #8C1D18;
+  background: #1C0B0B;
+  border-color: #D96B63;
+  color: #F2A6A0;
 }
 
 /* Why */
@@ -464,15 +466,15 @@
 }
 
 .cx-help-link:hover {
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   border-color: var(--accent);
 }
 
 /* Final CTA — clean dark band; explicitly no borders or pseudo-element
    dividers anywhere inside so nothing can cross the heading or text. */
 .cx-cta {
-  background: var(--ink);
-  color: var(--surface);
+  background: var(--background-secondary);
+  color: var(--foreground);
   border: none;
   isolation: isolate;
   overflow-x: clip;
@@ -511,7 +513,7 @@
 .cx-cta-text {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: #C9C4B8;
+  color: var(--ink-2);
   margin: 0 0 2.25rem;
   max-width: 36rem;
 }

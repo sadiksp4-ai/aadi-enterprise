@@ -1,0 +1,336 @@
+/* =========================================================================
+   Brand Collection — Stage 4 composition
+   Shared shell, typography, buttons, media, focus and motion live in
+   `src/react-app/styles/editorial.css` (Stage 1 foundation).
+   Namespaced `.bc-*`: only additive classes.
+   ========================================================================= */
+
+/* A — Brand hero ---------------------------------------------------------- */
+
+.bc-hero {
+  padding-top: var(--ed-hero-top);
+  padding-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.bc-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.bc-hero-copy {
+  min-width: 0;
+}
+
+.bc-hero-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-primary);
+  font-size: var(--ed-text-display);
+  font-weight: 700;
+  line-height: var(--ed-leading-display);
+  letter-spacing: var(--ed-tracking-display);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.bc-hero-intro {
+  max-width: 38rem;
+  margin: 0 0 1.6rem;
+  font-size: var(--ed-text-lead);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.bc .px-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.bc-hero-logo {
+  width: 100%;
+  max-width: 20rem;
+  aspect-ratio: 16 / 10;
+  justify-self: end;
+}
+
+.bc-hero-media {
+  margin-top: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+/* B — Overview ------------------------------------------------------------ */
+
+.bc-overview-head {
+  margin-bottom: 1.4rem;
+}
+
+.bc-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem 2.5rem;
+  margin: 0;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.bc-fact {
+  min-width: 0;
+}
+
+.bc-fact dt {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--ed-text-meta);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.bc-fact dd {
+  margin: 0.4rem 0 0;
+  font-size: var(--ed-text-body);
+  line-height: 1.55;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* C — Confirmed ranges (brands without a product catalogue) --------------- */
+
+.bc-range-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.bc-range-list > li {
+  border-bottom: 1px solid var(--line);
+}
+
+.bc-range-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.2rem 0;
+}
+
+.bc-range-text {
+  min-width: 0;
+}
+
+.bc-range-name {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.bc-range-cat {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-secondary);
+  font-size: var(--ed-text-meta);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.bc-range-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex-shrink: 0;
+}
+
+.bc-range-view,
+.bc-range-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition-base);
+}
+
+.bc-range-wa {
+  color: var(--ink-2);
+}
+
+.bc-range-view:hover,
+.bc-range-wa:hover {
+  color: var(--accent-hover);
+}
+
+.bc-range-view svg,
+.bc-range-wa svg {
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.bc-range-view:hover svg {
+  transform: translateX(2px);
+}
+
+/* D — Enquiry ------------------------------------------------------------- */
+
+.bc-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+}
+
+.bc-cta .px-cta-title {
+  margin: 0;
+}
+
+/* Range detail sheet ------------------------------------------------------ */
+
+.bc-sheet {
+  max-width: 42rem;
+}
+
+.bc-sheet-block {
+  margin-top: 1.6rem;
+}
+
+.bc-sheet-subtitle {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.bc-detail-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bc-detail-list--features {
+  border-top: 1px solid var(--line);
+}
+
+.bc-detail-list--features li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--ed-text-small);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.bc-detail-list--chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.bc-detail-list--chips li {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+
+.bc-sheet-text {
+  margin: 0;
+  font-size: var(--ed-text-small);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* Fallback ---------------------------------------------------------------- */
+
+.bc-fallback-section {
+  padding-top: var(--ed-hero-top);
+  padding-bottom: var(--ed-section-space-lg);
+}
+
+.bc-fallback-title {
+  max-width: 18ch;
+}
+
+/* Responsive -------------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .bc-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .bc-hero-logo {
+    order: -1;
+    width: 9rem;
+    max-width: none;
+    justify-self: start;
+  }
+
+  .bc-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .bc-hero {
+    padding-bottom: 1.75rem;
+  }
+
+  .bc-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 599px) {
+  .bc-facts {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .bc-range-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .bc-range-actions {
+    gap: 1.25rem;
+  }
+}
+
+/* Reduced motion: reveal wrappers must never leave content hidden. */
+@media (prefers-reduced-motion: reduce) {
+  .bc-overview-head,
+  .bc-fact,
+  .bc-range-list > li,
+  .bc-cta {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

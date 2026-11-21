@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { brandDirectory } from "../../data/brand-directory";
+import { getBrandCollection } from "../../data/brand-collections";
+import { CATALOGUE_GROUP_LABELS } from "../../data/catalogue-groups";
+import type { CatalogueBrandProfile } from "../../data/catalogue.types";
 
 interface PageMeta {
   title: string;
@@ -21,13 +25,13 @@ const OG_IMAGE_URL = `${SITE_URL}/about-hero.jpg`;
 const HOME_META: PageMeta = {
   title: "Aadi Enterprises | Hospitality & Hotel Solutions in India",
   description:
-    "Aadi Enterprises provides professional hospitality solutions, housekeeping equipment, F&B supplies, hygiene systems and in-room amenities for hotels, restaurants and institutions across India.",
+    "Aadi Enterprises provides professional hospitality solutions including kitchen equipment, F&B supplies, housekeeping, laundry, cold chain and guest amenities for hotels, restaurants and institutions across India.",
 };
 
 const PRODUCTS_META: PageMeta = {
   title: "Hospitality Products & Equipment | Aadi Enterprises",
   description:
-    "Explore Aadi Enterprises' range of professional hospitality products including kitchen equipment, housekeeping solutions, hygiene systems, F&B supplies and guest amenities.",
+    "Explore Aadi Enterprises' range of professional hospitality products including kitchen equipment, F&B supplies, housekeeping, laundry, cold chain and guest amenities.",
 };
 
 const ROUTE_META: Record<string, PageMeta> = {
@@ -35,9 +39,14 @@ const ROUTE_META: Record<string, PageMeta> = {
   "/about": {
     title: "About Aadi Enterprises | Hospitality Solutions Partner",
     description:
-      "Learn about Aadi Enterprises, a hospitality solutions company providing professional equipment, housekeeping, hygiene and in-room solutions for businesses across India.",
+      "Learn about Aadi Enterprises, a hospitality solutions company providing professional kitchen, F&B, housekeeping, laundry, cold chain and guest experience solutions across India.",
   },
   "/products": PRODUCTS_META,
+  "/products/brands": {
+    title: "Brand Directory | Hospitality Equipment Brands | Aadi Enterprises",
+    description:
+      "Browse Aadi Enterprises' confirmed hospitality brand partners across professional kitchens, food and beverage, housekeeping, laundry, guest amenities and commercial refrigeration.",
+  },
   "/clients": {
     title: "Our Clients | Hotels, Restaurants & Institutions | Aadi Enterprises",
     description:
@@ -56,6 +65,32 @@ const ROUTE_META: Record<string, PageMeta> = {
   // Legacy alias redirects to /products; keep its metadata in sync.
   "/brands": PRODUCTS_META,
 };
+
+/** Brand collection pages that are not published (or unknown slugs). */
+const BRAND_COLLECTION_UNAVAILABLE_META: PageMeta = {
+  title: "Brand Collection | Aadi Enterprises",
+  description:
+    "This brand collection is not published yet. Browse the Aadi Enterprises brand directory to explore confirmed brands and the ranges recorded in the catalogue.",
+};
+
+const BRAND_COLLECTION_PATH = /^\/products\/brand\/([^/]+)$/;
+
+/**
+ * Metadata for a published brand collection. Titles and descriptions only
+ * restate verified catalogue facts: brand name, category and range count.
+ */
+function brandCollectionMeta(brand: CatalogueBrandProfile): PageMeta {
+  const categories = brand.groupIds
+    .map((id) => CATALOGUE_GROUP_LABELS[id])
+    .join(" and ");
+  const rangeCount = brand.rangeIds.length;
+  return {
+    title: `${brand.displayName} Collection | ${categories} | Aadi Enterprises`,
+    description: `${brand.displayName} in the Aadi Enterprises catalogue: ${rangeCount} confirmed ${
+      rangeCount === 1 ? "range" : "ranges"
+    } in ${categories}. View range details, request a quote or enquire on WhatsApp.`,
+  };
+}
 
 function upsertDescription(content: string): void {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="description"]');
@@ -121,10 +156,35 @@ const Seo: React.FC = () => {
   useEffect(() => {
     const key =
       pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
-    const meta = ROUTE_META[key] ?? HOME_META;
-    // The legacy /brands alias redirects to /products — canonicalize it
-    // to the products URL so both never compete in the index.
-    const canonicalPath = key === "/brands" ? "/products" : ROUTE_META[key] ? key : "/";
+
+    const brandMatch = key.match(BRAND_COLLECTION_PATH);
+    let meta: PageMeta;
+    let canonicalPath: string;
+
+    if (brandMatch) {
+      // Dynamic brand collection route: resolve the slug against the curated
+      // directory and the published launch list.
+      const slug = decodeURIComponent(brandMatch[1]).toLowerCase();
+      const brand = brandDirectory.brandBySlug.get(slug);
+      const published = getBrandCollection(slug);
+
+      if (brand && published) {
+        meta = brandCollectionMeta(brand);
+        canonicalPath = `/products/brand/${brand.slug}`;
+      } else {
+        // Unknown or unlaunched brands are not indexable content; point
+        // search engines at the directory that owns those entries.
+        meta = BRAND_COLLECTION_UNAVAILABLE_META;
+        canonicalPath = "/products/brands";
+      }
+    } else {
+      meta = ROUTE_META[key] ?? HOME_META;
+      // The legacy /brands alias redirects to /products — canonicalize it
+      // to the products URL so both never compete in the index.
+      canonicalPath =
+        key === "/brands" ? "/products" : ROUTE_META[key] ? key : "/";
+    }
+
     const canonicalUrl = `${SITE_URL}${canonicalPath === "/" ? "/" : canonicalPath}`;
     document.title = meta.title;
     upsertDescription(meta.description);

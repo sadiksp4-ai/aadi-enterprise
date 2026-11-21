@@ -45,12 +45,14 @@
   font-family: var(--font-secondary);
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--accent-deep);
+  color: var(--accent-hover);
   cursor: pointer;
   text-decoration: none;
+  transition: color var(--transition-base);
 }
 
 .ax-link:hover {
+  color: var(--foreground);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -377,10 +379,10 @@
   gap: 0.5rem 2rem;
 }
 
-/* CTA (same language as homepage) */
+/* CTA */
 .ax-cta {
-  background: var(--ink);
-  color: var(--surface);
+  background: var(--background-secondary);
+  color: var(--foreground);
 }
 
 .ax-cta-inner {
@@ -398,14 +400,14 @@
   font-size: clamp(1.9rem, 3.6vw, 2.75rem);
   font-weight: 700;
   line-height: 1.25;
-  color: var(--surface);
+  color: var(--foreground);
   margin: 0 0 1rem;
 }
 
 .ax-cta-text {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: #C9C4B8;
+  color: var(--ink-2);
   margin: 0 0 2.25rem;
   max-width: 36rem;
 }
@@ -434,25 +436,25 @@
 }
 
 .ax-btn-light {
-  background: var(--surface);
-  color: var(--ink);
-  border-color: var(--surface);
+  background: var(--accent);
+  color: var(--foreground);
+  border-color: var(--accent);
 }
 
 .ax-btn-light:hover {
-  background: #fff;
-  border-color: #fff;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .ax-btn-ghost-light {
   background: transparent;
-  color: var(--surface);
-  border-color: rgba(247, 245, 240, 0.45);
+  color: var(--foreground);
+  border-color: var(--border);
 }
 
 .ax-btn-ghost-light:hover {
-  border-color: var(--surface);
-  color: #fff;
+  border-color: var(--accent-hover);
+  background: rgba(12, 153, 144, 0.08);
 }
 
 /* Responsive */
