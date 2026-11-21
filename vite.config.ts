@@ -38,10 +38,17 @@ export default defineConfig({
 	base: "/", // Custom domain serves from root
 	server: {
 		watch: {
-			// Excel workbooks in the repo root are frequently open in Excel,
-			// which locks them on Windows and crashes Vite's watcher with
-			// EBUSY. They are source material, never imported by the app.
-			ignored: ["**/*.xlsx"],
+			// Excel workbooks and video assets are frequently held open by
+			// Windows applications, which locks them and crashes Vite's
+			// watcher with EBUSY. They are static source material, never
+			// imported by the app.
+			ignored: [
+				"**/*.xlsx",
+				"**/*.mp4",
+				"**/*.mov",
+				"**/*.webm",
+				"**/public/Videos/**",
+			],
 		},
 	},
 });

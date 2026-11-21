@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -21,6 +22,8 @@ import { PeekCard } from '../components/ui/peek-card';
 import { RevealCard } from '../components/ui/reveal-card';
 import { StoryCards } from '../components/ui/story-card';
 import { useIsMobileViewport } from '../lib/use-media-query';
+import { usePrefersReducedMotion } from '../lib/use-reduced-motion';
+import ZafferanoVideo from '../components/Home/ZafferanoVideo';
 import catalog from '../../../aadi-info.json';
 
 const solutionsData = [
@@ -207,6 +210,23 @@ function HomePage() {
   const navigate = useNavigate();
   const whatsappUrl = getWhatsAppUrl(getGeneralEnquiryMessage());
   const isMobileViewport = useIsMobileViewport();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    video.muted = true;
+
+    if (prefersReducedMotion) {
+      video.pause();
+      return;
+    }
+
+    void video.play().catch(() => {
+      // Poster remains if the browser blocks background playback.
+    });
+  }, [prefersReducedMotion]);
 
   return (
     <div
@@ -221,10 +241,12 @@ function HomePage() {
       >
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <video
-            autoPlay
+            ref={heroVideoRef}
+            autoPlay={!prefersReducedMotion}
             loop
             muted
             playsInline
+            preload={prefersReducedMotion ? "none" : "auto"}
             className="h-full w-full object-cover"
             poster="/images/hero-fallback.jpg"
             aria-hidden="true"
@@ -233,31 +255,19 @@ function HomePage() {
             {/* Fallback if folder was renamed to lowercase */}
             <source src="/videos/hero-hospitality.mp4" type="video/mp4" />
           </video>
-          {/* Dark cinematic vignette overlay so white headline text remains legible */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/80 via-[#080808]/60 to-[#080808]" />
+          {/* Subtle cinematic overlay keeps the ivory headline legible while
+              leaving the hospitality footage dominant. */}
+          <div className="hx-hero-overlay" aria-hidden="true" />
         </div>
         <div className="hx-hero-inner">
           <div className="hx-hero-copy">
             <h1 className="hx-hero-title">
-              <span className="hx-hero-title-line">Complete</span>{' '}
-              <span className="hx-hero-title-line">Hospitality.</span>{' '}
-              <span className="hx-hero-title-line">Perfectly</span>{' '}
-              <span className="hx-hero-title-line">Equipped.</span>
+              Everything for exceptional hospitality.
             </h1>
-            <p className="hx-hero-lead">
-              From professional kitchens to exceptional guest experiences.
-            </p>
             <div className="hx-hero-actions">
               <MagneticCTA type="button" onClick={() => navigate('/products')}>
                 Explore Solutions
                 <ArrowRight size={20} aria-hidden="true" />
-              </MagneticCTA>
-              <MagneticCTA
-                type="button"
-                variant="outline"
-                onClick={() => navigate('/contact')}
-              >
-                Request a Consultation
               </MagneticCTA>
             </div>
           </div>
@@ -378,12 +388,7 @@ function HomePage() {
       >
         <div className="hx-feature-inner">
           <div className="hx-feature-media">
-            <img
-              src={getAssetUrl('images/spotlight/zafferano-poldina-pro.webp')}
-              alt="Zafferano Poldina Pro cordless table lamps in red, purple and orange on a restaurant table"
-              loading="lazy"
-              decoding="async"
-            />
+            <ZafferanoVideo />
           </div>
           <div className="hx-feature-copy">
             <p className="hx-eyebrow">Featured</p>

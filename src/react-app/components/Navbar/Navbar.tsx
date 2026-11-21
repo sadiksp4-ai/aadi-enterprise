@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Search } from "lucide-react";
 import "./Navbar.css";
 import { getAssetUrl } from "../../utils";
 import { EnquiryDrawer } from "../EnquiryDrawer";
+import GlobalSearch from "../Search/GlobalSearch";
 import { MorphingButton } from "../ui/morphing-button";
 import { DirectionalTooltip } from "../ui/directional-tooltip";
 
@@ -18,6 +20,8 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const openedSearchFromMenu = useRef(false);
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -26,6 +30,28 @@ const Navbar: React.FC = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const openSearch = () => {
+    openedSearchFromMenu.current = isMenuOpen;
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+      window.requestAnimationFrame(() => setIsSearchOpen(true));
+      return;
+    }
+    setIsSearchOpen(true);
+  };
+
+  const handleSearchOpenChange = (open: boolean) => {
+    setIsSearchOpen(open);
+    if (!open && openedSearchFromMenu.current) {
+      openedSearchFromMenu.current = false;
+      window.requestAnimationFrame(() => {
+        document
+          .querySelector<HTMLButtonElement>(".hamburger")
+          ?.focus({ preventScroll: true });
+      });
+    }
   };
 
   useEffect(() => {
@@ -89,6 +115,16 @@ const Navbar: React.FC = () => {
             {label}
           </Link>
         ))}
+        <button
+          type="button"
+          className="navbar-search-trigger"
+          onClick={openSearch}
+          aria-label="Search the website"
+          aria-keyshortcuts="Control+K Meta+K"
+        >
+          <Search size={18} aria-hidden="true" />
+          <span className="navbar-search-label">Search</span>
+        </button>
         <MorphingButton
           idleText="Request a Quote"
           variant="primary"
@@ -112,6 +148,10 @@ const Navbar: React.FC = () => {
       </DirectionalTooltip>
 
       <EnquiryDrawer open={isQuoteOpen} onOpenChange={setIsQuoteOpen} />
+      <GlobalSearch
+        open={isSearchOpen}
+        onOpenChange={handleSearchOpenChange}
+      />
     </nav>
   );
 };

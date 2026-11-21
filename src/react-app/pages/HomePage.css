@@ -170,71 +170,65 @@
   background: var(--background);
 }
 
-.hx-hero-video-wrap {
+.hx-hero-overlay {
   position: absolute;
   inset: 0;
-  z-index: -2;
-}
-
-.hx-hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hx-hero-gradient {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
   background:
-    linear-gradient(90deg, rgba(5, 9, 9, 0.82) 0%, rgba(5, 9, 9, 0.5) 45%, rgba(5, 9, 9, 0.2) 100%),
-    linear-gradient(180deg, rgba(5, 9, 9, 0.35) 0%, rgba(5, 9, 9, 0.1) 50%, rgba(5, 9, 9, 0.65) 100%);
+    radial-gradient(ellipse at center, rgba(5, 9, 9, 0.08) 0%, rgba(5, 9, 9, 0.38) 78%),
+    linear-gradient(180deg, rgba(5, 9, 9, 0.46) 0%, rgba(5, 9, 9, 0.32) 45%, rgba(5, 9, 9, 0.68) 100%);
 }
 
 .hx-hero-inner {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: clamp(6rem, 18vh, 11rem) 1.5rem clamp(3rem, 5vh, 4.5rem);
+  padding: clamp(6rem, 10vh, 8rem) 1.5rem clamp(2rem, 4vh, 3rem);
+  text-align: center;
 }
 
 .hx-hero-copy {
-  max-width: 34rem;
-  animation: hx-rise-in 700ms cubic-bezier(0.2, 0.7, 0.25, 1) both;
+  width: 100%;
+  max-width: 70rem;
+  text-align: center;
 }
 
 .hx-hero-title {
-  font-family: var(--font-primary);
-  font-size: clamp(2.6rem, 5.2vw, 5rem);
-  font-weight: 700;
-  line-height: 1.06;
-  letter-spacing: -0.035em;
+  max-width: 100%;
+  margin: 0 0 clamp(1.6rem, 3vh, 2.2rem);
   color: var(--foreground);
-  margin: 0 0 2rem;
-}
-
-.hx-hero-title-line {
-  display: block;
-}
-
-.hx-hero-title-line:first-child {
-  margin-bottom: 0.14em;
-}
-
-.hx-hero-lead {
-  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
-  line-height: 1.5;
-  color: var(--ink-2);
-  margin: 0 0 2.25rem;
-  max-width: 26rem;
+  font-family: var(--font-primary);
+  font-size: clamp(2.1rem, 4.2vw, 4.1rem);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  animation: hx-rise-in 700ms cubic-bezier(0.2, 0.7, 0.25, 1) both;
 }
 
 .hx-hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.85rem;
+  animation: hx-rise-in 650ms 180ms cubic-bezier(0.2, 0.7, 0.25, 1) both;
+}
+
+.hx-hero .hx-hero-actions .hx-cta-magnetic {
+  flex: 0 0 auto;
+}
+
+.hx-hero .hx-btn-primary {
+  color: var(--background);
+}
+
+.hx-hero .hx-btn-primary:hover {
+  color: var(--background);
 }
 
 /* Solutions — editorial luxury equipment grid */
@@ -496,13 +490,6 @@
   border-radius: 0.35rem;
   background: var(--background);
   border: 1px solid var(--hx-line);
-}
-
-.hx-feature-media img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
 }
 
 .hx-feature-copy {
@@ -915,7 +902,7 @@
   }
 
   .hx-hero-inner {
-    padding: clamp(7rem, 16vh, 9rem) 1.25rem clamp(2.5rem, 6vh, 4rem);
+    padding: clamp(6rem, 14vh, 8rem) 1.25rem clamp(2rem, 5vh, 3rem);
   }
 
   .hx-hero-copy {
@@ -923,18 +910,14 @@
   }
 
   .hx-hero-title {
-    font-size: clamp(2.4rem, 8vw, 3.6rem);
-    margin-bottom: 1.75rem;
+    font-size: clamp(2.05rem, 5.2vw, 3.2rem);
+    margin-bottom: 1.6rem;
   }
 
-  .hx-hero-lead {
-    max-width: none;
-    margin-bottom: 2rem;
-  }
-
-  .hx-hero-gradient {
+  .hx-hero-overlay {
     background:
-      linear-gradient(180deg, rgba(5, 9, 9, 0.65) 0%, rgba(5, 9, 9, 0.45) 50%, rgba(5, 9, 9, 0.75) 100%);
+      radial-gradient(ellipse at center, rgba(5, 9, 9, 0.08) 0%, rgba(5, 9, 9, 0.42) 78%),
+      linear-gradient(180deg, rgba(5, 9, 9, 0.5) 0%, rgba(5, 9, 9, 0.35) 45%, rgba(5, 9, 9, 0.7) 100%);
   }
 
   .hx-section-inner {
@@ -952,10 +935,10 @@
     grid-template-columns: 1fr;
   }
 
-  .hx-hero-actions .hx-btn,
   .hx-cta-actions .hx-btn {
     width: 100%;
   }
+
 }
 
 @media (max-width: 480px) {
@@ -964,7 +947,7 @@
   }
 
   .hx-hero-title {
-    font-size: clamp(2.2rem, 10.5vw, 3.2rem);
+    font-size: clamp(2rem, 9.2vw, 2.6rem);
   }
 
   .hx-section-title {
@@ -984,5 +967,12 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .hx-hero-title,
+  .hx-hero-actions {
+    opacity: 1;
+    animation: none;
+    transform: none;
   }
 }
