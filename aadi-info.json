@@ -812,6 +812,39 @@
             "Hospitals",
             "Retail Spaces"
           ]
+        },
+        {
+          "name": "Origami",
+          "description": "Origami was started in 1995 and has today grown to become the leading producer of paper disposables in India, with its own tissue paper production facility and conversion facilities across the country.",
+          "features": [
+            "Integrated tissue paper production",
+            "Institutional supply for the away-from-home market",
+            "Export supply with food-contact safe products",
+            "Customisation available, including private label"
+          ],
+          "extraInfo": {
+            "Product Range": [
+              "Paper napkins",
+              "Toilet tissue rolls",
+              "Facial tissues",
+              "Kitchen towels",
+              "Hand towels",
+              "Pocket tissues",
+              "Wet wipes",
+              "Tissue jumbo rolls"
+            ],
+            "Institutional Ranges": [
+              "EcoDelux (virgin material from managed forest resources)",
+              "EcoVal (recycled material)"
+            ]
+          },
+          "idealFor": [
+            "HORECA",
+            "Food Service",
+            "Facilities Management",
+            "Health Care",
+            "Airlines"
+          ]
         }
       ]
     },

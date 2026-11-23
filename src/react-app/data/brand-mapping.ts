@@ -22,6 +22,10 @@
  * - `sourceIndex` is the record's position in `aadi-info.json`; every entry
  *   also carries `expectedSourceName` so a reordered/edited source fails
  *   loudly instead of silently mis-classifying a record.
+ * - Records withheld from the public products experience are listed under
+ *   `CURATED_HIDDEN_RECORDS`. They stay in `aadi-info.json` — the factual
+ *   source is never rewritten — but they are not published as brands, ranges
+ *   or pending entries and are excluded from catalogue search.
  * - No product facts, descriptions, specifications or brand copy are invented
  *   here. Brand descriptions stay absent until verified text exists.
  */
@@ -59,7 +63,20 @@ export interface CuratedPendingRecordDefinition {
   readonly reason: string;
 }
 
-/** Confirmed brand identities (34). */
+/**
+ * A source record withheld from the public products experience.
+ *
+ * Hiding is a publication decision, not a data edit: the record stays in
+ * `aadi-info.json` and keeps its stable `sourceIndex`, but no brand, range,
+ * pending entry or search result is derived from it.
+ */
+export interface CuratedHiddenRecordDefinition {
+  readonly sourceIndex: number;
+  readonly expectedSourceName: string;
+  readonly reason: string;
+}
+
+/** Confirmed brand identities (31). */
 export const CURATED_BRANDS: readonly CuratedBrandDefinition[] = [
   {
     id: "rational",
@@ -94,14 +111,6 @@ export const CURATED_BRANDS: readonly CuratedBrandDefinition[] = [
     classification: "manufacturer",
     logo: "/brand-logos/tramontina.webp",
     notes: "Manufacturer brand per the approved classification guidance.",
-  },
-  {
-    id: "atlantic-chef",
-    slug: "atlantic-chef",
-    displayName: "Atlantic Chef",
-    classification: "brand",
-    logo: "/brand-logos/atlantic-chef.webp",
-    notes: "Record copy names Atlantic Chef as the knife brand.",
   },
   {
     id: "ariane",
@@ -225,23 +234,6 @@ export const CURATED_BRANDS: readonly CuratedBrandDefinition[] = [
     notes: "Confirmed by the partner directory as a food-service brand.",
   },
   {
-    id: "bar-kraft",
-    slug: "bar-kraft",
-    displayName: "Bar Kraft",
-    classification: "brand",
-    logo: "/brand-logos/bar-kraft.webp",
-    notes: "Record copy names Bar Kraft as the barware brand.",
-  },
-  {
-    id: "kaapi-solutions",
-    slug: "kaapi-solutions",
-    displayName: "Kaapi Solutions",
-    classification: "brand",
-    logo: "/brand-logos/kaapi-solutions.webp",
-    notes:
-      "Record copy describes a coffee-equipment provider; the brand identity is confirmed, manufacturing is not asserted.",
-  },
-  {
     id: "cothas-coffee",
     slug: "cothas-coffee",
     displayName: "Cothas Coffee",
@@ -299,20 +291,20 @@ export const CURATED_BRANDS: readonly CuratedBrandDefinition[] = [
     logo: "/brand-logos/vileda-professional.webp",
   },
   {
+    id: "origami",
+    slug: "origami",
+    displayName: "Origami",
+    classification: "brand",
+    notes:
+      "Record copy taken from origamiindia.com; no verified brand logo asset yet.",
+  },
+  {
     id: "electrolux-professional",
     slug: "electrolux-professional",
     displayName: "Electrolux Professional",
     classification: "manufacturer",
     logo: "/brand-logos/electrolux-professional.webp",
     notes: "Source copy explicitly calls Electrolux a laundry equipment manufacturer.",
-  },
-  {
-    id: "elanpro",
-    slug: "elanpro",
-    displayName: "Elanpro",
-    classification: "brand",
-    logo: "/brand-logos/elanpro.webp",
-    notes: "Record copy names Elanpro as a hotel-refrigeration brand.",
   },
   {
     id: "jvd",
@@ -342,7 +334,7 @@ export const CURATED_BRANDS: readonly CuratedBrandDefinition[] = [
   },
 ];
 
-/** Confirmed ranges (35), each backed by exactly one source record. */
+/** Confirmed ranges (32), each backed by exactly one source record. */
 export const CURATED_RANGES: readonly CuratedRangeDefinition[] = [
   {
     sourceIndex: 0,
@@ -372,13 +364,6 @@ export const CURATED_RANGES: readonly CuratedRangeDefinition[] = [
     brandId: "tramontina",
     rangeId: "tramontina",
     rangeName: "Tramontina",
-  },
-  {
-    sourceIndex: 4,
-    expectedSourceName: "Atlantic Chef - Professional Chef Knives",
-    brandId: "atlantic-chef",
-    rangeId: "professional-chef-knives",
-    rangeName: "Professional Chef Knives",
   },
   {
     sourceIndex: 5,
@@ -486,20 +471,6 @@ export const CURATED_RANGES: readonly CuratedRangeDefinition[] = [
     rangeName: "Shapes",
   },
   {
-    sourceIndex: 20,
-    expectedSourceName: "Bar Kraft",
-    brandId: "bar-kraft",
-    rangeId: "bar-kraft",
-    rangeName: "Bar Kraft",
-  },
-  {
-    sourceIndex: 21,
-    expectedSourceName: "Kaapi Solutions",
-    brandId: "kaapi-solutions",
-    rangeId: "kaapi-solutions",
-    rangeName: "Kaapi Solutions",
-  },
-  {
     sourceIndex: 22,
     expectedSourceName: "Cothas Coffee",
     brandId: "cothas-coffee",
@@ -549,28 +520,28 @@ export const CURATED_RANGES: readonly CuratedRangeDefinition[] = [
     rangeName: "Vileda Professional",
   },
   {
-    sourceIndex: 37,
+    sourceIndex: 34,
+    expectedSourceName: "Origami",
+    brandId: "origami",
+    rangeId: "origami",
+    rangeName: "Origami",
+  },
+  {
+    sourceIndex: 38,
     expectedSourceName: "Electrolux Professional",
     brandId: "electrolux-professional",
     rangeId: "electrolux-professional",
     rangeName: "Electrolux Professional",
   },
   {
-    sourceIndex: 38,
-    expectedSourceName: "Elanpro",
-    brandId: "elanpro",
-    rangeId: "elanpro",
-    rangeName: "Elanpro",
-  },
-  {
-    sourceIndex: 39,
+    sourceIndex: 40,
     expectedSourceName: "JVD",
     brandId: "jvd",
     rangeId: "jvd",
     rangeName: "JVD",
   },
   {
-    sourceIndex: 40,
+    sourceIndex: 41,
     expectedSourceName: "Zafferano",
     brandId: "zafferano",
     rangeId: "pina-pro",
@@ -578,7 +549,7 @@ export const CURATED_RANGES: readonly CuratedRangeDefinition[] = [
     notes: "Range identity comes from the curated mapping, not the marketing headline.",
   },
   {
-    sourceIndex: 41,
+    sourceIndex: 42,
     expectedSourceName: "Zafferano",
     brandId: "zafferano",
     rangeId: "poldina-pro",
@@ -586,7 +557,7 @@ export const CURATED_RANGES: readonly CuratedRangeDefinition[] = [
     notes: "Range identity comes from the curated mapping, not the marketing headline.",
   },
   {
-    sourceIndex: 42,
+    sourceIndex: 43,
     expectedSourceName: "Ice Make",
     brandId: "ice-make",
     rangeId: "ice-make",
@@ -595,7 +566,7 @@ export const CURATED_RANGES: readonly CuratedRangeDefinition[] = [
 ];
 
 /**
- * Records that are not published as brands yet (9).
+ * Records that are not published as brands yet (8).
  * The catalogue record remains fully accessible; only classification is
  * withheld pending verification or content authoring.
  */
@@ -634,15 +605,7 @@ export const CURATED_PENDING_RECORDS: readonly CuratedPendingRecordDefinition[] 
         "Service/system offering described in Aadi's own voice; no brand or manufacturer is identified.",
     },
     {
-      sourceIndex: 33,
-      expectedSourceName: "Saraya / Mystair",
-      candidateName: "Saraya / Mystair",
-      classification: "unverified",
-      reason:
-        "One record names two hygiene brands (Saraya and Mystair); the brand/range split needs verification before either is published as a confirmed brand.",
-    },
-    {
-      sourceIndex: 34,
+      sourceIndex: 35,
       expectedSourceName: "Commercial Laundry Machines",
       candidateName: "Commercial Laundry Machines",
       classification: "product-collection",
@@ -650,7 +613,7 @@ export const CURATED_PENDING_RECORDS: readonly CuratedPendingRecordDefinition[] 
         "Generic equipment category supplied from multiple OEMs; no single brand is identified.",
     },
     {
-      sourceIndex: 35,
+      sourceIndex: 36,
       expectedSourceName: "Laundry Layout Planning & Execution",
       candidateName: "Laundry Layout Planning & Execution",
       classification: "service",
@@ -658,7 +621,7 @@ export const CURATED_PENDING_RECORDS: readonly CuratedPendingRecordDefinition[] 
         "Aadi service offering (planning, installation, AMC), not a brand or product range.",
     },
     {
-      sourceIndex: 36,
+      sourceIndex: 37,
       expectedSourceName: "Laundry Accessories",
       candidateName: "Laundry Accessories",
       classification: "product-collection",
@@ -666,7 +629,7 @@ export const CURATED_PENDING_RECORDS: readonly CuratedPendingRecordDefinition[] 
         "Generic accessory category compatible with multiple machine brands; no brand is identified.",
     },
     {
-      sourceIndex: 43,
+      sourceIndex: 44,
       expectedSourceName: "Luxury Leather Collection",
       candidateName: "Luxury Leather Collection",
       classification: "product-collection",
@@ -674,3 +637,39 @@ export const CURATED_PENDING_RECORDS: readonly CuratedPendingRecordDefinition[] 
         "Aadi's own curated leather collection with no manufacturer or brand name in the source.",
     },
   ];
+
+/**
+ * Records withheld from the public products experience (5).
+ *
+ * These are publication decisions, not data changes: the source records remain
+ * in `aadi-info.json` so nothing is lost, but no brand, range, pending entry or
+ * search result is derived from them.
+ */
+export const CURATED_HIDDEN_RECORDS: readonly CuratedHiddenRecordDefinition[] = [
+  {
+    sourceIndex: 4,
+    expectedSourceName: "Atlantic Chef - Professional Chef Knives",
+    reason: "Removed from the public products experience.",
+  },
+  {
+    sourceIndex: 20,
+    expectedSourceName: "Bar Kraft",
+    reason: "Removed from the public products experience.",
+  },
+  {
+    sourceIndex: 21,
+    expectedSourceName: "Kaapi Solutions",
+    reason: "Removed from the public products experience.",
+  },
+  {
+    sourceIndex: 33,
+    expectedSourceName: "Saraya / Mystair",
+    reason: "Removed from the public products experience.",
+  },
+  {
+    sourceIndex: 39,
+    expectedSourceName: "Elanpro",
+    reason: "Removed from the public products experience.",
+  },
+];
+

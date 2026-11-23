@@ -17,6 +17,7 @@
 import { catalogueIndex } from "./catalogue";
 import {
   CURATED_BRANDS,
+  CURATED_HIDDEN_RECORDS,
   CURATED_PENDING_RECORDS,
   CURATED_RANGES,
 } from "./brand-mapping";
@@ -203,6 +204,36 @@ export function createBrandDirectory(
     usedSourceIndexes.add(pending.sourceIndex);
   }
 
+  /* Withheld records ---------------------------------------------------- */
+
+  /* Hiding a record is a publication decision. The record still counts as
+     covered so the integrity check below keeps guarding against genuinely
+     unmapped source data. */
+  const hiddenSourceIndexes = new Set<number>();
+
+  for (const hidden of CURATED_HIDDEN_RECORDS) {
+    if (usedSourceIndexes.has(hidden.sourceIndex)) {
+      throw new Error(
+        `Source record ${hidden.sourceIndex} is both published and withheld.`
+      );
+    }
+
+    const record = recordsBySourceIndex.get(hidden.sourceIndex);
+    if (!record) {
+      throw new Error(
+        `Withheld source record ${hidden.sourceIndex} was not found in the catalogue.`
+      );
+    }
+    if (record.name !== hidden.expectedSourceName) {
+      throw new Error(
+        `Withheld source record ${hidden.sourceIndex} is "${record.name}" but the curated mapping expects "${hidden.expectedSourceName}".`
+      );
+    }
+
+    hiddenSourceIndexes.add(hidden.sourceIndex);
+    usedSourceIndexes.add(hidden.sourceIndex);
+  }
+
   if (usedSourceIndexes.size !== index.records.length) {
     throw new Error(
       `Brand directory covers ${usedSourceIndexes.size} of ${index.records.length} source records.`
@@ -343,6 +374,7 @@ export function createBrandDirectory(
     brands,
     ranges,
     pendingRecords,
+    hiddenSourceIndexes,
     brandById,
     brandBySlug,
     rangeById,

@@ -192,6 +192,11 @@ export interface CatalogueBrandDirectory {
   readonly brands: readonly CatalogueBrandProfile[];
   readonly ranges: readonly CatalogueRange[];
   readonly pendingRecords: readonly CataloguePendingRecord[];
+  /**
+   * Source indexes withheld from the public products experience. They are
+   * accounted for by the coverage check but never published.
+   */
+  readonly hiddenSourceIndexes: ReadonlySet<number>;
   readonly brandById: ReadonlyMap<string, CatalogueBrandProfile>;
   readonly brandBySlug: ReadonlyMap<string, CatalogueBrandProfile>;
   readonly rangeById: ReadonlyMap<string, CatalogueRange>;

@@ -2,16 +2,15 @@
  * Website-wide search index.
  *
  * Every entry is derived from the existing catalogue data at module load:
- * 44 catalogue records, 51 featured products, 34 confirmed brands, the six
- * product groups and the public pages. Nothing is duplicated or hand-curated
- * apart from the page route list.
+ * 40 published catalogue records, 51 featured products, 31 confirmed brands,
+ * the six product groups and the public pages. Nothing is duplicated or
+ * hand-curated apart from the page route list.
  */
 
 import { brandDirectory } from "../data/brand-directory";
 import { getBrandCollection } from "../data/brand-collections";
 import { catalogueIndex } from "../data/catalogue";
 import { CATALOGUE_GROUPS } from "../data/catalogue-groups";
-import type { CatalogueGroupId } from "../data/catalogue.types";
 import { FEATURED_CATALOGUE } from "../data/featured-products";
 import { catalogueSearchText } from "./catalogue-search";
 
@@ -118,7 +117,15 @@ const featuredEntries: GlobalSearchEntry[] = FEATURED_CATALOGUE.flatMap(
     })
 );
 
-const catalogueEntries: GlobalSearchEntry[] = catalogueIndex.records.map(
+/**
+ * Source records published on the public products experience. Withheld records
+ * stay in `aadi-info.json` but must never appear in search results.
+ */
+const publishedCatalogueRecords = catalogueIndex.records.filter(
+  (record) => !brandDirectory.hiddenSourceIndexes.has(record.sourceIndex)
+);
+
+const catalogueEntries: GlobalSearchEntry[] = publishedCatalogueRecords.map(
   (record) => ({
     id: `catalogue:${record.slug}`,
     group: "products" as const,
@@ -152,10 +159,9 @@ const brandEntries: GlobalSearchEntry[] = brandDirectory.brands.map((brand) => {
 });
 
 const categoryEntries: GlobalSearchEntry[] = CATALOGUE_GROUPS.map((group) => {
-  const count =
-    catalogueIndex.groups.find((entry) => entry.id === group.id)?.recordCount ??
-    catalogueIndex.recordsByGroup.get(group.id as CatalogueGroupId)?.length ??
-    0;
+  const count = publishedCatalogueRecords.filter(
+    (record) => record.groupId === group.id
+  ).length;
   return {
     id: `category:${group.id}`,
     group: "categories" as const,

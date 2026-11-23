@@ -20,7 +20,7 @@
  *
  * It then appears automatically in the directory section and, because it has a
  * collection page, on that page's catalogue shortcut. Brands without approved
- * products never appear, so the section can never drift into a list of all 34
+ * products never appear, so the section can never drift into a list of all 31
  * partners.
  */
 
@@ -98,7 +98,7 @@ export const CATALOGUE_PRODUCT_TOTAL = CATALOGUE_BRANDS.reduce(
 
 /**
  * Catalogue entry for a brand id (or slug), if that brand publishes one.
- * Returns `undefined` for the 31 partners without approved products, which is
+ * Returns `undefined` for the 27 partners without approved products, which is
  * what keeps the brand-page shortcut off those pages.
  */
 export function getCatalogueBrand(

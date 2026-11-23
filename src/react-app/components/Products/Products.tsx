@@ -166,7 +166,7 @@ const FEATURED_BRAND_SLUGS = [
   "zafferano",
   "karcher",
   "electrolux-professional",
-  "elanpro",
+  "dolphy",
   "ice-make",
 ] as const;
 
