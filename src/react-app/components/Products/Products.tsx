@@ -135,11 +135,30 @@ const ALL_ENTRIES: CatalogueEntry[] = [...RANGE_ENTRIES, ...PENDING_ENTRIES].sor
  */
 const FEATURED_COLLECTION_IDS = ["karcher", "tramontina", "dolphy"] as const;
 
+/** Full-frame brand cover posters, one per featured collection. */
+const FEATURED_COVERS: Record<
+  (typeof FEATURED_COLLECTION_IDS)[number],
+  { readonly image: string; readonly alt: string }
+> = {
+  karcher: {
+    image: "/products/karcher/aadi-karcher-brand-cover.webp",
+    alt: "Kärcher Professional Cleaning Solutions",
+  },
+  tramontina: {
+    image: "/products/Tramontina/aadi-tramontina-brand-cover.webp",
+    alt: "Tramontina Professional Cookware and Kitchenware",
+  },
+  dolphy: {
+    image: "/products/Dolphy/aadi-dolphy-brand-cover.webp",
+    alt: "Dolphy Professional Hygiene and Guest Amenities",
+  },
+};
+
 const FEATURED_COLLECTIONS = FEATURED_COLLECTION_IDS.flatMap((brandId) => {
   const brand = brandDirectory.brandBySlug.get(brandId);
   const catalogue = getFeaturedCatalogue(brandId);
-  const cover = catalogue?.products[0];
-  if (!brand || !catalogue || !cover) return [];
+  const cover = FEATURED_COVERS[brandId];
+  if (!brand || !catalogue || catalogue.products.length === 0) return [];
 
   return [
     {
@@ -148,8 +167,8 @@ const FEATURED_COLLECTIONS = FEATURED_COLLECTION_IDS.flatMap((brandId) => {
       // Presentation spelling for the official brand mark; data stays untouched.
       name: brandId === "karcher" ? "Kärcher" : brand.displayName,
       count: catalogue.products.length,
-      image: cover.imagePath,
-      imageAlt: `${brand.displayName} ${cover.name}`,
+      image: cover.image,
+      imageAlt: cover.alt,
     },
   ];
 });
@@ -576,6 +595,8 @@ const Products: React.FC = () => {
                     <img
                       src={getAssetUrl(collection.image)}
                       alt={collection.imageAlt}
+                      width={1200}
+                      height={1600}
                       loading="lazy"
                       decoding="async"
                     />
