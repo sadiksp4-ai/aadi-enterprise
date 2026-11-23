@@ -5,12 +5,12 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
-  MessageCircle,
   Snowflake,
   X,
 } from "lucide-react";
 import "./Products.css";
 import { getAssetUrl } from "../../utils";
+import WhatsAppIcon from "../WhatsAppIcon";
 import {
   getGeneralEnquiryMessage,
   getProductEnquiryMessage,
@@ -883,7 +883,7 @@ const Products: React.FC = () => {
                                     entry
                                   )} on WhatsApp`}
                                 >
-                                  <MessageCircle size={15} aria-hidden="true" />
+                                  <WhatsAppIcon size={15} />
                                 </a>
                               </div>
                             </li>
@@ -1015,7 +1015,7 @@ const Products: React.FC = () => {
                   rel="noopener noreferrer"
                   className="px-btn px-btn-secondary"
                 >
-                  <MessageCircle size={16} aria-hidden="true" />
+                  <WhatsAppIcon size={16} />
                   WhatsApp
                 </a>
               </div>
@@ -1223,7 +1223,7 @@ const EntryDialog: React.FC<EntryDialogProps> = ({
           rel="noopener noreferrer"
           className="px-btn px-btn-secondary"
         >
-          <MessageCircle size={16} aria-hidden="true" />
+          <WhatsAppIcon size={16} />
           WhatsApp Enquiry
         </a>
       </div>

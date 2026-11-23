@@ -11,7 +11,6 @@ import {
   Clock3,
   Mail,
   MapPin,
-  MessageCircle,
 } from "lucide-react";
 import data from "../../../aadi-info.json";
 import { BUSINESS_HOURS, PUNE_HEAD_OFFICE } from "../data/contact";
@@ -20,6 +19,7 @@ import {
   getContactPageEnquiryMessage,
   getWhatsAppUrl,
 } from "../utils/whatsapp";
+import WhatsAppIcon from "../components/WhatsAppIcon";
 import {
   SECTION_VIEWPORT,
   heroReveal,
@@ -138,7 +138,7 @@ const ContactPage: React.FC = () => {
               variants={revealItem}
             >
               <span className="cx-option-icon" aria-hidden="true">
-                <MessageCircle size={20} />
+                <WhatsAppIcon size={20} />
               </span>
               <span className="cx-option-copy">
                 <span className="cx-option-title">WhatsApp Enquiry</span>
@@ -451,7 +451,7 @@ const ContactPage: React.FC = () => {
               </div>
               <div className="cx-direct-row">
                 <dt>
-                  <MessageCircle size={14} aria-hidden="true" /> WhatsApp
+                  <WhatsAppIcon size={14} /> WhatsApp
                 </dt>
                 <dd>
                   <a
@@ -486,7 +486,7 @@ const ContactPage: React.FC = () => {
               rel="noopener noreferrer"
               className="px-btn px-btn-primary"
             >
-              <MessageCircle size={16} aria-hidden="true" />
+              <WhatsAppIcon size={16} />
               WhatsApp
             </a>
             <button

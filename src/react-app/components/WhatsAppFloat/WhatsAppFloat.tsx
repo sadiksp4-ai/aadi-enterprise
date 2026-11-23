@@ -1,5 +1,5 @@
 import React from "react";
-import { MessageCircle } from "lucide-react";
+import WhatsAppIcon from "../WhatsAppIcon";
 import { getWhatsAppUrl, getGeneralEnquiryMessage } from "../../utils/whatsapp";
 import "./WhatsAppFloat.css";
 
@@ -13,7 +13,7 @@ const WhatsAppFloat: React.FC = () => {
       aria-label="Chat with Aadi Enterprises on WhatsApp"
       title="Chat on WhatsApp"
     >
-      <MessageCircle size={26} className="whatsapp-float-icon" />
+      <WhatsAppIcon size={30} className="whatsapp-float-icon" />
     </a>
   );
 };

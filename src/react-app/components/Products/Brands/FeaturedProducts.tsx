@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle, Search, X } from "lucide-react";
+import { ArrowRight, Search, X } from "lucide-react";
+import WhatsAppIcon from "../../WhatsAppIcon";
 import "./FeaturedProducts.css";
 import { getAssetUrl } from "../../../utils";
 import {
@@ -276,7 +277,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                       className="fp-card-action fp-card-action--wa"
                       aria-label={`Enquire about ${brandName} ${product.name}, model ${product.model}, on WhatsApp`}
                     >
-                      <MessageCircle size={14} aria-hidden="true" />
+                      <WhatsAppIcon size={14} />
                       Enquire
                     </a>
                   </div>
@@ -390,7 +391,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
           rel="noopener noreferrer"
           className="px-btn px-btn-secondary"
         >
-          <MessageCircle size={16} aria-hidden="true" />
+          <WhatsAppIcon size={16} />
           WhatsApp
         </a>
       </div>

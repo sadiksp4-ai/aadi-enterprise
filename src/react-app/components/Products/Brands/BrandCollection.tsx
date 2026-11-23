@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import WhatsAppIcon from "../../WhatsAppIcon";
 import "./BrandCollection.css";
 import Breadcrumbs from "../Breadcrumbs";
 import FeaturedProducts from "./FeaturedProducts";
@@ -395,7 +396,7 @@ const BrandCollection: React.FC = () => {
                           range
                         )} on WhatsApp`}
                       >
-                        <MessageCircle size={15} aria-hidden="true" />
+                        <WhatsAppIcon size={15} />
                         Enquire
                       </a>
                     </div>
@@ -434,7 +435,7 @@ const BrandCollection: React.FC = () => {
                 rel="noopener noreferrer"
                 className="px-btn px-btn-secondary"
               >
-                <MessageCircle size={16} aria-hidden="true" />
+                <WhatsAppIcon size={16} />
                 WhatsApp
               </a>
             </div>
@@ -559,7 +560,7 @@ const RangeDialog: React.FC<RangeDialogProps> = ({
           rel="noopener noreferrer"
           className="px-btn px-btn-secondary"
         >
-          <MessageCircle size={16} aria-hidden="true" />
+          <WhatsAppIcon size={16} />
           WhatsApp
         </a>
       </div>

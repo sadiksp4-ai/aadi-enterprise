@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import WhatsAppIcon from '../WhatsAppIcon';
 import './Footer.css';
 import { getAssetUrl } from '../../utils';
 import { WHATSAPP_DISPLAY_NUMBER, getGeneralEnquiryMessage, getWhatsAppUrl } from '../../utils/whatsapp';
@@ -120,7 +121,7 @@ const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="footer-whatsapp-link"
                 >
-                  <MessageCircle size={15} aria-hidden="true" />
+                  <WhatsAppIcon size={15} />
                   WhatsApp Enquiry ({WHATSAPP_DISPLAY_NUMBER})
                 </a>
               </li>

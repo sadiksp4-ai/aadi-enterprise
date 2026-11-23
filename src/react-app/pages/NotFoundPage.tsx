@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import WhatsAppIcon from "../components/WhatsAppIcon";
 import "./NotFoundPage.css";
 import {
   WHATSAPP_DISPLAY_NUMBER,
@@ -30,7 +31,7 @@ function NotFoundPage() {
             rel="noopener noreferrer"
             className="nf-btn nf-btn-outline"
           >
-            <MessageCircle size={17} aria-hidden="true" />
+            <WhatsAppIcon size={17} />
             WhatsApp ({WHATSAPP_DISPLAY_NUMBER})
           </a>
         </div>

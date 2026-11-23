@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useWeb3Forms from '@web3forms/react';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import {
   Sheet,
   SheetContent,
@@ -256,7 +257,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({ open, onOpenChange
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              <MessageCircle size={15} aria-hidden="true" />
+              <WhatsAppIcon size={15} />
               Chat on WhatsApp ({WHATSAPP_DISPLAY_NUMBER})
             </a>
           </SheetBody>

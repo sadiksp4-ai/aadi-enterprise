@@ -6,7 +6,6 @@ import {
   Package,
   Wrench,
   HeartHandshake,
-  MessageCircle,
 } from 'lucide-react';
 import './HomePage.css';
 import InstagramFeed from '../components/InstagramFeed/InstagramFeed';
@@ -16,6 +15,7 @@ import {
   getGeneralEnquiryMessage,
   getWhatsAppUrl,
 } from '../utils/whatsapp';
+import WhatsAppIcon from '../components/WhatsAppIcon';
 import { MagneticCTA } from '../components/motion/MagneticCTA';
 import { SpotlightCard } from '../components/ui/spotlight-card';
 import { PeekCard } from '../components/ui/peek-card';
@@ -595,7 +595,7 @@ function HomePage() {
               rel="noopener noreferrer"
               className="hx-btn hx-btn-outline"
             >
-              <MessageCircle size={20} aria-hidden="true" />
+              <WhatsAppIcon size={20} />
               WhatsApp ({WHATSAPP_DISPLAY_NUMBER})
             </a>
           </div>

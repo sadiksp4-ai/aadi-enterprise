@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import WhatsAppIcon from '../components/WhatsAppIcon';
 import './AboutPage.css';
 import { getAssetUrl } from '../utils';
 import {
@@ -365,7 +366,7 @@ function AboutPage() {
               rel="noopener noreferrer"
               className="ax-btn ax-btn-ghost-light"
             >
-              <MessageCircle size={17} aria-hidden="true" />
+              <WhatsAppIcon size={17} />
               WhatsApp Enquiry ({WHATSAPP_DISPLAY_NUMBER})
             </a>
           </div>

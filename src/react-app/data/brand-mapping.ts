@@ -295,8 +295,8 @@ export const CURATED_BRANDS: readonly CuratedBrandDefinition[] = [
     slug: "origami",
     displayName: "Origami",
     classification: "brand",
-    notes:
-      "Record copy taken from origamiindia.com; no verified brand logo asset yet.",
+    logo: "/products/Origami.jpg",
+    notes: "Record copy taken from origamiindia.com; logo supplied by Aadi.",
   },
   {
     id: "electrolux-professional",

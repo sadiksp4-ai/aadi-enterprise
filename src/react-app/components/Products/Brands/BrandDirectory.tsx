@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
-  MessageCircle,
   Search,
   X,
 } from "lucide-react";
 import "./BrandDirectory.css";
 import Breadcrumbs from "../Breadcrumbs";
 import { getAssetUrl } from "../../../utils";
+import WhatsAppIcon from "../../WhatsAppIcon";
 import {
   getProductEnquiryMessage,
   getWhatsAppUrl,
@@ -427,7 +427,7 @@ const BrandDirectory: React.FC = () => {
                 rel="noopener noreferrer"
                 className="px-btn px-btn-secondary"
               >
-                <MessageCircle size={16} aria-hidden="true" />
+                <WhatsAppIcon size={16} />
                 WhatsApp
               </a>
             </div>
