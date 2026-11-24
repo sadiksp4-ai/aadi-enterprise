@@ -3,8 +3,8 @@
  * Keeps the destination number and message formatting in one place.
  */
 
-export const WHATSAPP_DISPLAY_NUMBER = "+91 93561 26454";
-export const WHATSAPP_DIGITS = "919356126454";
+export const WHATSAPP_DISPLAY_NUMBER = "+91 90763 04428";
+export const WHATSAPP_DIGITS = "919076304428";
 
 export function getWhatsAppUrl(message?: string): string {
   const base = `https://wa.me/${WHATSAPP_DIGITS}`;

@@ -15,7 +15,7 @@ interface PageMeta {
  * (https://www.aadienterprisespune.com), consistent with the contact email
  * domain and the custom-domain `base: "/"` in vite.config.ts.
  */
-const SITE_URL = "https://www.aadienterprisespune.com";
+export const SITE_URL = "https://www.aadienterprisespune.com";
 
 /** Absolute URL of the social-sharing image: branded Aadi Enterprises hotel
  *  lobby (1709x920 ≈ 1.86:1, 221 KB), the closest existing asset to the
@@ -142,6 +142,23 @@ function upsertHeadTag(attr: "property" | "name", key: string, content: string):
   }
 }
 
+function applyHead(meta: PageMeta, canonicalPath: string): void {
+  const canonicalUrl = `${SITE_URL}${canonicalPath === "/" ? "/" : canonicalPath}`;
+  document.title = meta.title;
+  upsertDescription(meta.description);
+  upsertCanonical(canonicalPath);
+  upsertHeadTag("property", "og:title", meta.title);
+  upsertHeadTag("property", "og:description", meta.description);
+  upsertHeadTag("property", "og:url", canonicalUrl);
+  upsertHeadTag("property", "og:type", "website");
+  upsertHeadTag("property", "og:site_name", "Aadi Enterprises");
+  upsertHeadTag("property", "og:image", OG_IMAGE_URL);
+  upsertHeadTag("name", "twitter:card", "summary_large_image");
+  upsertHeadTag("name", "twitter:title", meta.title);
+  upsertHeadTag("name", "twitter:description", meta.description);
+  upsertHeadTag("name", "twitter:image", OG_IMAGE_URL);
+}
+
 /**
  * Route-driven document head manager (Step 1: title + meta description;
  * Step 2: canonical URL; Step 3: Open Graph + Twitter sharing metadata).
@@ -150,12 +167,39 @@ function upsertHeadTag(attr: "property" | "name", key: string, content: string):
  * NOTE: no twitter:site/creator tags — no official X handle is confirmed
  * in the repository, and handles must not be invented.
  */
-const Seo: React.FC = () => {
+export interface SeoProps {
+  /** Page-specific title and description. When set, overrides the route table. */
+  title?: string;
+  description?: string;
+  /** Path used for the canonical tag and og:url, e.g. "/catalog/tramontina/page/12". */
+  canonicalPath?: string;
+}
+
+/**
+ * Routes whose metadata is owned by a page-level <Seo {...props} /> instance
+ * (dynamic content such as the catalogue viewer). The global instance skips
+ * them so the two never race for document.title.
+ */
+const PAGE_OWNED_PREFIXES = ["/catalog/"];
+
+const Seo: React.FC<SeoProps> = ({ title, description, canonicalPath: canonicalOverride }) => {
   const { pathname } = useLocation();
+  const hasOverride = Boolean(title || description || canonicalOverride);
 
   useEffect(() => {
     const key =
       pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+
+    if (hasOverride) {
+      const overrideMeta: PageMeta = {
+        title: title ?? HOME_META.title,
+        description: description ?? HOME_META.description,
+      };
+      applyHead(overrideMeta, canonicalOverride ?? key);
+      return;
+    }
+
+    if (PAGE_OWNED_PREFIXES.some((prefix) => key.startsWith(prefix))) return;
 
     const brandMatch = key.match(BRAND_COLLECTION_PATH);
     let meta: PageMeta;
@@ -185,21 +229,8 @@ const Seo: React.FC = () => {
         key === "/brands" ? "/products" : ROUTE_META[key] ? key : "/";
     }
 
-    const canonicalUrl = `${SITE_URL}${canonicalPath === "/" ? "/" : canonicalPath}`;
-    document.title = meta.title;
-    upsertDescription(meta.description);
-    upsertCanonical(canonicalPath);
-    upsertHeadTag("property", "og:title", meta.title);
-    upsertHeadTag("property", "og:description", meta.description);
-    upsertHeadTag("property", "og:url", canonicalUrl);
-    upsertHeadTag("property", "og:type", "website");
-    upsertHeadTag("property", "og:site_name", "Aadi Enterprises");
-    upsertHeadTag("property", "og:image", OG_IMAGE_URL);
-    upsertHeadTag("name", "twitter:card", "summary_large_image");
-    upsertHeadTag("name", "twitter:title", meta.title);
-    upsertHeadTag("name", "twitter:description", meta.description);
-    upsertHeadTag("name", "twitter:image", OG_IMAGE_URL);
-  }, [pathname]);
+    applyHead(meta, canonicalPath);
+  }, [pathname, hasOverride, title, description, canonicalOverride]);
 
   return null;
 };

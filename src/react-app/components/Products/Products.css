@@ -709,6 +709,60 @@
 
 /* Details dialog ---------------------------------------------------------- */
 
+.px-catalog-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(12, 153, 144, 0.35);
+  background: #0b1c17;
+}
+
+.px-catalog-cta-copy {
+  min-width: 0;
+  max-width: 36rem;
+}
+
+.px-catalog-cta-eyebrow {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2dd4bf;
+}
+
+.px-catalog-cta-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d4d4d8;
+}
+
+.px-catalog-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  background: #0c9990;
+  color: #080808;
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color var(--transition-base);
+}
+
+.px-catalog-cta-button:hover,
+.px-catalog-cta-button:focus-visible {
+  background: #0b8f87;
+}
+
 .px-sheet--motion {
   animation: none;
   box-shadow: none;

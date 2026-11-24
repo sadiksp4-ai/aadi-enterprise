@@ -410,6 +410,40 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Tramontina interactive catalogue */}
+      <section
+        className="hx-feature bg-[#080808] text-white"
+        style={{ backgroundColor: '#080808', color: '#ffffff' }}
+        aria-labelledby="hx-catalog-title"
+      >
+        <div className="hx-feature-inner">
+          <div className="hx-feature-media">
+            <img
+              src={getAssetUrl('products/Tramontina/aadi-tramontina-brand-cover.webp')}
+              alt="Tramontina Hospitality Catalogue cover"
+              width={1200}
+              height={1600}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="hx-feature-copy">
+            <p className="hx-eyebrow">Tramontina · May 2026</p>
+            <h2 id="hx-catalog-title" className="hx-feature-title">
+              Tramontina Hospitality Catalogue
+            </h2>
+            <p className="hx-feature-text">
+              Browse the full cookware, knives and utensils range page by page. Search by
+              product code and enquire on WhatsApp from any page.
+            </p>
+            <MagneticCTA type="button" onClick={() => navigate('/catalog/tramontina')}>
+              View Interactive Catalogue
+              <ArrowRight size={20} aria-hidden="true" />
+            </MagneticCTA>
+          </div>
+        </div>
+      </section>
+
       {/* Capabilities — editorial layout */}
       <section
         className="hx-capabilities bg-[#080808] text-white"

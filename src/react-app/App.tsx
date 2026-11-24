@@ -10,6 +10,7 @@ import BrandCollectionPage from "./pages/BrandCollectionPage";
 import ClientsPage from "./pages/ClientsPage";
 import PartnersPage from "./pages/PartnersPage";
 import ContactPage from "./pages/ContactPage";
+import CatalogViewerPage from "./pages/CatalogViewerPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import WhatsAppFloat from "./components/WhatsAppFloat/WhatsAppFloat";
 import Seo from "./components/Seo/Seo";
@@ -39,6 +40,8 @@ function App() {
               <Route path="/clients" element={<ClientsPage />} />
               <Route path="/partners" element={<PartnersPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/catalog/tramontina" element={<CatalogViewerPage />} />
+              <Route path="/catalog/tramontina/page/:pageNumber" element={<CatalogViewerPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>

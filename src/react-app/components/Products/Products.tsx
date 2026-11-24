@@ -618,6 +618,20 @@ const Products: React.FC = () => {
               </motion.li>
             ))}
           </motion.ul>
+
+          <div className="px-catalog-cta">
+            <div className="px-catalog-cta-copy">
+              <p className="px-catalog-cta-eyebrow">Tramontina Hospitality Catalogue</p>
+              <p className="px-catalog-cta-text">
+                Browse the May 2026 range page by page. Search by product code and enquire on
+                WhatsApp from any page.
+              </p>
+            </div>
+            <Link to="/catalog/tramontina" className="px-catalog-cta-button">
+              View Interactive Catalogue
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
 

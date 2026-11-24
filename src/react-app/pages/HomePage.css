@@ -492,6 +492,15 @@
   border: 1px solid var(--hx-line);
 }
 
+.hx-feature-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .hx-feature-copy {
   display: flex;
   flex-direction: column;
