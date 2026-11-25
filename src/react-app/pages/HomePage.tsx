@@ -419,10 +419,10 @@ function HomePage() {
         <div className="hx-feature-inner">
           <div className="hx-feature-media">
             <img
-              src={getAssetUrl('products/Tramontina/aadi-tramontina-brand-cover.webp')}
-              alt="Tramontina Hospitality Catalogue cover"
+              src={getAssetUrl('catalogue-heroes/aadi-tramontina-cookware-catalogue-hero.webp')}
+              alt="Aadi Enterprises and Tramontina professional cookware collection"
               width={1200}
-              height={1600}
+              height={900}
               loading="lazy"
               decoding="async"
             />
